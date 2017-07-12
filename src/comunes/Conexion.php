@@ -2,7 +2,7 @@
 
 	class Conexion{
 		private $host = "localhost";
-		private $dbname = "sls_bd";
+		private $dbname = "remington";
 		private $user = "root";
 		private $password = "";
 		private $conexion = null;
