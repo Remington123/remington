@@ -1,10 +1,10 @@
 <?php
 
-include (dirname(__FILE__) . '/../comunes/Conexion.php'); 
+ include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 //include (dirname(__FILE__) . '/../comunes/Consultas.php');	
 
 
-/*class DAOCurso{
+class DAOCliente{
 	private $conexion=null;
 
 		public function listar(){
@@ -27,7 +27,10 @@ include (dirname(__FILE__) . '/../comunes/Conexion.php');
 			}
 		}
 		
-}*/
+}
+
+$prueba = new DAOCliente();
+$prueba->listar();
 
 
 
