@@ -1,22 +1,24 @@
 <?php
 
  include (dirname(__FILE__). '/../comunes/Conexion.php'); 
-//include (dirname(__FILE__) . '/../comunes/Consultas.php');	
+ include (dirname(__FILE__) . '/../comunes/Consultas.php');	
 
 
-class DAOCliente{
+class ClienteDAO implements Consultas{
 	private $conexion=null;
 
 		public function listar(){
 			$conexion =new Conexion();
 			try {
-				$cnn=$conexion -> getConexion();
+
+				$cnn=$conexion->getConexion();
 				$sql= "SELECT * FROM cliente;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
-				$data = [];
-				while($resultado=$statement->fetch(PDO::FETCH_ASSOC)){
-					$data[]=$resultado;
+
+				$data = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data[] = $resultado;
 				}
 				echo json_encode($data);
 			}catch (Throwable $e) {
@@ -26,10 +28,14 @@ class DAOCliente{
 				$conexion = null;
 			}
 		}
+
+		public function registrar($objeto) : bool;
+		public function modificar($objeto) : bool;
+		public function eliminar(int $id) : bool;
 		
 }
 
-$prueba = new DAOCliente();
+$prueba = new ClienteDAO();
 $prueba->listar();
 
 

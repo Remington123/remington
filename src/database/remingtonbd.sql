@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: remington
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.24-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,57 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `banner`
+--
+
+DROP TABLE IF EXISTS `banner`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `banner` (
+  `idbanner` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `fecha` varchar(10) DEFAULT NULL,
+  `url` varchar(100) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idbanner`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `banner`
+--
+
+LOCK TABLES `banner` WRITE;
+/*!40000 ALTER TABLE `banner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `banner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoriaproducto`
+--
+
+DROP TABLE IF EXISTS `categoriaproducto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoriaproducto` (
+  `idcategoriaproducto` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(45) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idcategoriaproducto`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoriaproducto`
+--
+
+LOCK TABLES `categoriaproducto` WRITE;
+/*!40000 ALTER TABLE `categoriaproducto` DISABLE KEYS */;
+INSERT INTO `categoriaproducto` VALUES (1,'Camisa',1),(2,'Pantalón',1),(3,'Cobarta',1),(4,'Saco',1),(5,'Chaleco',1);
+/*!40000 ALTER TABLE `categoriaproducto` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `cliente`
@@ -36,7 +87,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`idcliente`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
   CONSTRAINT `fk_idtipousuario` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +96,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230','Av. America Sur #123','978546213',NULL,1,1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,18 +332,22 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `producto` (
   `idproducto` int(11) NOT NULL AUTO_INCREMENT,
-  `idtela` int(11) DEFAULT NULL,
-  `idtalla` int(11) DEFAULT NULL,
-  `idmodelo` int(11) DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `precio` decimal(18,2) DEFAULT NULL,
+  `precioventa` decimal(18,2) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `stockactual` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
+  `idmodelo` int(11) DEFAULT NULL,
+  `idtalla` int(11) DEFAULT NULL,
+  `idtela` int(11) DEFAULT NULL,
+  `idcategoriaproducto` int(11) DEFAULT NULL,
   PRIMARY KEY (`idproducto`),
   KEY `fk_idtalla_idx` (`idtalla`),
   KEY `fk_idmodelo_idx` (`idmodelo`),
   KEY `fk_idtela_idx` (`idtela`),
+  KEY `fk_idcategoriaproducto_idx` (`idcategoriaproducto`),
+  CONSTRAINT `fk_idcategoriaproducto` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idmodelo` FOREIGN KEY (`idmodelo`) REFERENCES `modelo` (`idmodelo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtalla` FOREIGN KEY (`idtalla`) REFERENCES `talla` (`idtalla`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtela` FOREIGN KEY (`idtela`) REFERENCES `tela` (`idtela`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -415,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-12  1:32:41
+-- Dump completed on 2017-07-17 18:40:06

@@ -18,8 +18,6 @@
 			}finally{
 				//vaciar memoria
 				$this->conexion = null;
-			
-			
-		}	
+			}	
+		}
 	}
-}
