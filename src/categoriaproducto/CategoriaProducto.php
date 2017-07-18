@@ -1,36 +1,38 @@
 <?php 
 	class CategoriaProducto{
+
 		private $idcategoriaproducto;
 		private $descripcion;
 		private $estado;
-		public fuction __construct(){
+
+		public function __construct(){
 			$this->idcategoriaproducto=0;
 			$this->descripcion="";
 			$this->estado=0;
 		}
 
-			public function getIdcategoriaproducto(){
-		return $this->idcategoriaproducto;
-	}
+		public function getIdcategoriaproducto() : int{
+			return $this->idcategoriaproducto;
+		}
 
-	public function setIdcategoriaproducto($idcategoriaproducto){
-		$this->idcategoriaproducto = $idcategoriaproducto;
-	}
+		public function setIdcategoriaproducto(int $idcategoriaproducto){
+			$this->idcategoriaproducto = $idcategoriaproducto;
+		}
 
-	public function getDescripcion(){
-		return $this->descripcion;
-	}
+		public function getDescripcion() : string{
+			return $this->descripcion;
+		}
 
-	public function setDescripcion($descripcion){
-		$this->descripcion = $descripcion;
-	}
+		public function setDescripcion(string $descripcion){
+			$this->descripcion = $descripcion;
+		}
 
-	public function getEstado(){
-		return $this->estado;
-	}
+		public function getEstado() : int{
+			return $this->estado;
+		}
 
-	public function setEstado($estado){
-		$this->estado = $estado;
-	}
+		public function setEstado(int $estado){
+			$this->estado = $estado;
+		}
 	}
  ?>
