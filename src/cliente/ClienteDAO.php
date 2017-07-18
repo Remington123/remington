@@ -29,9 +29,15 @@ class ClienteDAO implements Consultas{
 			}
 		}
 
-		public function registrar($objeto) : bool;
-		public function modificar($objeto) : bool;
-		public function eliminar(int $id) : bool;
+		public function registrar($objeto) : bool{
+			return true; 
+		}
+		public function modificar($objeto) : bool{
+			return true; 
+		}
+		public function eliminar(int $id) : bool{
+			return true; 
+		}
 		
 }
 
