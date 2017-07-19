@@ -16,7 +16,8 @@
 		</div>
 		<div class="row">
 			<form id="frm-cliente-registrar" action="cliente/ClienteController.php" method="POST">
-				<input type="hidden" id="opcion" name="opcion" value="registrar">
+				<input type="hidden" id="opcion" name="opcion" value="modificar">
+				<input type="hidden" id="idcliente" name="idcliente" value="4">
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label for="nombre" class="col-sm-2 control-label">Nombre</label>

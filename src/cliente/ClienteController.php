@@ -11,7 +11,8 @@
 		break;
 		
 		case 'modificar':
-
+			$clienteBl = new ClienteBL();
+			echo $clienteBl->modificar();
 		break;
 	}
 	

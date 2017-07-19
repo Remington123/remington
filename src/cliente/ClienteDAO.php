@@ -7,8 +7,11 @@
 		private $conexion=null;
 
 		public function listar(){
-			$conexion =new Conexion();
+			//crear un instanacia de la clase Conexion
+			$conexion = new Conexion();
+
 			try {
+
 				$cnn = $conexion->getConexion();
 				$sql = "SELECT * FROM cliente;";
 				$statement=$cnn->prepare($sql);
@@ -31,6 +34,7 @@
 			$conexion = new Conexion();
 			$respuesta = false;
 			$statement = null;
+			
 			try{
 				$cnn = $conexion->getConexion();
 				$sql = "INSERT INTO cliente(nombres, apellidopaterno, apellidomaterno, dni, direccion, celular, ruc, idtipousuario, estado) VALUES (?,?,?,?,?,?,?,?,?);";
@@ -80,12 +84,63 @@
 			return $respuesta;
 		}
 
-		public function modificar($objeto) : bool{
-			return true; 
+		public function modificar( $objeto ) : bool{
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE cliente SET  nombres = :nombres, 
+											apellidopaterno = :apellidopaterno, 
+											apellidomaterno = :apellidomaterno,
+											dni = :dni, 
+											direccion = :direccion,
+											celular = :celular,
+											ruc = :ruc,
+											idtipousuario = :idtipousuario,
+											estado = :estado 
+						WHERE idcliente = :idcliente;";
+
+				$idcliente = $objeto->getIdcliente();
+				$nombre = $objeto->getNombre();
+				$apellidopaterno = $objeto->getApellidopaterno();
+				$apellidomaterno = $objeto->getApellidomaterno();
+				$dni = $objeto->getDni();				
+				$direccion = $objeto->getDireccion();
+				//$email = $objeto->getEmail();
+				//$created_at = $objeto->getCreated_at();
+				$celular = $objeto->getCelular();
+				$ruc = $objeto->getRuc();
+				$idtipousuario = $objeto->getIdtipousuario();
+				$estado = $objeto->getEstado();	
+
+				$statement = $cnn->prepare($sql);
+
+				$statement->bindParam(":idcliente", $idcliente, PDO::PARAM_INT);
+				$statement->bindParam(":nombres", $nombre, PDO::PARAM_STR);
+				$statement->bindParam(":apellidopaterno", $apellidopaterno, PDO::PARAM_STR);
+				$statement->bindParam(":apellidomaterno", $apellidomaterno, PDO::PARAM_STR);
+				$statement->bindParam(":dni", $dni, PDO::PARAM_STR);
+				$statement->bindParam(":direccion", $direccion, PDO::PARAM_STR);
+				$statement->bindParam(":celular", $celular, PDO::PARAM_STR);
+				$statement->bindParam(":ruc", $ruc, PDO::PARAM_STR);
+				$statement->bindParam(":idtipousuario", $idtipousuario, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();
+
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta; 
 		}
 
 		public function eliminar(int $id) : bool{
-			return true; 
+			return true;
 		}			
 	}
 
