@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: remington
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.21-MariaDB
+-- Server version	5.5.5-10.1.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -79,6 +79,7 @@ CREATE TABLE `cliente` (
   `apellidopaterno` varchar(50) DEFAULT NULL,
   `apellidomaterno` varchar(50) DEFAULT NULL,
   `dni` varchar(8) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `celular` varchar(9) DEFAULT NULL,
   `ruc` varchar(11) DEFAULT NULL,
@@ -86,7 +87,7 @@ CREATE TABLE `cliente` (
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idcliente`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
-  CONSTRAINT `fk_idtipousuario` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_idtipousuario` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,7 +97,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230','Av. America Sur #123','978546213',NULL,1,1);
+INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612',NULL,'Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230',NULL,'Av. America Sur #123','978546213',NULL,1,1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +145,7 @@ CREATE TABLE `confeccion` (
   `idcliente` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idconfeccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,6 +154,7 @@ CREATE TABLE `confeccion` (
 
 LOCK TABLES `confeccion` WRITE;
 /*!40000 ALTER TABLE `confeccion` DISABLE KEYS */;
+INSERT INTO `confeccion` VALUES (1,'traje completo','15/07/2017',1,1);
 /*!40000 ALTER TABLE `confeccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +173,7 @@ CREATE TABLE `detalleconfeccion` (
   PRIMARY KEY (`iddetalleconfeccion`),
   KEY `fk_idconfeccion_idx` (`idconfeccion`),
   CONSTRAINT `fk_idconfeccion` FOREIGN KEY (`idconfeccion`) REFERENCES `confeccion` (`idconfeccion`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,6 +182,7 @@ CREATE TABLE `detalleconfeccion` (
 
 LOCK TABLES `detalleconfeccion` WRITE;
 /*!40000 ALTER TABLE `detalleconfeccion` DISABLE KEYS */;
+INSERT INTO `detalleconfeccion` VALUES (4,'brazos','15 cm',1),(5,'hombros','20 cm',1);
 /*!40000 ALTER TABLE `detalleconfeccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +236,7 @@ CREATE TABLE `empleado` (
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idempleado`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
-  CONSTRAINT `fk_idtipousuarioempleado` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_idtipousuarioempleado` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -272,6 +275,32 @@ LOCK TABLES `modelo` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pagina`
+--
+
+DROP TABLE IF EXISTS `pagina`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pagina` (
+  `idpagina` int(11) NOT NULL AUTO_INCREMENT,
+  `modulo` varchar(50) DEFAULT NULL,
+  `paginas` varchar(100) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idpagina`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pagina`
+--
+
+LOCK TABLES `pagina` WRITE;
+/*!40000 ALTER TABLE `pagina` DISABLE KEYS */;
+INSERT INTO `pagina` VALUES (1,'cliente','cliente/registrar.php',3),(2,'cliente','cliente/listar.php',3);
+/*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pedido`
 --
 
@@ -299,28 +328,32 @@ LOCK TABLES `pedido` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `permisos`
+-- Table structure for table `permiso`
 --
 
-DROP TABLE IF EXISTS `permisos`;
+DROP TABLE IF EXISTS `permiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permisos` (
-  `idpermisos` int(11) NOT NULL AUTO_INCREMENT,
-  `categorias` varchar(50) DEFAULT NULL,
-  `paginas` varchar(100) DEFAULT NULL,
-  `nivel` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`idpermisos`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `permiso` (
+  `idpermiso` int(11) NOT NULL AUTO_INCREMENT,
+  `idtipousuario` int(11) DEFAULT NULL,
+  `idpagina` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idpermiso`),
+  KEY `fk_idtipousuariopermiso_idx` (`idtipousuario`),
+  KEY `fk_idpagina_idx` (`idpagina`),
+  CONSTRAINT `fk_idpagina` FOREIGN KEY (`idpagina`) REFERENCES `pagina` (`idpagina`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_idtipousuariopermiso` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `permisos`
+-- Dumping data for table `permiso`
 --
 
-LOCK TABLES `permisos` WRITE;
-/*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
+LOCK TABLES `permiso` WRITE;
+/*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
+INSERT INTO `permiso` VALUES (1,2,1),(2,3,1),(3,3,2);
+/*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -401,7 +434,7 @@ CREATE TABLE `tela` (
   `color` varchar(40) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idtela`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,6 +443,7 @@ CREATE TABLE `tela` (
 
 LOCK TABLES `tela` WRITE;
 /*!40000 ALTER TABLE `tela` DISABLE KEYS */;
+INSERT INTO `tela` VALUES (1,'tela francessa','turquesa',1),(2,'tela romana','plomo',1),(3,'tela comic','rosado',1);
 /*!40000 ALTER TABLE `tela` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,11 +479,11 @@ DROP TABLE IF EXISTS `tipousuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipousuario` (
-  `idusuario` int(11) NOT NULL AUTO_INCREMENT,
+  `idtipousuario` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
-  `nivel` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idtipousuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -458,7 +492,7 @@ CREATE TABLE `tipousuario` (
 
 LOCK TABLES `tipousuario` WRITE;
 /*!40000 ALTER TABLE `tipousuario` DISABLE KEYS */;
-INSERT INTO `tipousuario` VALUES (1,'administrador',1);
+INSERT INTO `tipousuario` VALUES (1,'cliente ',1),(2,'empleado',2),(3,'administrador',3);
 /*!40000 ALTER TABLE `tipousuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -471,4 +505,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-17 18:40:06
+-- Dump completed on 2017-07-20 20:29:50
