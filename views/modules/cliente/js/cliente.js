@@ -1,3 +1,8 @@
+$(function(){
+	alert("Cliente.js");
+	//Guardar();
+});
+
 function Guardar(){
 	$("#frm-cliente-registrar").on("submit", function(e){
 		e.preventDefault();

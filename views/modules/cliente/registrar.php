@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Registrar Cliente</title>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-	<div class="container">
-		<div class="row">
+<?php 
+		$script = '/js/cliente.js';
+
+		$content = '<div class="row">
 			<div class="col-sm-12">
 				<h1 class="text-center">Formulario de Registro</h1>
 				<hr>
@@ -44,6 +37,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<input type="text" id="email" name="email" class="form-control" placeholder="">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="celular" class="col-sm-2 control-label">Celular</label>
 						<div class="col-sm-10">
 							<input type="text" id="celular" name="celular" class="form-control" placeholder="">
@@ -68,17 +67,9 @@
 					</div>
 				</div>
 			</form>
-		</div>
-	</div>
-	<script	  src="https://code.jquery.com/jquery-3.2.1.min.js"
-			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-			  crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="js/cliente.js"></script>
-	<script>
-		$(function(){
-			Guardar();
-		});
-	</script>
-</body>
-</html>
+		</div>';
+
+		$path = ["content"=>$content, "script"=>$script];
+		echo json_encode( $path );
+?>
+	

@@ -5,6 +5,10 @@
 	$clienteBl = null;
 
 	switch ( $opcion ) {
+		case 'listar':
+			$clienteBl = new ClienteBL();
+			$clienteBl->listar();
+		break;
 		case 'registrar':
 			$clienteBl = new ClienteBL();
 			echo $clienteBl->registrar();

@@ -6,6 +6,8 @@
 		private $apellidopaterno;
 		private $apellidomaterno;
 		private $dni;
+		private $email;
+		private $contrasena;
 		private $direccion;
 		private $celular;
 		private $ruc;
@@ -18,6 +20,8 @@
 			$this->apellidopaterno = "";
 			$this->apellidomaterno = "";
 			$this->dni = "";
+			$this->email = "";
+			$this->contrasena = "";
 			$this->direccion = "";
 			$this->celular = "";
 			$this->ruc = "";
@@ -63,6 +67,22 @@
 
 		public function setDni(string $dni){
 			$this->dni = $dni;
+		}
+
+		public function getEmail() :string{
+			return $this->email;
+		}
+
+		public function setEmail(string $email){
+			$this->email = $email;
+		}
+
+		public function getContrasena() : string {
+			return $this->contrasena;
+		}
+
+		public function setContrasena(string $dni){
+			$this->contrasena = $dni;
 		}
 
 		public function getDireccion() : string{

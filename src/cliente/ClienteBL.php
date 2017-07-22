@@ -5,6 +5,11 @@
 	class ClienteBL{
 		private $dao=null;
 
+		public function listar(){
+			$dao = new ClienteDAO();
+			$dao->listar();
+		}
+
 		public function registrar() : string{
 			$informacion = [];
 
@@ -14,6 +19,7 @@
 			$cliente->setApellidopaterno( $_POST["apellidopaterno"] );
 			$cliente->setApellidomaterno( $_POST["apellidomaterno"] );
 			$cliente->setDni( $_POST["dni"] );
+			$cliente->setEmail( $_POST["email"] );
 			$cliente->setCelular( $_POST["celular"] );
 			$cliente->setDireccion( $_POST["direccion"] );
 			$cliente->setRuc( $_POST["ruc"] );

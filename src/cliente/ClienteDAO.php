@@ -23,7 +23,7 @@
 				}
 				echo json_encode($data);
 			}catch (Throwable $e) {
-				echo $e->getMessage();
+				return $e->getMessage();
 			}finally{
 				$statement->closeCursor();
 				$conexion = null;
@@ -37,14 +37,15 @@
 			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO cliente(nombres, apellidopaterno, apellidomaterno, dni, direccion, celular, ruc, idtipousuario, estado) VALUES (?,?,?,?,?,?,?,?,?);";
+				$sql = "INSERT INTO cliente(nombres, apellidopaterno, apellidomaterno, dni, email, contrasena, direccion, celular, ruc, idtipousuario, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				$nombre = $objeto->getNombre();
 				$apellidopaterno = $objeto->getApellidopaterno();
 				$apellidomaterno = $objeto->getApellidomaterno();
 				$dni = $objeto->getDni();				
+				$email = $objeto->getEmail();
+				$contrasena = $objeto->getContrasena();
 				$direccion = $objeto->getDireccion();
-				//$email = $objeto->getEmail();
 				//$created_at = $objeto->getCreated_at();
 				$celular = $objeto->getCelular();
 				$ruc = $objeto->getRuc();
@@ -56,23 +57,14 @@
 				$statement->bindParam(2, $apellidopaterno, PDO::PARAM_STR);
 				$statement->bindParam(3, $apellidomaterno, PDO::PARAM_STR);
 				$statement->bindParam(4, $dni, PDO::PARAM_STR);
-				$statement->bindParam(5, $direccion, PDO::PARAM_STR);
-				$statement->bindParam(6, $celular, PDO::PARAM_STR);
-				$statement->bindParam(7, $ruc, PDO::PARAM_STR);
-				$statement->bindParam(8, $idtipousuario, PDO::PARAM_INT);
-				$statement->bindParam(9, $estado, PDO::PARAM_INT);
+				$statement->bindParam(5, $email, PDO::PARAM_STR);
+				$statement->bindParam(6, $contrasena, PDO::PARAM_STR);
+				$statement->bindParam(7, $direccion, PDO::PARAM_STR);
+				$statement->bindParam(8, $celular, PDO::PARAM_STR);
+				$statement->bindParam(9, $ruc, PDO::PARAM_STR);
+				$statement->bindParam(10, $idtipousuario, PDO::PARAM_INT);
+				$statement->bindParam(11, $estado, PDO::PARAM_INT);
 
-				/*$statement = $cnn->prepare( $sql );
-				$statement->bindParam(1, $objeto->getNombre(), PDO::PARAM_STR);
-				$statement->bindParam(2, $objeto->getApellidopaterno(), PDO::PARAM_STR);
-				$statement->bindParam(3, $objeto->getApellidomaterno(), PDO::PARAM_STR);
-				$statement->bindParam(4, $objeto->getDni(), PDO::PARAM_STR);
-				$statement->bindParam(5, $objeto->getDireccion(), PDO::PARAM_STR);
-				$statement->bindParam(6, $objeto->getCelular(), PDO::PARAM_STR);
-				$statement->bindParam(7, $objeto->getRuc(), PDO::PARAM_STR);
-				$statement->bindParam(8, $objeto->getIdtipousuario(), PDO::PARAM_INT);
-				$statement->bindParam(9, $objeto->getEstado(), PDO::PARAM_INT);*/
-				
 				$respuesta = $statement->execute();//devuelve true, si no hubo error.
 				
 			}catch(Exception $e){

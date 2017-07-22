@@ -1,22 +1,22 @@
 <?php 
 	
 	class TipoUsuario{
-		private $idusuario;
+		private $idtipousuario;
 		private $descripcion;
 		private $nivel;
 
 		public function __construct(){
-			$this->idusuario = 0;
+			$this->idtipousuario = 0;
 			$this->descripcion = "";
 			$this->nivel = 1;
 		}
 
-		public function getIdusuario() : int{
-			return $this->idusuario;
+		public function getIdtipousuario() : int{
+			return $this->idtipousuario;
 		}
 
-		public function setIdusuario(int $idusuario){
-			$this->idusuario = $idusuario;
+		public function setIdtipousuario(int $idtipousuario){
+			$this->idtipousuario = $idtipousuario;
 		}
 
 		public function getDescripcion() : string{

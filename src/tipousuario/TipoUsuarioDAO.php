@@ -1,7 +1,7 @@
 <?php
 
 include (dirname(__FILE__). '/../comunes/Conexion.php'); 
-include (dirname(__FILE__) . '/../comunes/Consultas.php');
+include (dirname(__FILE__). '/../comunes/Consultas.php');
 
 class TipoUsuarioDAO implements Consultas{
 	private $conexion=null;
@@ -36,7 +36,9 @@ class TipoUsuarioDAO implements Consultas{
 
 	public function eliminar(int $id) : bool{
 		return true; 
-	}	
+	}
+
+	
 		
 }
 
