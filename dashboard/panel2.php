@@ -8,6 +8,7 @@
 				</ul>
 			</div>
 		</div>
+		
 		<div class="row" id="showpage">
 			<!--Aquí, se mostrarán todas las páginas-->
 		</div>
