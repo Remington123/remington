@@ -1,6 +1,7 @@
 $(function(){
 	showPage();
-	login();
+	//alert("general");
+	//login();
 });
 
 function showPage(){
@@ -14,11 +15,13 @@ function showPage(){
 			var n = path.lastIndexOf("/"),//devuelve la posición del caracter
     			module = path.slice(0, n),//obtiene los caracteres de acuerdo al límite
     			page = JSON.parse( info ),//Convertine de cadena json a un objeto
-    			script = $("<script></script>").attr("src","../views/modules/"+module+page.script);
+    			script = $("<script></script>").prop("src","../views/modules/"+module+page.script);
 			
-			console.log( info );
-			console.log(module);
-			console.log(page);
+			var script   = document.createElement("script");
+			script.type  = "text/javascript";
+			script.src   = "../views/modules/"+module+page.script;    // use this for linked script
+			//document.body.appendChild(script);
+
 			console.log(script);
 
 			$("#showpage").html( page.content );

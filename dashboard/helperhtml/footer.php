@@ -15,9 +15,9 @@
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.8
+      <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a href="#">Remington</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -37,6 +37,14 @@
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- Scripts Personal -->
+<script src="js/general.js"></script>
+<div id="myscripts">
+    <!--<script src="../views/modules/cliente/js/cliente.js"></script>-->
+</div>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="plugins/morris/morris.min.js"></script>
@@ -64,4 +72,5 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
 

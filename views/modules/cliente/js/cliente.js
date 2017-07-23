@@ -1,9 +1,9 @@
-$(function(){
-	//alert("Cliente.js");
-	dtCliente();
-	//Guardar();
-});
+/* Llamado o ejecución de funciones */
+dtCliente();
+//alert("Cliente.js");
+//guardar();
 
+//Creación de funciones JS para el módulo cliente
 function dtCliente(){
 	var table = $("#dt_cliente").DataTable({
 		detroy: true,
@@ -22,13 +22,30 @@ function dtCliente(){
 			{"data":"apellidomaterno", visible:false},
 			{"data":"email"},
 			{"data":"celular"},
-			{"defaultContent": `<button type='button' class='modificar btn btn-primary' data-toggle='modal' data-target='#modalModificar' ><i class='fa fa-pencil-square-o'></i>Edit</button>
-			<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i>Delete</button>`}
-		]
+			{"defaultContent": `<button type='button' class='modificar btn btn-primary' data-toggle='modal' data-target='#modalModificar' ><i class='fa fa-pencil-square-o'></i></button>
+			<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>`}
+		],
+		"language": spanish
+	});
+
+	obtener_data_modificar("#dt_cliente tbody", table);
+}
+
+function obtener_data_modificar (tbody, table){
+	$(tbody).on("click", "button.modificar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		console.log(data);
+		var idusuario = $("#idcliente").val( data.idcliente ),
+				nombre = $("#nombre").val( data.nombres ),
+				apellidopaterno = $("#apellidopaterno").val( data.apellidopaterno ),
+				apellidomaterno = $("#apellidomaterno").val( data.apellidomaterno ),
+				email = $("#email").val( data.email ),
+				celular = $("#celular").val( data.celular ),
+				opcion = $("#opcion").val("modificar");
 	});
 }
 
-function Guardar(){
+function guardar(){
 	$("#frm-cliente-registrar").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
@@ -49,4 +66,29 @@ function Guardar(){
 
 function limpiarCajas(){
 	$("input").val("");
+}
+
+var spanish = {
+    "sProcessing":     "Procesando...",
+    "sLengthMenu":     "Mostrar _MENU_ registros",
+    "sZeroRecords":    "No se encontraron resultados",
+    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":    "",
+    "sSearch":         "Buscar:",
+    "sUrl":            "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
 }
