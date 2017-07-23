@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: remington
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.24-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -80,6 +80,7 @@ CREATE TABLE `cliente` (
   `apellidomaterno` varchar(50) DEFAULT NULL,
   `dni` varchar(8) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `contrasena` varchar(45) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `celular` varchar(9) DEFAULT NULL,
   `ruc` varchar(11) DEFAULT NULL,
@@ -97,7 +98,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612',NULL,'Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230',NULL,'Av. America Sur #123','978546213',NULL,1,1);
+INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','pett@gmail.com','123','Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230','jose@gmail.com','123','Av. America Sur #123','978546213',NULL,1,1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,6 +230,8 @@ CREATE TABLE `empleado` (
   `apellidopaterno` varchar(50) DEFAULT NULL,
   `apellidomaterno` varchar(50) DEFAULT NULL,
   `dni` varchar(8) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `contrasena` varchar(45) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `fechanacimiento` varchar(10) DEFAULT NULL,
   `celular` varchar(9) DEFAULT NULL,
@@ -246,7 +249,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'kevin','yarasca','ponce','76525712','av. ferrocarril s/n','18/08/1995','920096053',1,1);
+INSERT INTO `empleado` VALUES (1,'kevin','Yarasca','Ponce','76525712','kevin@gmail.com','123','av. ferrocarril s/n','18/08/1995','920096053',2,1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +287,7 @@ DROP TABLE IF EXISTS `pagina`;
 CREATE TABLE `pagina` (
   `idpagina` int(11) NOT NULL AUTO_INCREMENT,
   `modulo` varchar(50) DEFAULT NULL,
-  `paginas` varchar(100) DEFAULT NULL,
+  `pagina` varchar(100) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idpagina`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
@@ -296,7 +299,7 @@ CREATE TABLE `pagina` (
 
 LOCK TABLES `pagina` WRITE;
 /*!40000 ALTER TABLE `pagina` DISABLE KEYS */;
-INSERT INTO `pagina` VALUES (1,'cliente','cliente/registrar.php',3),(2,'cliente','cliente/listar.php',3);
+INSERT INTO `pagina` VALUES (1,'cliente','cliente/registrar.php',1),(2,'cliente','cliente/listar.php',1);
 /*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,4 +508,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-20 20:29:50
+-- Dump completed on 2017-07-22 21:19:25
