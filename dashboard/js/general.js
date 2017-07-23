@@ -16,6 +16,11 @@ function showPage(){
     			page = JSON.parse( info ),//Convertine de cadena json a un objeto
     			script = $("<script></script>").attr("src","../views/modules/"+module+page.script);
 			
+			console.log( info );
+			console.log(module);
+			console.log(page);
+			console.log(script);
+
 			$("#showpage").html( page.content );
 			$("#myscripts").html("");//limpiar
 			$("#myscripts").append( script );

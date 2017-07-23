@@ -1,4 +1,14 @@
-	<?php include 'helperhtml/header.php' ?>
+	<!--php include 'helperhtml/header.php' -->
+	<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
 	<body>	
 		<div class="container">
 			<div class="row">
@@ -13,10 +23,25 @@
 		</div>
 		<!--php include '../views/modules/cliente/registrar.php' -->
 
-		<?php include 'helperhtml/footer.php' ?>
+		<!--php include 'helperhtml/footer.php' -->
+		
+		<footer>
+			<div class="row">
+				<div class="col-sm-4">Información</div>
+				<div class="col-sm-4">Social Media</div>
+				<div class="col-sm-4">Contacto</div>
+			</div>
+		</footer>
+
+		<script	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="js/general.js"></script>
+
 		<!--Emplear solo scripts JS necesarios-->
 		<div id="myscripts">
-		<!--<script src="../views/modules/cliente/js/cliente.js"></script>-->
+			<!--<script src="../views/modules/cliente/js/cliente.js"></script>-->
 		</div>
 	</body>
-</html>
+	</html>
