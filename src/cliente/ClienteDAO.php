@@ -13,13 +13,13 @@
 			try {
 
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM cliente;";
+				$sql = "SELECT idcliente, nombres, apellidopaterno, apellidomaterno, email, celular FROM cliente;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
 				$data = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-					$data[] = $resultado;
+					$data["data"][] = $resultado;
 				}
 				echo json_encode($data);
 			}catch (Throwable $e) {
