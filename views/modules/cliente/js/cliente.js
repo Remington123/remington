@@ -22,10 +22,9 @@ function dtCliente(){
 			{"data":"apellidomaterno", visible:false},
 			{"data":"email"},
 			{"data":"celular"},
-			{"defaultContent": `<button type='button' class='modificar btn btn-primary' data-toggle='modal' data-target='#modalModificar' ><i class='fa fa-pencil-square-o'></i></button>
-			<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>`}
-		],
-		"language": spanish
+			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
+			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
+		]
 	});
 
 	obtener_data_modificar("#dt_cliente tbody", table);
@@ -54,7 +53,7 @@ function guardar(){
 		//console.log("Controlador: " + controller);
 		$.ajax({
 			method:"POST",
-			url:"../../../src/"+controller,
+			url:"../src/"+controller,
 			data: frm
 		}).done(function(info){
 			//respuesta del servidor
