@@ -1,5 +1,8 @@
 <?php 	
 
+	include 'CategoriaProductoDAO.php';
+	include 'CategoriaProducto.php';
+
 class CategoriaProductoBL{
 	private $dao=null;
 

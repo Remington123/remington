@@ -52,6 +52,23 @@
             <li><a href="" data-page="empleado/registrar.php"><i class="fa fa-circle-o"></i> Registrar</a></li>
           </ul>
         </li>
+
+
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Categoria Producto</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="" data-page="categoriaproducto/listar.php"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="" data-page="categoriaproducto/registrar.php"><i class="fa fa-circle-o"></i> Registrar</a></li>
+          </ul>
+        </li>
+
+
         <!--<li>
           <a href="#">
             <i class="fa fa-th"></i> <span>Producto</span>
