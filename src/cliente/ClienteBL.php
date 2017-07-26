@@ -26,7 +26,7 @@
 			$cliente->setIdtipousuario( 1 );
 			$cliente->setEstado(1);//por defecto uno
 
-			$dao = new clienteDAO();
+			$dao = new ClienteDAO();
 			$dao->registrar( $cliente ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
 
 			return ( json_encode($informacion) );		

@@ -2,12 +2,32 @@
 
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
-	include 'CategoriaProducto.php';
 
 	class CategoriaProductoDAO implements Consultas{
 
 		public function listar(){
-			echo "listar";
+
+			//crear un instanacia de la clase Conexion
+			$conexion = new Conexion();
+
+			try {
+
+				$cnn = $conexion->getConexion();
+				$sql = "SELECT * FROM categoriaproducto;";
+				$statement=$cnn->prepare($sql);
+				$statement->execute();
+
+				$data = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				echo json_encode($data);
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
 		}
 		public function registrar($objeto) : bool{
 			return true;
@@ -20,21 +40,6 @@
 		}
 	}
 
-	//Instanciando un objeto de la clase CategoriaProductoDAO
-	$dao = new CategoriaProductoDAO();
-	//Crear un objeto de la CategoriaProducto (Entidad)
-	$categoria = new CategoriaProducto();
-	//Seteando al objeto $categoria
-	$categoria->setIdcategoriaproducto( 100 );
-	$categoria->setDescripcion("Camisas");
-	$categoria->setEstado( 1 );
-
-	print_r($categoria);
-	//Acceder al método registrar y a la vez, voy a pasar como parámetro el objeto $categoria;
-	//$dao->registrar( $categoria );
-
-	//Para hacer pequras pruebas usar el var_dump() o  print_r();
-	//var_dump( $dao->registrar( $categoria ) );
-
+	
 
  ?>
