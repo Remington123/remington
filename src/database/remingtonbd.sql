@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: remington
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.21-MariaDB
+-- Server version	5.5.5-10.1.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -265,7 +265,7 @@ CREATE TABLE `modelo` (
   `descripcion` varchar(50) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idmodelo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,6 +274,7 @@ CREATE TABLE `modelo` (
 
 LOCK TABLES `modelo` WRITE;
 /*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
+INSERT INTO `modelo` VALUES (1,'camisa manga corta',1),(2,'cmisa manga larga',1),(3,'saco cuello chino ',1);
 /*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,7 +413,7 @@ CREATE TABLE `talla` (
   `acronimo` varchar(5) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idtalla`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,6 +422,7 @@ CREATE TABLE `talla` (
 
 LOCK TABLES `talla` WRITE;
 /*!40000 ALTER TABLE `talla` DISABLE KEYS */;
+INSERT INTO `talla` VALUES (1,'camisa','s',1),(2,'camisa','l',1),(3,'saco','xl',2);
 /*!40000 ALTER TABLE `talla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,4 +510,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-22 21:19:25
+-- Dump completed on 2017-07-26  1:54:27
