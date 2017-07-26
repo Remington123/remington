@@ -11,7 +11,7 @@
 			$empleado->setEmail( $_POST["email"] );
 			$empleado->setContrasena( $_POST["contrasena"] );
 
-			$dao->validarAcceso( $empleado );
+			return $dao->validarAcceso( $empleado );
 		}
 
 	}

@@ -2,7 +2,7 @@
 
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');	
-
+	include 'EmpleadoSesion.php';
 
 	class EmpleadoDAO implements Consultas{
 		private $conexion=null;
@@ -136,8 +136,7 @@
 			$conexion =new Conexion();
 			try {
 				$cnn=$conexion -> getConexion();
-				$sql= "SELECT nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email
-								, e.idtipousuario 
+				$sql= "SELECT nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email, tu.descripcion, e.idtipousuario 
 						FROM empleado e 
 						INNER JOIN tipousuario tu ON e.idtipousuario = tu.idtipousuario
 						WHERE email = :email and contrasena = :contrasena; ";
@@ -150,11 +149,20 @@
 				$statement->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
 
 				$statement->execute();
-				$data = [];
+				$arrayEmpleado = [];
+				$empleadoSesion = null;
 				while($resultado=$statement->fetch(PDO::FETCH_ASSOC)){
-					$data[]=$resultado;
+					$arrayEmpleado = $resultado;
+					$_SESSION["nombres"] = $resultado["nombres"];
+					$_SESSION["apellidos"] = $resultado["apellidos"];
+					$_SESSION["email"] = $resultado["email"];
+					$_SESSION["idtipousuario"] = $resultado["idtipousuario"];
+					$_SESSION["descripcion"] = $resultado["descripcion"];
+					//$empleadoSesion = new EmpleadoSesion( $arrayEmpleado );
 				}
-				echo json_encode($data);
+				return $_SESSION;
+				//var_dump($_SESSION);
+				//echo json_encode($data);
 			}catch (Throwable $e) {
 				echo $e->getMessage();
 			}finally{

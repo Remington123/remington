@@ -2,7 +2,6 @@
 
   <!-- Left side column. contains the logo and sidebar -->
   <?php include 'helperhtml/siderbar.php' ?>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

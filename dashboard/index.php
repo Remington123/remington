@@ -33,7 +33,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Accede para iniciar sesión</p>
 
-    <form id="frm-autenticacion-user" action="empleado/EmpleadoController.php" method="post">
+    <form id="frm-autenticacion-user" action="../src/empleado/EmpleadoController.php" method="post">
       <input type="hidden" id="opcion" name="opcion" value="acceso">
       <div class="form-group has-feedback">
         <input type="email" id="email" name="email" class="form-control" placeholder="Correo">

@@ -38,6 +38,7 @@ function login(){
 		var frm = $(this).serialize();
 		console.log( frm );
 		var controller = $(this).attr("action");
+		console.log(controller);
 		$.ajax({
 			method:"POST",
 			url:"../src/"+controller,

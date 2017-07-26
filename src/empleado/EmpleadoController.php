@@ -1,6 +1,6 @@
 <?php 
 	include 'EmpleadoBL.php';
-
+	
 	$opcion = $_POST["opcion"];
 	$empleadoBL = null;
 
@@ -19,8 +19,10 @@
 			echo $empleadoBL->modificar();
 		break;
 		case 'acceso':
+			session_start();
 			$empleadoBL = new EmpleadoBL();
-			$empleadoBL->validarAcceso();
+			var_dump( $empleadoBL->validarAcceso() );
+			header('Location: ../../dashboard/panel.php');
 		break;
 	}
 	
