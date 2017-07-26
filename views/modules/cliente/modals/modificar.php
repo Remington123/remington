@@ -17,14 +17,13 @@
 						<form id="frm'. $accion.$modulo.'" class="form-horizontal" action="" method="POST">
 						<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 						<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
-
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
                               		for="nombre">Nombre</label>
 								<div class="col-sm-10">
 									<input id="nombre" name="nombre" type="text" class="form-control">
 								</div>
-							</div>
+							</div>							
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
                               		for="apellidopaterno">Apellido Paterno</label>
