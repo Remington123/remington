@@ -69,6 +69,37 @@
         </li>
 
 
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Modelo</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="" data-page="modelo/listar.php"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="" data-page="modelo/registrar.php"><i class="fa fa-circle-o"></i> Registrar</a></li>
+          </ul>
+        </li>
+
+
+                <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Talla</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="" data-page="talla/listar.php"><i class="fa fa-circle-o"></i> Listar</a></li>
+            <li><a href="" data-page="talla/registrar.php"><i class="fa fa-circle-o"></i> Registrar</a></li>
+          </ul>
+        </li>
+
+
         <!--<li>
           <a href="#">
             <i class="fa fa-th"></i> <span>Producto</span>

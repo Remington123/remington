@@ -2,7 +2,8 @@
 include 'ModeloDAO.php';
 include 'Modelo.php';
 class ModeloBL{
-	private function listar(){
+	
+public function listar(){
 
         $dao = new ModeloDAO();
 		$dao->listar();
