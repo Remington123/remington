@@ -18,6 +18,11 @@
 			$clienteBl = new ClienteBL();
 			echo $clienteBl->modificar();
 		break;
+
+		case 'eliminar':
+			$clienteBl = new ClienteBL();
+			echo $clienteBl->eliminar();
+		break;
 	}
 	
 ?>
