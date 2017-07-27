@@ -55,5 +55,18 @@
 
 			return ( json_encode($informacion) );
 		}
+
+		public function eliminar() : bool{
+			$informacion = [];
+			$id = $_POST["idcliente"];
+			$dao = new ClienteDAO();
+
+			if( $dao->eliminar( $id ) )
+				$informacion["respuesta"] = "ok_eliminacion";
+			else
+				$informacion["respuesta"] = "error_eliminacion";
+
+			return ( json_encode($informacion) );
+		}
 	}
 ?>
