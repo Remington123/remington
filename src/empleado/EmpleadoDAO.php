@@ -1,8 +1,7 @@
 <?php
 
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
-	include (dirname(__FILE__) . '/../comunes/Consultas.php');	
-	include 'EmpleadoSesion.php';
+	include (dirname(__FILE__) . '/../comunes/Consultas.php');
 
 	class EmpleadoDAO implements Consultas{
 		private $conexion=null;
@@ -134,6 +133,7 @@
 
 		public function validarAcceso( $objeto ){
 			$conexion =new Conexion();
+			$statement=null; 
 			try {
 				$cnn=$conexion -> getConexion();
 				$sql= "SELECT nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email, tu.descripcion, e.idtipousuario 
