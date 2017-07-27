@@ -1,19 +1,17 @@
 <?php
 
-include (dirname(__FILE__). '/../comunes/Conexion.php'); 
-	include (dirname(__FILE__) . '/../comunes/Consultas.php');
+	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
+	include (dirname(__FILE__). '/../comunes/Consultas.php');
 
-	class PermisosDAO implements Consultas{
+	class PermisoDAO implements Consultas{
 		private $conexion=null;
 
 		public function listar(){
 			//crear un instanacia de la clase Conexion
 			$conexion = new Conexion();
-
 			try {
-
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM permisos;";
+				$sql = "SELECT * FROM permiso;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -33,26 +31,18 @@ include (dirname(__FILE__). '/../comunes/Conexion.php');
 		public function registrar($objeto) : bool{
 			$conexion = new Conexion();
 			$respuesta = false;
-			$statement = null;
-			
+			$statement = null;			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO permisos(categoria, paginas, nivel) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+				$sql = "INSERT INTO permiso(idtipousuario, idpagina) VALUES (?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				
-				$categoria = $objeto->getCategoria();
-				$paginas = $objeto->getPaginas();
-				$nivel = $objeto->getNivel();
+				$idtipousuario = $objeto->getIdtipousuario();
+				$idpagina = $objeto->getIdpagina();
 				
-							
-				
-
 				$statement = $cnn->prepare( $sql );
-				$statement->bindParam(1, $categoria, PDO::PARAM_STR);
-				$statement->bindParam(2, $paginas, PDO::PARAM_STR);
-				$statement->bindParam(3, $nivel, PDO::PARAM_STR);
-				
-
+				$statement->bindParam(1, $idtipousuario, PDO::PARAM_INT);
+				$statement->bindParam(2, $idpagina, PDO::PARAM_INT);				
 				$respuesta = $statement->execute();
 				
 			}catch(Exception $e){
@@ -71,27 +61,20 @@ include (dirname(__FILE__). '/../comunes/Conexion.php');
 			try{
 				$conexion = new Conexion();
 				$cnn = $conexion->getConexion();
-				$sql = "UPDATE permisos SET  categoria = :categoria, 
-											paginas = :paginas, 
-											nivel = :nivel,
-										
-						WHERE idpermisos = :idpermisos;";
+				$sql = "UPDATE permiso SET idtipousuario = :idtipousuario, 
+											idpagina = :idpagina,			
+						WHERE idpermiso = :idpermiso;";
 
-				$idpermisos = $objeto->getIdpermisos();
-				$categoria = $objeto->getCategoria();
-				$paginas = $objeto->getPaginas();
-				$nivel = $objeto->getNivel();
+				$idpermiso = $objeto->getIdpermiso();
+				$idtipousuario = $objeto->getIdtipousuario();
+				$idpagina = $objeto->getIdpagina();
 			
 				$statement = $cnn->prepare($sql);
 
-				$statement->bindParam(":idpermisos", $idpermisos, PDO::PARAM_INT);
-				$statement->bindParam(":categoria", $categoria, PDO::PARAM_STR);
-				$statement->bindParam(":paginas", $paginas, PDO::PARAM_STR);
-				$statement->bindParam(":nivel", $nivel, PDO::PARAM_STR);
-			
-
+				$statement->bindParam(":idpermiso", $idpermisos, PDO::PARAM_INT);
+				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_STR);
+				$statement->bindParam(":idpagina", $paginas, PDO::PARAM_STR);
 				$respuesta = $statement->execute();
-
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
 			}finally{

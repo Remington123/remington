@@ -6,21 +6,19 @@
 
 	switch ( $opcion ) {
 		case 'listar':
-		$permisoBl = new PermisoBL();
-		$permisoBl->listar();
+			$permisoBl = new PermisoBL();
+			$permisoBl->listar();
 		break;
 
 		case 'registrar':
-		$permisoBl = new PermisoBL();
-		echo $permisoBl->registrar();
+			$permisoBl = new PermisoBL();
+			echo $permisoBl->registrar();
 		break;
 
 		case 'modificar':
-		$permisoBl = new PermisoBL();
-		echo $permisoBl->PermisoBL();
+			$permisoBl = new PermisoBL();
+			echo $permisoBl->PermisoBL();
 		break;
 	}
-
-
 
  ?>
