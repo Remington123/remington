@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: remington
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.24-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -279,6 +279,31 @@ INSERT INTO `modelo` VALUES (1,'camisa manga corta',1),(2,'cmisa manga larga',1)
 UNLOCK TABLES;
 
 --
+-- Table structure for table `modulo`
+--
+
+DROP TABLE IF EXISTS `modulo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modulo` (
+  `idmodulo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idmodulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modulo`
+--
+
+LOCK TABLES `modulo` WRITE;
+/*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
+INSERT INTO `modulo` VALUES (1,'Cliente',1),(2,'Empleado',1),(3,'Producto',1),(4,'Categoria Producto',1),(5,'Modelo',1),(6,'Tela',1),(7,'Talla',1),(8,'Permiso',1);
+/*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pagina`
 --
 
@@ -287,11 +312,14 @@ DROP TABLE IF EXISTS `pagina`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pagina` (
   `idpagina` int(11) NOT NULL AUTO_INCREMENT,
-  `modulo` varchar(50) DEFAULT NULL,
+  `idmodulo` int(11) DEFAULT NULL,
   `pagina` varchar(100) DEFAULT NULL,
+  `icono` varchar(40) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`idpagina`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idpagina`),
+  KEY `fk_idmodulo_idx` (`idmodulo`),
+  CONSTRAINT `fk_idmodulo` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +328,7 @@ CREATE TABLE `pagina` (
 
 LOCK TABLES `pagina` WRITE;
 /*!40000 ALTER TABLE `pagina` DISABLE KEYS */;
-INSERT INTO `pagina` VALUES (1,'cliente','cliente/registrar.php',1),(2,'cliente','cliente/listar.php',1);
+INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1);
 /*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -510,4 +538,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-26  1:54:27
+-- Dump completed on 2017-08-05  0:18:40

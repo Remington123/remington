@@ -1,8 +1,11 @@
 $(function(){
-	showPage();
 	//alert("general");
+	showPage();
+	//dibujarPaginasEnSiderBar();
 	//login();
 });
+
+
 
 function showPage(){
 	$("a").on("click", function(e){
@@ -31,6 +34,54 @@ function showPage(){
 
 	});
 }
+
+function dibujarPaginasEnSiderBar(){
+	$.ajax({
+		method:"POST",
+		url:"../src/pagina/PaginaController.php",
+		data:{"opcion":"listar"}
+	}).done(function(info){
+		//respuesta del servidor
+		var paginas = JSON.parse(info);
+		//console.log(info);
+		console.log(paginas);
+
+		var html = `<li class="header">MAIN NAVIGATION</li>`;
+
+       	for(var i in paginas.modulo ){
+       		var idmodulo = paginas.modulo[i].idmodulo,
+       			modulo = paginas.modulo[i].nombre;
+
+	        html+=`<li class="treeview">
+	          <a href="#">
+	            <i class="fa fa-files-o"></i>
+	            <span>${ modulo }</span>
+	            <span class="pull-right-container">
+	              <span class="label label-primary pull-right">4</span>
+	            </span>
+	          </a>
+	          <ul class="treeview-menu">`;
+
+	        for( var j in paginas.data ){
+	          	var pagina = paginas.data[j].pagina,
+	          		data_idmodulo = paginas.data[j].idmodulo,
+       				caracter = pagina.lastIndexOf("/"),
+       				limite = pagina.length;
+    				nombrepagina = pagina.slice(caracter+1, limite-4 );
+    			
+    			if( idmodulo == data_idmodulo )
+	            	html+=`<li><a href=\"\" data-page="${ pagina }"><i class="fa fa-circle-o"></i> ${nombrepagina}</a></li>`;
+	        }
+	          html+=`</ul>
+	        </li>`;
+    	}
+
+    	$(".sidebar-menu").append(html);
+	});
+}
+
+
+
 
 function login(){
 	$("#frm-autenticacion-user").on("submit", function(e){

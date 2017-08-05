@@ -1,4 +1,10 @@
-<?php $ruta= "../views/modules/" ?>
+<?php
+    
+    $_POST["opcion"] = "listar";//mando como valor predeterminado a mi opción hacia mi controlador
+    include '../src/pagina/PaginaController.php';
+    $paginas = json_decode($lista);//recupero la lista obtenido en la variable global $listar
+
+?>
 
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -23,38 +29,46 @@
               </span>
         </div>
       </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <!--<li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Cliente</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="" data-page="cliente/registrar.php"><i class="fa fa-circle-o"></i> Registrar</a></li>
-            <li><a href="" data-page="cliente/listar.php"><i class="fa fa-circle-o"></i> Listar</a></li>
-          </ul>
-        </li>-->
+
+      <ul class="sidebar-menu"> 
+
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Empleado</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="" data-page="empleado/listar.php"><i class="fa fa-circle-o"></i> Listar</a></li>
-            <li><a href="" data-page="empleado/registrar.php"><i class="fa fa-circle-o"></i> Registrar</a></li>
-          </ul>
-        </li>
-                  
+        <?php
+            for( $i=0; $i < count($paginas->{"modulo"}); $i++ ){//filas
+                $idmodulo = $paginas->{"modulo"}[ $i ]->idmodulo;
+                $modulo = $paginas->{"modulo"}[ $i ]->nombre;
+        ?>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa fa-folder"></i>
+                    <span><?php echo $modulo; ?></span>
+                    <span class="pull-right-container">
+                        <span class="label label-primary pull-right">4</span>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+
+                <?php 
+                    for($j=0; $j < count($paginas->{"data"}); $j++){//columnas
+                        $url = $paginas->{"data"}[ $j ]->pagina;
+
+                        $posicion = strpos($url, "/") + 1;
+                        $archivo = substr($url, $posicion);
+                        $length = strlen($archivo) - 4;
+                        $pagina = substr($archivo, 0, $length);
+
+                        $data_idmodulo = $paginas->{"data"}[ $j ]->idmodulo;
+                        
+                        if( $idmodulo == $data_idmodulo ){
+                ?>
+                    <li><a href="" data-page="<?php echo $url; ?>"><i class="fa fa-file-text-o"></i> <?php echo ucwords($pagina); ?></a></li>
+                <?php  } } ?>
+                </ul>
+            </li>
+        <?php  } ?>
+   
       </ul>
+
     </section>
     <!-- /.sidebar -->
   </aside>
