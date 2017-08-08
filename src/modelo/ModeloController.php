@@ -20,6 +20,11 @@
 			$modeloBl = new ModeloBL();
 			echo $modeloBl->modificar();
 		break;
+
+		case 'combo':
+			$modeloBl = new ModeloBL();
+			echo $modeloBl->llenarCombo();
+		break;
 	}
 
  ?>

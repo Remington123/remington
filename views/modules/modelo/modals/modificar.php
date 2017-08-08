@@ -25,6 +25,7 @@
 									<input id="descripcion" name="descripcion" type="text" class="form-control">
 								</div>
 							</div>
+							
 						
 						</div>
 

@@ -20,6 +20,11 @@
 			$tallaBl = new TallaBL();
 			echo $tallaBl->modificar();
 		break;
+
+		case 'combo':
+			$tallaBl = new TallaBL();
+			echo $tallaBl->llenarCombo();
+		break;
 	}
 
 

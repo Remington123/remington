@@ -3,13 +3,14 @@
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
 
-	class CategoriaProductoDAO implements Consultas{
+	class ProductoDAO implements Consultas{
+		private $conexion=null;
 
 		public function listar(){
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM categoriaproducto;";
+				$sql = "SELECT * FROM producto;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -17,7 +18,7 @@
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}
-				echo json_encode($data);
+				return json_encode($data);
 			}catch (Throwable $e) {
 				return $e->getMessage();
 			}finally{
@@ -25,17 +26,21 @@
 				$conexion = null;
 			}
 		}
+
 		public function registrar($objeto) : bool{
-			return true;
+			$respuesta = false;	
+			return $respuesta;
 		}
-		public function modificar($objeto) : bool{
-			return true;
+
+		public function modificar( $objeto ) : bool{
+			$respuesta = false;
+			return $respuesta; 
 		}
+
 		public function eliminar(int $id) : bool{
-			return false;
-		}
+			$respuesta = false;
+			return $respuesta; 
+		}			
 	}
 
-	
-
- ?>
+?>

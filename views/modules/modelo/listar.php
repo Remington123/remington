@@ -16,7 +16,8 @@
 					<table id="dt_modelo" class="table table-striped">
 						<thead>
 							<th>ID</th>
-							<th>Descripcion</th>
+							<th>Descripción</th>
+							<th>Categoría</th>
 							<th></th>
 						</thead>
 					</table>

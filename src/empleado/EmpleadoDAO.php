@@ -2,6 +2,7 @@
 
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
+	//include 'Empleado.php';
 
 	class EmpleadoDAO implements Consultas{
 		private $conexion=null;
@@ -10,16 +11,16 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM empleado;";
+				$sql = "SELECT idempleado ,nombres, apellidopaterno, apellidomaterno, email, celular FROM empleado;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
 				$data = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-					$data[] = $resultado;
+					$data["data"][] = $resultado;
 				}
-				var_dump($data);
-				//echo json_encode($data);
+				//var_dump($data);
+				return json_encode($data);
 			}catch (Throwable $e) {
 				return $e->getMessage();
 			}finally{
@@ -136,10 +137,12 @@
 			$statement=null; 
 			try {
 				$cnn=$conexion -> getConexion();
-				$sql= "SELECT nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email, tu.descripcion, e.idtipousuario 
+				$sql= "SELECT nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email,
+								e.idtipousuario, tu.descripcion, p.idmodulo 
 						FROM empleado e 
 						INNER JOIN tipousuario tu ON e.idtipousuario = tu.idtipousuario
-						WHERE email = :email and contrasena = :contrasena; ";
+						INNER JOIN permiso p ON tu.idtipousuario = p.idtipousuario
+						WHERE email = :email and contrasena = :contrasena and p.estado = 1; ";
 				$statement=$cnn->prepare($sql);
 
 				$email = $objeto->getEmail();
@@ -149,6 +152,7 @@
 				$statement->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
 
 				$statement->execute();
+				//var_dump($statement->execute());
 				$arrayEmpleado = [];
 				$empleadoSesion = null;
 				while($resultado=$statement->fetch(PDO::FETCH_ASSOC)){
@@ -158,8 +162,10 @@
 					$_SESSION["email"] = $resultado["email"];
 					$_SESSION["idtipousuario"] = $resultado["idtipousuario"];
 					$_SESSION["descripcion"] = $resultado["descripcion"];
+					$modulos[] = $resultado["idmodulo"];
 					//$empleadoSesion = new EmpleadoSesion( $arrayEmpleado );
 				}
+				$_SESSION["idmodulo"] = $modulos;
 				return $_SESSION;
 				//var_dump($_SESSION);
 				//echo json_encode($data);
@@ -169,8 +175,13 @@
 				$statement->closeCursor();
 				$conexion = null;
 			}
-		}
-			
+		}			
 	}
+
+	/*$dao = new EmpleadoDAO();
+	$e = new Empleado();
+	$e->setEmail("geo412@gmail.com");
+	$e->setContrasena("123");
+	$dao->validarAcceso( $e );*/
 
 ?>

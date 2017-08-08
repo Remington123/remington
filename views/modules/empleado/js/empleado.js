@@ -1,41 +1,49 @@
 /* Llamado o ejecución de funciones */
-dtTalla();
-//alert("Cliente.js");
-//guardar();
+dtEmpleado();
 
-//Creación de funciones JS para el módulo cliente
-function dtTalla(){
-	var table = $("#dt_talla").DataTable({
+//Creación de funciones JS para el módulo empleado
+function dtEmpleado(){
+	var table = $("#dt_empleado").DataTable({
 		detroy: true,
 		ajax:{
 			method: "POST",
-			url: "../src/talla/TallaController.php",
+			url: "../src/empleado/EmpleadoController.php",
 			data: {opcion:"listar"}
 		},
 		columns:[
-			{"data":"idtalla"},
-			{"data":"descripcion"},
-			{"data":"categoria"},
+			{"data":"idempleado"},
+			{"data":"nombres"},
+			{"data":"apellidopaterno", 
+			"render": function(data, type, full, meta){
+				return `${full.apellidopaterno+" "+full.apellidomaterno}`;
+			}},
+			{"data":"apellidomaterno", visible:false},
+			{"data":"email"},
+			{"data":"celular"},
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
 	});
 
-	obtener_data_modificar("#dt_talla tbody", table);
+	obtener_data_modificar("#dt_empleado tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
 	$(tbody).on("click", "button.modificar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
-		var idtalla = $("#idtalla").val( data.idtalla ),
-				descripcion = $("#descripcion").val( data.descripcion),
+		var idusuario = $("#idempleado").val( data.idcliente ),
+				nombre = $("#nombre").val( data.nombres ),
+				apellidopaterno = $("#apellidopaterno").val( data.apellidopaterno ),
+				apellidomaterno = $("#apellidomaterno").val( data.apellidomaterno ),
+				email = $("#email").val( data.email ),
+				celular = $("#celular").val( data.celular ),
 				opcion = $("#opcion").val("modificar");
 	});
 }
 
 function guardar(){
-	$("#frmtalla").on("submit", function(e){
+	$("#frm-empleado-registrar").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
 		//console.log(frm);

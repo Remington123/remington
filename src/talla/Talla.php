@@ -3,48 +3,48 @@
 	class Talla{
 		
 		private $idtalla;
-		private $nombre;
-		private $acronimo;
+		private $descripcion;
 		private $estado;
+		private $idcategoriaproducto;
 
 		public function __construct(){
 			$this->idtalla = 0;
-			$this->nombre = "";
-			$this->acronimo = "";
+			$this->descripcion = "";
 			$this->estado = 0;
+			$this->idcategoriaproducto = 0;
 		}
 
-	public function getIdtalla() :int{
-		return $this->idtalla;
-	}
+		public function getIdtalla() :int{
+			return $this->idtalla;
+		}
 
-	public function setIdtalla(int $idtalla){
-		$this->idtalla = $idtalla;
-	}
+		public function setIdtalla(int $idtalla){
+			$this->idtalla = $idtalla;
+		}
 
-	public function getNombre() :string{
-		return $this->nombre;
-	}
+		public function getDescripcion() :string{
+			return $this->descripcion;
+		}
 
-	public function setNombre(string $nombre){
-		$this->nombre = $nombre;
-	}
+		public function setDescripcion(string $descripcion){
+			$this->descripcion = $descripcion;
+		}
 
-	public function getAcronimo() :string{
-		return $this->acronimo;
-	}
+		public function getEstado() :int{
+			return $this->estado;
+		}
 
-	public function setAcronimo(string $acronimo){
-		$this->acronimo = $acronimo;
-	}
+		public function setEstado(int $estado){
+			$this->estado = $estado;
+		}
 
-	public function getEstado() :int{
-		return $this->estado;
-	}
+		public function getIdcategoriaproducto() :int{
+				return $this->idcategoriaproducto;
+		}
 
-	public function setEstado(int $estado){
-		$this->estado = $estado;
-	}
+		public function setIdcategoriaproducto(int $idcategoriaproducto){
+			$this->idcategoriaproducto = $idcategoriaproducto;
+		}
 
 	}
 

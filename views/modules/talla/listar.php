@@ -17,7 +17,7 @@
 						<thead>
 							<th>ID</th>
 							<th>Nombre</th>
-							<<th>Acronimo</th>
+							<th>Categoría</th>
 							<th></th>
 						</thead>
 					</table>

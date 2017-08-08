@@ -34,9 +34,17 @@
 
         <li class="header">MAIN NAVIGATION</li>
         <?php
-            for( $i=0; $i < count($paginas->{"modulo"}); $i++ ){//filas
+
+            $permisoModuloEmpleado = $_SESSION["idmodulo"];
+            $c = 0;//contador
+
+            for( $i=0; $i < count($paginas->{"modulo"}); $i++ ){
                 $idmodulo = $paginas->{"modulo"}[ $i ]->idmodulo;
                 $modulo = $paginas->{"modulo"}[ $i ]->nombre;
+
+                //Validacion con el idmodulo de la sesion
+                if( isset($permisoModuloEmpleado[$c] ) && $permisoModuloEmpleado[$c] == $idmodulo ){
+                  $c++;
         ?>
             <li class="treeview">
                 <a href="#">
@@ -49,9 +57,8 @@
                 <ul class="treeview-menu">
 
                 <?php 
-                    for($j=0; $j < count($paginas->{"data"}); $j++){//columnas
+                    for($j=0; $j < count($paginas->{"data"}); $j++){
                         $url = $paginas->{"data"}[ $j ]->pagina;
-
                         $posicion = strpos($url, "/") + 1;
                         $archivo = substr($url, $posicion);
                         $length = strlen($archivo) - 4;
@@ -65,7 +72,7 @@
                 <?php  } } ?>
                 </ul>
             </li>
-        <?php  } ?>
+        <?php  } }?>
    
       </ul>
 

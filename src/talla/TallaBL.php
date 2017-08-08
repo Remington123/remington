@@ -42,5 +42,11 @@
 
 			return ( json_encode($informacion) );
 		}
+
+		public function llenarCombo(){
+			$dao = new TallaDAO();
+			$idcategoriaproducto = $_POST["idcategoriaproducto"];
+			return $dao->llenarCombo( $idcategoriaproducto );
+		}
 	}
 ?>

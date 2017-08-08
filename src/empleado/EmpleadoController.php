@@ -7,7 +7,7 @@
 	switch ( $opcion ) {
 		case 'listar':
 			$empleadoBL = new EmpleadoBL();
-			$empleadoBL->listar();
+			echo $empleadoBL->listar();
 		break;
 		case 'registrar':
 			$empleadoBL = new EmpleadoBL();

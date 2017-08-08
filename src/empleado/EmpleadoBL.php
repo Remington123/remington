@@ -5,6 +5,11 @@
 	class EmpleadoBL{
 		private $dao = null;
 
+		public function listar(){
+			$dao = new EmpleadoDAO();
+			return $dao->listar();
+		}
+
 		public function validarAcceso(){
 			$dao = new EmpleadoDAO();
 			$empleado = new Empleado();
