@@ -1,4 +1,7 @@
 <?php 
+		$accion = "registrar";
+		$modulo = "talla";
+		$controlador = $modulo.'/TallaController';
 		$script = '/js/talla.js';
 
 		$content = '
@@ -10,9 +13,10 @@
 		    </div>
 		    <!-- /.box-header -->
 		    <!-- form start -->
-		    <form id = "frmtallaregistrar" action="talla/TallaController.php" role="form">
+		    <form id="frmguardar'.$modulo.'" action="'.$controlador.'" role="form">
+		    	<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
+				<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 		      <div class="box-body">
-
 		        <div class="form-group">
 		            <label for="talla">Talla</label>            
 		            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
@@ -21,13 +25,11 @@
 				<div class="form-group">
 		            <label for="acronimo">Acronimo</label>            
 		            <input type="text" id="acronimo" name="acronimo" class="form-control" placeholder="Acronimo">
-		        </div>
-
-		        
+		        </div>		        
 		      </div>
 		      <!-- /.box-body -->
 		      <div class="box-footer">
-		        <button type="submit" class="btn btn-primary">Submit</button>
+		        <button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 		      </div>
 		    </form>
 		  </div>

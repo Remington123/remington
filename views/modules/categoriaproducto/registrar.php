@@ -1,4 +1,8 @@
 <?php 
+		
+		$modulo = "categoriaproducto";
+		$accion = "registrar";
+		$controlador = $modulo.'/CategoriaProductoController';
 		$script = '/js/categoriaproducto.js';
 
 		$content = '
@@ -10,7 +14,9 @@
 		    </div>
 		    <!-- /.box-header -->
 		    <!-- form start -->
-		    <form id = "frmcategoriaproductoregistrar" action="categoriaproducto/CategoriaProductoController.php" role="form">
+		    <form id="frmguardar'.$modulo.'" action="'.$controlador.'" role="form">
+			    <input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
+				<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 		      <div class="box-body">
 
 		        <div class="form-group">
@@ -21,7 +27,7 @@
 		      </div>
 		      <!-- /.box-body -->
 		      <div class="box-footer">
-		        <button type="submit" class="btn btn-primary">Submit</button>
+		        <button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 		      </div>
 		    </form>
 		  </div>

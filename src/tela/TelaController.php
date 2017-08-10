@@ -20,6 +20,16 @@
 			$telaBl = new TelaBL();
 			echo $telaBl->modificar();
 		break;
+
+		case 'eliminar':
+			$telaBl = new TelaBL();
+			echo $telaBl->eliminar();
+		break;
+
+		case 'combo':
+			$telaBl = new TelaBL();
+			echo $telaBl->llenarCombo();
+		break;
 	}
 
  ?>

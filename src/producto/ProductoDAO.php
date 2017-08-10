@@ -27,8 +27,44 @@
 			}
 		}
 
-		public function registrar($objeto) : bool{
-			$respuesta = false;	
+		public function registrar( $objeto ) : bool{
+			$conexion = new Conexion();
+			$respuesta = false;
+			$statement = null;			
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "INSERT INTO producto(descripcion, precio, precioventa, stock, stockactual, estado, idmodelo, idtalla, idtela, idcategoriaproducto) VALUES (?,?,?,?,?,?,?,?,?,?);";
+				/*Notice: Only variables should be passed by reference*/
+				$descripcion = $objeto->getDescripcion();
+				$precio = $objeto->getPrecio();
+				$precioventa = $objeto->getPrecioventa();
+				$stock = $objeto->getStock();
+				$stockactual = $objeto->getStockactual();
+				$estado = $objeto->getEstado();
+				$idmodelo = $objeto->getIdmodelo();
+				$idtalla = $objeto->getIdtalla();
+				$idtela = $objeto->getIdtela();
+				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
+
+				$statement = $cnn->prepare( $sql );
+				$statement->bindParam(1, $descripcion, PDO::PARAM_STR );
+				$statement->bindParam(2, $precio, PDO::PARAM_INT );
+				$statement->bindParam(3, $precioventa, PDO::PARAM_INT );
+				$statement->bindParam(4, $stock, PDO::PARAM_INT );
+				$statement->bindParam(5, $stockactual, PDO::PARAM_INT );
+				$statement->bindParam(6, $estado, PDO::PARAM_INT );
+				$statement->bindParam(7, $idmodelo, PDO::PARAM_INT );
+				$statement->bindParam(8, $idtalla, PDO::PARAM_INT );
+				$statement->bindParam(9, $idtela, PDO::PARAM_INT );
+				$statement->bindParam(10, $idcategoriaproducto, PDO::PARAM_INT );
+
+				$respuesta = $statement->execute();				
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
 			return $respuesta;
 		}
 

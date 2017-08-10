@@ -10,6 +10,11 @@
 			$productoBl = new ProductoBL();
 			echo $productoBl->listar();
 		break;
+
+		case 'registrar':
+			$productoBl = new ProductoBL();
+			echo $productoBl->registrar();
+		break;
 	}
 
  ?>

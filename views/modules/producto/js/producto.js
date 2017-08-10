@@ -2,8 +2,48 @@
 dtProducto();
 llenarComboCategoria("registrar", 0);
 obtenerIdCategoria();
+llenarComboTela("registrar", 0);
+guardar();
+eliminar();
 
-//Creación de funciones JS para el módulo cliente
+//Creación de funciones JS para el módulo producto
+
+function guardar(){
+	$("#frmguardarproducto").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize();
+		var controller = $(this).attr("action");
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){
+			console.log(info);
+			//limpiarCajas();//excluir el campo opción
+		});
+	});
+}
+
+function eliminar(){
+	$("#frmeliminarproducto").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize();
+		var controller = $(this).attr("action");
+		console.log(controller);
+		console.log( frm );
+		/*$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){
+			console.log(info);
+			limpiarCajas();
+		});*/
+	});
+}
+
 function dtProducto(){
 	var table = $("#dt_producto").DataTable({
 		detroy: true,
@@ -47,7 +87,7 @@ function obtener_data_modificar (tbody, table){
 		llenarComboCategoria("modificar", idcategoriaproducto);
 		llenarComboTalla("modificar", idcategoriaproducto, idtalla);
 		llenarComboModelo("modificar", idcategoriaproducto, idmodelo);
-
+		llenarComboTela("modificar", idtela);
 	});
 }
 
@@ -60,7 +100,7 @@ function llenarComboCategoria(accion, idcategoriaproducto){
 		var categoria = JSON.parse( info ),
 			option = "";
 		$("#idcategoriaproducto").html("");//limpiar el combo
-		//option +=`<option> Seleccionar </option>`;
+		option +=`<option> Seleccionar </option>`;
 
 		if( accion == "registrar" ){			
 			for(i in categoria.data )
@@ -149,22 +189,30 @@ function llenarComboModelo(accion, idcategoriaproducto, idmodelo){
 	});
 }
 
-function guardar(){
-	$("#frmmodeloregistrar").on("submit", function(e){
-		e.preventDefault();
-		var frm = $(this).serialize();
-		//console.log(frm);
-		var controller = $(this).attr("action");
-		//console.log("Controlador: " + controller);
-		$.ajax({
-			method:"POST",
-			url:"../src/"+controller,
-			data: frm
-		}).done(function(info){
-			//respuesta del servidor
-			console.log(info);
-			limpiarCajas();
-		});
+function llenarComboTela(accion, idtela){
+	$.ajax({
+		method: "POST",
+		url: "../src/tela/TelaController.php",
+		data: {opcion:"combo"}
+	}).done( function( info ){
+		var tela = JSON.parse( info ),
+			option = "";
+		$("#idtela").html("");//limpiar el combo
+		option +=`<option> Seleccionar </option>`;
+
+		if( accion == "registrar" ){			
+			for(i in tela.data )
+				option +=`<option value="${tela.data[i].idtela}"> ${tela.data[i].descripcion} </option>`;
+			
+		}else if( accion == "modificar" ){
+			for(i in tela.data ){
+				if( idtela == tela.data[i].idtela )
+					option += `<option selected value="${tela.data[i].idtela}"> ${tela.data[i].descripcion} </option>`;
+				else option +=`<option value="${tela.data[i].idtela}"> ${tela.data[i].descripcion} </option>`;
+			}
+		}
+
+		$("#idtela").html(option);
 	});
 }
 

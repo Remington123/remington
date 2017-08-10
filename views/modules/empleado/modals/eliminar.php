@@ -2,10 +2,11 @@
 
 	$accion = "eliminar";
 	$modulo = "empleado";
+	$controlador = $modulo.'/EmpleadoController';
 	
 	$modalEliminar = '
 	<div class="row">
-		<form id="frm'. $accion.$modulo.'" action="" method="POST">
+		<form id="frm'. $accion.$modulo.'" action="'.$controlador.'" method="POST">
 			<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 			<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 			<!-- Modal -->
@@ -20,7 +21,7 @@
 							¿Está seguro de '. $accion.' al '.$modulo.'?<strong data-name=""></strong>
 						</div>
 						<div class="modal-footer">
-							<button type="button" id="'. $accion.'-'.$modulo.'" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+							<button type="submit" id="'. $accion.'-'.$modulo.'" class="btn btn-primary">Aceptar</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
