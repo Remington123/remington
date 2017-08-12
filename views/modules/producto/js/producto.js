@@ -1,4 +1,5 @@
 /* Llamado o ejecución de funciones */
+//var table;
 dtProducto();
 llenarComboCategoria("registrar", 0);
 obtenerIdCategoria();
@@ -7,6 +8,7 @@ guardar();
 eliminar();
 
 //Creación de funciones JS para el módulo producto
+
 
 function guardar(){
 	$("#frmguardarproducto").on("submit", function(e){
@@ -47,12 +49,11 @@ function eliminar(){
 
 function dtProducto(){
 
-	var table = $("#dt_producto").DataTable();
-        table.destroy();
-        //$("#dt_producto").empty();
+	if ( $.fn.DataTable.isDataTable('#dt_producto') )
+	  	$("#dt_producto").empty();
 
 	var table = $("#dt_producto").DataTable({
-		detroy: true,
+		destroy: true,
 		ajax:{
 			method: "POST",
 			url: "../src/producto/ProductoController.php",
@@ -72,6 +73,7 @@ function dtProducto(){
 
 	obtener_data_modificar("#dt_producto tbody", table);
 	obtener_idproducto_eliminar("#dt_producto tbody", table);
+
 }
 
 function obtener_data_modificar (tbody, table){

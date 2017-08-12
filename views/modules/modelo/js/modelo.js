@@ -5,6 +5,10 @@ dtModelo();
 
 //Creación de funciones JS para el módulo cliente
 function dtModelo(){
+
+	if ( $.fn.DataTable.isDataTable('#dt_modelo') )
+	  	$("#dt_modelo").empty();
+	  
 	var table = $("#dt_modelo").DataTable({
 		detroy: true,
 		ajax:{

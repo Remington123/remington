@@ -3,6 +3,10 @@ dtEmpleado();
 
 //Creación de funciones JS para el módulo empleado
 function dtEmpleado(){
+
+	if ( $.fn.DataTable.isDataTable('#dt_empleado') )
+	  	$("#dt_empleado").empty();
+
 	var table = $("#dt_empleado").DataTable({
 		detroy: true,
 		ajax:{

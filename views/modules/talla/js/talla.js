@@ -5,6 +5,10 @@ dtTalla();
 
 //Creación de funciones JS para el módulo cliente
 function dtTalla(){
+
+	if ( $.fn.DataTable.isDataTable('#dt_talla') )
+	  	$("#dt_talla").empty();
+
 	var table = $("#dt_talla").DataTable({
 		detroy: true,
 		ajax:{
