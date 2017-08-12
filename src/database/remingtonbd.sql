@@ -62,7 +62,7 @@ CREATE TABLE `categoriaproducto` (
 
 LOCK TABLES `categoriaproducto` WRITE;
 /*!40000 ALTER TABLE `categoriaproducto` DISABLE KEYS */;
-INSERT INTO `categoriaproducto` VALUES (1,'Camisa',1),(2,'Pantalón',1),(3,'Cobarta',1),(4,'Saco',1),(5,'Chaleco',1);
+INSERT INTO `categoriaproducto` VALUES (1,'Camisa',1),(2,'Chaleco',1),(3,'Cobarta',1),(4,'Saco',1),(5,'Pantalón',1);
 /*!40000 ALTER TABLE `categoriaproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +240,7 @@ CREATE TABLE `empleado` (
   PRIMARY KEY (`idempleado`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
   CONSTRAINT `fk_idtipousuarioempleado` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +249,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'kevin','Yarasca','Ponce','76525712','kevin@gmail.com','123','av. ferrocarril s/n','18/08/1995','920096053',2,1);
+INSERT INTO `empleado` VALUES (1,'kevin','Yarasca','Ponce','76525712','kevin@gmail.com','123','av. ferrocarril s/n','18/08/1995','920096053',2,1),(2,'Geovanny','Rios','Abarca','47523012','geo@gmail.com','123','Urb. Libertad MZ V lote 7','28/02/1991','947856321',3,1),(3,'Yanira','Aquino','Ladera','42159875','yani@gmail.com','123','Av.Universitaria N°240','10/08/1998','947856312',3,1),(4,'Deysi','Alejandro','Bazan','44963214','deysi@gmail.com','123','Alejandro deustua N°739','23/03/1996','981237451',2,1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,9 +263,12 @@ DROP TABLE IF EXISTS `modelo`;
 CREATE TABLE `modelo` (
   `idmodelo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) DEFAULT NULL,
+  `idcategoriaproducto` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`idmodelo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idmodelo`),
+  KEY `fk_idcategoriaproductomodelo_idx` (`idcategoriaproducto`),
+  CONSTRAINT `fk_idcategoriaproductomodelo` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,7 +277,7 @@ CREATE TABLE `modelo` (
 
 LOCK TABLES `modelo` WRITE;
 /*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
-INSERT INTO `modelo` VALUES (1,'camisa manga corta',1),(2,'cmisa manga larga',1),(3,'saco cuello chino ',1);
+INSERT INTO `modelo` VALUES (1,'Camisa manga corta',1,1),(2,'Camisa manga larga',1,1),(3,'Chaleco ajustado en terciopelo',2,1),(4,'Chaleco ajustado de cuadros',2,1);
 /*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,13 +372,14 @@ DROP TABLE IF EXISTS `permiso`;
 CREATE TABLE `permiso` (
   `idpermiso` int(11) NOT NULL AUTO_INCREMENT,
   `idtipousuario` int(11) DEFAULT NULL,
-  `idpagina` int(11) DEFAULT NULL,
+  `idmodulo` int(11) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idpermiso`),
   KEY `fk_idtipousuariopermiso_idx` (`idtipousuario`),
-  KEY `fk_idpagina_idx` (`idpagina`),
-  CONSTRAINT `fk_idpagina` FOREIGN KEY (`idpagina`) REFERENCES `pagina` (`idpagina`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `fk_idmodulo_idx` (`idmodulo`),
+  CONSTRAINT `fk_idmodulopermiso` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtipousuariopermiso` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +388,7 @@ CREATE TABLE `permiso` (
 
 LOCK TABLES `permiso` WRITE;
 /*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
-INSERT INTO `permiso` VALUES (1,2,1),(2,3,1),(3,3,2);
+INSERT INTO `permiso` VALUES (1,2,2,0),(2,2,3,0),(3,2,4,1),(4,2,5,1),(5,2,6,1),(6,2,7,1),(7,3,1,1),(8,3,2,1),(9,3,3,1),(10,3,4,1),(11,3,5,1),(12,3,6,1),(13,3,7,1),(14,3,8,1);
 /*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,20 +407,20 @@ CREATE TABLE `producto` (
   `stock` int(11) DEFAULT NULL,
   `stockactual` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
+  `idcategoriaproducto` int(11) DEFAULT NULL,
   `idmodelo` int(11) DEFAULT NULL,
   `idtalla` int(11) DEFAULT NULL,
   `idtela` int(11) DEFAULT NULL,
-  `idcategoriaproducto` int(11) DEFAULT NULL,
   PRIMARY KEY (`idproducto`),
-  KEY `fk_idtalla_idx` (`idtalla`),
-  KEY `fk_idmodelo_idx` (`idmodelo`),
   KEY `fk_idtela_idx` (`idtela`),
   KEY `fk_idcategoriaproducto_idx` (`idcategoriaproducto`),
+  KEY `fk_idmodelo_idx` (`idmodelo`),
+  KEY `fk_idtalla_idx` (`idtalla`),
   CONSTRAINT `fk_idcategoriaproducto` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idmodelo` FOREIGN KEY (`idmodelo`) REFERENCES `modelo` (`idmodelo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtalla` FOREIGN KEY (`idtalla`) REFERENCES `talla` (`idtalla`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtela` FOREIGN KEY (`idtela`) REFERENCES `tela` (`idtela`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -425,6 +429,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,'Camisa super elegante ',60.00,70.00,10,10,1,1,2,2,1),(2,'Camisa a cuadros elegante',60.00,70.00,20,20,1,1,2,3,2),(3,'Chaleco de vestir',80.00,90.00,20,20,1,2,3,5,2),(4,'Chaleco formal de trabajo en oficina',50.00,60.00,30,30,1,2,4,4,2),(5,'Camisa informal',60.00,70.00,10,10,1,1,2,1,1);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,11 +442,13 @@ DROP TABLE IF EXISTS `talla`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `talla` (
   `idtalla` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) DEFAULT NULL,
-  `acronimo` varchar(5) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `idcategoriaproducto` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`idtalla`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idtalla`),
+  KEY `fk_idcategoriaproductotalla_idx` (`idcategoriaproducto`),
+  CONSTRAINT `fk_idcategoriaproductotalla` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -450,7 +457,7 @@ CREATE TABLE `talla` (
 
 LOCK TABLES `talla` WRITE;
 /*!40000 ALTER TABLE `talla` DISABLE KEYS */;
-INSERT INTO `talla` VALUES (1,'camisa','s',1),(2,'camisa','l',1),(3,'saco','xl',2);
+INSERT INTO `talla` VALUES (1,'S - pecho 91 - 96 cm',1,1),(2,'M - pecho 96 - 101 cm',1,1),(3,'L - pecho 101 - 106 cm',1,1),(4,'42 - W 81 cm',2,1),(5,'44 - W 84 cm',2,1),(6,'46 - W 91 cm',2,1);
 /*!40000 ALTER TABLE `talla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,4 +545,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-05  0:18:40
+-- Dump completed on 2017-08-12  1:35:59

@@ -10,7 +10,7 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM producto;";
+				$sql = "SELECT * FROM producto WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -69,12 +69,82 @@
 		}
 
 		public function modificar( $objeto ) : bool{
+			$conexion = new Conexion();
 			$respuesta = false;
-			return $respuesta; 
+			$statement = null;			
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE producto SET 
+								 descripcion = :descripcion,
+								 precio = :precio,
+								 precioventa = :precioventa,
+								 stock = :stock,
+								 stockactual = :stockactual,
+								 estado = :estado,
+								 idmodelo = :idmodelo,
+								 idtalla = :idtalla,
+								 idtela = :idtela,
+								 idcategoriaproducto = :idcategoriaproducto
+						WHERE idproducto = :idproducto;";
+				/*Notice: Only variables should be passed by reference*/
+				$descripcion = $objeto->getDescripcion();
+				$precio = $objeto->getPrecio();
+				$precioventa = $objeto->getPrecioventa();
+				$stock = $objeto->getStock();
+				$stockactual = $objeto->getStockactual();
+				$estado = $objeto->getEstado();
+				$idmodelo = $objeto->getIdmodelo();
+				$idtalla = $objeto->getIdtalla();
+				$idtela = $objeto->getIdtela();
+				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
+				$idproducto = $objeto->getIdproducto();
+
+				$statement = $cnn->prepare( $sql );
+				$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR );
+				$statement->bindParam(":precio", $precio, PDO::PARAM_INT );
+				$statement->bindParam(":precioventa", $precioventa, PDO::PARAM_INT );
+				$statement->bindParam(":stock", $stock, PDO::PARAM_INT );
+				$statement->bindParam(":stockactual", $stockactual, PDO::PARAM_INT );
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT );
+				$statement->bindParam(":idmodelo", $idmodelo, PDO::PARAM_INT );
+				$statement->bindParam(":idtalla", $idtalla, PDO::PARAM_INT );
+				$statement->bindParam(":idtela", $idtela, PDO::PARAM_INT );
+				$statement->bindParam(":idcategoriaproducto", $idcategoriaproducto, PDO::PARAM_INT );
+				$statement->bindParam(":idproducto", $idproducto, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();				
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 
 		public function eliminar(int $id) : bool{
+			$conexion = null;
+			$statement = null;
 			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE producto SET  estado = :estado 
+						WHERE idproducto = :idproducto;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement->bindParam(":idproducto", $id, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();
+
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
 			return $respuesta; 
 		}			
 	}

@@ -20,7 +20,7 @@ function guardar(){
 			data: frm
 		}).done(function(info){
 			console.log(info);
-			//limpiarCajas();//excluir el campo opción
+			dtProducto();
 		});
 	});
 }
@@ -33,18 +33,24 @@ function eliminar(){
 		var controller = $(this).attr("action");
 		console.log(controller);
 		console.log( frm );
-		/*$.ajax({
+		$.ajax({
 			method:"POST",
 			url:"../src/"+controller+".php",
 			data: frm
 		}).done(function(info){
 			console.log(info);
-			limpiarCajas();
-		});*/
+			dtProducto();
+			//limpiarCajas();
+		});
 	});
 }
 
 function dtProducto(){
+
+	var table = $("#dt_producto").DataTable();
+        table.destroy();
+        //$("#dt_producto").empty();
+
 	var table = $("#dt_producto").DataTable({
 		detroy: true,
 		ajax:{
@@ -58,13 +64,14 @@ function dtProducto(){
 			{"data":"precio"},
 			{"data":"precioventa"},
 			{"data":"stock"},
-			{"data":"stockactual"},
+			{"data":"stockactual", "width": "100px" },
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
 	});
 
 	obtener_data_modificar("#dt_producto tbody", table);
+	obtener_idproducto_eliminar("#dt_producto tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
@@ -88,6 +95,13 @@ function obtener_data_modificar (tbody, table){
 		llenarComboTalla("modificar", idcategoriaproducto, idtalla);
 		llenarComboModelo("modificar", idcategoriaproducto, idmodelo);
 		llenarComboTela("modificar", idtela);
+	});
+}
+
+function obtener_idproducto_eliminar (tbody, table){
+	$(tbody).on("click", "button.eliminar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		var idproducto = $("#frmeliminarproducto #idproducto").val( data.idproducto );
 	});
 }
 

@@ -51,6 +51,7 @@
 	        <div class="form-group">
 	          <label for="stock">Stock</label>
 	          <input type="text" id="stock" name="stock" class="form-control" placeholder="Stock">
+	          <input type="hidden" id="stock" name="stockactual" class="form-control" placeholder="StockActual">
 	        </div>
 
 	      </div>

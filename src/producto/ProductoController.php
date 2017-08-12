@@ -15,6 +15,16 @@
 			$productoBl = new ProductoBL();
 			echo $productoBl->registrar();
 		break;
+
+		case 'modificar':
+			$productoBl = new ProductoBL();
+			echo $productoBl->modificar();
+		break;
+
+		case 'eliminar':
+			$productoBl = new ProductoBL();
+			echo $productoBl->eliminar();
+		break;
 	}
 
  ?>
