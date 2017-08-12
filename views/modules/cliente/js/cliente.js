@@ -5,7 +5,7 @@ dtCliente();
 
 //Creación de funciones JS para el módulo cliente
 function dtCliente(){
-	
+
 	if ( $.fn.DataTable.isDataTable('#dt_cliente') )
 	  	$("#dt_cliente").empty();
 
@@ -62,13 +62,8 @@ function guardar(){
 		}).done(function(info){
 			//respuesta del servidor
 			console.log(info);
-			limpiarCajas();
 		});
 	});
-}
-
-function limpiarCajas(){
-	$("input").val("");
 }
 
 var spanish = {

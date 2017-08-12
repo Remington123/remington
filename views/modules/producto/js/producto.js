@@ -42,7 +42,7 @@ function eliminar(){
 		}).done(function(info){
 			console.log(info);
 			dtProducto();
-			//limpiarCajas();
+			
 		});
 	});
 }
@@ -230,10 +230,6 @@ function llenarComboTela(accion, idtela){
 
 		$("#idtela").html(option);
 	});
-}
-
-function limpiarCajas(){
-	$("input").val("");
 }
 
 var spanish = {

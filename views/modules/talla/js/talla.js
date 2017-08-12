@@ -52,14 +52,11 @@ function guardar(){
 		}).done(function(info){
 			//respuesta del servidor
 			console.log(info);
-			limpiarCajas();
+			
 		});
 	});
 }
 
-function limpiarCajas(){
-	$("input").val("");
-}
 
 var spanish = {
     "sProcessing":     "Procesando...",

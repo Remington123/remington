@@ -8,7 +8,7 @@ function dtModelo(){
 
 	if ( $.fn.DataTable.isDataTable('#dt_modelo') )
 	  	$("#dt_modelo").empty();
-	  
+
 	var table = $("#dt_modelo").DataTable({
 		detroy: true,
 		ajax:{
@@ -52,13 +52,9 @@ function guardar(){
 		}).done(function(info){
 			//respuesta del servidor
 			console.log(info);
-			limpiarCajas();
+			
 		});
 	});
-}
-
-function limpiarCajas(){
-	$("input").val("");
 }
 
 var spanish = {
