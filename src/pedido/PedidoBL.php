@@ -1,53 +1,61 @@
 <?php
+	include 'PedidoDAO.php';
+	include 'Pedido.php';
+	include 'PedidoValidar.php';
 
-include 'PedidoDAO.php';
-include 'Pedido.php';
-class PedidoBl{
-    private $dao =null;
-    public function listar(){
-    	$dao =new PedidoDAO();
-    	$dao->listar();    	
-    }
+	class PedidoBL{
 
-public function registrar() :string{
+	    private $dao =null;
+	    private $validar = null;
 
-	$informacion =[];
+	    public function listar(){
+	    	$dao = new PedidoDAO();
+	    	return $dao->listar();    	
+	    }
 
-	$pedido =new Pedido();
-	$pedido->setFecha( $_POST["fecha"]);
-	$pedido->setIdpedido( 1 );
-	$pedido->setTotal($_POST["total"]);
+		public function registrar() :string{
+			$informacion =[];
+			$validar = new PedidoValidar();
+			if( $validar->datosObtenidosFormulario( "registrar" ) ){
+				$pedido = new Pedido();
+				$pedido->setFecha( $_POST["fecha"] );
+				$pedido->setIdcliente( $_POST["idcliente"] );
+				$pedido->setTotal( $_POST["total"] );
+
+				$dao = new PedidoDAO();
+				$dao->registrar( $pedido ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+			}else{
+				$informacion["respuesta"] = "llenar_datos";
+			}
+
+			return ( json_encode($informacion));
+		}
+
+		public function modificar() :string{
+			$informacion = [];
+			$validar = new PedidoValidar();
+			if( $validar->datosObtenidosFormulario( "modificar" ) ){
+				$pedido = new Pedido();
+				$pedido->setIdpedido( $_POST["idpedido"] );
+				$pedido->setFecha( $_POST["fecha"] );
+				$pedido->setIdcliente( $_POST["idcliente"] );	
+				$pedido->setTotal( $_POST["total"] );
+
+				$dao =new PedidoDAO();
+				if ($dao->modificar($pedido))
+					$informacion["respuesta"] = "ok_modificacion";
+				else
+					$informacion["respuesta"] = "error_modificacion";
+				
+			}else{
+				$informacion["respuesta"] = "llenar_datos";
+			}
+
+			return ( json_encode($informacion) );
+		}
 
 
-$dao = new pedidoDAO();
-$dao->registrar( $pedido ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
-
-return ( json_encode($informacion));
-
-}
-public function modificar() :string{
-
-$informacion = [];
-			$pedido = new Cliente();
-			$pedido->setFecha( $_POST["fecha"] );
-			$pedido->setIdpedido( 1 );
-			$pedido->setTotal( $_POST["total"] );
-
-
-			$dao =new PedidoDAO();
-			if ($dao->modificar($pedido))
-				$informacion["respuesta"] = "ok_modificacion";
-			else
-				$informacion["respuesta"] = "error_modificacion";
-
-  return ( json_encode($informacion) );
-
-
-}
-
-}
-
-
+	}
 ?>
 
 

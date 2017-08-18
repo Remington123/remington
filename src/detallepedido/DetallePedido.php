@@ -7,6 +7,7 @@
  	private $idproducto;
  	private $cantidad;
  	private $importe;
+ 	private $estado;
 
  	public function __construct(){
  		$this->iddetallepedido = 0;
@@ -14,6 +15,7 @@
  		$this->idproducto = 0;
  		$this->cantidad = 0;
  		$this->importe = 0;
+ 		$this->estado = 0;
  	}
 
  	public function getIddetallepedido() :int{
@@ -53,6 +55,14 @@
 	}
 
 	public function setImporte(float $importe){
+		$this->importe = $importe;
+	}
+
+	public function getEstado() :int{
+		return $this->importe;
+	}
+
+	public function setEstado(int $importe){
 		$this->importe = $importe;
 	}
  }

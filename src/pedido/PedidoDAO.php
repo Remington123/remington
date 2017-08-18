@@ -1,57 +1,80 @@
 <?php
-include (dirname(__FILE__). '/../comunes/Conexion.php'); 
-include (dirname(__FILE__) . '/../comunes/Consultas.php');
-class PedidoDAO implements Consultas{
-private function listar(){
+	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
+	include (dirname(__FILE__) . '/../comunes/Consultas.php');
 
-	$conexion =new Conexion();
-	try{
+	class PedidoDAO implements Consultas{
 
+		public function listar(){
+			$conexion =new Conexion();
+			try{
+				$cnn =$conexion->getConexion();
+				$sql ="SELECT * FROM  pedido;";
+				$statement=$cnn->prepare($sql);
+				$statement->execute();
 
-		$cnn =$conexion->getConexion();
-		$sql ="SELECT * FROM  pedido;";
-		$statement=$cnn->prepare($sql);
-		$statement->execute();
+				$data = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+		    }catch (throwable $e){
+		    	echo $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+		
+		public function registrar($objeto) :bool{
+			$conexion = new Conexion();
+			$respuesta = false;
+			$statement = null;
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "INSERT INTO pedido(fecha, idcliente, total) VALUES (?,?,?);";
+				$fecha =$objeto->getFecha();
+				$idcliente = $objeto->getIdcliente();
+				$total =$objeto->getTotal();
 
+				$statement = $cnn->prepare($sql);
 
-		$data = [];//arreglo vacio
-		while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-					$data[] = $resultado;
+				$statement->bindParam(1, $fecha, PDO::PARAM_STR);
+				$statement->bindParam(2, $idcliente, PDO::PARAM_INT);
+				$statement->bindParam(3, $total, PDO::PARAM_INT);
 
-	}
-	echo json_encode($data);
-   }catch (throwable $e);
-   return $e->getMessage();
-}finally{
+				$respuesta = $statement->execute();
 
-	$statement->closeCursor();
-	$conexion = null;
-}
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta; 
+		}
 
-}
-public function registrar($objeto):bool{
-	$conexion = new Conexion();
-	$respuesta = false;
-	$statement = null;
+		public function modificar($objeto) :bool{
+			$conexion = new Conexion();
+			$respuesta = false;
+			$statement = null;
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE pedido SET fecha := fecha,
+										  idcliente := idcliente,
+										  total := total
+						WHERE idpedido := idpedido";
+				$fecha =$objeto->getFecha();
+				$idcliente = $objeto->getIdcliente();
+				$total =$objeto->getTotal();
 
+				$statement = $cnn->prepare($sql);
 
-	try{
-		$cnn = $conexion->getConexion();
-		$sql = "INSERT INTO pedido(fecha, idcliente, total) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
-		$fecha =$objeto->getFecha();
-		$id = $objeto->getcliente();
-		$total =$objeto->gettotal();
-
-$statement = $cnn->prepare($sql);
-
-$statement->bindParam(":idpedido", $idpedido, PDO::PARAM_INT);
-				$statement->bindParam(":fecha", $nombre, PDO::PARAM_STR);
+				$statement->bindParam(":fecha", $fecha, PDO::PARAM_STR);
 				$statement->bindParam(":idcliente", $idcliente, PDO::PARAM_INT);
-				$statement->bindParam(":total", $total, PDO::PARAM_STR);
+				$statement->bindParam(":total", $total, PDO::PARAM_INT);
+				$statement->bindParam(":idpedido", $total, PDO::PARAM_INT);
 
-
-
-			$respuesta = $statement->execute();
+				$respuesta = $statement->execute();
 
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
@@ -63,9 +86,10 @@ $statement->bindParam(":idpedido", $idpedido, PDO::PARAM_INT);
 		}
 
 		public function eliminar(int $id) : bool{
-			return true;
+			$respuesta = false;
+			/*En discusión*/
+			return $respuesta; 
+		}
 
-
-	}
 }
 ?>

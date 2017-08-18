@@ -8,7 +8,7 @@
 	switch ( $opcion ) {
 		case 'listar':
 			$pedidoBl = new PedidoBL();
-			$pedidoBl->listar();
+			echo $pedidoBl->listar();
 		break;
 
 		case 'registrar':
