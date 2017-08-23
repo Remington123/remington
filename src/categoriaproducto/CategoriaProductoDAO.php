@@ -47,9 +47,9 @@
 				echo "EXCEPTION ".$e->getMessage();
 			}finally{
 				$statement->closeCursor();
-				$conexion = null;			}
-		}
-		return $respuesta;
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 
 
@@ -66,7 +66,7 @@
 			$estado = $objeto->getEstado();
 
 			$statement = $cnn->prepare( $sql );
-			$statement->bindParam(":descripcion" $descripcion, PDO::PARAM_STR);
+			$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 			$statement->bindParam(":estado", $estado, PDO::PARAM_INT);	
 			$respuesta = $statement->execute();
 			}catch(Exception $e){
