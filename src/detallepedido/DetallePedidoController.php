@@ -8,12 +8,12 @@
 	switch ( $opcion ) {
 		case 'listar':
 			$detallepedidoBl = new DetallePedidoBL();
-			$detallepedidoBl->listar();
+			echo $detallepedidoBl->listar();
 		break;
 		
 		case 'listarPedidoConDetalle':
 			$detallepedidoBl = new DetallePedidoBL();
-			$detallepedidoBl->listarDetallePedido();
+			echo $detallepedidoBl->listarDetallePedido();
 		break;
 
 		case 'registrar':

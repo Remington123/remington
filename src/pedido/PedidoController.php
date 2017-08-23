@@ -11,6 +11,11 @@
 			echo $pedidoBl->listar();
 		break;
 
+		case 'listarPedido':
+			$pedidoBl = new PedidoBL();
+			echo $pedidoBl->listarPedido();
+		break;
+
 		case 'registrar':
 			$pedidoBl = new PedidoBL();
 			echo $pedidoBl->registrar();

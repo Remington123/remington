@@ -24,6 +24,35 @@
 				$conexion = null;
 			}
 		}
+
+		public function listarPedido( $idpedido ){
+			$conexion =new Conexion();
+			$statement = null;
+			try{
+				$cnn =$conexion->getConexion();
+				$sql =" SELECT p.idpedido, fecha, total, p.idcliente, 
+				CONCAT( nombres, ' ', apellidopaterno, ' ', apellidomaterno ) AS cliente
+						FROM pedido p
+						INNER JOIN cliente c
+						ON p.idcliente = c.idcliente
+						WHERE p.idpedido = ? ";
+
+				$statement=$cnn->prepare($sql);
+				$statement->bindParam(1, $idpedido, PDO::PARAM_INT);
+				$statement->execute();
+
+				$data = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+		    }catch (throwable $e){
+		    	echo $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
 		
 		public function registrar($objeto) :bool{
 			$conexion = new Conexion();
@@ -86,28 +115,7 @@
 		}
 
 		public function eliminar(int $id) : bool{
-			$conexion = null;
-			$statement = null;
-			$respuesta = false;
-			try{
-				$conexion = new Conexion();
-				$cnn = $conexion->getConexion();
-				$sql = "UPDATE pedido SET  estado = :estado 
-						WHERE idpedido = :idpedido;";
-				$estado = 0;
-
-				$statement = $cnn->prepare($sql);
-				$statement->bindParam(":idpedido", $id, PDO::PARAM_INT);
-				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
-
-				$respuesta = $statement->execute();
-
-			}catch(Exception $e){
-				echo "EXCEPCIÓN ".$e->getMessage();
-			}finally{
-				$statement->closeCursor();
-				$conexion = null;
-			}
+			$respuesta = false;			
 			return $respuesta; 
 		}
 

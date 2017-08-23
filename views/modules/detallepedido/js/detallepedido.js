@@ -6,8 +6,30 @@ obtenerDataPedido();
 function obtenerDataPedido(){
 	$("#btnlistar-detallepedido").on("click",function(){
 		var idpedido = $("#idpedido").val();
-		alert( idpedido );
+		if( idpedido == "" )
+			alert("Ingresar código de pedido");
+		else{
+			$.ajax({
+				method: "POST",
+				url: "../src/pedido/PedidoController.php",
+				data: {opcion:"listarPedido",idpedido: idpedido}
+			}).done( function( info ){
+				var pedido = JSON.parse(info),
+					idpedido = pedido.data[0].idpedido;
+				llenarDatosDeModulo( pedido );	
+				//Pasamos el idpedido como parámetro
+				dtDetallePedido( idpedido );
+			});
+		}
 	});
+}
+
+function llenarDatosDeModulo( pedido ){
+	$("#idpedido").val( pedido.data[0].idpedido );
+	$("#idcliente").val( pedido.data[0].idcliente );
+	$("#cliente").val( pedido.data[0].cliente );
+	$("#total").val( pedido.data[0].total );
+	$("#fecha").val( pedido.data[0].fecha );
 }
 
 function dtDetallePedido( idpedido ){

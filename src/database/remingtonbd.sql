@@ -200,6 +200,7 @@ CREATE TABLE `detallepedido` (
   `idproducto` int(11) DEFAULT NULL,
   `cantidad` mediumint(3) DEFAULT NULL,
   `importe` decimal(18,2) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`iddetallepedido`),
   KEY `fk_idproducto_idx` (`idproducto`),
   KEY `fk_idpedido_idx` (`idpedido`),
@@ -293,7 +294,7 @@ CREATE TABLE `modulo` (
   `nombre` varchar(50) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idmodulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +303,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-INSERT INTO `modulo` VALUES (1,'Cliente',1),(2,'Empleado',1),(3,'Producto',1),(4,'Categoria Producto',1),(5,'Modelo',1),(6,'Tela',1),(7,'Talla',1),(8,'Permiso',1);
+INSERT INTO `modulo` VALUES (1,'Cliente',1),(2,'Empleado',1),(3,'Producto',1),(4,'Categoria Producto',1),(5,'Modelo',1),(6,'Tela',1),(7,'Talla',1),(8,'Permiso',1),(9,'Pedido',1),(10,'Detalle Pedido',1);
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -322,7 +323,7 @@ CREATE TABLE `pagina` (
   PRIMARY KEY (`idpagina`),
   KEY `fk_idmodulo_idx` (`idmodulo`),
   CONSTRAINT `fk_idmodulo` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +332,7 @@ CREATE TABLE `pagina` (
 
 LOCK TABLES `pagina` WRITE;
 /*!40000 ALTER TABLE `pagina` DISABLE KEYS */;
-INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1);
+INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1),(16,9,'pedido/listar.php','fa fa-folder',1),(17,10,'detallepedido/listar.php','fa fa-folder',1);
 /*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,7 +380,7 @@ CREATE TABLE `permiso` (
   KEY `fk_idmodulo_idx` (`idmodulo`),
   CONSTRAINT `fk_idmodulopermiso` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtipousuariopermiso` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -388,7 +389,7 @@ CREATE TABLE `permiso` (
 
 LOCK TABLES `permiso` WRITE;
 /*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
-INSERT INTO `permiso` VALUES (1,2,2,0),(2,2,3,0),(3,2,4,1),(4,2,5,1),(5,2,6,1),(6,2,7,1),(7,3,1,1),(8,3,2,1),(9,3,3,1),(10,3,4,1),(11,3,5,1),(12,3,6,1),(13,3,7,1),(14,3,8,1);
+INSERT INTO `permiso` VALUES (1,2,2,0),(2,2,3,0),(3,2,4,1),(4,2,5,1),(5,2,6,1),(6,2,7,1),(7,3,1,1),(8,3,2,1),(9,3,3,1),(10,3,4,1),(11,3,5,1),(12,3,6,1),(13,3,7,1),(14,3,8,1),(15,3,9,1),(16,3,10,1);
 /*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -429,7 +430,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Camisa super elegante ',60.00,70.00,10,10,1,1,2,2,1),(2,'Camisa a cuadros elegante',60.00,70.00,20,20,1,1,2,3,2),(3,'Chaleco de vestir',80.00,90.00,20,20,1,2,3,5,2),(4,'Chaleco formal de trabajo en oficina',50.00,60.00,30,30,1,2,4,4,2),(5,'Camisa informal',60.00,70.00,10,10,1,1,2,1,1);
+INSERT INTO `producto` VALUES (1,'Camisa super elegante ',60.00,70.00,10,10,1,1,1,3,2),(2,'Camisa a cuadros elegante',60.00,70.00,20,20,0,1,2,3,2),(3,'Chaleco de vestir',80.00,90.00,20,20,0,2,4,6,1),(4,'Chaleco formal de trabajo en oficina',50.00,60.00,30,30,0,2,4,4,2),(5,'Camisa informal',60.00,70.00,10,10,1,1,2,1,1);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -485,6 +486,30 @@ LOCK TABLES `tela` WRITE;
 /*!40000 ALTER TABLE `tela` DISABLE KEYS */;
 INSERT INTO `tela` VALUES (1,'tela francessa','turquesa',1),(2,'tela romana','plomo',1),(3,'tela comic','rosado',1);
 /*!40000 ALTER TABLE `tela` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipocliente`
+--
+
+DROP TABLE IF EXISTS `tipocliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipocliente` (
+  `idtipocliente` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idtipocliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipocliente`
+--
+
+LOCK TABLES `tipocliente` WRITE;
+/*!40000 ALTER TABLE `tipocliente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipocliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -545,4 +570,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-12  1:35:59
+-- Dump completed on 2017-08-23  0:13:41

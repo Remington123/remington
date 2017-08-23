@@ -29,14 +29,13 @@
 		            <input type="text" id="cliente" name="cliente" class="form-control" placeholder="Cliente">
 		        </div>
 		        <div class="form-group">
-		            <label for="total">Total</label>            
-		            <input type="text" id="total" name="total" class="form-control" placeholder="Total">
-		        </div>
-		        <div class="form-group">
 		            <label for="fecha">Fecha</label>            
 		            <input type="text" id="fecha" name="fecha" class="form-control" placeholder="Fecha">
 		        </div>
-		        
+		        <div class="form-group">
+		            <label for="total">Total</label>            
+		            <input type="text" id="total" name="total" class="form-control" placeholder="Total">
+		        </div>		        
 		      </div>
 		      <!-- /.box-body -->
 		      <div class="box-footer">

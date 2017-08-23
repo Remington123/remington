@@ -18,10 +18,10 @@
 								ON dp.idpedido = p.idpedido
 								INNER JOIN producto pro
 								ON dp.idproducto = pro.idproducto
-								WHERE p.idpedido :=idpedido and dp.estado = 1;";
+								WHERE p.idpedido = ? and dp.estado = 1;";
 				$statement=$cnn->prepare($sql);
 				
-				$statement->bindParam(":idpedido", $idpedido, PDO::PARAM_INT)
+				$statement->bindParam(1, $idpedido, PDO::PARAM_INT);
 				$statement->execute();
 
 				$data = [];//arreglo vacio

@@ -3,7 +3,7 @@
 	include 'DetallePedido.php';
 	include 'DetallePedidoValidar.php';
 
-	class PedidoBL{
+	class DetallePedidoBL{
 
 	    private $dao =null;
 	    private $validar = null;
@@ -20,8 +20,7 @@
 	    	if( $validar->idPrimarioPedido() ){
 		    	$dao = new DetallePedidoDAO();
 		    	$idpedido = $_POST["idpedido"];
-		    	$dao->listarDetallePedido( $idpedido );
-		    	return $dao;
+		    	return $dao->listarDetallePedido( $idpedido );
 	    	}else{
 	    		$informacion["respuesta"] = "idpedido_indefinido";
 	    		return ( json_encode($informacion));
