@@ -21,6 +21,11 @@
 			echo $modeloBl->modificar();
 		break;
 
+		case 'eliminar':
+			$modeloBl = new ModeloBL();
+			echo $modeloBl->eliminar();
+		break;
+
 		case 'combo':
 			$modeloBl = new ModeloBL();
 			echo $modeloBl->llenarCombo();

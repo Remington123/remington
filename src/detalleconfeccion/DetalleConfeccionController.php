@@ -21,6 +21,11 @@
 			echo $detalleconfeccionBl->modificar();
 		break;
 
+		case 'eliminar':
+		$detalleconfeccionBl = new DetalleConfeccionBL();
+		echo $detalleconfeccionBl->eliminar();
+		break;
+
 	}
 
  ?>

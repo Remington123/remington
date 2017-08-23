@@ -4,6 +4,7 @@
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
 
 	class CategoriaProductoDAO implements Consultas{
+		private $conexion=null;
 
 		public function listar(){
 			$conexion = new Conexion();
@@ -17,7 +18,7 @@
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}
-				echo json_encode($data);
+				return json_encode($data);
 			}catch (Throwable $e) {
 				return $e->getMessage();
 			}finally{
@@ -26,16 +27,87 @@
 			}
 		}
 		public function registrar($objeto) : bool{
-			return true;
+			$conexion = new Conexion();
+			$respuesta = false;
+			$statement = null;
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "INSERT INTO categoriaproducto(descripcion, estado)
+					VALUES (??);";
+
+			$descripcion = $objeto->getDescripcion();
+			$estado = $objeto->getEstado();
+
+			$statement = $cnn->prepare( $sql	 );
+			$statement->bindParam(1, $descripcion, PDO::PARAM_STR );
+			$statement->bindParam(2, $estado, PDO::PARAM_INT );
+
+			$respuesta = $statement->execute();
+			}catch(Exception $e){
+				echo "EXCEPTION ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;			}
 		}
+		return $respuesta;
+		}
+
+
 		public function modificar($objeto) : bool{
-			return true;
+			$conexion = new Conexion();
+			$respuesta = false;
+			$statement = null;
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE categoriaproducto SET descripcion = :descripcion,
+					estado = :estado WHERE idcategoriaproducto = :idcategoriaproducto;";
+
+			$descripcion = $objeto->getDescripcion();
+			$estado = $objeto->getEstado();
+
+			$statement = $cnn->prepare( $sql );
+			$statement->bindParam(":descripcion" $descripcion, PDO::PARAM_STR);
+			$statement->bindParam(":estado", $estado, PDO::PARAM_INT);	
+			$respuesta = $statement->execute();
+			}catch(Exception $e){
+				echo "EXCEPTION ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}	
+			return $respuesta;
+			
 		}
 		public function eliminar(int $id) : bool{
-			return false;
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE categoriaproducto SET estado = :estado WHERE idcategoriaproducto = :idcategoriaproducto;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement->bindParam(":idcategoriaproducto", $id, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();
+
+			}catch(Exception $e){
+				echo "EXCEPTION ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 	}
-
-	
-
  ?>
+
+
+
+
+
+
+

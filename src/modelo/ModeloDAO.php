@@ -80,7 +80,26 @@
 		}
 
 		public function eliminar(int $id) : bool{
-			return true;
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE modelo SET estado = :estado WHERE idmodelo = :idmodelo;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement = bindParam(":idmodelo", $id, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+			
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 
 		public function llenarCombo( $idcategoriaproducto ){

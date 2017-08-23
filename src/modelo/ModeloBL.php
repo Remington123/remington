@@ -1,8 +1,11 @@
 <?php
 	include 'ModeloDAO.php';
 	include 'Modelo.php';
+	include 'ModeloValidar.php';
 
 	class ModeloBL{
+		private $dao = null;
+		private $validar = null;
 		
 		public function listar(){
 	        $dao = new ModeloDAO();
@@ -30,6 +33,25 @@
 			else
 				$informacion["respuesta"] = "error_modificacion";
 
+			return ( json_encode($informacion) );
+		}
+
+		public function eliminar() :string{
+			$informacion = [];			
+			$validar = new ModeloValidar();
+			if( $validar->idPrimarioObtenidoFormulario() ){
+				$idmodelo = $_POST["idmodelo"];
+
+				$dao = new  ModeloDAO();
+				if( $dao->eliminar( $idmodelo ) )
+					$informacion["respuesta"] = "ok_eliminacion";
+				else
+					$informacion["respuesta"] = "error_eliminacion";
+
+			}else{
+				$informacion["respuesta"] = "idmodelo_indefinido";
+			}
+			
 			return ( json_encode($informacion) );
 		}
 

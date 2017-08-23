@@ -54,6 +54,24 @@
 			return ( json_encode($informacion) );
 		}
 
+		public function eliminar() :string{
+			$informacion = [];			
+			$validar = new PedidoValidar();
+			if( $validar->idPrimarioObtenidoFormulario() ){
+				$idpedido = $_POST["idpedido"];
+
+				$dao = new PedidoDAO();
+				if( $dao->eliminar( $idpedido ) )
+					$informacion["respuesta"] = "ok_eliminacion";
+				else
+					$informacion["respuesta"] = "error_eliminacion";
+
+			}else{
+				$informacion["respuesta"] = "idproducto_indefinido";
+			}
+			
+			return ( json_encode($informacion) );
+
 
 	}
 ?>

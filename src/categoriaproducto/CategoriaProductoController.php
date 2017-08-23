@@ -8,7 +8,7 @@
  	switch ( $opcion ) {
  		case 'listar':
  			$categoriaproductoBl = new 	CategoriaProductoBL();
- 			$categoriaproductoBl->listar();
+ 			echo $categoriaproductoBl->listar();
  		break;
  		
  		case 'registrar':
@@ -21,7 +21,10 @@
  			echo $categoriaproductoBl->modificar();
  		break;
 
-
- 	} 
+ 		case 'eliminar' :
+ 			$categoriaproductoBl = new CategoriaProductoBL();
+ 			echo $categoriaproductoBl->eliminar();
+ 		break;	
+	} 
 
  ?>

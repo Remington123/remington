@@ -20,6 +20,10 @@
 			$comprobantepagoBl = new ComprobantePagoBL();
 			echo $comprobantepagoBl();
 		break;
-	}
 
- ?>
+		case 'eliminar':
+			$comprobantepagoBl = new ComprobantePagoBL();
+			echo $comprobantepagoBl->eliminar();
+		break;
+	}
+?>

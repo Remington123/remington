@@ -20,6 +20,11 @@
 			$pedidoBl = new PedidoBL();
 			echo $pedidoBl->modificar();
 		break;
+
+		case 'eliminar':
+			$pedidoBl = new PedidoBL();
+			echo $pedidoBl->eliminar();
+		break;
 	}
 
  ?>

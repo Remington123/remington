@@ -86,8 +86,28 @@
 		}
 
 		public function eliminar(int $id) : bool{
+			$conexion = null;
+			$statement = null;
 			$respuesta = false;
-			/*En discusión*/
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE pedido SET  estado = :estado 
+						WHERE idpedido = :idpedido;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement->bindParam(":idpedido", $id, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();
+
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
 			return $respuesta; 
 		}
 

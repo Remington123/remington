@@ -18,6 +18,12 @@
 			$empleadoBL = new EmpleadoBL();
 			echo $empleadoBL->modificar();
 		break;
+
+		case 'eliminar':
+			$empleadoBL = new EmpleadoBL();
+			echo $empleadoBL->eliminar();
+		break;
+
 		case 'acceso':
 			session_start();
 			$empleadoBL = new EmpleadoBL();

@@ -77,9 +77,9 @@
 		}
 
 		public function modificar( $objeto ) : bool{
-			$conexion = null;
-			$statement = null;
-			$respuesta = false;
+			$conexion = new Conexion();
+			$statement = false;
+			$respuesta = null;
 			try{
 				$conexion = new Conexion();
 				$cnn = $conexion->getConexion();

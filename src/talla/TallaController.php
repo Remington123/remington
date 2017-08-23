@@ -21,6 +21,11 @@
 			echo $tallaBl->modificar();
 		break;
 
+		case 'eliminar':
+			$tallaBl = new TallaBL();
+			echo $tallaBl->eliminar();
+		break;
+
 		case 'combo':
 			$tallaBl = new TallaBL();
 			echo $tallaBl->llenarCombo();

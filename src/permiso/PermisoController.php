@@ -19,6 +19,11 @@
 			$permisoBl = new PermisoBL();
 			echo $permisoBl->PermisoBL();
 		break;
+
+		case 'eliminar':
+			$permisoBl = new PermisoBL();
+			echo $permisoBl->eliminar();
+		break;
 	}
 
  ?>

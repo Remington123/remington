@@ -22,6 +22,11 @@
  			$paginaBL = new PaginaBL();
  			echo $paginaBL->modificar();
  		break;
+
+		case 'eliminar':
+			$paginaBl = new PaginaBL();
+			echo $paginaBl->eliminar();
+		break;
  	} 
 	
 
