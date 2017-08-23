@@ -30,7 +30,6 @@
 				$empleado->setIdtipousuario( $_POST["tipousuario"] );
 				$empleado->setEstado(1);
 
-
 				$dao = new EmpleadoDAO();
 				$dao->registrar( $empleado ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
 			}else{
@@ -41,7 +40,6 @@
 		}
 
 		public function modificar() : string{
-
 			$informacion = [];
 			$validar = new EmpleadoValidar();
 			if( $validar->datosObtenidosFormulario("modificar" ) ){
@@ -59,35 +57,32 @@
 				$empleado->setIdtipousuario( $_POST["idtipousuario"] );
 				$empleado->setEstado(1);
 
-
 				$dao = new Empleado();
 				$dao->modificar( $empleado) ? $informacion["respuesta"] = "ok_modificar" : $informacion["respuesta"] = "error_modificar";
-		}else{
-			$informacion["respuesta"] = "llenar_datos";
+			}else{
+				$informacion["respuesta"] = "llenar_datos";
+			}
+			return ( json_encode($informacion) );
 		}
 
-		return ( json_encode($informacion) );
+		public function eliminar() :string{
+			$informacion = [];
+			$validar = new EmpleadoValidar();
+			if( $validar->idPrimarioObtenidoFormulario() ){
+				$idempledo = $_POST["idempledo"];
 
-	}
+				$dao = new EmpleadoDAO();
+				if( $dao->eliminar( $idempledo ) )
+					$informacion["respuesta"] = "ok_eliminacion";
+				else
+					$informacion["respuesta"] = "error_eliminacion";
 
-	public function eliminar() :string{
-		$informacion = [];
-		$validar = new EmpleadoValidar();
-		if( $validar->idPrimarioObtenidoFormulario() ){
-			$idempledo = $_POST["idempledo"];
+			}else{
+				$informacion["respuesta"] = "idempledo_indefinido";
+			}
 
-			$dao = new EmpleadoDAO();
-			if( $dao->eliminar( $idempledo ) )
-				$informacion["respuesta"] = "ok_eliminacion";
-			else
-				$informacion["respuesta"] = "error_eliminacion";
-
-		}else{
-			$informacion["respuesta"] = "idempledo_indefinido";
+			return ( json_encode($informacion) );
 		}
-
-		return ( json_encode($informacion) );
-	}
 
 		public function validarAcceso(){
 			$dao = new EmpleadoDAO();
@@ -96,6 +91,11 @@
 			$empleado->setContrasena( $_POST["contrasena"] );
 
 			return $dao->validarAcceso( $empleado );
+		}
+
+		public function cerrarSesion(){
+			$dao = new EmpleadoDAO();
+			return $dao->cerrarSesion();
 		}
 
 	}

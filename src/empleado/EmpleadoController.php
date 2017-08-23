@@ -30,5 +30,13 @@
 			var_dump( $empleadoBL->validarAcceso() );
 			header('Location: ../../dashboard/panel.php');
 		break;
+
+		case 'cerrarsesion':
+			session_start();
+			$empleadoBL = new EmpleadoBL();
+			var_dump( $empleadoBL->cerrarSesion() );
+			session_destroy();			
+			header('Location: ../../dashboard/index.php');
+		break;
 	}
 	

@@ -5,8 +5,6 @@ $(function(){
 	//login();
 });
 
-
-
 function showPage(){
 	$("a").on("click", function(e){
 		e.preventDefault();
@@ -80,9 +78,6 @@ function dibujarPaginasEnSiderBar(){
 	});
 }
 
-
-
-
 function login(){
 	$("#frm-autenticacion-user").on("submit", function(e){
 		e.preventDefault();
@@ -95,6 +90,19 @@ function login(){
 			url:"../src/"+controller,
 			data: frm
 		}).done( function(info){
+			console.log( info );
+		});
+	});
+}
+
+function cerrarSesion(){
+	$("#frmcerrarsesion").on("submit", function(e){
+		e.preventDefault();
+		var controller = $(this).attr("action");
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller
+		}).done( function( info ){
 			console.log( info );
 		});
 	});

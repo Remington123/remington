@@ -33,7 +33,6 @@ function llenarDatosDeModulo( pedido ){
 }
 
 function dtDetallePedido( idpedido ){
-
 	if ( $.fn.DataTable.isDataTable('#dt_detallepedido') )
 	  	$("#dt_detallepedido").empty();
 
@@ -82,8 +81,7 @@ function guardar(){
 			data: frm
 		}).done(function(info){
 			//respuesta del servidor
-			console.log(info);
-			
+			console.log(info);			
 		});
 	});
 }

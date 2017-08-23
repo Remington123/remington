@@ -1,3 +1,15 @@
+<?php 
+    session_start();    
+    //comprobamos si la sesion contiene algún dato.
+    $arreglo = $_SESSION;    
+    if( count( $arreglo ) > 0  ){
+     //echo "<script> alert('Sesion con Datos');</script>";   
+    }else{
+      //echo "<script> alert('Sesion sin Datos');</script>";   
+      header("Location: ../dashboard/index.php");
+    }
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +76,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php session_start();  echo $_SESSION["apellidos"];?></span>
+              <span class="hidden-xs"><?php /*session_start();*/  echo $_SESSION["nombres"]." ".$_SESSION["apellidos"];?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -72,12 +84,12 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $_SESSION["apellidos"];?> - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  Bienvenido: <?php echo $_SESSION["nombres"]." ".$_SESSION["apellidos"];?> <!-- Web Developer-->
+                  <!--<small>Member since Nov. 2017</small>-->
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+              <!--<li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
@@ -89,23 +101,26 @@
                     <a href="#">Friends</a>
                   </div>
                 </div>
-                <!-- /.row -->
-              </li>
+                
+              </li>-->
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">Mi Perfil</a>
                 </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
+                <form id="frmcerrarsesion" action="../src/empleado/EmpleadoController.php" method="POST">
+                  <input type="hidden" id="opcion" name="opcion" value="cerrarsesion">
+                  <div class="pull-right">
+                    <button type="submit" class="btn btn-default btn-flat">Cerrar Sesión</button>
+                  </div>
+                </form>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
+          <!--<li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+          </li>-->
         </ul>
       </div>
     </nav>

@@ -137,7 +137,7 @@
 			$statement=null; 
 			try {
 				$cnn=$conexion -> getConexion();
-				$sql= "SELECT nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email,
+				$sql= "SELECT e.idempleado, nombres, CONCAT(apellidopaterno,' ',apellidomaterno) AS apellidos, email,
 								e.idtipousuario, tu.descripcion, p.idmodulo 
 						FROM empleado e 
 						INNER JOIN tipousuario tu ON e.idtipousuario = tu.idtipousuario
@@ -156,7 +156,8 @@
 				$arrayEmpleado = [];
 				$empleadoSesion = null;
 				while($resultado=$statement->fetch(PDO::FETCH_ASSOC)){
-					$arrayEmpleado = $resultado;
+					//$arrayEmpleado = $resultado;
+					$_SESSION["idempleado"] = $resultado["idempleado"];
 					$_SESSION["nombres"] = $resultado["nombres"];
 					$_SESSION["apellidos"] = $resultado["apellidos"];
 					$_SESSION["email"] = $resultado["email"];
@@ -175,13 +176,19 @@
 				$statement->closeCursor();
 				$conexion = null;
 			}
-		}			
-	}
+		}
 
-	/*$dao = new EmpleadoDAO();
-	$e = new Empleado();
-	$e->setEmail("geo412@gmail.com");
-	$e->setContrasena("123");
-	$dao->validarAcceso( $e );*/
+		public function cerrarSesion(){
+			$_SESSION["idempleado"] = array();
+			$_SESSION["nombres"] = array();
+			$_SESSION["apellidos"] = array();
+			$_SESSION["email"] = array();
+			$_SESSION["idtipousuario"] = array();
+			$_SESSION["descripcion"] = array();
+			$_SESSION["idmodulo"] = array();
+			return $_SESSION;			
+		}
+
+	}
 
 ?>
