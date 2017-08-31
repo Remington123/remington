@@ -86,5 +86,12 @@
 			return ( json_encode($informacion) );
 		}
 
+		public function listarPorTipo(){
+			//$tipousuario = $_POST["tipousuario"];
+			$tipousuario = "";//si es hombre, mujer
+			$dao = new ProductoDAO();
+			return $dao->listarPorTipo( $tipousuario );
+		}
+
 	}
 ?>

@@ -146,7 +146,28 @@
 				$conexion = null;
 			}
 			return $respuesta; 
-		}			
+		}
+
+		public function listarPorTipo( $tipousuario ){
+			$conexion = new Conexion();
+			try {
+				$cnn = $conexion->getConexion();
+				$sql = "SELECT idproducto, descripcion, precioventa FROM producto WHERE estado = 1;";
+				$statement=$cnn->prepare($sql);
+				$statement->execute();
+
+				$data = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
 	}
 
 ?>

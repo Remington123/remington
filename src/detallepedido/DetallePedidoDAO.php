@@ -109,5 +109,48 @@
 			/*En discusión*/
 			return $respuesta; 
 		}
+
+		public function agregarItem( $objeto ){//$objeto es el producto
+			
+			if( isset( $_SESSION["carrito"] ) ){
+				$carrito = $_SESSION["carrito"];
+			}else{
+				$carrito = array();//arreglo vacio
+			}
+			//hacer una pequeña validación con el precio desde la BD segun idproducto
+			/*$objeto->getIdproducto();
+			$objeto->getCantidad();
+			$objeto->getImporte();*/
+			//agregando más items al carrito
+			array_push($carrito, $objeto);
+			$_SESSION["carrito"] = $carrito;
+			return $_SESSION["carrito"];
+		}
+
+		public function actualizarCarrito( $arrayItems ){//$objeto es el producto
+			
+			if( isset( $_SESSION["carrito"] ) ){
+				$carrito = $_SESSION["carrito"];
+			}else{
+				$carrito = array();//arreglo vacio
+			}
+
+			$i = 0;
+			foreach ( $carrito as $p ) {
+				//primero, hacer una validación del id y precio
+				if( $p->{'idproducto'} == $arrayItems[$i]->{'idproducto'} && 
+					$p->{'precio'} == $arrayItems[$i]->{'precio'} ){
+
+					$cantidad = intval( $arrayItems[$i]->{'cantidad'} );
+					$precio = floatval( $arrayItems[$i]->{'precio'} );
+
+					$p->{'cantidad'} = $arrayItems[$i]->{'cantidad'};
+					$p->{'importe'} = $cantidad * $precio;
+				}
+				$i++;
+			}
+			$_SESSION["carrito"] = $carrito;
+			return $_SESSION["carrito"];
+		}
 }
 ?>

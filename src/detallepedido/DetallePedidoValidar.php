@@ -44,6 +44,18 @@
 
 			return $idPedidoConValor;
 		}
+
+		public function datosCarrito(){
+			$camposConValores = false;
+
+			if( !empty( $_POST["idproducto"] ) &&
+				!empty( $_POST["cantidad"] ) &&
+				!empty( $_POST["precio"] )){
+				$_POST["importe"] = floatval( $_POST["precio"] ) * intval( $_POST["cantidad"] );
+				$camposConValores = true;
+			}
+			return $camposConValores;
+		}
 	}
 
  ?>

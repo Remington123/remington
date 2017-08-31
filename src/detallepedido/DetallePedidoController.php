@@ -30,6 +30,22 @@
 			$detallepedidoBl = new DetallePedidoBL();
 			echo $detallepedidoBl->eliminar();
 		break;
+
+		case 'agregarItem':
+			session_start();
+			$detallepedidoBl = new DetallePedidoBL();
+			//var_dump( $detallepedidoBl->agregarItem() );
+			$detallepedidoBl->agregarItem();
+			header('Location: ../../tienda/index.php');
+		break;
+
+		case 'actualizarCarrito':
+			session_start();
+			$detallepedidoBl = new DetallePedidoBL();
+			$detallepedidoBl->actualizarCarrito();
+			//header('Location: ../../tienda/realizar-compra.php');
+		break;
+
 	}
 
  ?>

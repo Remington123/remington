@@ -2,7 +2,8 @@
     session_start();    
     //comprobamos si la sesion contiene algún dato.
     $arreglo = $_SESSION;    
-    if( count( $arreglo ) > 0  ){
+    //if( count( $arreglo ) > 0 ){
+    if( isset( $_SESSION["idempleado"] ) ){
      //echo "<script> alert('Sesion con Datos');</script>";   
     }else{
       //echo "<script> alert('Sesion sin Datos');</script>";   

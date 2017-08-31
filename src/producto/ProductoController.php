@@ -25,6 +25,11 @@
 			$productoBl = new ProductoBL();
 			echo $productoBl->eliminar();
 		break;
-	}
+
+		case 'listarPorTipo':
+			$productoBl = new ProductoBL();
+			echo $productoBl->listarPorTipo();
+		break;
+		}
 
  ?>
