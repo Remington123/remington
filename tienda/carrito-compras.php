@@ -34,6 +34,7 @@
 					<tbody id="tbody_pedidos">
 			<?php 
 				$total = 0;
+				$indice = 0;
 				foreach ( $carrito as $p ) {
 					//var_dump($carrito);
 			 ?>
@@ -46,7 +47,7 @@
 								<input type='text' name='cantidad' class='cantidad data' min='1' value="<?php echo $p->cantidad;?>">
 							</td>
 							<td class='importe'><?php echo $p->importe; ?></td>
-							<td><button type='button' id='btnEliminar'>Eliminar</button></td>
+							<td><button type="button" data-indice-item="<?php echo $indice; ?>" class="eliminar">Eliminar</button></td>
 							<?php $total = $total + $p->importe; ?>
 							
 							<td><input type="hidden" class="data" value="<?php echo $p->idproducto; ?>"></td>
@@ -54,7 +55,7 @@
 							<td><input type="hidden" class="data" value="<?php echo $p->precio;?>"></td>
 							<td><input type="hidden" class="data importe" value="<?php echo $p->importe; ?>"></td>
 							<td><input type="hidden" class="data" value="urlfoto"></td>
-							
+							<?php $indice++; ?>
 						</tr>
 			<?php } ?>			
 						<tr>
@@ -84,7 +85,24 @@
 			calcularImporte();
 			//meter unputs hidden para poder enviar los datos a ir a Caja
 			enviarData();
+			eliminarItem();
 		});
+
+		function eliminarItem(){
+			$("tr .eliminar").on("click", function(){
+				/*La propiedad dataset, almacena aquellos valores, de las propiedades personalizadas que hemos propuesto: data-indice-item*/
+				var indice = $(this)[0].dataset.indiceItem;
+				$.ajax({
+					method:"POST",
+					url:"../src/detallepedido/DetallePedidoController.php",
+					data:{opcion: "eliminarItem", indice: indice}
+				}).done( function( info ){
+					console.log( info );
+					window.location = "carrito-compras.php";
+				});
+
+			});
+		}
 
 		function enviarData(){
 			$("#btnIrCaja").on("click", function(){

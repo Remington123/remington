@@ -56,9 +56,17 @@
 
 	      </div>
 	      <!-- /.box-body -->
-	      <div class="box-footer">
-	        <button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
+	      <div class="box-footer">        	
+        	<button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 	      </div>
+	      
+	      <div class="row">
+	        <br>
+	       	<div class="col-sm-12 mensaje ocultar">
+	        		
+	       	</div>
+	      </div>
+
 	    </form>
 	  </div>
 	  <!-- /.box -->

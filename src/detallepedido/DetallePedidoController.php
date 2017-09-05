@@ -39,6 +39,13 @@
 			header('Location: ../../tienda/index.php');
 		break;
 
+		case 'eliminarItem':
+			session_start();
+			$detallepedidoBl = new DetallePedidoBL();
+			//var_dump( $detallepedidoBl->eliminarItem() );
+			$detallepedidoBl->eliminarItem();
+			break;
+
 		case 'actualizarCarrito':
 			session_start();
 			$detallepedidoBl = new DetallePedidoBL();

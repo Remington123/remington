@@ -127,6 +127,29 @@
 			return $_SESSION["carrito"];
 		}
 
+		public function eliminarItem( $indice ){
+
+			if( isset( $_SESSION["carrito"] ) ){
+				$carrito = $_SESSION["carrito"];
+				unset( $carrito[ $indice ] );
+
+				$carrito = array_values($carrito);
+				$_SESSION["carrito"] = $carrito;
+
+				if( count( $_SESSION["carrito"] ) == 0 ){
+					session_unset( $_SESSION["carrito"] );
+				}
+				
+			}
+			/*else if( count( $_SESSION["carrito"]) == 0 ) {
+				//$_SESSION["carrito"] = array();//arreglo vacio
+				session_unset( $_SESSION["carrito"] );
+			}*/
+			
+			return $_SESSION["carrito"];
+
+		}
+
 		public function actualizarCarrito( $arrayItems ){//$objeto es el producto
 			
 			if( isset( $_SESSION["carrito"] ) ){

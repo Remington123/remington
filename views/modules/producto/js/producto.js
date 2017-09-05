@@ -21,7 +21,7 @@ function guardar(){
 			url:"../src/"+controller+".php",
 			data: frm
 		}).done(function(info){
-			console.log(info);
+			mensajes( info );
 			dtProducto();
 		});
 	});
@@ -39,12 +39,46 @@ function eliminar(){
 			method:"POST",
 			url:"../src/"+controller+".php",
 			data: frm
-		}).done(function(info){
-			console.log(info);
-			dtProducto();
-			
+		}).done(function(info){			
+			mensajes( info );
+			dtProducto();			
 		});
 	});
+}
+
+function mensajes( info ){
+	var json = JSON.parse(info);
+
+	var texto = "", color = "", div="";
+	if(json.respuesta == "bien"){
+		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+		color = "alert-success";
+	}
+	if(json.respuesta == "error"){
+		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+		color = "alert-danger";
+	}
+	if(json.respuesta == "llenar_datos"){
+		texto = "<strong>Advertencia!</strong> Llenar todos los datos solicitados.";
+		color = "alert-warning";
+	}
+	if(json.respuesta == "id_indefinido"){
+		texto = "<strong>Advertencia!</strong> ID no definido.";
+		color = "alert-warning";
+	}
+	console.log(texto);
+	div = `<div class="alert ${color} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>					
+				</button>
+				${texto}
+			</div>`;
+
+	$(".mensaje").html( div ).removeClass("ocultar");
+}
+
+function limpiarMensaje(){
+	$(".mensaje").html("").addClass("ocultar");
 }
 
 function dtProducto(){
@@ -97,6 +131,8 @@ function obtener_data_modificar (tbody, table){
 		llenarComboTalla("modificar", idcategoriaproducto, idtalla);
 		llenarComboModelo("modificar", idcategoriaproducto, idmodelo);
 		llenarComboTela("modificar", idtela);
+
+		limpiarMensaje();
 	});
 }
 
@@ -104,6 +140,8 @@ function obtener_idproducto_eliminar (tbody, table){
 	$(tbody).on("click", "button.eliminar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		var idproducto = $("#frmeliminarproducto #idproducto").val( data.idproducto );
+
+		limpiarMensaje();
 	});
 }
 

@@ -108,6 +108,15 @@
 			}
 		}
 
+		public function eliminarItem(){
+			if( isset( $_POST["indice"] ) ){
+				$dao = new DetallePedidoDAO();				
+				$indice = intval( $_POST["indice"] );
+
+				return $dao->eliminarItem( $indice );
+			}
+		}
+
 		public function actualizarCarrito(){
 			
 				$dao = new DetallePedidoDAO();				
@@ -125,6 +134,7 @@
 				//var_dump($arrayItems);
 				return $dao->actualizarCarrito( $arrayItems );			
 		}
+
 	}
 ?>
 
