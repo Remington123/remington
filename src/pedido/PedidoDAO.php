@@ -1,6 +1,7 @@
 <?php
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
+	include 'PedidoGeneradorCodigo.php';
 
 	class PedidoDAO implements Consultas{
 
@@ -54,13 +55,41 @@
 			}
 		}
 		
+		public function obtenerCodigoGenerado( $idpedido ) :string{
+			$codigoGenerado = "";
+			if( $idpedido == null ){
+					$codigoGenerado = "CP00001";				
+			}else{
+				$codigoGenerado = $idpedido;
+				$subcadena = substr($codigoGenerado, 2, 6);
+				$numero = intval( $subcadena );
+				$codigo = new PedidoGeneradorCodigo();
+				$codigo->generar( $numero );
+				$codigoGenerado = $codigo->serie();
+			}				
+			return $codigoGenerado;
+		}
+
 		public function registrar($objeto) :bool{
 			$conexion = new Conexion();
 			$respuesta = false;
 			$statement = null;
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO pedido(fecha, idcliente, total) VALUES (?,?,?);";
+
+				$sql = "SELECT MAX(idpedido) AS idpedido FROM pedido";
+				$statement=$cnn->prepare($sql);
+				$statement->execute();
+				$idpedido = 0;
+				$codigoGenerado = "";
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$idpedido = $resultado["idpedido"];
+				}
+				//var_dump($idpedido);
+				/*Validacion del valor que retorna la consulta*/
+				$codigoGenerado = $this->obtenerCodigoGenerado( $idpedido );
+				echo $codigoGenerado;
+				/*$sql = "INSERT INTO pedido(fecha, idcliente, total) VALUES (?,?,?);";
 				$fecha =$objeto->getFecha();
 				$idcliente = $objeto->getIdcliente();
 				$total =$objeto->getTotal();
@@ -71,7 +100,7 @@
 				$statement->bindParam(2, $idcliente, PDO::PARAM_INT);
 				$statement->bindParam(3, $total, PDO::PARAM_INT);
 
-				$respuesta = $statement->execute();
+				$respuesta = $statement->execute();*/
 
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
@@ -118,6 +147,8 @@
 			$respuesta = false;			
 			return $respuesta; 
 		}
-
-}
+	}
+	/*Realizando Prueba*/
+	$dao = new PedidoDAO();
+	$dao->registrar("Hola");
 ?>
