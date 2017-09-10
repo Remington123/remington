@@ -1,8 +1,10 @@
 /* Llamado o ejecución de funciones */
 //var table;
 dtProducto();
+buscarDtProducto();
 llenarComboCategoria("registrar", 0);
-obtenerIdCategoria();
+//obtenerIdCategoria();
+
 llenarComboTela("registrar", 0);
 guardar();
 eliminar();
@@ -81,6 +83,38 @@ function limpiarMensaje(){
 	$(".mensaje").html("").addClass("ocultar");
 }
 
+function buscarDtProducto(){
+	$("#buscar-producto").on("click", function(){
+		var descripcion = $("#frmbuscarproducto #descripcion").val();
+
+		if ( $.fn.DataTable.isDataTable('#buscar_dt_producto') )
+	  	$("#buscar_dt_producto").empty();
+
+
+		var table = $('#buscar_dt_producto').DataTable({
+			"destroy": true,
+			"ajax":{
+				method:"POST",
+				url: "../src/producto/ProductoController.php",
+				data: {opcion:"buscar", descripcion: descripcion}
+			},
+			columns:[
+			{"data":"idproducto"},
+			{"data":"descripcion"},
+			{"data":"idcategoriaproducto"},
+			{"data":"idtela"},
+			{"defaultContent": `<a hrefs='#' class='seleccionar' ><i class='fa fa-hand-o-left'></i></a>`}
+			],
+			"paging": true,
+			"lengthChange": false,
+			"searching": false,
+			"ordering": false,
+			"info": true,
+			"autoWidth": false
+	    });			
+	});
+}
+
 function dtProducto(){
 
 	if ( $.fn.DataTable.isDataTable('#dt_producto') )
@@ -96,10 +130,9 @@ function dtProducto(){
 		columns:[
 			{"data":"idproducto"},
 			{"data":"descripcion"},
-			{"data":"precio"},
-			{"data":"precioventa"},
-			{"data":"stock"},
-			{"data":"stockactual", "width": "100px" },
+			{"data":"idcategoriaproducto"},
+			{"data":"idtela"},
+			{"data":"estado"},
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]

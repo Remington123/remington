@@ -30,6 +30,11 @@
 			$productoBl = new ProductoBL();
 			echo $productoBl->listarPorTipo();
 		break;
-		}
+
+		case 'buscar':
+			$productoBl = new ProductoBL();
+			echo $productoBl->buscar();
+		break;
+	}
 
  ?>

@@ -19,15 +19,13 @@
 			if( $validar->datosObtenidosFormulario( "registrar" ) ){
 				$producto = new Producto();
 				$producto->setDescripcion( $_POST["descripcion"] );
-				$producto->setPrecio( $_POST["precio"] );
-				$producto->setPrecioventa( $_POST["precioventa"] );
-				$producto->setStock( $_POST["stock"] );
-				$producto->setStockactual( $_POST["stock"] );
 				$producto->setEstado(1);
-				$producto->setIdmodelo( $_POST["idmodelo"] );
-				$producto->setIdtalla( $_POST["idtalla"] );
 				$producto->setIdtela( $_POST["idtela"] );
 				$producto->setIdcategoriaproducto( $_POST["idcategoriaproducto"] );
+				/*$producto->setPrecio( $_POST["precio"] );
+				$producto->setStock( $_POST["stock"] );
+				$producto->setIdmodelo( $_POST["idmodelo"] );
+				$producto->setIdtalla( $_POST["idtalla"] );*/
 				//agregar url de imagen del producto
 
 				$dao = new ProductoDAO();
@@ -91,6 +89,12 @@
 			$tipousuario = "";//si es hombre, mujer
 			$dao = new ProductoDAO();
 			return $dao->listarPorTipo( $tipousuario );
+		}
+
+		public function buscar(){
+			$dao = new ProductoDAO();
+			$descripcion = $_POST["descripcion"];
+			return $dao->buscar( $descripcion );
 		}
 
 	}

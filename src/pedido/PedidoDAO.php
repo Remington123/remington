@@ -85,20 +85,22 @@
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$idpedido = $resultado["idpedido"];
 				}
-				//var_dump($idpedido);
-				/*Validacion del valor que retorna la consulta*/
 				$codigoGenerado = $this->obtenerCodigoGenerado( $idpedido );
 				echo $codigoGenerado;
-				/*$sql = "INSERT INTO pedido(fecha, idcliente, total) VALUES (?,?,?);";
+				
+				//Meter transacciones, commit, rollback
+
+				/*$sql = "INSERT INTO pedido(idpedido, fecha, idcliente, total) VALUES (?,?,?,?);";
 				$fecha =$objeto->getFecha();
 				$idcliente = $objeto->getIdcliente();
 				$total =$objeto->getTotal();
 
 				$statement = $cnn->prepare($sql);
-
-				$statement->bindParam(1, $fecha, PDO::PARAM_STR);
-				$statement->bindParam(2, $idcliente, PDO::PARAM_INT);
-				$statement->bindParam(3, $total, PDO::PARAM_INT);
+				
+				$statement->bindParam(1, $codigoGenerado, PDO::PARAM_STR);
+				$statement->bindParam(2, $fecha, PDO::PARAM_STR);
+				$statement->bindParam(3, $idcliente, PDO::PARAM_INT);
+				$statement->bindParam(4, $total, PDO::PARAM_INT);
 
 				$respuesta = $statement->execute();*/
 

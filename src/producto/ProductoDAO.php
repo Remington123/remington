@@ -33,30 +33,30 @@
 			$statement = null;			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO producto(descripcion, precio, precioventa, stock, stockactual, estado, idmodelo, idtalla, idtela, idcategoriaproducto) VALUES (?,?,?,?,?,?,?,?,?,?);";
+				$sql = "INSERT INTO producto(descripcion, estado, idcategoriaproducto, idtela ) VALUES (?,?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
-				$descripcion = $objeto->getDescripcion();
-				$precio = $objeto->getPrecio();
-				$precioventa = $objeto->getPrecioventa();
-				$stock = $objeto->getStock();
-				$stockactual = $objeto->getStockactual();
-				$estado = $objeto->getEstado();
-				$idmodelo = $objeto->getIdmodelo();
-				$idtalla = $objeto->getIdtalla();
-				$idtela = $objeto->getIdtela();
 				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
+				$descripcion = $objeto->getDescripcion();
+				$idtela = $objeto->getIdtela();
+				$estado = $objeto->getEstado();
+
+				/*$precio = $objeto->getPrecio();				
+				$stock = $objeto->getStock();				
+				$idmodelo = $objeto->getIdmodelo();
+				$idtalla = $objeto->getIdtalla();*/
+
 
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $descripcion, PDO::PARAM_STR );
-				$statement->bindParam(2, $precio, PDO::PARAM_INT );
-				$statement->bindParam(3, $precioventa, PDO::PARAM_INT );
+				
+				/*$statement->bindParam(2, $precio, PDO::PARAM_INT );				
 				$statement->bindParam(4, $stock, PDO::PARAM_INT );
-				$statement->bindParam(5, $stockactual, PDO::PARAM_INT );
-				$statement->bindParam(6, $estado, PDO::PARAM_INT );
 				$statement->bindParam(7, $idmodelo, PDO::PARAM_INT );
-				$statement->bindParam(8, $idtalla, PDO::PARAM_INT );
-				$statement->bindParam(9, $idtela, PDO::PARAM_INT );
-				$statement->bindParam(10, $idcategoriaproducto, PDO::PARAM_INT );
+				$statement->bindParam(8, $idtalla, PDO::PARAM_INT );*/
+				
+				$statement->bindParam(2, $estado, PDO::PARAM_INT );
+				$statement->bindParam(3, $idcategoriaproducto, PDO::PARAM_INT );
+				$statement->bindParam(4, $idtela, PDO::PARAM_INT );
 
 				$respuesta = $statement->execute();				
 			}catch(Exception $e){
@@ -154,6 +154,29 @@
 				$cnn = $conexion->getConexion();
 				$sql = "SELECT idproducto, descripcion, precioventa FROM producto WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
+				$statement->execute();
+
+				$data = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
+		public function buscar( $descripcion ){
+			$conexion = new Conexion();
+			try {
+				$cnn = $conexion->getConexion();
+				$sql = "SELECT * FROM producto WHERE descripcion LIKE :descripcion AND estado = 1;";
+				$statement=$cnn->prepare($sql);
+				$comodin = "%".$descripcion."%";
+				$statement->bindParam(":descripcion", $comodin, PDO::PARAM_STR);
 				$statement->execute();
 
 				$data = [];//arreglo vacio

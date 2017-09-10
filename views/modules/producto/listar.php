@@ -9,7 +9,7 @@
 		<div class="col-xs-12">
 	        <div class="box">
 	            <div class="box-header">
-	              <h3 class="box-title">Lista de Empleados</h3>
+	              <h3 class="box-title">Lista de Productos</h3>
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
@@ -17,10 +17,9 @@
 						<thead>
 							<th>ID</th>
 							<th>Descripción</th>
-							<th>Precio</th>
-							<th>Precio Venta</th>
-							<th>Stock</th>
-							<th>Stock Actual</th>
+							<th>Categoria</th>
+							<th>Tela</th>
+							<th>Estado</th>						
 							<th></th>
 						</thead>
 					</table>
