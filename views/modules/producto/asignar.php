@@ -25,12 +25,12 @@
 
 	        <div class="form-group col-md-6">
 	            <label for="descripcion">Descripción</label>            
-	            <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Descripción">
+	            <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Descripción" disabled>
 	        </div>
 
 			<div class="form-group col-md-6">
-	          <label for="idcategoriaproducto">Categoría</label>
-	          <input type="text" id="categoria" name="categoria" class="form-control" placeholder="Categoría">
+	          <label for="categoria">Categoría</label>
+	          <input type="text" id="categoria" name="categoria" class="form-control" placeholder="Categoría" disabled>
 	        </div>
 	        <div class="form-group col-md-6">
 	          <label for="idmodelo">Modelo</label>
@@ -62,35 +62,25 @@
 	        </div>	        
 
 	        <div class="form-group col-md-12">	        	        	
-        		<button type="button" id="asignar-'.$modulo.'" class="btn btn-success">Agregar</button>
+        		<button type="button" id="agregar-'.$modulo.'" class="btn btn-success">Agregar</button>
 	      	</div>     
 
 	      	<div class="col-md-12">       			            
 		        
 		            <div class="box-body">
-						<table id="" class="table table-hover">
+						<table id="dt_detalleproducto" class="ocultar table table-hover">
 							<thead>
-								<th>ID</th>
+								<th>Id Producto</th>
+								<th>Id Modelo</th>
+								<th>Id Talla</th>
+								<th>Id Color</th>
 								<th>Modelo</th>
 								<th>Talla</th>
 								<th>Color</th>
 								<th>Stock</th>
 								<th>Precio</th>
 								<th></th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>01</td>
-									<td>Cuello V</td>
-									<td>S</td>
-									<td>Negro</td>
-									<td>30</td>
-									<td>70</td>
-									<td>
-										<button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
-									</td>
-								</tr>
-							</tbody>
+							</thead>							
 						</table>
 					</div>				
 			</div> 
@@ -109,6 +99,7 @@
 	      </div>
 		<!-- campos ocultos -->		
 	      <input type="hidden" id="idcategoriaproducto" name="idcategoriaproducto">
+	      <input type="hidden" id="id_producto" name="id_producto">
 
 	    </form>
 	  </div>

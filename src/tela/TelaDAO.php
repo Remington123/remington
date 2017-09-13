@@ -44,7 +44,7 @@
 			$statement=null;
 			try {			
 				$cnn = $conexion->getConexion();
-				$sql = " SELECT idtela, descripcion, color FROM tela WHERE estado = 1;";
+				$sql = " SELECT idtela, descripcion FROM tela WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 				$data = [];

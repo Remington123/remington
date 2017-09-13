@@ -1,8 +1,11 @@
 /* Llamado o ejecución de funciones */
 //var table;
 dtProducto();
-buscarDtProducto();
 llenarComboCategoria("registrar", 0);
+buscarDtProducto();
+llenarComboColor("registrar", 0);
+//seleccionarProducto();
+agregarDetalleProducto();
 //obtenerIdCategoria();
 
 llenarComboTela("registrar", 0);
@@ -85,11 +88,10 @@ function limpiarMensaje(){
 
 function buscarDtProducto(){
 	$("#buscar-producto").on("click", function(){
-		var descripcion = $("#frmbuscarproducto #descripcion").val();
+		var descripcion = $("#descripcion-prenda").val();
 
 		if ( $.fn.DataTable.isDataTable('#buscar_dt_producto') )
 	  	$("#buscar_dt_producto").empty();
-
 
 		var table = $('#buscar_dt_producto').DataTable({
 			"destroy": true,
@@ -99,11 +101,12 @@ function buscarDtProducto(){
 				data: {opcion:"buscar", descripcion: descripcion}
 			},
 			columns:[
-			{"data":"idproducto"},
-			{"data":"descripcion"},
-			{"data":"idcategoriaproducto"},
-			{"data":"idtela"},
-			{"defaultContent": `<a hrefs='#' class='seleccionar' ><i class='fa fa-hand-o-left'></i></a>`}
+				{"data":"idproducto"},
+				{"data":"descripcion"},
+				{"data":"idcategoriaproducto"},
+				{"data":"idtela"},
+				{"data":"categoria"},
+				{"defaultContent": `<a hrefs='#' class='seleccionar' data-dismiss="modal" ><i class='fa fa-hand-o-left'></i></a>`}
 			],
 			"paging": true,
 			"lengthChange": false,
@@ -111,12 +114,86 @@ function buscarDtProducto(){
 			"ordering": false,
 			"info": true,
 			"autoWidth": false
-	    });			
+	    });
+
+	    seleccionarProducto("#buscar_dt_producto tbody", table);
+	});
+}
+
+function seleccionarProducto(tbody, table){
+	$(tbody).on("click", "a.seleccionar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		console.log( data );
+
+		//Por si se escoge otro pruducto nuevo.		
+		if ( $.fn.DataTable.isDataTable('#dt_detalleproducto') ){
+	  		$("#dt_detalleproducto").empty();
+		}
+
+		var idcategoriaproducto = $("#idcategoriaproducto").val( data.idcategoriaproducto ),
+			idproducto = $("#id_producto").val( data.idproducto ),
+			descripcion = $("#descripcion").val( data.descripcion ),
+			categoria = $("#categoria").val( data.categoria );
+		llenarComboModelo("registrar", data.idcategoriaproducto , 0);
+		llenarComboTalla("registrar", data.idcategoriaproducto , 0);
+		//limpiarMensaje();
+	});
+}
+
+function agregarDetalleProducto(){
+	$("#agregar-producto").on("click", function(){
+		var table = $('#dt_detalleproducto').DataTable({
+			"destroy":true,
+			"columns":[
+				{"data":"id_producto", visible: false},
+				{"data":"idmodelo", visible: false},
+				{"data":"idtalla", visible: false},
+				{"data":"idcolor", visible: false},
+				{"data":"modelo"},
+				{"data":"talla"},
+				{"data":"color"},
+				{"data":"stock"},
+				{"data":"precio"},
+				{"defaultContent": `<button class='eliminar btn btn-danger'><i class='fa fa-trash-o'></i></button>`}
+			],
+			"paging": false,
+			"lengthChange": false,
+			"searching": false,
+			"ordering": false,
+			"info": false,
+			"autoWidth": false
+		});
+
+		$("#dt_detalleproducto").removeClass("ocultar");
+
+		var fila =	{						
+				        id_producto: $("#id_producto").val(),
+				        idmodelo: $("#idmodelo").val(),
+				        idtalla: $("#idtalla").val(),
+				        idcolor: $("#idcolor").val(),
+				        modelo: $("#idmodelo option:selected").text(),
+				        talla: $("#idtalla option:selected").text(),
+				        color: $("#idcolor option:selected").text(),
+				        stock: $("#stock").val(),
+				        precio: $("#precio").val()			    	
+				    };				
+
+		table.row.add( fila ).draw();
+	});
+}
+
+function guardarAsignacion(){
+	//datos de la tabla
+	$.ajax({
+		method: "POST",
+		url: "",
+		data:
+	}).done(function( info ){
+		console.log( info );
 	});
 }
 
 function dtProducto(){
-
 	if ( $.fn.DataTable.isDataTable('#dt_producto') )
 	  	$("#dt_producto").empty();
 
@@ -175,6 +252,33 @@ function obtener_idproducto_eliminar (tbody, table){
 		var idproducto = $("#frmeliminarproducto #idproducto").val( data.idproducto );
 
 		limpiarMensaje();
+	});
+}
+
+function llenarComboColor(accion, idcategoriaproducto){
+	$.ajax({
+		method: "POST",
+		url: "../src/color/ColorController.php",
+		data: {opcion:"combo"}
+	}).done( function( info ){
+		var color = JSON.parse( info ),
+			option = "";
+		$("#idcolor").html("");//limpiar el combo
+		option +=`<option> Seleccionar </option>`;
+
+		if( accion == "registrar" ){			
+			for(i in color.data )
+				option +=`<option value="${color.data[i].idcolor}"> ${color.data[i].nombre} </option>`;
+			
+		}else if( accion == "modificar" ){
+			for(i in color.data ){
+				if( idcolor == color.data[i].idcolor )
+					option += `<option selected value="${color.data[i].idcolor}"> ${color.data[i].nombre} </option>`;
+				else option +=`<option value="${color.data[i].idcolor}"> ${color.data[i].nombre} </option>`;
+			}
+		}
+
+		$("#idcolor").html(option);
 	});
 }
 

@@ -173,9 +173,15 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM producto WHERE descripcion LIKE :descripcion AND estado = 1;";
+				
+				//$comodin = "'%$descripcion%'";
+				$sql = "SELECT p.idproducto, p.descripcion, p.estado, 
+						p.idcategoriaproducto, p.idtela, cp.descripcion AS categoria FROM producto p
+						INNER JOIN categoriaproducto cp
+						ON p.idcategoriaproducto = cp.idcategoriaproducto
+						WHERE p.descripcion LIKE :descripcion AND p.estado = 1;";
 				$statement=$cnn->prepare($sql);
-				$comodin = "%".$descripcion."%";
+				$comodin = "%".$descripcion."%";//ver esto
 				$statement->bindParam(":descripcion", $comodin, PDO::PARAM_STR);
 				$statement->execute();
 

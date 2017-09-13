@@ -6,7 +6,7 @@
 	
 	$modalBuscar = '
 	<div class="row">
-		<form id="frm'. $accion.$modulo.'" action="'.$controlador.'" method="POST">
+		
 			<div class="modal fade" id="modal'. $accion.'" tabindex="-1" role="dialog" aria-labelledby="modal'. $accion.'Label">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
@@ -16,7 +16,7 @@
 						</div>
 						<div class="modal-body">							
 							<div class="form-group col-md-10">
-					            <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Ingresar nombre de producto ...">
+					            <input type="text" id="descripcion-prenda" name="descripcion-prenda" class="form-control" placeholder="Ingresar nombre de producto ...">
 					        </div>
 					        <div class="form-group col-md-2">
 					            
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		
 	</div>';
 
  ?>
