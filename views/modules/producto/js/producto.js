@@ -5,12 +5,15 @@ llenarComboCategoria("registrar", 0);
 buscarDtProducto();
 llenarComboColor("registrar", 0);
 //seleccionarProducto();
-agregarDetalleProducto();
+agregarItemDetalle();
 //obtenerIdCategoria();
 
 llenarComboTela("registrar", 0);
+guardarAsignacion();
 guardar();
 eliminar();
+
+var tabla_detalle = "";
 
 //Creación de funciones JS para el módulo producto
 
@@ -140,20 +143,44 @@ function seleccionarProducto(tbody, table){
 	});
 }
 
-function agregarDetalleProducto(){
+function validarCampos(){
+	var idproducto = $("#id_producto").val(),
+		idmodelo = $("#idmodelo").val(),
+		idtalla = $("#idtalla").val(),
+		idcolor = $("#idcolor").val(),	
+		stock = $("#stock").val(),
+		precio = $("#precio").val(),
+		url = $("#url_imagen").val(),
+		respuesta = false;
+
+	if( idproducto != "" && idmodelo != "", idtalla != "" && idcolor != "" && stock != "" && precio != "" && url != ""){
+		respuesta = true;
+	}	
+	return respuesta;
+}
+
+function limpiarCajasAsignacion(){
+	$("#url_imagen").val("");
+	$("#stock").val("");
+	$("#precio").val("");
+}
+
+function agregarItemDetalle(){
 	$("#agregar-producto").on("click", function(){
 		var table = $('#dt_detalleproducto').DataTable({
 			"destroy":true,
 			"columns":[
-				{"data":"id_producto", visible: false},
+				{"data":"idproducto", visible: false},
 				{"data":"idmodelo", visible: false},
 				{"data":"idtalla", visible: false},
 				{"data":"idcolor", visible: false},
 				{"data":"modelo"},
 				{"data":"talla"},
-				{"data":"color"},
+				{"data":"color"},				
 				{"data":"stock"},
 				{"data":"precio"},
+				{"data":"imagen"},
+				{"data":"urlimagen"},
 				{"defaultContent": `<button class='eliminar btn btn-danger'><i class='fa fa-trash-o'></i></button>`}
 			],
 			"paging": false,
@@ -164,33 +191,71 @@ function agregarDetalleProducto(){
 			"autoWidth": false
 		});
 
-		$("#dt_detalleproducto").removeClass("ocultar");
-
-		var fila =	{						
-				        id_producto: $("#id_producto").val(),
+		if( validarCampos() ){
+			$("#dt_detalleproducto").removeClass("ocultar");
+			var imagen = $("#url_imagen").val();
+			var fila =	{						
+				        idproducto: $("#id_producto").val(),
 				        idmodelo: $("#idmodelo").val(),
 				        idtalla: $("#idtalla").val(),
 				        idcolor: $("#idcolor").val(),
 				        modelo: $("#idmodelo option:selected").text(),
 				        talla: $("#idtalla option:selected").text(),
 				        color: $("#idcolor option:selected").text(),
+				        imagen: "<a href='"+imagen+"' target='_blank' ><img src='"+imagen+"' width='80' height='50' /></a>",
+				        urlimagen: imagen,
 				        stock: $("#stock").val(),
 				        precio: $("#precio").val()			    	
-				    };				
-
-		table.row.add( fila ).draw();
+				    };
+			table.row.add( fila ).draw();
+			limpiarCajasAsignacion();
+		}else{
+			alert("Llenar los datos solicitados");
+		}
+		eliminarItemDetalle("#dt_detalleproducto tbody", table);
+		
+		tabla_detalle = obtenerDataDetalleProducto(table);		
 	});
+}
+
+function eliminarItemDetalle(tbody, table){
+	$(tbody).on('click', 'button.eliminar', function(){
+    	table.row( $(this).parents('tr') )
+        	 .remove()
+        	 .draw();
+	});
+}
+
+function obtenerDataDetalleProducto(table){
+		var data = table.rows().data();		
+		return data;
 }
 
 function guardarAsignacion(){
 	//datos de la tabla
-	$.ajax({
+
+	$("#frmguardarasignarproducto").on("submit", function(e){
+		e.preventDefault();
+		//información para enviar por ajax, solo hacer un recorrido each
+		console.log( tabla_detalle[0]);//acceder a cada propiedad, idproducto
+		console.log( tabla_detalle[1]);
+		console.log( tabla_detalle.length);
+	});
+
+	/*var data = {
+		idproducto: $("#id_producto").val(),
+		data:[
+			
+		]
+	};*/
+
+	/*$.ajax({
 		method: "POST",
 		url: "",
-		data:
+		data: ""
 	}).done(function( info ){
 		console.log( info );
-	});
+	});*/
 }
 
 function dtProducto(){

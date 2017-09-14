@@ -3,14 +3,14 @@
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
 
-	class ProductoDAO implements Consultas{
+	class DetalleProductoDAO implements Consultas{
 		private $conexion=null;
 
 		public function listar(){
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM producto WHERE estado = 1;";
+				$sql = "SELECT * FROM detalleproducto WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -33,18 +33,26 @@
 			$statement = null;			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO producto(descripcion, estado, idcategoriaproducto, idtela ) VALUES (?,?,?,?);";
+				$sql = "INSERT INTO detalleproducto(idproducto, idmodelo, idtalla, idcolor, urlimagen, stock, precio,estado ) VALUES (?,?,?,?,?,?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
-				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
-				$descripcion = $objeto->getDescripcion();
-				$idtela = $objeto->getIdtela();
+				$idproducto = $objeto->getIdproducto();
+				$idmodelo = $objeto->getIdmodelo();
+				$idtalla = $objeto->getIdtalla();
+				$idcolor = $objeto->getIdcolor();
+				$urlimagen = $objeto->getUrlimagen();
+				$precio = $objeto->getPrecio();				
+				$stock = $objeto->getStock();
 				$estado = $objeto->getEstado();
 
 				$statement = $cnn->prepare( $sql );
-				$statement->bindParam(1, $descripcion, PDO::PARAM_STR );
-				$statement->bindParam(2, $estado, PDO::PARAM_INT );
-				$statement->bindParam(3, $idcategoriaproducto, PDO::PARAM_INT );
-				$statement->bindParam(4, $idtela, PDO::PARAM_INT );
+				$statement->bindParam(1, $idproducto, PDO::PARAM_STR );	
+				$statement->bindParam(2, $idmodelo, PDO::PARAM_INT );
+				$statement->bindParam(3, $idtalla, PDO::PARAM_INT );
+				$statement->bindParam(4, $idcolor, PDO::PARAM_INT );
+				$statement->bindParam(5, $urlimagen, PDO::PARAM_STR );
+				$statement->bindParam(6, $stock, PDO::PARAM_INT );
+				$statement->bindParam(7, $precio, PDO::PARAM_INT );			
+				$statement->bindParam(8, $estado, PDO::PARAM_INT );
 
 				$respuesta = $statement->execute();				
 			}catch(Exception $e){
@@ -63,29 +71,27 @@
 			try{
 				$cnn = $conexion->getConexion();
 				$sql = "UPDATE producto SET 
-								 descripcion = :descripcion,
+								 
 								 precio = :precio,
-								 precioventa = :precioventa,
+								 
 								 stock = :stock,
-								 stockactual = :stockactual,
+								 
 								 estado = :estado,
 								 idmodelo = :idmodelo,
 								 idtalla = :idtalla,
-								 idtela = :idtela,
-								 idcategoriaproducto = :idcategoriaproducto
-						WHERE idproducto = :idproducto;";
+								 
+								 
+						WHERE iddetalleproducto = :iddetalleproducto;";
 				/*Notice: Only variables should be passed by reference*/
-				$descripcion = $objeto->getDescripcion();
-				$precio = $objeto->getPrecio();
-				$precioventa = $objeto->getPrecioventa();
-				$stock = $objeto->getStock();
-				$stockactual = $objeto->getStockactual();
-				$estado = $objeto->getEstado();
+				$idproducto = $objeto->getIdproducto();
 				$idmodelo = $objeto->getIdmodelo();
 				$idtalla = $objeto->getIdtalla();
-				$idtela = $objeto->getIdtela();
-				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
-				$idproducto = $objeto->getIdproducto();
+				$idcolor = $objeto->getIdcolor();
+				$urlimagen = $objeto->getUrlimagen();
+				$precio = $objeto->getPrecio();				
+				$stock = $objeto->getStock();
+				$estado = $objeto->getEstado();
+				$iddetalleproducto = $objeto->getIddetalleproducto();
 
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR );
@@ -134,35 +140,6 @@
 				$conexion = null;
 			}
 			return $respuesta; 
-		}
-
-		public function buscar( $descripcion ){
-			$conexion = new Conexion();
-			try {
-				$cnn = $conexion->getConexion();
-				
-				//$comodin = "'%$descripcion%'";
-				$sql = "SELECT p.idproducto, p.descripcion, p.estado, 
-						p.idcategoriaproducto, p.idtela, cp.descripcion AS categoria FROM producto p
-						INNER JOIN categoriaproducto cp
-						ON p.idcategoriaproducto = cp.idcategoriaproducto
-						WHERE p.descripcion LIKE :descripcion AND p.estado = 1;";
-				$statement=$cnn->prepare($sql);
-				$comodin = "%".$descripcion."%";//ver esto
-				$statement->bindParam(":descripcion", $comodin, PDO::PARAM_STR);
-				$statement->execute();
-
-				$data = [];//arreglo vacio
-				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-					$data["data"][] = $resultado;
-				}
-				return json_encode($data);
-			}catch (Throwable $e) {
-				return $e->getMessage();
-			}finally{
-				$statement->closeCursor();
-				$conexion = null;
-			}
 		}
 	}
 

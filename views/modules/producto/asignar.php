@@ -15,7 +15,7 @@
 	    </div>
 	    <!-- /.box-header -->
 	    <!-- form start -->
-	    <form id="frmguardar'.$modulo.'" action="'.$controlador.'" role="form">
+	    <form id="frmguardarasignar'.$modulo.'" action="'.$controlador.'" role="form">
 	    <input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 		<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 	      <div class="box-body">
@@ -46,8 +46,8 @@
 	        </div>
 
 			<div class="form-group col-md-5">
-	          <label for="urlimagen">Imagen</label>
-	          <input type="text" id="urlimagen" name="urlimagen" class="form-control" placeholder="Url imagen">
+	          <label for="url_imagen">Imagen</label>
+	          <input type="text" id="url_imagen" name="url_imagen" class="form-control" placeholder="Url imagen">
 	        </div>
 
 			<div class="form-group col-md-2">
@@ -76,9 +76,11 @@
 								<th>Id Color</th>
 								<th>Modelo</th>
 								<th>Talla</th>
-								<th>Color</th>
+								<th>Color</th>								
 								<th>Stock</th>
 								<th>Precio</th>
+								<th>Imagen</th>
+								<th>Url Imagen</th>
 								<th></th>
 							</thead>							
 						</table>
@@ -87,8 +89,10 @@
 
 	      </div>
 	      <!-- /.box-body -->
-	      <div class="box-footer">        	
-        	<button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
+	      <div class="box-footer">
+	      	<div class="form-group col-md-12">
+        	<button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary ">Guardar</button>
+        	</div>
 	      </div>
 	      
 	      <div class="row">
