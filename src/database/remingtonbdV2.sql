@@ -103,6 +103,31 @@ INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','pett@gmail.
 UNLOCK TABLES;
 
 --
+-- Table structure for table `color`
+--
+
+DROP TABLE IF EXISTS `color`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `color` (
+  `idcolor` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idcolor`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `color`
+--
+
+LOCK TABLES `color` WRITE;
+/*!40000 ALTER TABLE `color` DISABLE KEYS */;
+INSERT INTO `color` VALUES (1,'Azul',1),(2,'Azul Noche',1),(3,'Azul Marino',1),(4,'Negro',1),(5,'Plomo',1),(6,'Gris',1),(7,'Plateado',1);
+/*!40000 ALTER TABLE `color` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comprobantepago`
 --
 
@@ -219,6 +244,36 @@ LOCK TABLES `detallepedido` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `detalleproducto`
+--
+
+DROP TABLE IF EXISTS `detalleproducto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `detalleproducto` (
+  `iddetalleproducto` int(11) NOT NULL AUTO_INCREMENT,
+  `idproducto` int(11) DEFAULT NULL,
+  `idmodelo` int(11) DEFAULT NULL,
+  `idtalla` int(11) DEFAULT NULL,
+  `idcolor` tinyint(4) DEFAULT NULL,
+  `urlimagen` varchar(45) DEFAULT NULL,
+  `stock` smallint(6) DEFAULT NULL,
+  `precio` decimal(18,2) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`iddetalleproducto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `detalleproducto`
+--
+
+LOCK TABLES `detalleproducto` WRITE;
+/*!40000 ALTER TABLE `detalleproducto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detalleproducto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `empleado`
 --
 
@@ -252,6 +307,56 @@ LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
 INSERT INTO `empleado` VALUES (1,'kevin','Yarasca','Ponce','76525712','kevin@gmail.com','123','av. ferrocarril s/n','18/08/1995','920096053',2,1),(2,'Geovanny','Rios','Abarca','47523012','geo@gmail.com','123','Urb. Libertad MZ V lote 7','28/02/1991','947856321',3,1),(3,'Yanira','Aquino','Ladera','42159875','yani@gmail.com','123','Av.Universitaria N°240','10/08/1998','947856312',3,1),(4,'Deysi','Alejandro','Bazan','44963214','deysi@gmail.com','123','Alejandro deustua N°739','23/03/1996','981237451',2,1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `envio`
+--
+
+DROP TABLE IF EXISTS `envio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `envio` (
+  `idenvio` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(45) DEFAULT NULL,
+  `costo` decimal(18,2) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idenvio`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `envio`
+--
+
+LOCK TABLES `envio` WRITE;
+/*!40000 ALTER TABLE `envio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `envio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `igv`
+--
+
+DROP TABLE IF EXISTS `igv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `igv` (
+  `idigv` tinyint(4) NOT NULL,
+  `porcentaje` varchar(45) DEFAULT NULL,
+  `fecha` varchar(10) DEFAULT NULL,
+  `estado` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idigv`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `igv`
+--
+
+LOCK TABLES `igv` WRITE;
+/*!40000 ALTER TABLE `igv` DISABLE KEYS */;
+/*!40000 ALTER TABLE `igv` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -323,7 +428,7 @@ CREATE TABLE `pagina` (
   PRIMARY KEY (`idpagina`),
   KEY `fk_idmodulo_idx` (`idmodulo`),
   CONSTRAINT `fk_idmodulo` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +437,7 @@ CREATE TABLE `pagina` (
 
 LOCK TABLES `pagina` WRITE;
 /*!40000 ALTER TABLE `pagina` DISABLE KEYS */;
-INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1),(16,9,'pedido/listar.php','fa fa-folder',1),(17,10,'detallepedido/listar.php','fa fa-folder',1);
+INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1),(16,9,'pedido/listar.php','fa fa-folder',1),(17,10,'detallepedido/listar.php','fa fa-folder',1),(18,3,'producto/asignar.php','fa fa-folder',1);
 /*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,6 +465,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES ('CP00001','06/09/2017',1,200.00);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,25 +509,15 @@ DROP TABLE IF EXISTS `producto`;
 CREATE TABLE `producto` (
   `idproducto` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) DEFAULT NULL,
-  `precio` decimal(18,2) DEFAULT NULL,
-  `precioventa` decimal(18,2) DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `stockactual` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   `idcategoriaproducto` int(11) DEFAULT NULL,
-  `idmodelo` int(11) DEFAULT NULL,
-  `idtalla` int(11) DEFAULT NULL,
   `idtela` int(11) DEFAULT NULL,
   PRIMARY KEY (`idproducto`),
-  KEY `fk_idtela_idx` (`idtela`),
   KEY `fk_idcategoriaproducto_idx` (`idcategoriaproducto`),
-  KEY `fk_idmodelo_idx` (`idmodelo`),
-  KEY `fk_idtalla_idx` (`idtalla`),
+  KEY `fk_idtela_idx` (`idtela`),
   CONSTRAINT `fk_idcategoriaproducto` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_idmodelo` FOREIGN KEY (`idmodelo`) REFERENCES `modelo` (`idmodelo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_idtalla` FOREIGN KEY (`idtalla`) REFERENCES `talla` (`idtalla`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtela` FOREIGN KEY (`idtela`) REFERENCES `tela` (`idtela`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -430,7 +526,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Camisa super elegante ',60.00,70.00,10,10,1,1,1,3,2),(2,'Camisa a cuadros elegante',60.00,70.00,20,20,0,1,2,3,2),(3,'Chaleco de vestir',80.00,90.00,20,20,0,2,4,6,1),(4,'Chaleco formal de trabajo en oficina',50.00,60.00,30,30,0,2,4,4,2),(5,'Camisa informal',60.00,70.00,10,10,1,1,2,1,1);
+INSERT INTO `producto` VALUES (1,'Camisa Formal',1,1,1),(2,'Camisa a cuadros elegante',1,1,1),(3,'Chaleco de vestir',1,2,2),(4,'Camisa super elegante ',1,1,4);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,10 +568,9 @@ DROP TABLE IF EXISTS `tela`;
 CREATE TABLE `tela` (
   `idtela` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(70) DEFAULT NULL,
-  `color` varchar(40) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idtela`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +579,7 @@ CREATE TABLE `tela` (
 
 LOCK TABLES `tela` WRITE;
 /*!40000 ALTER TABLE `tela` DISABLE KEYS */;
-INSERT INTO `tela` VALUES (1,'tela francessa','turquesa',1),(2,'tela romana','plomo',1),(3,'tela comic','rosado',1);
+INSERT INTO `tela` VALUES (1,'Manchester',1),(2,'Bronson',1),(3,'Cardif',1),(4,'Barrington',1),(5,'Polystel',1),(6,'Fifty',1);
 /*!40000 ALTER TABLE `tela` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -570,4 +665,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-06  1:58:35
+-- Dump completed on 2017-09-14 22:54:57

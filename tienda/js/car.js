@@ -5,6 +5,17 @@ $(function(){
 });
 
 function listarProductosMujeres(){
+	/*se va a cambiar esta parte de listado sin tipo, por prodocuto
+	y en la pagina del producto solo, se va a listar por detalleproducto 
+	de acuerdo al id producto seleccionado , para que muestre 
+	las tallas, foto(s), colores, modelo, cantidad disponible
+	-hacer un combo de colores y de acuerdo a eso, mostrar las tallas disponibles.
+	-con el combo de colores, también cambiar las imágenes con dicho color.
+	-hacer validación de stock, de acuerdo al color y la talla elegida:
+	 si hay stock, entonces aparece el boton de agregar al carro, si no, debe mostrarse
+	 un mensaje de: stock agotado.	
+	 */
+
 	$.ajax({
 		method: "POST",
 		url: "../src/producto/ProductoController.php",
