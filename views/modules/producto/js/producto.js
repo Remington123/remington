@@ -227,19 +227,34 @@ function eliminarItemDetalle(tbody, table){
 }
 
 function obtenerDataDetalleProducto(table){
-		var data = table.rows().data();		
+		var data = table.rows().data();
+		var produtos = [];
+
+/*var objeto = { idproducto: 1, descripcion: "Hola"};
+    fruits.push( objeto );*/
+
+		for( var i=0; i < data.length; i++ ){
+			console.log( data[i].idproducto );
+			console.log( data[i].idmodelo );
+			console.log( data[i].idcolor );
+			console.log( data[i].idtalla );
+			console.log( data[i].urlimagen );
+			console.log( data[i].precio );
+			console.log( data[i].stock );
+		}
+
 		return data;
 }
 
 function guardarAsignacion(){
 	//datos de la tabla
-
+	var productos = [];
 	$("#frmguardarasignarproducto").on("submit", function(e){
 		e.preventDefault();
 		//información para enviar por ajax, solo hacer un recorrido each
-		console.log( tabla_detalle[0]);//acceder a cada propiedad, idproducto
-		console.log( tabla_detalle[1]);
-		console.log( tabla_detalle.length);
+		/*console.log( tabla_detalle[0]);//acceder a cada propiedad, idproducto
+		console.log( tabla_detalle[1]);*/
+		console.log( tabla_detalle);
 	});
 
 	/*var data = {

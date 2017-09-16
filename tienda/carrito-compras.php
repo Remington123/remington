@@ -1,21 +1,17 @@
 <?php 
+
 	include '../src/detallepedido/Item.php';//incluir esta la entidad para poder mostrar los datos
 	session_start();
 	//header('Location: '.$_SERVER["PHP_SELF"]);
 	//echo $_SERVER["PHP_SELF"];
+
+	include 'helperhtml/header.php'
  ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Mi Carrito</title>
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-</head>
-<body>
 
+	<!-- NO TOCAR -->	
 	<h2>Lista de Productos agregados al carrito de compras</h2>
-<a href="http://www.worldanimalfoundation.net/f/wolf.pdf">PDF</a>
+	<a href="http://www.worldanimalfoundation.net/f/wolf.pdf">PDF</a>
 	<?php 
 		if( isset($_SESSION["carrito"]) ){
 			$carrito = $_SESSION["carrito"];
@@ -73,6 +69,8 @@
 			echo "No hay Items agregados";
 		}
 		?>
+	<!-- NO TOCAR -->
+
 
 
 	<script
@@ -173,5 +171,9 @@
 		    return sumarImporte;		    
 		}
 	</script>
-</body>
-</html>
+
+	<!-- FIN NO TOCAR -->
+
+	
+
+<?php include 'helperhtml/footer.php' ?>
