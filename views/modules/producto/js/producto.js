@@ -167,7 +167,7 @@ function limpiarCajasAsignacion(){
 
 function agregarItemDetalle(){
 	$("#agregar-producto").on("click", function(){
-		var table = $('#dt_detalleproducto').DataTable({
+		tabla_detalle = $('#dt_detalleproducto').DataTable({
 			"destroy":true,
 			"columns":[
 				{"data":"idproducto", visible: false},
@@ -207,43 +207,44 @@ function agregarItemDetalle(){
 				        stock: $("#stock").val(),
 				        precio: $("#precio").val()			    	
 				    };
-			table.row.add( fila ).draw();
+			tabla_detalle.row.add( fila ).draw();
 			limpiarCajasAsignacion();
 		}else{
 			alert("Llenar los datos solicitados");
 		}
-		eliminarItemDetalle("#dt_detalleproducto tbody", table);
-		
-		tabla_detalle = obtenerDataDetalleProducto(table);		
+		eliminarItemDetalle("#dt_detalleproducto tbody", tabla_detalle);		
 	});
 }
 
 function eliminarItemDetalle(tbody, table){
 	$(tbody).on('click', 'button.eliminar', function(){
     	table.row( $(this).parents('tr') )
-        	 .remove()
-        	 .draw();
+        	 .remove();
+        table.draw();
 	});
 }
 
 function obtenerDataDetalleProducto(table){
-		var data = table.rows().data();
-		var produtos = [];
+		var detalle = table.rows().data();
+		var productos = [], json = "";
+		//console.log( data );
 
-/*var objeto = { idproducto: 1, descripcion: "Hola"};
-    fruits.push( objeto );*/
-
-		for( var i=0; i < data.length; i++ ){
-			console.log( data[i].idproducto );
-			console.log( data[i].idmodelo );
-			console.log( data[i].idcolor );
-			console.log( data[i].idtalla );
-			console.log( data[i].urlimagen );
-			console.log( data[i].precio );
-			console.log( data[i].stock );
+		for( var i=0; i < detalle.length; i++ ){
+			var item = {
+				idproducto : detalle[i].idproducto,
+				idmodelo : detalle[i].idmodelo,
+				idcolor : detalle[i].idcolor,
+				idtalla : detalle[i].idtalla,
+				urlimagen : detalle[i].urlimagen,
+				precio : detalle[i].precio,
+				stock : detalle[i].stock,
+			};
+			productos.push( item );
 		}
 
-		return data;
+		json = {data: productos};
+
+		return JSON.stringify(json);//convierte a una cadena
 }
 
 function guardarAsignacion(){
@@ -254,7 +255,14 @@ function guardarAsignacion(){
 		//información para enviar por ajax, solo hacer un recorrido each
 		/*console.log( tabla_detalle[0]);//acceder a cada propiedad, idproducto
 		console.log( tabla_detalle[1]);*/
-		console.log( tabla_detalle);
+
+		/*El producto ingresado, solo se podrá editar, siempre y cuando
+		tenga un estado de recien ingresado, caso contrario, saldrá
+		un mensaje diciendo que a ese producto, ya se le asignaron
+		talla, color, etc.*/
+
+		var data = obtenerDataDetalleProducto( tabla_detalle);
+		console.log( data );// esta data se enviará a PHP servirdor
 	});
 
 	/*var data = {
