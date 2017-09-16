@@ -3,7 +3,10 @@
 <div class="footer">
 	<div class="footer_agile_inner_info_w3l">
 		<div class="col-md-3 footer-left">
-			<h2><a href="index.html"><span>E</span>lite Shoppy </a></h2>
+
+<img class="img-responsive" src="images/logo.png" alt=" ">
+
+			<h2><a href="index.html"> <img class="img-responsive" src="images/logo1.png" width="200" height="100"> </a></h2>
 			<p>Lorem ipsum quia dolor
 			sit amet, consectetur, adipisci velit, sed quia non 
 			numquam eius modi tempora.</p>
@@ -25,26 +28,25 @@
 		<div class="col-md-9 footer-right">
 			<div class="sign-grds">
 				<div class="col-md-6 sign-gd">
-					<h4>Our <span>Information</span> </h4>
+					<h4>Nuestra <span>Informacion</span> </h4>
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="mens.html">Men's Wear</a></li>
-						<li><a href="womens.html">Women's wear</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="typography.html">Short Codes</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="mens.html">Ternos Caballero</a></li>
+						<li><a href="about.html">Acerca de</a></li>
+						<li><a href="typography.html">Codigos Cortos</a></li>
+						<li><a href="contact.html">Contactanos</a></li>
 					</ul>
 				</div>
 				
 				<div class="col-md-6 sign-gd-two">
-					<h4>Store <span>Information</span></h4>
+					<h4>Informacion <span>de la Tienda</span></h4>
 					<div class="w3-address">
 						<div class="w3-address-grid">
 							<div class="w3-address-left">
 								<i class="fa fa-phone" aria-hidden="true"></i>
 							</div>
 							<div class="w3-address-right">
-								<h6>Phone Number</h6>
+								<h6>Telefono</h6>
 								<p>+1 234 567 8901</p>
 							</div>
 							<div class="clearfix"> </div>
@@ -54,8 +56,8 @@
 								<i class="fa fa-envelope" aria-hidden="true"></i>
 							</div>
 							<div class="w3-address-right">
-								<h6>Email Address</h6>
-								<p>Email :<a href="mailto:example@email.com"> mail@example.com</a></p>
+								<h6>Correo Electronico</h6>
+								<p>Correo :<a href="mailto:example@email.com"> mail@gmai.com</a></p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -64,8 +66,8 @@
 								<i class="fa fa-map-marker" aria-hidden="true"></i>
 							</div>
 							<div class="w3-address-right">
-								<h6>Location</h6>
-								<p>Broome St, NY 10002,California, USA. 
+								<h6>Ubicacion</h6>
+								<p>Calle Real, NY 10002,El Tambo - Huancayo, PERU. 
 								
 								</p>
 							</div>
@@ -104,7 +106,7 @@
 
 		<div class="clearfix"></div>
 	</div>-->
-		<p class="copy-right">&copy 2017 Elite shoppy. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+		<p class="copy-right"> 2017 Tienda Remington. Todo los Derechos Reservados | Diseñado por <a href="">Corporacion Continental</a></p>
 	</div>
 </div>
 <!-- //footer -->
