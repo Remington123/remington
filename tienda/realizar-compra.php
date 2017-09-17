@@ -2,16 +2,9 @@
 	include '../src/detallepedido/Item.php';//incluir esta la entidad para poder mostrar 
 	session_start();
 
+	include 'helperhtml/header.php';
  ?>
 
-
- <!DOCTYPE html>
- <html lang="en">
- <head>
- 	<meta charset="UTF-8">
- 	<title>Realizar Compra</title>
- </head>
- <body>
  	<h1>Realizar Compra</h1>
 
 	<?php 
@@ -69,5 +62,4 @@
  	<h2>Cuenta Bancaria</h2>
  	<h2>Pago con Tarjetas: API de CULQUI</h2>
 	
- </body>
- </html>
+<?php include 'helperhtml/footer.php' ?>

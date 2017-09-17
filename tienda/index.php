@@ -1,5 +1,6 @@
 <?php include 'helperhtml/header.php' ?>
 
+<<<<<<< HEAD
 <body>
 <!-- header -->
 <div class="header" id="home">
@@ -278,6 +279,8 @@
 			</div>
 		</div>
 <!-- //Modal2 -->
+=======
+>>>>>>> 2d566d11f16919cefa28b4baa3948e5599324082
 
 <!-- banner -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
