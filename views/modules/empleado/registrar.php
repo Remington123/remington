@@ -41,16 +41,27 @@
 		          <input type="text" id="email" name="email" class="form-control" placeholder="Email">
 		        </div>
 		        <div class="form-group">
-		          <label for="celular">Celular</label>
-		          <input type="text" id="celular" name="celular" class="form-control" placeholder="Celular">
+		          <label for="contrasena">Contraseña</label>
+		          <input type="text" id="contrasena" name="contrasena" class="form-control" placeholder="Dirección">
+		        </div>
+		        <div class="form-group">
+		          <label for="fechanacimiento">Fecha Nacimiento</label>
+		          <input type="date" id="fechanacimiento" name="fechanacimiento" class="form-control" placeholder="Dirección">
 		        </div>
 		        <div class="form-group">
 		          <label for="direccion">Dirección</label>
 		          <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección">
 		        </div>
 		        <div class="form-group">
-		          <label for="ruc">Ruc</label>
-		          <input type="text" id="ruc" name="ruc" class="form-control" placeholder="Ruc">
+		          <label for="celular">Celular</label>
+		          <input type="text" id="celular" name="celular" class="form-control" placeholder="Celular">
+		        </div>
+		        <div class="form-group">
+		          <label for="idtipousuario">Tipo Usuario</label>
+		          <select class="form-control" id="idtipousuario" name="idtipousuario" ><option value="1">Cliente</option>
+		          <option value="2">Empleado</option>
+		          <option value="3">Administrador</option>
+		          </select>
 		        </div>
 
 		      </div>
@@ -58,6 +69,14 @@
 		      <div class="box-footer">
 		        <button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 		      </div>
+
+			  <div class="row">
+		        <br>
+		       	<div class="col-sm-12 mensaje ocultar">
+		       			        		
+		       	</div>
+		      </div>
+
 		    </form>
 		  </div>
 		  <!-- /.box -->

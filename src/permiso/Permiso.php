@@ -30,6 +30,7 @@
 			$this->idtipousuario = $idtipousuario;
 		}
 
+<<<<<<< HEAD
 		public function getIdmodulo() :int{
 			return $this->idpagina;
 		}
@@ -42,6 +43,19 @@
 			{
 				return $this->estado;
 			}
+=======
+		public function getIdmodulo() : int{
+			return $this->idmodulo;
+		}
+
+		public function setIdmodulo(int $idmodulo){
+			$this->idmodulo = $idmodulo;
+		}
+
+		public function getEstado() : int{
+			return $this->estado;
+		}
+>>>>>>> b3c2c67eddaf0f611a49c4a5bab97bc61b14be5f
 
 		public function setEstado(int $estado){
 			$this->estado = $estado;

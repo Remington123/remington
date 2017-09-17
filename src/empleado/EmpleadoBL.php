@@ -16,22 +16,22 @@
 
 			$informacion = [];
 			$validar = new EmpleadoValidar();
-			if( $validar->datosObtenidosFormulario("registrar" ) ){
+			if( $validar->datosObtenidosFormulario("registrar") ){
 				$empleado = new Empleado();
-				$empleado->setNombres( $_POST["nombres"] );
+				$empleado->setNombre( $_POST["nombre"] );
 				$empleado->setApellidopaterno( $_POST["apellidopaterno"] );
 				$empleado->setApellidomaterno( $_POST["apellidomaterno"]);
 				$empleado->setDni( $_POST["dni"] );
-				$empleado->setEmai( $_POST["email"] );
-				$empleado->setContraseña( $_POST["contraseña"] );
+				$empleado->setEmail( $_POST["email"] );
+				$empleado->setContrasena( $_POST["contrasena"] );
 				$empleado->setDireccion( $_POST["direccion"] );
-				$empleado->setFechanacimiento( $_POST["fechanacimiento"]);
-				$empleado->setCelular( $_POST["celuar"] );
-				$empleado->setIdtipousuario( $_POST["tipousuario"] );
+				$empleado->setFechanacimiento( date( 'Y/m/d', strtotime( $_POST["fechanacimiento"]) ) );
+				$empleado->setCelular( $_POST["celular"] );
+				$empleado->setIdtipousuario( $_POST["idtipousuario"] );
 				$empleado->setEstado(1);
 
 				$dao = new EmpleadoDAO();
-				$dao->registrar( $empleado ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+				$dao->registrar( $empleado ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion[respuesta] = "llenar_datos";
 			}
@@ -58,7 +58,7 @@
 				$empleado->setEstado(1);
 
 				$dao = new Empleado();
-				$dao->modificar( $empleado) ? $informacion["respuesta"] = "ok_modificar" : $informacion["respuesta"] = "error_modificar";
+				$dao->modificar( $empleado) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}
@@ -73,12 +73,12 @@
 
 				$dao = new EmpleadoDAO();
 				if( $dao->eliminar( $idempledo ) )
-					$informacion["respuesta"] = "ok_eliminacion";
+					$informacion["respuesta"] = "bien";
 				else
-					$informacion["respuesta"] = "error_eliminacion";
+					$informacion["respuesta"] = "error";
 
 			}else{
-				$informacion["respuesta"] = "idempledo_indefinido";
+				$informacion["respuesta"] = "id_indefinido";
 			}
 
 			return ( json_encode($informacion) );

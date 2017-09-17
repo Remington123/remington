@@ -1,7 +1,6 @@
 <?php
 	include 'PermisoDAO.php';
 	include 'Permiso.php';
-	include 'ProductoValidar.php';
 
 	class PermisoBl{
 	    private $dao =null;
@@ -13,7 +12,6 @@
 	    }
 
 	    public function registrar() : string{
-
 	    	$informacion = [];
 			$validar = new PermisoValidar();
 			if( $validar->datosObtenidosFormulario( "registrar" ) ){
@@ -37,7 +35,11 @@
 		public function modificar() : string{
 
 			$informacion = [];
+<<<<<<< HEAD
 			$permiso = new PermisoValidar();
+=======
+			$validar = new PermisoValidar();
+>>>>>>> b3c2c67eddaf0f611a49c4a5bab97bc61b14be5f
 			if( $validar->datosObtenidosFormulario( "modificar" ) ){
 				$permiso = new Permiso();
 				$permiso->setIdpermiso( $_POST["idpermiso"] );

@@ -41,7 +41,7 @@
 	          <select class="form-control" id="idtalla" name="idtalla" ><option value="">Seleccionar</option></select>
 	        </div>
 			<div class="form-group col-md-3">
-	          <label for="idtalla">Color</label>
+	          <label for="idcolor">Color</label>
 	          <select class="form-control" id="idcolor" name="idcolor" ><option value="">Seleccionar</option></select>
 	        </div>
 

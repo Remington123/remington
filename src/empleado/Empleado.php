@@ -25,7 +25,7 @@
 			$this->contrasena = "";
 			$this->direccion = "";
 			$this->celular = "";
-			$this->fechanacimiento = "";
+			$this->fechanacimiento = date( 'Y/m/d', time() );
 			$this->idtipousuario = 1;
 			$this->estado = 0;
 		}

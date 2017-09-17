@@ -32,21 +32,34 @@
 		public function registrar($objeto) : bool{
 			$conexion = new Conexion();
 			$respuesta = false;
-			$statement = null;			
+			$statement = null;
 			try{
 				$cnn = $conexion->getConexion();
+<<<<<<< HEAD
 				$sql = "INSERT INTO permiso(idtipousuario, idmodulo, estado) VALUES (?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				
 				$idtipousuario = $objeto->getIdtipousuario();
 				$idmodulo = $objeto->getIdmodulo();
+=======
+				$sql = "INSERT INTO permiso(idtipousuario, idmodulo, estado) VALUES (?,?,?);";
+				/*Notice: Only variables should be passed by reference*/
+				
+				$idtipousuario = $objeto->getIdtipousuario();
+				$idpagina = $objeto->getIdmodulo();
+>>>>>>> b3c2c67eddaf0f611a49c4a5bab97bc61b14be5f
 				$estado = $objeto->getEstado();
 				
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $idtipousuario, PDO::PARAM_INT);
+<<<<<<< HEAD
 				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);	
 				$statement->bindParm(3, $idestado, PDO::PARAM_INT)
 
+=======
+				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);
+				$statement->bindParam(3, $estado, PDO::PARAM_INT);
+>>>>>>> b3c2c67eddaf0f611a49c4a5bab97bc61b14be5f
 				$respuesta = $statement->execute();
 				
 			}catch(Exception $e){
@@ -76,10 +89,15 @@
 				$statement = $cnn->prepare($sql);
 
 				$statement->bindParam(":idpermiso", $idpermisos, PDO::PARAM_INT);
+<<<<<<< HEAD
 				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_STR);
 				$statement->bindParam(":idmodulo", $modulo, PDO::PARAM_STR);
 				$statement->bindParam(" :estado", $estado, PDO::PARAM_INT)
 
+=======
+				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_INT);
+				$statement->bindParam(":idpagina", $paginas, PDO::PARAM_STR);
+>>>>>>> b3c2c67eddaf0f611a49c4a5bab97bc61b14be5f
 				$respuesta = $statement->execute();
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();

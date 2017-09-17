@@ -17,7 +17,9 @@
 			}
 
 			if( !empty( $_POST["idempleado"] ) &&
-				!empty( $_POST["nombres"] ) &&
+				!empty( $_POST["nombre"] ) &&
+				!empty( $_POST["apellidopaterno"] ) &&
+				!empty( $_POST["apellidomaterno"] ) &&
 				!empty( $_POST["dni"] ) &&
 				!empty( $_POST["email"] ) &&
 				!empty( $_POST["contrasena"] ) &&
@@ -25,10 +27,11 @@
 				!empty( $_POST["fechanacimiento"] ) &&
 				!empty( $_POST["celular"] ) &&
 				!empty( $_POST["idtipousuario"] ) ){
-				$camposConValores = true;
+				return $camposConValores = true;
 			}
 		}
-			public function idPrimarioObtenidoFormulario() : bool{
+		
+		public function idPrimarioObtenidoFormulario() : bool{
 				$idConValor = false;
 
 				if( !empty( $_POST["idempleado"] ) )
