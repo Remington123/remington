@@ -4,7 +4,7 @@
 
 		private $idproducto;
 		private $descripcion;		
-		private $estado;		
+		private $estado;/*(0:eliminado, 1: nuevo, 2: asignado)*/
 		private $idtela;
 		private $idcategoriaproducto; 
 

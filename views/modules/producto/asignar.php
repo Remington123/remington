@@ -1,9 +1,9 @@
 <?php
 	include 'modals/buscar.php';
 
-	$modulo = "producto";
-	$accion = "asignar";
-	$controlador = $modulo.'/ProductoController';
+	$modulo = "detalleproducto";
+	$accion = "registrar";
+	$controlador = $modulo.'/DetalleProductoController';
 	$script = '/js/producto.js';
 
 	$content = '
@@ -15,7 +15,7 @@
 	    </div>
 	    <!-- /.box-header -->
 	    <!-- form start -->
-	    <form id="frmguardarasignar'.$modulo.'" action="'.$controlador.'" role="form">
+	    <form id="frmguardar'.$modulo.'" action="'.$controlador.'" role="form">
 	    <input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 		<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 	      <div class="box-body">
@@ -62,7 +62,7 @@
 	        </div>	        
 
 	        <div class="form-group col-md-12">	        	        	
-        		<button type="button" id="agregar-'.$modulo.'" class="btn btn-success">Agregar</button>
+        		<button type="button" id="agregar-item" class="btn btn-success">Agregar</button>
 	      	</div>     
 
 	      	<div class="col-md-12">       			            

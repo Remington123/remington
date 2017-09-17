@@ -90,5 +90,11 @@
 			return $dao->buscar( $descripcion );
 		}
 
+		public function asignar(){
+			$dao = new ProductoDAO();
+			$items = $_POST["items"];
+			return $dao->asignar( $items );
+		}
+
 	}
 ?>

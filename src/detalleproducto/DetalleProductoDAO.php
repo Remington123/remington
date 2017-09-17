@@ -14,7 +14,7 @@
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
-				$data = [];//arreglo vacio
+				$data["data"] = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}
@@ -33,28 +33,31 @@
 			$statement = null;			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO detalleproducto(idproducto, idmodelo, idtalla, idcolor, urlimagen, stock, precio,estado ) VALUES (?,?,?,?,?,?,?,?);";
-				/*Notice: Only variables should be passed by reference*/
-				$idproducto = $objeto->getIdproducto();
-				$idmodelo = $objeto->getIdmodelo();
-				$idtalla = $objeto->getIdtalla();
-				$idcolor = $objeto->getIdcolor();
-				$urlimagen = $objeto->getUrlimagen();
-				$precio = $objeto->getPrecio();				
-				$stock = $objeto->getStock();
-				$estado = $objeto->getEstado();
-
+				$sql = "INSERT INTO detalleproducto(idproducto, idmodelo, idtalla, idcolor, urlimagen, stock, precio, estado ) VALUES (?,?,?,?,?,?,?,?);";
+				
 				$statement = $cnn->prepare( $sql );
-				$statement->bindParam(1, $idproducto, PDO::PARAM_STR );	
-				$statement->bindParam(2, $idmodelo, PDO::PARAM_INT );
-				$statement->bindParam(3, $idtalla, PDO::PARAM_INT );
-				$statement->bindParam(4, $idcolor, PDO::PARAM_INT );
-				$statement->bindParam(5, $urlimagen, PDO::PARAM_STR );
-				$statement->bindParam(6, $stock, PDO::PARAM_INT );
-				$statement->bindParam(7, $precio, PDO::PARAM_INT );			
-				$statement->bindParam(8, $estado, PDO::PARAM_INT );
+				$estado = 1;
+				$idproducto = 0;
+				foreach ( $objeto->{"data"} as $item ) {
+					$statement->bindParam(1, $item->{"idproducto"}, PDO::PARAM_INT );	
+					$statement->bindParam(2, $item->{"idmodelo"}, PDO::PARAM_INT );
+					$statement->bindParam(3, $item->{"idtalla"}, PDO::PARAM_INT );
+					$statement->bindParam(4, $item->{"idcolor"}, PDO::PARAM_INT );
+					$statement->bindParam(5, $item->{"urlimagen"}, PDO::PARAM_STR );
+					$statement->bindParam(6, $item->{"stock"}, PDO::PARAM_INT );
+					$statement->bindParam(7, $item->{"precio"}, PDO::PARAM_INT );			
+					$statement->bindParam(8, $estado, PDO::PARAM_INT );
+					$idproducto = $item->{"idproducto"};
+					$respuesta = $statement->execute();		
+				}
+				/*Estados de un prpducto:
+					0: Eliminado
+					1: Nuevo
+					2: Completo (producto con una o "n" tallas asignadas)
+				*/	
+				$cnn_modificar = $conexion->getConexion();
+				$this->cambiarEstadoCompleto($respuesta, $idproducto, $cnn_modificar);
 
-				$respuesta = $statement->execute();				
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
 			}finally{
@@ -140,6 +143,18 @@
 				$conexion = null;
 			}
 			return $respuesta; 
+		}
+
+		public function cambiarEstadoCompleto( bool $respuesta, int $idproducto, $cnn ){
+			if( $respuesta ){				
+				$sql = "UPDATE producto SET estado =:estado
+						WHERE idproducto =:idproducto";
+				$statement = $cnn->prepare($sql);
+				$estado = 2;//estado completo
+				$statement->bindParam(":idproducto", $idproducto, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+				$statement->execute();
+			}
 		}
 	}
 
