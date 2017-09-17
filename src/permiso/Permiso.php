@@ -30,7 +30,6 @@
 			$this->idtipousuario = $idtipousuario;
 		}
 
-
 		public function getIdmodulo() :int{
 			return $this->idpagina;
 		}
@@ -39,26 +38,8 @@
 			$this->idpagina = $idpagina;
 		}
 
-		public function getEstado() : int
-			{
-				return $this->estado;
-			}
-
-		public function getIdmodulo() : int{
-			return $this->idmodulo;
-		}
-
-		public function setIdmodulo(int $idmodulo){
-			$this->idmodulo = $idmodulo;
-		}
-
 		public function getEstado() : int{
 			return $this->estado;
-		}
-
-
-		public function setEstado(int $estado){
-			$this->estado = $estado;
 		}
 
 	}

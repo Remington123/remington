@@ -1,8 +1,7 @@
 <?php 
 	include (dirname(__FILE__) . '/../comunes/IValidarDatosObtenidosFormulario.php');
 
-	class PermisoValidar implements
-	IValidarDatosObtenidosFormulario{
+	class PermisoValidar implements IValidarDatosObtenidosFormulario{
 
 		public function datosObtenidosFormulario( $accion ) : bool{
 			$camposConValores = false;
@@ -17,28 +16,20 @@
 					$_POST["idpermiso"] = "0";				
 			}
 
-			/*Cambiar*/
 			if( !empty( $_POST["idpedido"] ) &&
-				!empty( $_POST["fecha"] ) &&
-				!empty( $_POST["idcliente"] ) &&
-				!empty( $_POST["total"] )){
+				!empty( $_POST["idtipousuario"] ) &&
+				!empty( $_POST["idmodulo"] ) ){
 				$camposConValores = true;
 			}
 
 			return $camposConValores;
-
 		}
 
 		public function idPrimarioObtenidoFormulario() :bool{
 			$idConValor = false;
 
-
 			if( !empty( $_POST["idpermiso"] ) )
 				$idConValor = true;
-
-			
-			if( !empty( $_POST["idpermiso"] ) )
-				$idConValor = true;		
 
 			return $idConValor;
 		}

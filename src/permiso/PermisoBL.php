@@ -23,7 +23,7 @@
 				//agregar url de imagen del producto
 
 				$dao = new PermisoDAO();
-				$dao->registrar( $producto ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+				$dao->registrar( $producto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}
@@ -47,7 +47,7 @@
 				//agregar url de imagen del producto
 
 				$dao = new PermisoDAO();
-				$dao->modificar( $permiso ) ? $informacion["respuesta"] = "ok_modificar" : $informacion["respuesta"] = "error_modificar";
+				$dao->modificar( $permiso ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}
@@ -64,12 +64,12 @@
 
 				$dao = new PermisoDAO();
 				if( $dao->eliminar( $idpermiso ) )
-					$informacion["respuesta"] = "ok_eliminacion";
+					$informacion["respuesta"] = "bien";
 				else
-					$informacion["respuesta"] = "error_eliminacion";
+					$informacion["respuesta"] = "error";
 
 			}else{
-				$informacion["respuesta"] = "idpermiso_indefinido";
+				$informacion["respuesta"] = "id_indefinido";
 			}
 			
 			return ( json_encode($informacion) );

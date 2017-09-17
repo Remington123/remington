@@ -36,12 +36,6 @@
 			try{
 				$cnn = $conexion->getConexion();
 
-				$sql = "INSERT INTO permiso(idtipousuario, idmodulo, estado) VALUES (?,?);";
-				/*Notice: Only variables should be passed by reference*/
-				
-				$idtipousuario = $objeto->getIdtipousuario();
-				$idmodulo = $objeto->getIdmodulo();
-
 				$sql = "INSERT INTO permiso(idtipousuario, idmodulo, estado) VALUES (?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				
@@ -52,14 +46,8 @@
 				
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $idtipousuario, PDO::PARAM_INT);
-
 				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);	
 				$statement->bindParm(3, $idestado, PDO::PARAM_INT)
-
-
-				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);
-				$statement->bindParam(3, $estado, PDO::PARAM_INT);
-
 				$respuesta = $statement->execute();
 				
 			}catch(Exception $e){
@@ -83,21 +71,11 @@
 
 				$idpermiso = $objeto->getIdpermiso();
 				$idtipousuario = $objeto->getIdtipousuario();
-				$idmodulo = $objeto->getIdpagina();
-				$estado = $objeto->getIdestado();
+				$idmodulo = $objeto->getIdmodulo();
 			
 				$statement = $cnn->prepare($sql);
-
-				$statement->bindParam(":idpermiso", $idpermisos, PDO::PARAM_INT);
-
-				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_STR);
-				$statement->bindParam(":idmodulo", $modulo, PDO::PARAM_STR);
-				$statement->bindParam(" :estado", $estado, PDO::PARAM_INT)
-
-
-				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_INT);
-				$statement->bindParam(":idpagina", $paginas, PDO::PARAM_STR);
-
+				$statement->bindParam(":idtipousuario", $idtipousuario, PDO::PARAM_STR);
+				$statement->bindParam(":idpermiso", $idpermiso, PDO::PARAM_INT);
 				$respuesta = $statement->execute();
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
@@ -115,7 +93,7 @@
 			try{
 				$conexion = new Conexion();
 				$cnn = $conexion->getConexion();
-				$sql = "UPDATE permiso SET estado WHERE idpermiso = :idpermiso;";
+				$sql = "UPDATE permiso SET estado =:estado WHERE idpermiso =:idpermiso;";
 				$estado = 0;
 
 				$statement = $cnn->prepare($sql);
