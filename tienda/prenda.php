@@ -1,5 +1,5 @@
 <?php 
-	
+	include 'helperhtml/header.php';
  ?>
 
  <!DOCTYPE html>
@@ -12,3 +12,8 @@
  	<h1>Descripción de Prenda seleccionada unica</h1>
  </body>
  </html>
+
+
+ <?php
+ 	include 'helperhtml/footer.php'
+ ?>
