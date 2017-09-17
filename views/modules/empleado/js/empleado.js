@@ -1,5 +1,6 @@
 /* Llamado o ejecución de funciones */
 dtEmpleado();
+guardar();
 
 //Creación de funciones JS para el módulo empleado
 function dtEmpleado(){
@@ -47,7 +48,7 @@ function obtener_data_modificar (tbody, table){
 }
 
 function guardar(){
-	$("#frm-empleado-registrar").on("submit", function(e){
+	$("#frmguardarempleado").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
 		//console.log(frm);
@@ -55,13 +56,45 @@ function guardar(){
 		//console.log("Controlador: " + controller);
 		$.ajax({
 			method:"POST",
-			url:"../src/"+controller,
+			url:"../src/"+controller+".php",
 			data: frm
 		}).done(function(info){
 			//respuesta del servidor
+			mensajes( info );
 			console.log(info);
 		});
 	});
+}
+
+function mensajes( info ){
+	var json = JSON.parse(info);
+
+	var texto = "", color = "", div="";
+	if(json.respuesta == "bien"){
+		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+		color = "alert-success";
+	}
+	if(json.respuesta == "error"){
+		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+		color = "alert-danger";
+	}
+	if(json.respuesta == "llenar_datos"){
+		texto = "<strong>Advertencia!</strong> Llenar todos los datos solicitados.";
+		color = "alert-warning";
+	}
+	if(json.respuesta == "id_indefinido"){
+		texto = "<strong>Advertencia!</strong> ID no definido.";
+		color = "alert-warning";
+	}
+	console.log(texto);
+	div = `<div class="alert ${color} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>					
+				</button>
+				${texto}
+			</div>`;
+
+	$(".mensaje").html( div ).removeClass("ocultar");
 }
 
 var spanish = {

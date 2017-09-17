@@ -4,12 +4,14 @@
 
 		private $idpermiso;
 		private $idtipousuario;
-		private $idpagina;
+		private $idmodulo;
+		private $estado;
 
 		public function __construct(){
 			$this->idpermiso = 0;
 			$this->idtipousuario = 0;
-			$this->idpagina = 0;
+			$this->idmodulo = 0;
+			$this->estado = 0;
 		}
 
 		public function getIdpermiso() :int{
@@ -28,13 +30,22 @@
 			$this->idtipousuario = $idtipousuario;
 		}
 
-		public function getIdpagina() :int{
-			return $this->idpagina;
+		public function getIdmodulo() : int{
+			return $this->idmodulo;
 		}
 
-		public function setIdpagina(int $idpagina){
-			$this->idpagina = $idpagina;
+		public function setIdmodulo(int $idmodulo){
+			$this->idmodulo = $idmodulo;
 		}
+
+		public function getEstado() : int{
+			return $this->estado;
+		}
+
+		public function setEstado(int $estado){
+			$this->estado = $estado;
+		}
+
 	}
 
  ?>

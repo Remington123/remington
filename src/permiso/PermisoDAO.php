@@ -31,18 +31,20 @@
 		public function registrar($objeto) : bool{
 			$conexion = new Conexion();
 			$respuesta = false;
-			$statement = null;			
+			$statement = null;
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO permiso(idtipousuario, idpagina) VALUES (?,?);";
+				$sql = "INSERT INTO permiso(idtipousuario, idmodulo, estado) VALUES (?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				
 				$idtipousuario = $objeto->getIdtipousuario();
-				$idpagina = $objeto->getIdpagina();
+				$idpagina = $objeto->getIdmodulo();
+				$estado = $objeto->getEstado();
 				
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $idtipousuario, PDO::PARAM_INT);
-				$statement->bindParam(2, $idpagina, PDO::PARAM_INT);				
+				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);
+				$statement->bindParam(3, $estado, PDO::PARAM_INT);
 				$respuesta = $statement->execute();
 				
 			}catch(Exception $e){
@@ -72,7 +74,7 @@
 				$statement = $cnn->prepare($sql);
 
 				$statement->bindParam(":idpermiso", $idpermisos, PDO::PARAM_INT);
-				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_STR);
+				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_INT);
 				$statement->bindParam(":idpagina", $paginas, PDO::PARAM_STR);
 				$respuesta = $statement->execute();
 			}catch(Exception $e){
