@@ -37,7 +37,7 @@
 		public function modificar() : string{
 
 			$informacion = [];
-			$validar = new PermisiValidar();
+			$permiso = new PermisoValidar();
 			if( $validar->datosObtenidosFormulario( "modificar" ) ){
 				$permiso = new Permiso();
 				$permiso->setIdpermiso( $_POST["idpermiso"] );

@@ -9,6 +9,7 @@
 		public function listar(){
 			//crear un instanacia de la clase Conexion
 			$conexion = new Conexion();
+			
 			try {
 				$cnn = $conexion->getConexion();
 				$sql = "SELECT * FROM permiso;";
@@ -34,15 +35,18 @@
 			$statement = null;			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO permiso(idtipousuario, idpagina) VALUES (?,?);";
+				$sql = "INSERT INTO permiso(idtipousuario, idmodulo, estado) VALUES (?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				
 				$idtipousuario = $objeto->getIdtipousuario();
-				$idpagina = $objeto->getIdpagina();
+				$idmodulo = $objeto->getIdmodulo();
+				$estado = $objeto->getEstado();
 				
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $idtipousuario, PDO::PARAM_INT);
-				$statement->bindParam(2, $idpagina, PDO::PARAM_INT);				
+				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);	
+				$statement->bindParm(3, $idestado, PDO::PARAM_INT)
+
 				$respuesta = $statement->execute();
 				
 			}catch(Exception $e){
@@ -62,18 +66,20 @@
 				$conexion = new Conexion();
 				$cnn = $conexion->getConexion();
 				$sql = "UPDATE permiso SET idtipousuario = :idtipousuario, 
-											idpagina = :idpagina,			
-						WHERE idpermiso = :idpermiso;";
+									WHERE idpermiso = :idpermiso;";
 
 				$idpermiso = $objeto->getIdpermiso();
 				$idtipousuario = $objeto->getIdtipousuario();
-				$idpagina = $objeto->getIdpagina();
+				$idmodulo = $objeto->getIdpagina();
+				$estado = $objeto->getIdestado();
 			
 				$statement = $cnn->prepare($sql);
 
 				$statement->bindParam(":idpermiso", $idpermisos, PDO::PARAM_INT);
 				$statement->bindParam(":idtipousuario", $categoria, PDO::PARAM_STR);
-				$statement->bindParam(":idpagina", $paginas, PDO::PARAM_STR);
+				$statement->bindParam(":idmodulo", $modulo, PDO::PARAM_STR);
+				$statement->bindParam(" :estado", $estado, PDO::PARAM_INT)
+
 				$respuesta = $statement->execute();
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
@@ -85,7 +91,29 @@
 		}
 
 		public function eliminar(int $id) : bool{
-			return true;
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE permiso SET estado WHERE idpermiso = :idpermiso;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement->bindParam(" :idpermiso", $id, PDO::PARAM_INT);
+				$statement->bindParam(" :estado", $estado, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();
+
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
+
 		}			
 	}
 
