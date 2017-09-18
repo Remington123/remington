@@ -85,4 +85,4 @@
 		$path = ["content"=>$content, "script"=>$script];
 		echo json_encode( $path );
 ?>
-	
+	5
