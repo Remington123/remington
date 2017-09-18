@@ -65,19 +65,53 @@ function dtProducto(){
 			data: {opcion:"listar"}
 		},
 		columns:[
-			{"data":"idproducto"},
-			{"data":"descripcion"},
-			{"data":"idcategoriaproducto"},
-			{"data":"idtela"},
-			{"data":"estado"},
-			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
-			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
+			{"data":"idproducto", "width": "5%"},
+			{"data":"descripcion", "width": "10%"},
+			{"data":"idcategoriaproducto", "width": "10%"},
+			{"data":"idtela","width": "10%"},
+			{"data":"estado", "width": "5%", 
+			"render": function ( data, type, row, meta ) {
+				if( row.estado == 1){
+			    	return `<p class="bg-success text-center"><strong>Nuevo</strong></p>`;					
+				}else if( row.estado == 2){
+					return `<p class="bg-info text-center"><strong>Completo</strong></p>`;
+				}
+		    }},
+			{"defaultContent": "", "width": "5%", 
+			"render": function ( data, type, row, meta ) {
+				if( row.estado == 2){
+			    	return `<button type='button' data-target='#modalvisualizar' data-toggle='modal' class='visualizar btn btn-default' ><i class='fa fa-eye'></i></button>`;					
+				}else{
+					return `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
+				<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`;
+				}
+		    }}
 		]
 	});
 
 	obtener_data_modificar("#dt_producto tbody", table);
 	obtener_idproducto_eliminar("#dt_producto tbody", table);
+	obtener_data_visualizar("#dt_producto tbody", table);
+}
 
+function obtener_data_visualizar (tbody, table){
+	$(tbody).on("click", "button.visualizar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		console.log(data);
+		var idproducto = $("#visualizar-idproducto").val( data.idproducto ),
+				descripcion = $("#visualizar-descripcion").val( data.descripcion ),
+				idcategoriaproducto = data.idcategoriaproducto,
+				idtalla = data.idtalla,
+				idmodelo = data.idmodelo,
+				idtela = data.idtela,
+				opcion = $("#opcion").val("visualizar");
+
+		//aquí se tendrá que llamar a los combos con los valores seleccionados
+		llenarComboCategoria("visualizar", idcategoriaproducto);
+		llenarComboTela("visualizar", idtela);
+
+		limpiarMensaje();
+	});
 }
 
 function obtener_data_modificar (tbody, table){
@@ -86,10 +120,6 @@ function obtener_data_modificar (tbody, table){
 		console.log(data);
 		var idproducto = $("#idproducto").val( data.idproducto ),
 				descripcion = $("#descripcion").val( data.descripcion ),
-				precio = $("#precio").val( data.precio ),
-				precioventa = $("#precioventa").val( data.precioventa ),
-				stock = $("#stock").val( data.stock ),
-				stockactual = $("#stockactual").val( data.stockactual ),
 				idcategoriaproducto = data.idcategoriaproducto,
 				idtalla = data.idtalla,
 				idmodelo = data.idmodelo,
@@ -98,8 +128,6 @@ function obtener_data_modificar (tbody, table){
 
 		//aquí se tendrá que llamar a los combos con los valores seleccionados
 		llenarComboCategoria("modificar", idcategoriaproducto);
-		llenarComboTalla("modificar", idcategoriaproducto, idtalla);
-		llenarComboModelo("modificar", idcategoriaproducto, idmodelo);
 		llenarComboTela("modificar", idtela);
 
 		limpiarMensaje();
@@ -387,14 +415,14 @@ function llenarComboCategoria(accion, idcategoriaproducto){
 			for(i in categoria.data )
 				option +=`<option value="${categoria.data[i].idcategoriaproducto}"> ${categoria.data[i].descripcion} </option>`;
 			
-		}else if( accion == "modificar" ){
+		}else if( accion == "modificar" || accion == "visualizar"){
 			for(i in categoria.data ){
 				if( idcategoriaproducto == categoria.data[i].idcategoriaproducto )
 					option += `<option selected value="${categoria.data[i].idcategoriaproducto}"> ${categoria.data[i].descripcion} </option>`;
 				else option +=`<option value="${categoria.data[i].idcategoriaproducto}"> ${categoria.data[i].descripcion} </option>`;
 			}
 		}
-
+		$("#visualizar-idcategoriaproducto").html(option);
 		$("#idcategoriaproducto").html(option);
 	});
 }
@@ -485,7 +513,7 @@ function llenarComboTela(accion, idtela){
 			for(i in tela.data )
 				option +=`<option value="${tela.data[i].idtela}"> ${tela.data[i].descripcion} </option>`;
 			
-		}else if( accion == "modificar" ){
+		}else if( accion == "modificar" || accion == "visualizar"){
 			for(i in tela.data ){
 				if( idtela == tela.data[i].idtela )
 					option += `<option selected value="${tela.data[i].idtela}"> ${tela.data[i].descripcion} </option>`;
@@ -494,6 +522,7 @@ function llenarComboTela(accion, idtela){
 		}
 
 		$("#idtela").html(option);
+		$("#visualizar-idtela").html(option);
 	});
 }
 

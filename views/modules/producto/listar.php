@@ -2,6 +2,7 @@
 	
 	include 'modals/modificar.php';
 	include 'modals/eliminar.php';
+	include 'modals/visualizar.php';
 
 	$script = "/js/producto.js";
 
@@ -25,7 +26,7 @@
 					</table>
 				</div>
 			</div>
-		</div>'.$modalModificar.$modalEliminar;
+		</div>'.$modalModificar.$modalEliminar.$modalVisualizar;
 
 	$path = ["content"=>$content, "script"=>$script];
 	echo json_encode( $path );

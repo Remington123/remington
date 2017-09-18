@@ -22,12 +22,6 @@
 				$producto->setEstado(1);
 				$producto->setIdtela( $_POST["idtela"] );
 				$producto->setIdcategoriaproducto( $_POST["idcategoriaproducto"] );
-				/*$producto->setPrecio( $_POST["precio"] );
-				$producto->setStock( $_POST["stock"] );
-				$producto->setIdmodelo( $_POST["idmodelo"] );
-				$producto->setIdtalla( $_POST["idtalla"] );*/
-				//agregar url de imagen del producto
-
 				$dao = new ProductoDAO();
 				$dao->registrar( $producto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
@@ -45,17 +39,9 @@
 				$producto = new Producto();
 				$producto->setIdproducto( $_POST["idproducto"] );
 				$producto->setDescripcion( $_POST["descripcion"] );
-				$producto->setPrecio( $_POST["precio"] );
-				$producto->setPrecioventa( $_POST["precioventa"] );
-				$producto->setStock( $_POST["stock"] );
-				$producto->setStockactual( $_POST["stock"] );
 				$producto->setEstado(1);
-				$producto->setIdmodelo( $_POST["idmodelo"] );
-				$producto->setIdtalla( $_POST["idtalla"] );
-				$producto->setIdtela( $_POST["idtela"] );
 				$producto->setIdcategoriaproducto( $_POST["idcategoriaproducto"] );
-				//agregar url de imagen del producto
-
+				$producto->setIdtela( $_POST["idtela"] );
 				$dao = new ProductoDAO();
 				$dao->modificar( $producto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
