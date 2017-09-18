@@ -10,11 +10,11 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM producto WHERE estado = 1;";
+				$sql = "SELECT * FROM producto WHERE estado = 1 OR estado = 2;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
-				$data = [];//arreglo vacio
+				$data["data"] = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}
@@ -152,10 +152,14 @@
 				$statement->bindParam(":descripcion", $comodin, PDO::PARAM_STR);
 				$statement->execute();
 
-				$data = [];//arreglo vacio
-				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-					$data["data"][] = $resultado;
-				}
+				$data["data"] = [];//arreglo vacio
+				//$filas = $statement->rowCount();
+				//if( $filas > 0 ){
+					while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+						$data["data"][] = $resultado;
+					}
+				//}
+
 				return json_encode($data);
 			}catch (Throwable $e) {
 				return $e->getMessage();

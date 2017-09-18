@@ -17,7 +17,6 @@ var tabla_detalle = "";
 
 //Creación de funciones JS para el módulo producto
 
-
 function guardar(){
 	$("#frmguardarproducto").on("submit", function(e){
 		e.preventDefault();
@@ -51,6 +50,68 @@ function eliminar(){
 			mensajes( info );
 			dtProducto();			
 		});
+	});
+}
+
+function dtProducto(){
+	if ( $.fn.DataTable.isDataTable('#dt_producto') )
+	  	$("#dt_producto").empty();
+
+	var table = $("#dt_producto").DataTable({
+		destroy: true,
+		ajax:{
+			method: "POST",
+			url: "../src/producto/ProductoController.php",
+			data: {opcion:"listar"}
+		},
+		columns:[
+			{"data":"idproducto"},
+			{"data":"descripcion"},
+			{"data":"idcategoriaproducto"},
+			{"data":"idtela"},
+			{"data":"estado"},
+			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
+			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
+		]
+	});
+
+	obtener_data_modificar("#dt_producto tbody", table);
+	obtener_idproducto_eliminar("#dt_producto tbody", table);
+
+}
+
+function obtener_data_modificar (tbody, table){
+	$(tbody).on("click", "button.modificar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		console.log(data);
+		var idproducto = $("#idproducto").val( data.idproducto ),
+				descripcion = $("#descripcion").val( data.descripcion ),
+				precio = $("#precio").val( data.precio ),
+				precioventa = $("#precioventa").val( data.precioventa ),
+				stock = $("#stock").val( data.stock ),
+				stockactual = $("#stockactual").val( data.stockactual ),
+				idcategoriaproducto = data.idcategoriaproducto,
+				idtalla = data.idtalla,
+				idmodelo = data.idmodelo,
+				idtela = data.idtela,
+				opcion = $("#opcion").val("modificar");
+
+		//aquí se tendrá que llamar a los combos con los valores seleccionados
+		llenarComboCategoria("modificar", idcategoriaproducto);
+		llenarComboTalla("modificar", idcategoriaproducto, idtalla);
+		llenarComboModelo("modificar", idcategoriaproducto, idmodelo);
+		llenarComboTela("modificar", idtela);
+
+		limpiarMensaje();
+	});
+}
+
+function obtener_idproducto_eliminar (tbody, table){
+	$(tbody).on("click", "button.eliminar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		var idproducto = $("#frmeliminarproducto #idproducto").val( data.idproducto );
+
+		limpiarMensaje();
 	});
 }
 
@@ -88,6 +149,8 @@ function mensajes( info ){
 function limpiarMensaje(){
 	$(".mensaje").html("").addClass("ocultar");
 }
+
+/* FUNCIONES PARA MÓDULO DETALLEPRODUCTO*/
 
 function buscarDtProducto(){
 	$("#buscar-producto").on("click", function(){
@@ -159,14 +222,8 @@ function validarCampos(){
 	return respuesta;
 }
 
-function limpiarCajasAsignacion(){
-	$("#url_imagen").val("");
-	$("#stock").val("");
-	$("#precio").val("");
-}
-
 function agregarItemDetalle(){
-	$("#agregar-producto").on("click", function(){
+	$("#agregar-item").on("click", function(){
 		tabla_detalle = $('#dt_detalleproducto').DataTable({
 			"destroy":true,
 			"columns":[
@@ -208,7 +265,7 @@ function agregarItemDetalle(){
 				        precio: $("#precio").val()			    	
 				    };
 			tabla_detalle.row.add( fila ).draw();
-			limpiarCajasAsignacion();
+
 		}else{
 			alert("Llenar los datos solicitados");
 		}
@@ -250,97 +307,42 @@ function obtenerDataDetalleProducto(table){
 function guardarAsignacion(){
 	//datos de la tabla
 	var productos = [];
-	$("#frmguardarasignarproducto").on("submit", function(e){
+	$("#frmguardardetalleproducto").on("submit", function(e){
 		e.preventDefault();
-		//información para enviar por ajax, solo hacer un recorrido each
-		/*console.log( tabla_detalle[0]);//acceder a cada propiedad, idproducto
-		console.log( tabla_detalle[1]);*/
-
-		/*El producto ingresado, solo se podrá editar, siempre y cuando
-		tenga un estado de recien ingresado, caso contrario, saldrá
+		/*El producto ingresado, solo se podrá editar( cambiar categoria, descripción), siempre y cuando
+		tenga un estado (0,1,2) de recien ingresado, caso contrario, saldrá
 		un mensaje diciendo que a ese producto, ya se le asignaron
 		talla, color, etc.*/
-
-		var data = obtenerDataDetalleProducto( tabla_detalle);
+		var controller = $(this).attr("action"),
+			opcion = $("#frmguardardetalleproducto #opcion").val(),
+			data = obtenerDataDetalleProducto( tabla_detalle);
 		console.log( data );// esta data se enviará a PHP servirdor
-	});
 
-	/*var data = {
-		idproducto: $("#id_producto").val(),
-		data:[
-			
-		]
-	};*/
-
-	/*$.ajax({
-		method: "POST",
-		url: "",
-		data: ""
-	}).done(function( info ){
-		console.log( info );
-	});*/
-}
-
-function dtProducto(){
-	if ( $.fn.DataTable.isDataTable('#dt_producto') )
-	  	$("#dt_producto").empty();
-
-	var table = $("#dt_producto").DataTable({
-		destroy: true,
-		ajax:{
+		$.ajax({
 			method: "POST",
-			url: "../src/producto/ProductoController.php",
-			data: {opcion:"listar"}
-		},
-		columns:[
-			{"data":"idproducto"},
-			{"data":"descripcion"},
-			{"data":"idcategoriaproducto"},
-			{"data":"idtela"},
-			{"data":"estado"},
-			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
-			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
-		]
-	});
-
-	obtener_data_modificar("#dt_producto tbody", table);
-	obtener_idproducto_eliminar("#dt_producto tbody", table);
-
+			url: "../src/"+controller+".php",
+			data: {opcion: opcion, items: data}
+		}).done(function( info ){
+			mensajes( info );
+			limpiarCampos();
+			console.log( info );
+		});
+	});	
 }
 
-function obtener_data_modificar (tbody, table){
-	$(tbody).on("click", "button.modificar", function(){
-		var data = table.row( $(this).parents("tr") ).data();
-		console.log(data);
-		var idproducto = $("#idproducto").val( data.idproducto ),
-				descripcion = $("#descripcion").val( data.descripcion ),
-				precio = $("#precio").val( data.precio ),
-				precioventa = $("#precioventa").val( data.precioventa ),
-				stock = $("#stock").val( data.stock ),
-				stockactual = $("#stockactual").val( data.stockactual ),
-				idcategoriaproducto = data.idcategoriaproducto,
-				idtalla = data.idtalla,
-				idmodelo = data.idmodelo,
-				idtela = data.idtela,
-				opcion = $("#opcion").val("modificar");
+function limpiarCampos(){
+	$("#buscar_dt_producto").empty();
+	$("#dt_detalleproducto").empty();
+	$("#descripcion").val("");
+	$("#categoria").val("");
+	$("#url_imagen").val("");
+	$("#stock").val("");
+	$("#precio").val("");
+	var option = "<option> Seleccionar </option>";
+	$("#idmodelo").html(option);
+	$("#idtalla").html(option);
+	$("#idcolor").html(option);
 
-		//aquí se tendrá que llamar a los combos con los valores seleccionados
-		llenarComboCategoria("modificar", idcategoriaproducto);
-		llenarComboTalla("modificar", idcategoriaproducto, idtalla);
-		llenarComboModelo("modificar", idcategoriaproducto, idmodelo);
-		llenarComboTela("modificar", idtela);
-
-		limpiarMensaje();
-	});
-}
-
-function obtener_idproducto_eliminar (tbody, table){
-	$(tbody).on("click", "button.eliminar", function(){
-		var data = table.row( $(this).parents("tr") ).data();
-		var idproducto = $("#frmeliminarproducto #idproducto").val( data.idproducto );
-
-		limpiarMensaje();
-	});
 }
 
 function llenarComboColor(accion, idcategoriaproducto){

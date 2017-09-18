@@ -26,9 +26,9 @@
 			echo $productoBl->eliminar();
 		break;
 
-		case 'listarPorTipo':
+		case 'asignar':
 			$productoBl = new ProductoBL();
-			echo $productoBl->listarPorTipo();
+			echo $productoBl->asignar();
 		break;
 
 		case 'buscar':
