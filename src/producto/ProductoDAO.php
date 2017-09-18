@@ -64,40 +64,22 @@
 				$cnn = $conexion->getConexion();
 				$sql = "UPDATE producto SET 
 								 descripcion = :descripcion,
-								 precio = :precio,
-								 precioventa = :precioventa,
-								 stock = :stock,
-								 stockactual = :stockactual,
 								 estado = :estado,
-								 idmodelo = :idmodelo,
-								 idtalla = :idtalla,
-								 idtela = :idtela,
-								 idcategoriaproducto = :idcategoriaproducto
+								 idcategoriaproducto = :idcategoriaproducto,
+								 idtela = :idtela
 						WHERE idproducto = :idproducto;";
 				/*Notice: Only variables should be passed by reference*/
-				$descripcion = $objeto->getDescripcion();
-				$precio = $objeto->getPrecio();
-				$precioventa = $objeto->getPrecioventa();
-				$stock = $objeto->getStock();
-				$stockactual = $objeto->getStockactual();
+				$descripcion = $objeto->getDescripcion();				
 				$estado = $objeto->getEstado();
-				$idmodelo = $objeto->getIdmodelo();
-				$idtalla = $objeto->getIdtalla();
-				$idtela = $objeto->getIdtela();
 				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
+				$idtela = $objeto->getIdtela();
 				$idproducto = $objeto->getIdproducto();
 
 				$statement = $cnn->prepare( $sql );
-				$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR );
-				$statement->bindParam(":precio", $precio, PDO::PARAM_INT );
-				$statement->bindParam(":precioventa", $precioventa, PDO::PARAM_INT );
-				$statement->bindParam(":stock", $stock, PDO::PARAM_INT );
-				$statement->bindParam(":stockactual", $stockactual, PDO::PARAM_INT );
+				$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR );	
 				$statement->bindParam(":estado", $estado, PDO::PARAM_INT );
-				$statement->bindParam(":idmodelo", $idmodelo, PDO::PARAM_INT );
-				$statement->bindParam(":idtalla", $idtalla, PDO::PARAM_INT );
+				$statement->bindParam(":idcategoriaproducto", $idcategoriaproducto, PDO::PARAM_INT );				
 				$statement->bindParam(":idtela", $idtela, PDO::PARAM_INT );
-				$statement->bindParam(":idcategoriaproducto", $idcategoriaproducto, PDO::PARAM_INT );
 				$statement->bindParam(":idproducto", $idproducto, PDO::PARAM_INT);
 
 				$respuesta = $statement->execute();				

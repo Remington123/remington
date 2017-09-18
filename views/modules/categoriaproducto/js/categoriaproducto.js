@@ -1,40 +1,44 @@
 /* Llamado o ejecución de funciones */
-dtCategoriaProducto();
-//alert("Cliente.js");
-//guardar();
+dtCategoriaproducto();
+guardar();
 
-//Creación de funciones JS para el módulo cliente
-function dtCategoriaProducto(){
+//Creación de funciones JS para el módulo empleado
+function dtCategoriaproducto(){
+
+	if ( $.fn.DataTable.isDataTable('#dt_categoriaproducto') )
+	  	$("#dt_categoriaproducto").empty();
+
 	var table = $("#dt_categoriaproducto").DataTable({
 		detroy: true,
 		ajax:{
 			method: "POST",
-			url: "../src/categoriaproducto/CategoriaProductoController.php",
+			url: "../src/categoriaproducto/CategoriaproductoController.php",
 			data: {opcion:"listar"}
 		},
 		columns:[
 			{"data":"idcategoriaproducto"},
 			{"data":"descripcion"},
+			{"data":"apellidopaterno", 
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
 	});
 
-	obtener_data_modificar("#dt_categoriaproducto tbody", table);
+	obtener_data_modificar("#dt_categoriaprosucto tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
 	$(tbody).on("click", "button.modificar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
-		var idcategoriaproducto = $("#idcategoriaproducto").val( data.idcategoriaproducto ),
+		var idusuario = $("#categoriaproducto").val( data.idcategoriaproducto ),
 				descripcion = $("#descripcion").val( data.descripcion ),
-				opcion = $("#opcion").val("modificar");
+	
 	});
 }
 
 function guardar(){
-	$("#frmcategoriaproductoregistrar").on("submit", function(e){
+	$("#frmguardarcategoriaproducto").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
 		//console.log(frm);
@@ -42,18 +46,45 @@ function guardar(){
 		//console.log("Controlador: " + controller);
 		$.ajax({
 			method:"POST",
-			url:"../src/"+controller,
+			url:"../src/"+controller+".php",
 			data: frm
 		}).done(function(info){
 			//respuesta del servidor
+			mensajes( info );
 			console.log(info);
-			limpiarCajas();
 		});
 	});
 }
 
-function limpiarCajas(){
-	$("input").val("");
+function mensajes( info ){
+	var json = JSON.parse(info);
+
+	var texto = "", color = "", div="";
+	if(json.respuesta == "bien"){
+		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+		color = "alert-success";
+	}
+	if(json.respuesta == "error"){
+		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+		color = "alert-danger";
+	}
+	if(json.respuesta == "llenar_datos"){
+		texto = "<strong>Advertencia!</strong> Llenar todos los datos solicitados.";
+		color = "alert-warning";
+	}
+	if(json.respuesta == "id_indefinido"){
+		texto = "<strong>Advertencia!</strong> ID no definido.";
+		color = "alert-warning";
+	}
+	console.log(texto);
+	div = `<div class="alert ${color} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>					
+				</button>
+				${texto}
+			</div>`;
+
+	$(".mensaje").html( div ).removeClass("ocultar");
 }
 
 var spanish = {

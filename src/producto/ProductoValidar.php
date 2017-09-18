@@ -22,10 +22,6 @@
 
 			if( !empty( $_POST["idproducto"] ) &&
 				!empty( $_POST["descripcion"] ) &&
-				/*!empty( $_POST["precio"] ) &&				
-				!empty( $_POST["stock"] ) &&				
-				!empty( $_POST["idmodelo"] ) &&
-				!empty( $_POST["idtalla"] ) &&*/
 				!empty( $_POST["idtela"] ) &&
 				!empty( $_POST["idcategoriaproducto"] ) ){
 				$camposConValores = true;

@@ -3,7 +3,7 @@
 
 	class ClienteValidar implements IValidarDatosObtenidosFormulario{
 
-		public function IValidarDatosObtenidosFormulario( $aaccion ) : bool{
+		public function datosObtenidosFormulario( $aaccion ) : bool{
 			$camposConValores = false;
 
 			if ( $accion == "registrar" ){
