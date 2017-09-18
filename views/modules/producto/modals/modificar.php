@@ -31,18 +31,7 @@
 					          	<select class="form-control" id="idcategoriaproducto" name="idcategoriaproducto" ><option value="">Seleccionar</option></select>
 					          </div>
 					        </div>
-					        <div class="form-group">
-					          <label class="col-sm-2 control-label" for="idmodelo">Modelo</label>
-					          <div class="col-sm-10">
-					          	<select class="form-control" id="idmodelo" name="idmodelo" ><option value="">Seleccionar</option></select>
-					          </div>
-					        </div>
-					        <div class="form-group">
-					          <label class="col-sm-2 control-label" for="idtalla">Talla</label>
-					          <div class="col-sm-10">
-					          	<select class="form-control" id="idtalla" name="idtalla" ><option value="">Seleccionar</option></select>
-					          </div>
-					        </div>
+					        
 					        <div class="form-group">
 					          <label class="col-sm-2 control-label" for="idtela">Tela</label>
 					          <div class="col-sm-10">
