@@ -70,6 +70,17 @@
 			return ( json_encode($informacion) );
 		}
 
+		public function listarProductoCompleto(){
+			$dao = new ProductoDAO();
+			return $dao->listarProductoCompleto();
+		}
+
+		public function listarPorCategoria(){
+			$dao = new ProductoDAO();
+			$idcategoriaproducto = $_POST["idcategoriaproducto"];
+			return $dao->listarPorCategoria( $idcategoriaproducto );
+		}
+
 		public function buscar(){
 			$dao = new ProductoDAO();
 			$descripcion = $_POST["descripcion"];

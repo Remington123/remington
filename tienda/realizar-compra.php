@@ -58,13 +58,10 @@
 		}
 		?>
 
-	<?php 
-
-		
-		echo date( 'Y/m/d', strtotime("11/12/2017") );
-		echo "<br>"
-	 ?>
  	<h2>Cuenta Bancaria</h2>
  	<h2>Pago con Tarjetas: API de CULQUI</h2>
+
+ 	<button>Pagar</button>
+ 	<button>Enviar Comprobante</button>
 	
 <?php include 'helperhtml/footer.php' ?>

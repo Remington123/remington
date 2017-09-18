@@ -26,6 +26,16 @@
 			echo $productoBl->eliminar();
 		break;
 
+		case 'listarProductoCompleto':
+			$productoBl = new ProductoBL();
+			echo $productoBl->listarProductoCompleto();
+		break;
+
+		case 'listarPorCategoria':
+			$productoBl = new ProductoBL();
+			echo $productoBl->listarPorCategoria();
+		break;
+
 		case 'asignar':
 			$productoBl = new ProductoBL();
 			echo $productoBl->asignar();

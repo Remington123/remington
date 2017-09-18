@@ -7,8 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--//tags -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -88,10 +86,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>-->
 									<div class="col-sm-6 multi-gd-img">
 										<ul class="multi-column-dropdown">
-											<li><a href="mens.html">Sacos</a></li>
-											<li><a href="mens.html">Camisas</a></li>
-											<li><a href="mens.html">Chaleco</a></li>
-											<li><a href="mens.html">Pantalón</a></li>
+											<li><a href="#" class="categoria" data-idcategoriaproducto="1">Camisas</a></li>
+											<li><a href="#" class="categoria" data-idcategoriaproducto="2">Chalecos</a></li>
+											<li><a href="#" class="categoria" data-idcategoriaproducto="3">Corbata</a></li>
+											<li><a href="#" class="categoria" data-idcategoriaproducto="4">Saco</a></li>
+											<li><a href="mens.html" class="categoria">Pantalón</a></li>
 										</ul>
 									</div>
 									<!--<div class="col-sm-6 multi-gd-img">

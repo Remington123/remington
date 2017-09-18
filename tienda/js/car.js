@@ -1,10 +1,38 @@
 $(function(){
 	//alert("Archivo car.js");
 	irCarritoCompras();
-	listarProductosMujeres();
+	listarProductoCompleto();
+	listarPorCategoria();
 });
 
-function listarProductosMujeres(){
+function listarPorCategoria(){
+	$(".categoria").on("click", function(){
+		var idcategoriaproducto = $(this).attr("data-idcategoriaproducto");
+		
+		if( idcategoriaproducto != "" ){
+			if( idcategoriaproducto > 0 && idcategoriaproducto < 6 ){
+				
+				$.ajax({
+					method: "POST",
+					url: "../src/producto/ProductoController.php",
+					data: {opcion:"listarPorCategoria", idcategoriaproducto: idcategoriaproducto}//mandar tipousuario, de acuerdo al tab escogido, poner un "id" a cada tab
+				}).done(function( info ){
+					var productos = JSON.parse( info ),
+						esquema = "";
+					console.log( productos );					
+				});
+
+			}else{
+				alert("No existe la categoria.")
+			}
+		}else{
+			alert("Valor de la categoría esta vacio.");
+		}
+
+	});
+}
+
+function listarProductoCompleto(){
 	/*se va a cambiar esta parte de listado sin tipo, por prodocuto
 	y en la pagina del producto solo, se va a listar por detalleproducto 
 	de acuerdo al id producto seleccionado , para que muestre 
@@ -19,7 +47,7 @@ function listarProductosMujeres(){
 	$.ajax({
 		method: "POST",
 		url: "../src/producto/ProductoController.php",
-		data: {opcion:"listarPorTipo", tipousuario:"mujer"}//mandar tipousuario, de acuerdo al tab escogido, poner un "id" a cada tab
+		data: {opcion:"listarProductoCompleto"}//mandar tipousuario, de acuerdo al tab escogido, poner un "id" a cada tab
 	}).done(function( info ){
 		var productos = JSON.parse( info ),
 			esquema = "";
@@ -29,14 +57,13 @@ function listarProductosMujeres(){
 			var objProducto = {
 				idproducto : productos.data[i].idproducto,
 				descripcion : productos.data[i].descripcion,
-				precio : productos.data[i].precioventa,
-				precioanterior: 0,//llenar después
-				urlimagen: ""
+				precio : productos.data[i].precio,				
+				urlimagen: productos.data[i].urlimagen
 			};
 			esquema += dibujarEsquemaProducto( objProducto );
 		}
 		esquema += `<div class="clearfix"></div>`;//esto sirve como para dar un enter
-		$(".tab2").append( esquema );		
+		$(".tab1").append( esquema );
 	});
 }
 
@@ -44,14 +71,14 @@ function dibujarEsquemaProducto( objProducto ){
 	var producto = `<div class="col-md-3 product-men">
 						<div class="men-pro-item simpleCart_shelfItem">
 							<div class="men-thumb-item">
-								<img src="images/w8.jpg" alt="" class="pro-image-front">
-								<img src="images/w8.jpg" alt="" class="pro-image-back">
+								<img src="${objProducto.urlimagen}" alt="" class="pro-image-front">
+								<img src="${objProducto.urlimagen}" alt="" class="pro-image-back">
 									<div class="men-cart-pro">
 										<div class="inner-men-cart-pro">
-											<a href="#" class="link-product-add-cart">Quick View</a>
+											<!--<a href="#" class="link-product-add-cart">Quick View</a>-->
 										</div>
 									</div>
-									<span class="product-new-top">New</span>
+									<!--<span class="product-new-top">New</span>-->
 									
 							</div>
 							<div class="item-info-product ">										
@@ -70,7 +97,7 @@ function dibujarEsquemaProducto( objProducto ){
 											<input type="hidden" name="precio" value="${objProducto.precio}">
 											<input type="hidden" name="cantidad" value="1">
 											<input type="hidden" name="importe" value="0">
-											<input type="submit" name="btnAgregar" value="Agregar" class="button" />
+											<input type="submit" name="btnAgregar" value="Comprar" class="button" />
 										</fieldset>
 									</form>
 								</div>																			
@@ -81,7 +108,7 @@ function dibujarEsquemaProducto( objProducto ){
 }
 
 function irCarritoCompras(){
-	$("#frmCarritoCompras").on("submit", function(e){
+	$("#btnCarrito").on("click", function(e){
 		e.preventDefault();
 		window.location = "carrito-compras.php";
 	});

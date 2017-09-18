@@ -230,6 +230,12 @@
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script>
+	$('form input').on('keypress', function(e) {
+	    return e.which !== 13;
+	});
+</script>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
