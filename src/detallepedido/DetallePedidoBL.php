@@ -23,7 +23,7 @@
 		    	$idpedido = $_POST["idpedido"];
 		    	return $dao->listarDetallePedido( $idpedido );
 	    	}else{
-	    		$informacion["respuesta"] = "idpedido_indefinido";
+	    		$informacion["respuesta"] = "id_indefinido";
 	    		return ( json_encode($informacion));
 	    	}
 	    }
@@ -40,7 +40,7 @@
 				$detallepedido->setEstado( 1 );
 
 				$dao = new DetallePedidoDAO();
-				$dao->registrar( $detallepedido ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+				$dao->registrar( $detallepedido ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}
@@ -62,9 +62,9 @@
 
 				$dao =new DetallePedidoDAO();
 				if ($dao->modificar($detallepedido))
-					$informacion["respuesta"] = "ok_modificacion";
+					$informacion["respuesta"] = "bien";
 				else
-					$informacion["respuesta"] = "error_modificacion";
+					$informacion["respuesta"] = "error";
 				
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
@@ -81,12 +81,12 @@
 
 				$dao = new DetallePedidoDAO();
 				if( $dao->eliminar( $iddetallepedido ) )
-					$informacion["respuesta"] = "ok_eliminacion";
+					$informacion["respuesta"] = "bien";
 				else
-					$informacion["respuesta"] = "error_eliminacion";
+					$informacion["respuesta"] = "error";
 
 			}else{
-				$informacion["respuesta"] = "iddetallepedido_indefinido";
+				$informacion["respuesta"] = "id_indefinido";
 			}
 			
 			return ( json_encode($informacion) );
@@ -94,18 +94,18 @@
 
 		public function agregarItem(){
 			$validar = new DetallePedidoValidar();
-			if( $validar->datosCarrito() ){
+			//if( $validar->datosCarrito() ){
 				$dao = new DetallePedidoDAO();
 				$item = new Item();				
 				$item->idproducto = intval( $_POST["idproducto"] );
 				$item->descripcion = $_POST["descripcion"];
 				$item->cantidad = intval( $_POST["cantidad"] );
-				$item->precio = floatval( $_POST["precio"] );
+				$item->precio = floatval( $_POST["item_precio"] );
 				$item->importe = floatval( $item->precio * $item->cantidad );
 				$item->estado = 1;
 
 				return $dao->agregarItem( $item );
-			}
+			//}
 		}
 
 		public function eliminarItem(){

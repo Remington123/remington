@@ -36,7 +36,7 @@
 			$detallepedidoBl = new DetallePedidoBL();
 			//var_dump( $detallepedidoBl->agregarItem() );
 			$detallepedidoBl->agregarItem();
-			header('Location: ../../tienda/index.php');
+			//header('Location: ../../tienda/index.php');
 		break;
 
 		case 'eliminarItem':
@@ -52,6 +52,8 @@
 			$detallepedidoBl->actualizarCarrito();
 			//header('Location: ../../tienda/realizar-compra.php');
 		break;
+
+
 
 	}
 

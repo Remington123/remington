@@ -3,7 +3,42 @@ $(function(){
 	irCarritoCompras();
 	listarProductoCompleto();
 	listarPorCategoria();
+	listarTallasPorColor();
+	seleccionarTalla();
 });
+
+function listarTallasPorColor(){
+	$("#idcolor").on("change", function(){
+		var idcolor = $(this).val(),
+			idproducto = $("#idcolor option:selected").attr("data-idproducto");
+		$.ajax({
+			method: "POST",
+			url: "../src/talla/TallaController.php",
+			data: {opcion:"comboPorColor", idcolor: idcolor, idproducto: idproducto}
+		}).done( function( info ){
+			var talla = JSON.parse( info ),
+				option = "";
+			console.log(talla);
+			$("#idtalla").html("");//limpiar el combo
+			option +=`<option> Seleccionar </option>`;
+		
+			for(i in talla.data )
+				option +=`<option data-stock="${talla.data[i].stock}" data-precio="${talla.data[i].precio}" value="${talla.data[i].idtalla}"> ${talla.data[i].descripcion} </option>`;		
+
+			$("#idtalla").html(option);
+		});
+	});
+}
+
+function seleccionarTalla(){
+	$("#idtalla").on("change", function(){
+		var precio = $("#idtalla option:selected").attr("data-precio"),
+			stock = $("#idtalla option:selected").attr("data-stock");
+			$("#prenda_precio").val("S/. "+precio);
+			$("#item_precio").val(precio);
+
+	});
+}
 
 function listarPorCategoria(){
 	$(".categoria").on("click", function(){
@@ -102,22 +137,23 @@ function dibujarEsquemaProducto( objProducto, col ){
 									<del>->Precio Anterior: $169.71</del>-->
 								</div>
 								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-									<form action="../src/detallepedido/DetallePedidoController.php" method="post">
+									<form action="prenda.php" method="post">
 										<fieldset>
-											<input type="hidden" name="opcion" value="agregarItem" />
+											<input type="hidden" name="opcion" value="listarProductoDetallePorId" />
 											<input type="hidden" name="idproducto" value="${objProducto.idproducto}">
 											<input type="hidden" name="descripcion" value="${objProducto.descripcion}">
 											<input type="hidden" name="precio" value="${objProducto.precio}">
+											<input type="hidden" name="urlimagen" value="${objProducto.urlimagen}">
 											<input type="hidden" name="cantidad" value="1">
 											<input type="hidden" name="importe" value="0">
-											<input type="submit" name="btnAgregar" value="Comprar" class="button" />
+											<input type="submit" value="Comprar" class="button" />
 										</fieldset>
 									</form>
 								</div>																			
 							</div>
 						</div>
 					</div>`;
-	return producto;
+	return producto;//en action poner prenda.php
 }
 
 function irCarritoCompras(){

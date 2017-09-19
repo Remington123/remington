@@ -59,7 +59,7 @@
 			<h5>Prendas <span></span></h5>
 			<div class="producto_categoria">
 
-			<!--<div class="col-md-4 product-men">
+			<div class="col-md-4 product-men">
 				<div class="men-pro-item simpleCart_shelfItem">
 					<div class="men-thumb-item">
 						<img src="images/m8.jpg" alt="" class="pro-image-front">
@@ -97,6 +97,7 @@
 					</div>
 				</div>
 			</div>
+			<!--
 			<div class="col-md-4 product-men">
 				<div class="men-pro-item simpleCart_shelfItem">
 					<div class="men-thumb-item">

@@ -49,7 +49,7 @@
 				$producto->setIdcategoriaproducto( $_POST["idcategoriaproducto"] );
 				//agregar url de imagen del producto
 
-				$dao = new ProductoDAO();
+				$dao = new DetalleProductoDAO();
 				$dao->modificar( $producto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
@@ -64,7 +64,7 @@
 			if( $validar->idPrimarioObtenidoFormulario() ){
 				$idproducto = $_POST["idproducto"];
 
-				$dao = new ProductoDAO();
+				$dao = new DetalleProductoDAO();
 				if( $dao->eliminar( $idproducto ) )
 					$informacion["respuesta"] = "bien";
 				else
@@ -76,6 +76,12 @@
 			
 			return ( json_encode($informacion) );
 		}
+
+		public function listarProductoDetallePorId() :string{
+	    	$idproducto = $_POST["idproducto"];
+	    	$dao = new DetalleProductoDAO();
+	    	return $dao->listarProductoDetallePorId( $idproducto );	    	
+	    }
 
 	}
 ?>
