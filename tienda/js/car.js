@@ -7,7 +7,7 @@ $(function(){
 
 function listarPorCategoria(){
 	$(".categoria").on("click", function(){
-		var idcategoriaproducto = $(this).attr("data-idcategoriaproducto");
+		var idcategoriaproducto = $(this).attr("data-idcategoriaproducto");//enviar por GET el idcategoria y mostrar los productos mens?id=1
 		
 		if( idcategoriaproducto != "" ){
 			if( idcategoriaproducto > 0 && idcategoriaproducto < 6 ){
@@ -15,11 +15,24 @@ function listarPorCategoria(){
 				$.ajax({
 					method: "POST",
 					url: "../src/producto/ProductoController.php",
-					data: {opcion:"listarPorCategoria", idcategoriaproducto: idcategoriaproducto}//mandar tipousuario, de acuerdo al tab escogido, poner un "id" a cada tab
+					data: {opcion:"listarPorCategoria", idcategoriaproducto: idcategoriaproducto}
 				}).done(function( info ){
 					var productos = JSON.parse( info ),
 						esquema = "";
-					console.log( productos );					
+					console.log( productos );
+
+					$(".producto_categoria").html("");//limpiar el tab2, que corresponde a mujeres
+					for(var i in productos.data){
+						var objProducto = {
+							idproducto : productos.data[i].idproducto,
+							descripcion : productos.data[i].descripcion,
+							precio : productos.data[i].precio,				
+							urlimagen: productos.data[i].urlimagen
+						};
+						esquema += dibujarEsquemaProducto( objProducto, 4 );
+					}
+					esquema += `<div class="clearfix"></div>`;//esto sirve como para dar un enter
+					$(".producto_categoria").append( esquema );
 				});
 
 			}else{
@@ -52,7 +65,7 @@ function listarProductoCompleto(){
 		var productos = JSON.parse( info ),
 			esquema = "";
 		console.log( productos );
-		$(".tab2").html("");//limpiar el tab2, que corresponde a mujeres
+		$(".tab1").html("");//limpiar el tab2, que corresponde a mujeres
 		for(var i in productos.data){
 			var objProducto = {
 				idproducto : productos.data[i].idproducto,
@@ -60,15 +73,15 @@ function listarProductoCompleto(){
 				precio : productos.data[i].precio,				
 				urlimagen: productos.data[i].urlimagen
 			};
-			esquema += dibujarEsquemaProducto( objProducto );
+			esquema += dibujarEsquemaProducto( objProducto, 3 );
 		}
 		esquema += `<div class="clearfix"></div>`;//esto sirve como para dar un enter
 		$(".tab1").append( esquema );
 	});
 }
 
-function dibujarEsquemaProducto( objProducto ){
-	var producto = `<div class="col-md-3 product-men">
+function dibujarEsquemaProducto( objProducto, col ){
+	var producto = `<div class="col-md-${col} product-men">
 						<div class="men-pro-item simpleCart_shelfItem">
 							<div class="men-thumb-item">
 								<img src="${objProducto.urlimagen}" alt="" class="pro-image-front">
