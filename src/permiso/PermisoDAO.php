@@ -18,7 +18,7 @@
 
 				$data["data"] = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
-					$data[] = $resultado;
+					$data["data"][] = $resultado;
 				}
 				echo json_encode($data);
 			}catch (Throwable $e) {
@@ -47,7 +47,7 @@
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $idtipousuario, PDO::PARAM_INT);
 				$statement->bindParam(2, $idmodulo, PDO::PARAM_INT);	
-				$statement->bindParm(3, $idestado, PDO::PARAM_INT)
+				$statement->bindParm(3, $idestado, PDO::PARAM_INT);
 				$respuesta = $statement->execute();
 				
 			}catch(Exception $e){

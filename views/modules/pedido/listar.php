@@ -12,7 +12,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table id="dt_detallepedido" class="table table-striped">
+					<table id="dt_pedido" class="table table-striped">
 						<thead>
 							<th>ID</th>
 							<th>Fecha</th>

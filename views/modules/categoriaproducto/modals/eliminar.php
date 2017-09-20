@@ -2,7 +2,7 @@
 
 	$accion = "eliminar";
 	$modulo = "categoriaproducto";
-	$controlador = $modulo.'/CategoriaproductoController';
+	$controlador = $modulo.'/CategoriaProductoController';
 	
 	$modalEliminar = '
 	<div class="row">

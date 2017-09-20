@@ -33,7 +33,7 @@
 							</div>
 						</form>
 					</div>
-					<!--Fin modal-body-->
+					
 				</div>
 			</div>		
 		</div>

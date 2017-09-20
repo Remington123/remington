@@ -1,5 +1,5 @@
 /* Llamado o ejecución de funciones */
-dtEmpleado();
+dtPermiso();
 guardar();
 
 //Creación de funciones JS para el módulo empleado

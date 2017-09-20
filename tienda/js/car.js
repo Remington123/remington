@@ -10,7 +10,13 @@ $(function(){
 function listarTallasPorColor(){
 	$("#idcolor").on("change", function(){
 		var idcolor = $(this).val(),
-			idproducto = $("#idcolor option:selected").attr("data-idproducto");
+			idproducto = $("#idcolor option:selected").attr("data-idproducto"),
+			imagen = $("#idcolor option:selected").attr("data-imagen"),
+			img = `<img src="${imagen}" data-imagezoom="true" class="img-responsive">`;
+			$(".thumb-image").html("");
+			$(".thumb-image").html(img);
+			console.log(imagen);
+
 		$.ajax({
 			method: "POST",
 			url: "../src/talla/TallaController.php",
@@ -20,7 +26,7 @@ function listarTallasPorColor(){
 				option = "";
 			console.log(talla);
 			$("#idtalla").html("");//limpiar el combo
-			option +=`<option> Seleccionar </option>`;
+			//option +=`<option> Seleccionar </option>`;
 		
 			for(i in talla.data )
 				option +=`<option data-stock="${talla.data[i].stock}" data-precio="${talla.data[i].precio}" value="${talla.data[i].idtalla}"> ${talla.data[i].descripcion} </option>`;		

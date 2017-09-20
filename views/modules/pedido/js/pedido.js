@@ -1,5 +1,5 @@
 /* Llamado o ejecución de funciones */
-dtEmpleado();
+dtPedido();
 guardar();
 
 //Creación de funciones JS para el módulo empleado
@@ -18,7 +18,7 @@ function dtPedido(){
 		columns:[
 			{"data":"idpedido"},
 			{"data":"fecha"},
-			{"data":"total"},,
+			{"data":"total"},
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]

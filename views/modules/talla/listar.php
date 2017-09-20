@@ -15,7 +15,7 @@
 	            <div class="box-body">
 					<table id="dt_talla" class="table table-striped">
 						<thead>
-							<th>Idtalla/th>
+							<th>Idtalla</th>
 							<th>Descripcion</th>
 							<th></th>
 						</thead>

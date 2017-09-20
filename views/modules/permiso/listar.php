@@ -13,7 +13,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-					<table id="dt_empleado" class="table table-striped">
+					<table id="dt_permiso" class="table table-striped">
 						<thead>
 							<th>Idpermiso</th>
 							<th>Idtipousuario</th>

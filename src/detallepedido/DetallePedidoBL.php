@@ -94,7 +94,7 @@
 
 		public function agregarItem(){
 			$validar = new DetallePedidoValidar();
-			//if( $validar->datosCarrito() ){
+			if( $validar->datosCarrito() ){
 				$dao = new DetallePedidoDAO();
 				$item = new Item();				
 				$item->idproducto = intval( $_POST["idproducto"] );
@@ -105,7 +105,7 @@
 				$item->estado = 1;
 
 				return $dao->agregarItem( $item );
-			//}
+			}
 		}
 
 		public function eliminarItem(){

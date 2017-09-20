@@ -150,7 +150,5 @@
 			return $respuesta; 
 		}
 	}
-	/*Realizando Prueba*/
-	$dao = new PedidoDAO();
-	$dao->registrar("Hola");
+
 ?>

@@ -8,7 +8,7 @@
 
 	    public function listar(){
 	    	$dao = new PermisoDAO();
-	    	$dao->listar()
+	    	$dao->listar();
 	    }
 
 	    public function registrar() : string{
