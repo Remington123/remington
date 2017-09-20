@@ -17,7 +17,7 @@
 			$modelo =new Modelo();
 			$modelo->setDescripcion($_POST["descripcion"]);
 			$modelo->setIdcategoriaproducto($_POST["idcategoriaproducto"]);
-			
+
 			$dao = new ModeloDAO();
 			$dao->registrar( $modelo) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			return (json_encode($informacion));
@@ -26,8 +26,8 @@
 		public function modificar() :string{
 			$informacion =[];
 			$modelo =new Modelo();
+			$modelo->setIdmodelo($_POST["idmodelo"]);
 			$modelo->setDescripcion($_POST["descripcion"]);
-			$modelo->setIdcategoriaproducto($_POST["idcategoriaproducto"]);
 			//$modelo->setEstado($_POST["estado"]);
 			$dao =new ModeloDAO();
 					

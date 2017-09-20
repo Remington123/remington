@@ -17,6 +17,8 @@
 						<thead>
 							<th>Idmodelo</th>
 							<th>Descripción</th>
+							<th>Id Categoria</th>
+							<th>Categoria</th>
 							<th></th>
 						</thead>
 					</table>

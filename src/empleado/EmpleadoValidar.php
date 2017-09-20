@@ -20,15 +20,18 @@
 				!empty( $_POST["nombre"] ) &&
 				!empty( $_POST["apellidopaterno"] ) &&
 				!empty( $_POST["apellidomaterno"] ) &&
-				!empty( $_POST["dni"] ) &&
+				//!empty( $_POST["dni"] ) &&
 				!empty( $_POST["email"] ) &&
-				!empty( $_POST["contrasena"] ) &&
-				!empty( $_POST["direccion"] ) &&
-				!empty( $_POST["fechanacimiento"] ) &&
-				!empty( $_POST["celular"] ) &&
-				!empty( $_POST["idtipousuario"] ) ){
-				return $camposConValores = true;
+				//!empty( $_POST["contrasena"] ) &&
+				//!empty( $_POST["direccion"] ) &&
+				//!empty( $_POST["fechanacimiento"] ) &&
+				!empty( $_POST["celular"] ) 
+				//!empty( $_POST["idtipousuario"] ) 
+			){
+				$camposConValores = true;
 			}
+
+			return $camposConValores;
 		}
 		
 		public function idPrimarioObtenidoFormulario() : bool{

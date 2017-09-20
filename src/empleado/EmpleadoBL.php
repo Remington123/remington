@@ -44,20 +44,20 @@
 			$validar = new EmpleadoValidar();
 			if( $validar->datosObtenidosFormulario("modificar" ) ){
 				$empleado = new Empleado();
-				$empleado->setIdempleado( $_POST["idempledo"] );
-				$empleado->setNombres( $_POST["nombres"] );
+				$empleado->setIdempleado( $_POST["idempleado"] );
+				$empleado->setNombre( $_POST["nombre"] );
 				$empleado->setApellidopaterno( $_POST["apellidopaterno"] );
 				$empleado->setApellidomaterno( $_POST["apellidomaterno"] );
-				$empleado->setDni( $_POST["dni"] );
+				//$empleado->setDni( $_POST["dni"] );
 				$empleado->setEmail( $_POST["email"] );
-				$empleado->setContrasena( $_POST["contrasena"] );
-				$empleado->setDireccion( $_POST["direccion"] );
-				$empleado->setFechanacimiento( $_POST["fechanacimiento"] );
+				//$empleado->setContrasena( $_POST["contrasena"] );
+				//$empleado->setDireccion( $_POST["direccion"] );
+				//$empleado->setFechanacimiento( $_POST["fechanacimiento"] );
 				$empleado->setCelular( $_POST["celular"] );
-				$empleado->setIdtipousuario( $_POST["idtipousuario"] );
-				$empleado->setEstado(1);
+				/*$empleado->setIdtipousuario( $_POST["idtipousuario"] );
+				$empleado->setEstado(1);*/
 
-				$dao = new Empleado();
+				$dao = new EmpleadoDAO();
 				$dao->modificar( $empleado) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";

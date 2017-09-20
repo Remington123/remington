@@ -85,37 +85,25 @@
 				$sql = "UPDATE empleado SET  nombres = :nombres, 
 											apellidopaterno = :apellidopaterno, 
 											apellidomaterno = :apellidomaterno,
-											dni = :dni, 
-											direccion = :direccion,
-											fechanacimiento = :fechanacimiento,
-											celular = :celular,
-											idtipousuario = :idtipousuario,
-											estado = :estado 
-						WHERE idcliente = :idcliente;";
+											email = :email,
+											celular = :celular										
+						WHERE idempleado = :idempleado;";
 
-				$idcliente = $objeto->getIdcliente();
+				$idempleado = $objeto->getIdempleado();
 				$nombre = $objeto->getNombre();
 				$apellidopaterno = $objeto->getApellidopaterno();
 				$apellidomaterno = $objeto->getApellidomaterno();
-				$dni = $objeto->getDni();				
-				$direccion = $objeto->getDireccion();
+				$email = $objeto->getEmail();
 				$celular = $objeto->getCelular();
-				$ruc = $objeto->getRuc();
-				$idtipousuario = $objeto->getIdtipousuario();
-				$estado = $objeto->getEstado();	
 
 				$statement = $cnn->prepare($sql);
 
-				$statement->bindParam(":idcliente", $idcliente, PDO::PARAM_INT);
+				$statement->bindParam(":idempleado", $idempleado, PDO::PARAM_INT);
 				$statement->bindParam(":nombres", $nombre, PDO::PARAM_STR);
 				$statement->bindParam(":apellidopaterno", $apellidopaterno, PDO::PARAM_STR);
 				$statement->bindParam(":apellidomaterno", $apellidomaterno, PDO::PARAM_STR);
-				$statement->bindParam(":dni", $dni, PDO::PARAM_STR);
-				$statement->bindParam(":direccion", $direccion, PDO::PARAM_STR);
-				$statement->bindParam(":celular", $celular, PDO::PARAM_STR);
-				$statement->bindParam(":ruc", $ruc, PDO::PARAM_STR);
-				$statement->bindParam(":idtipousuario", $idtipousuario, PDO::PARAM_INT);
-				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+				$statement->bindParam(":email", $email, PDO::PARAM_STR);				
+				$statement->bindParam(":celular", $celular, PDO::PARAM_STR);				
 
 				$respuesta = $statement->execute();
 

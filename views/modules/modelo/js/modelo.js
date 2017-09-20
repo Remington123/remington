@@ -1,9 +1,30 @@
 /* Llamado o ejecución de funciones */
 dtModelo();
-llenarComboCategoria();
 guardar();
+llenarComboCategoria();
 
 //Creación de funciones JS para el módulo empleado
+
+function guardar(){
+	$("#frmguardarmodelo").on("submit", function(e){
+		e.preventDefault();
+		var frm = $(this).serialize();
+		//console.log(frm);
+		var controller = $(this).attr("action");
+		//console.log("Controlador: " + controller);
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){
+			//respuesta del servidor
+			dtModelo();
+			mensajes( info );
+
+		});
+	});
+}
+
 function dtModelo(){
 
 	if ( $.fn.DataTable.isDataTable('#dt_modelo') )
@@ -19,6 +40,8 @@ function dtModelo(){
 		columns:[
 			{"data":"idmodelo"},
 			{"data":"descripcion"},
+			{"data":"idcategoriaproducto", visible: false},
+			{"data":"categoria"},
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
@@ -33,26 +56,8 @@ function obtener_data_modificar (tbody, table){
 		console.log(data);
 		var idmodelo = $("#idmodelo").val( data.idmodelo ),
 				descripcion = $("#descripcion").val( data.descripcion ),
+				categoria = $("#categoria").val( data.categoria ),
 				opcion = $("#opcion").val("modificar");
-	});
-}
-
-function guardar(){
-	$("#frmguardarmodelo").on("submit", function(e){
-		e.preventDefault();
-		var frm = $(this).serialize();
-		//console.log(frm);
-		var controller = $(this).attr("action");
-		//console.log("Controlador: " + controller);
-		$.ajax({
-			method:"POST",
-			url:"../src/"+controller+".php",
-			data: frm
-		}).done(function(info){
-			//respuesta del servidor
-			mensajes( info );
-			console.log(info);
-		});
 	});
 }
 

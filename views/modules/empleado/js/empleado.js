@@ -37,7 +37,7 @@ function obtener_data_modificar (tbody, table){
 	$(tbody).on("click", "button.modificar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
-		var idusuario = $("#idempleado").val( data.idcliente ),
+		var idusuario = $("#idempleado").val( data.idempleado ),
 				nombre = $("#nombre").val( data.nombres ),
 				apellidopaterno = $("#apellidopaterno").val( data.apellidopaterno ),
 				apellidomaterno = $("#apellidomaterno").val( data.apellidomaterno ),
@@ -61,6 +61,7 @@ function guardar(){
 		}).done(function(info){
 			//respuesta del servidor
 			mensajes( info );
+			dtEmpleado();
 			console.log(info);
 		});
 	});

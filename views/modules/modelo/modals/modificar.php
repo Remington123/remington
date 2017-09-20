@@ -21,6 +21,14 @@
 
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
+                              		for="categoria">Categoría</label>
+								<div class="col-sm-10">
+									<input id="categoria" name="categoria" type="text" disabled class="form-control">
+								</div>
+							</div>
+
+							<div class="form-group">
+								 <label  class="col-sm-2 control-label"
                               		for="descripcion">Descripcion</label>
 								<div class="col-sm-10">
 									<input id="descripcion" name="descripcion" type="text" class="form-control">
