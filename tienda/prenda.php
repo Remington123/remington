@@ -39,6 +39,7 @@
 					
 					<ul class="slides">
 						<li data-thumb="images/d2.jpg">
+
 							<div class="thumb-image"> 
 								<img src="<?php echo $urlimagen; ?>" data-imagezoom="true" class="img-responsive"> 
 							</div>
@@ -102,7 +103,9 @@
 									<input type="hidden" name="idproducto" value="<?php echo $idproducto; ?>">
 									<input type="hidden" name="descripcion" value="<?php echo $descripcion; ?>">
 									<input type="hidden" name="item_precio" value="<?php echo $precio; ?>">
-									
+									<input type="hidden" id="url_imagen" name="url_imagen" value="">
+									<input type="hidden" id="item_talla" name="item_talla" value="">
+									<input type="hidden" id="color" name="color" value="">
 									<input type="hidden" name="importe" value="0">
 									<input type="submit" name="btnAgregar" value="AGREGAR" class="btn btn-success col-sm-2" />
 								</fieldset>

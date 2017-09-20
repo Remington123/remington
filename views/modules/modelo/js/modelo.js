@@ -31,7 +31,7 @@ function dtModelo(){
 	  	$("#dt_modelo").empty();
 
 	var table = $("#dt_modelo").DataTable({
-		detroy: true,
+		"bDestroy": true,
 		ajax:{
 			method: "POST",
 			url: "../src/modelo/ModeloController.php",

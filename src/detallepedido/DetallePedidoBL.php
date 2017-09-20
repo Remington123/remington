@@ -98,6 +98,11 @@
 				$dao = new DetallePedidoDAO();
 				$item = new Item();				
 				$item->idproducto = intval( $_POST["idproducto"] );
+				$item->idcolor = intval( $_POST["idcolor"] );
+				$item->color = $_POST["color"];
+				$item->idtalla = intval( $_POST["idtalla"] );
+				$item->talla = $_POST["item_talla"];
+				$item->urlimagen = $_POST["url_imagen"];
 				$item->descripcion = $_POST["descripcion"];
 				$item->cantidad = intval( $_POST["cantidad"] );
 				$item->precio = floatval( $_POST["item_precio"] );

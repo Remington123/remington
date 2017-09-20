@@ -1,15 +1,16 @@
 /* Llamado o ejecución de funciones */
 dtEmpleado();
 guardar();
+var table;
 
 //Creación de funciones JS para el módulo empleado
 function dtEmpleado(){
-
+	
 	if ( $.fn.DataTable.isDataTable('#dt_empleado') )
-	  	$("#dt_empleado").empty();
+	$("#dt_empleado").empty();
 
-	var table = $("#dt_empleado").DataTable({
-		detroy: true,
+	table = $("#dt_empleado").DataTable({
+		"bDestroy": true,
 		ajax:{
 			method: "POST",
 			url: "../src/empleado/EmpleadoController.php",
@@ -29,7 +30,7 @@ function dtEmpleado(){
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
 	});
-
+	
 	obtener_data_modificar("#dt_empleado tbody", table);
 }
 

@@ -117,6 +117,8 @@
 			}else{
 				$carrito = array();//arreglo vacio
 			}
+
+			
 			//hacer una pequeña validación con el precio desde la BD segun idproducto
 			/*$objeto->getIdproducto();
 			$objeto->getCantidad();
@@ -125,6 +127,24 @@
 			array_push($carrito, $objeto);
 			$_SESSION["carrito"] = $carrito;
 			return $_SESSION["carrito"];
+		}
+
+		public function verificarItemRepetido( $objeto ){
+			/*$i = 0;
+			foreach ( $carrito as $p ) {
+				//primero, hacer una validación del id y precio
+				if( $p->{'idproducto'} == $objeto->idproducto && 
+					$p->{'idcolor'} == $objeto->idcolor && 
+					$p->{'idtalla'} == $objeto->idtalla ){
+
+					$cantidad = intval( $objeto->cantidad );
+					$precio = floatval( $objeto->precio );
+
+					$p->{'cantidad'} = $objeto->cantidad;
+					$p->{'importe'} = $cantidad * $precio;
+				}
+				$i++;
+			}*/
 		}
 
 		public function eliminarItem( $indice ){

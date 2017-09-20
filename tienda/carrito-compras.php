@@ -15,13 +15,17 @@
 	<?php 
 		if( isset($_SESSION["carrito"]) ){
 			$carrito = $_SESSION["carrito"];
+
+			//var_dump($carrito);
 	?>
 			<form id="frmpedidos" method="POST">
 				<table>
 					<thead>
 						<th>ID</th>
-						<th>Nombre</th>
 						<th>Imagen</th>
+						<th>Nombre</th>
+						<th>Color</th>
+						<th>Talla</th>
 						<th>Precio</th>
 						<th>Cantidad</th>
 						<th>Importe</th>
@@ -36,8 +40,10 @@
 			 ?>
 						<tr>
 							<td><?php echo $p->idproducto; ?></td>
+							<td> <img src="<?php echo $p->urlimagen; ?>" width="100" height="80" > </td>
 							<td><?php echo $p->descripcion; ?></td>
-							<td>Foto</td>
+							<td class='precio'><?php echo $p->color;?></td>
+							<td class='precio'><?php echo $p->talla;?></td>
 							<td class='precio'><?php echo $p->precio;?></td>
 							<td>
 								<input type='text' name='cantidad' class='cantidad data' min='1' value="<?php echo $p->cantidad;?>">

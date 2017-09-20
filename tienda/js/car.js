@@ -11,10 +11,13 @@ function listarTallasPorColor(){
 	$("#idcolor").on("change", function(){
 		var idcolor = $(this).val(),
 			idproducto = $("#idcolor option:selected").attr("data-idproducto"),
+			color = $("#idcolor option:selected").text(),
 			imagen = $("#idcolor option:selected").attr("data-imagen"),
 			img = `<img src="${imagen}" data-imagezoom="true" class="img-responsive">`;
 			$(".thumb-image").html("");
 			$(".thumb-image").html(img);
+			$("#url_imagen").val(imagen);
+			$("#color").val( color );
 			console.log(imagen);
 
 		$.ajax({
@@ -27,7 +30,20 @@ function listarTallasPorColor(){
 			console.log(talla);
 			$("#idtalla").html("");//limpiar el combo
 			//option +=`<option> Seleccionar </option>`;
-		
+			
+			//validar cuando el length de tallas es cero, en talla.descripcion="Sin datos"
+
+			if( talla.data.length == 1 ){
+				$("#prenda_precio").val("S/. "+ talla.data[0].precio);
+				$("#item_precio").val( talla.data[0].precio );
+				$("#item_talla").val( talla.data[0].descripcion );
+			}
+
+			//Inicialmente debe llenar cierto datos en los siguientes campos
+			$("#prenda_precio").val("S/. "+ talla.data[0].precio);
+			$("#item_precio").val( talla.data[0].precio );
+			$("#item_talla").val( talla.data[0].descripcion );
+
 			for(i in talla.data )
 				option +=`<option data-stock="${talla.data[i].stock}" data-precio="${talla.data[i].precio}" value="${talla.data[i].idtalla}"> ${talla.data[i].descripcion} </option>`;		
 
@@ -39,9 +55,12 @@ function listarTallasPorColor(){
 function seleccionarTalla(){
 	$("#idtalla").on("change", function(){
 		var precio = $("#idtalla option:selected").attr("data-precio"),
-			stock = $("#idtalla option:selected").attr("data-stock");
+			stock = $("#idtalla option:selected").attr("data-stock"),
+			talla = $("#idtalla option:selected").text();
+			console.log( talla );
 			$("#prenda_precio").val("S/. "+precio);
-			$("#item_precio").val(precio);
+			$("#item_precio").val( precio );
+			$("#item_talla").val( talla );//ver porque no jala dato esta mierda
 
 	});
 }

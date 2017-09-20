@@ -36,6 +36,7 @@
 			$detallepedidoBl = new DetallePedidoBL();
 			//var_dump( $detallepedidoBl->agregarItem() );
 			$detallepedidoBl->agregarItem();
+			header('Location: ../../tienda/carrito-compras.php');
 			//header('Location: ../../tienda/index.php');
 		break;
 
