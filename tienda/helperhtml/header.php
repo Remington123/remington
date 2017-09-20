@@ -7,8 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--//tags -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -77,24 +75,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav menu__list">
-					<li class="active menu__item menu__item--current"><a class="menu__link" href="index.html">Incio <span class="sr-only">(current)</span></a></li>
+					<li class="active menu__item menu__item--current"><a class="menu__link" href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
 					<li class=" menu__item"><a class="menu__link" href="about.html">Acerca De</a></li>
-					<li class="dropdown menu__item">
-						<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Caballero <span class="caret"></span></a>
-							<ul class="dropdown-menu multi-column columns-3">
+					<li class="menu__item">
+						<a href="categoria.php" class="menu__link">Categorias</a>
+							<!--<ul class="dropdown-menu multi-column columns-3">
 								<div class="agile_inner_drop_nav_info">
 									<!--<div class="col-sm-6 multi-gd-img1 multi-gd-text ">
 										<a href="mens.html"><img src="images/top2.jpg" alt=" "/></a>
-									</div>-->
-									<div class="col-sm-6 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="mens.html">Sacos</a></li>
-											<li><a href="mens.html">Camisas</a></li>
-											<li><a href="mens.html">Chaleco</a></li>
-											<li><a href="mens.html">Pantalón</a></li>
-										</ul>
 									</div>
-									<!--<div class="col-sm-6 multi-gd-img">
+									
+									<div class="col-sm-6 multi-gd-img">
 										<ul class="multi-column-dropdown">
 											<li><a href="mens.html">Jewellery</a></li>
 											<li><a href="mens.html">Sunglasses</a></li>
@@ -104,44 +95,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="mens.html">Sunglasses</a></li>
 											<li><a href="mens.html">Swimwear</a></li>
 										</ul>
-									</div>-->
+									</div>
 									<div class="clearfix"></div>
 								</div>
-							</ul>
+							</ul>-->
 					</li>
-					<!--<li class="dropdown menu__item">
-						<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Women's wear <span class="caret"></span></a>
-							<ul class="dropdown-menu multi-column columns-3">
-								<div class="agile_inner_drop_nav_info">
-									<div class="col-sm-6 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="womens.html">Clothing</a></li>
-											<li><a href="womens.html">Wallets</a></li>
-											<li><a href="womens.html">Footwear</a></li>
-											<li><a href="womens.html">Watches</a></li>
-											<li><a href="womens.html">Accessories</a></li>
-											<li><a href="womens.html">Bags</a></li>
-											<li><a href="womens.html">Caps & Hats</a></li>
-										</ul>
-									</div>
-									<div class="col-sm-6 multi-gd-img">
-										<ul class="multi-column-dropdown">
-											<li><a href="womens.html">Jewellery</a></li>
-											<li><a href="womens.html">Sunglasses</a></li>
-											<li><a href="womens.html">Perfumes</a></li>
-											<li><a href="womens.html">Beauty</a></li>
-											<li><a href="womens.html">Shirts</a></li>
-											<li><a href="womens.html">Sunglasses</a></li>
-											<li><a href="womens.html">Swimwear</a></li>
-										</ul>
-									</div>
-									<!--<div class="col-sm-6 multi-gd-img multi-gd-text ">
-										<a href="womens.html"><img src="images/top1.jpg" alt=" "/></a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</ul>
-					</li>-->
 					<li class="menu__item dropdown">
 					   <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Codigos Corto <b class="caret"></b></a>
 								<ul class="dropdown-menu agile_short_dropdown">

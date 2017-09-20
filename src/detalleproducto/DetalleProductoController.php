@@ -2,29 +2,44 @@
 
 	include 'DetalleProductoBL.php';
 
-	$opcion = $_POST["opcion"];
-	$detalleproductoBl = null;
+	$opcion = isset($_POST['opcion']) ? $_POST['opcion'] : '';;
+	$listaDetalle = ""; // variable global
+	
 
-	switch ( $opcion ) {
-		case 'listar':
-			$detalleproductoBl = new DetalleProductoBL();
-			echo $detalleproductoBl->listar();
-		break;
+		$detalleproductoBl = null;
 
-		case 'registrar':
-			$detalleproductoBl = new DetalleProductoBL();
-			echo $detalleproductoBl->registrar();
-		break;
+		switch ( $opcion ) {
+			case 'listar':
+				$detalleproductoBl = new DetalleProductoBL();
+				echo $detalleproductoBl->listar();
+			break;
 
-		case 'modificar':
-			$detalleproductoBl = new DetalleProductoBL();
-			echo $detalleproductoBl->modificar();
-		break;
+			case 'registrar':
+				$detalleproductoBl = new DetalleProductoBL();
+				echo $detalleproductoBl->registrar();
+			break;
 
-		case 'eliminar':
-			$detalleproductoBl = new DetalleProductoBL();
-			echo $detalleproductoBl->eliminar();
-		break;
-	}
+			case 'modificar':
+				$detalleproductoBl = new DetalleProductoBL();
+				echo $detalleproductoBl->modificar();
+			break;
+
+			case 'eliminar':
+				$detalleproductoBl = new DetalleProductoBL();
+				echo $detalleproductoBl->eliminar();
+			break;
+
+			case 'listarProductoDetallePorId':
+				$detalleproductoBl = new DetalleProductoBL();
+				$listaDetalle = $detalleproductoBl->listarProductoDetallePorId();
+			break;
+
+			default:
+				echo "<script> window.location = 'categoria.php'; </script>";			
+			break;
+		}
+	
+		//header('Location: ../../tienda/categoria.php');
+	
 
  ?>

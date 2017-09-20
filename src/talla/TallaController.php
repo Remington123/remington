@@ -30,6 +30,11 @@
 			$tallaBl = new TallaBL();
 			echo $tallaBl->llenarCombo();
 		break;
+
+		case 'comboPorColor':
+			$tallaBl = new TallaBL();
+			echo $tallaBl->llenarComboPorColor();
+		break;
 	}
 
 

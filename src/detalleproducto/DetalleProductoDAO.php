@@ -73,16 +73,12 @@
 			$statement = null;			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "UPDATE producto SET 
-								 
-								 precio = :precio,
-								 
-								 stock = :stock,
-								 
+				$sql = "UPDATE producto SET 								 
+								 precio = :precio,								 
+								 stock = :stock,								 
 								 estado = :estado,
 								 idmodelo = :idmodelo,
-								 idtalla = :idtalla,
-								 
+								 idtalla = :idtalla,								 
 								 
 						WHERE iddetalleproducto = :iddetalleproducto;";
 				/*Notice: Only variables should be passed by reference*/
@@ -143,6 +139,34 @@
 				$conexion = null;
 			}
 			return $respuesta; 
+		}
+
+		public function listarProductoDetallePorId( $idproducto ){
+			$conexion =new Conexion();
+			try{
+				$cnn =$conexion->getConexion();
+				$sql ="SELECT  dp.idcolor, c.nombre, dp.urlimagen
+						FROM detalleproducto dp
+						INNER JOIN color c
+						ON dp.idcolor = c.idcolor
+						WHERE dp.idproducto = ?
+						GROUP BY dp.idcolor";
+				$statement=$cnn->prepare($sql);
+				
+				$statement->bindParam(1, $idproducto, PDO::PARAM_INT);
+				$statement->execute();
+
+				$data["data"] = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+		    }catch (throwable $e){
+		    	echo $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
 		}
 
 		public function cambiarEstadoCompleto( bool $respuesta, int $idproducto, $cnn ){

@@ -146,7 +146,8 @@
 		}
 
 		function calcularImporte(){
-			$("tr .cantidad").on("change", function(){
+			$("tr .cantidad").on("change", function(e){
+				e.preventDefault();
 				var cantidad = parseInt( $(this).val() ),
 					precio = $(this).parents("tr")[0].children[3].innerHTML,
 					importe = $(this).parents("tr")[0].children[5];

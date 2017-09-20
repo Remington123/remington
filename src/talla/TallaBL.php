@@ -75,5 +75,12 @@
 			$idcategoriaproducto = $_POST["idcategoriaproducto"];
 			return $dao->llenarCombo( $idcategoriaproducto );
 		}
+
+		public function llenarComboPorColor(){
+			$dao = new TallaDAO();
+			$idcolor = $_POST["idcolor"];
+			$idproducto = $_POST["idproducto"];
+			return $dao->llenarComboPorColor( $idcolor, $idproducto );
+		}
 	}
 ?>

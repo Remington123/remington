@@ -118,6 +118,59 @@
 			return $respuesta; 
 		}
 
+		public function listarProductoCompleto(){
+			$conexion = new Conexion();
+			try {
+				$cnn = $conexion->getConexion();
+					$sql = "SELECT p.idproducto, p.descripcion, p.estado, dp.urlimagen, 
+							dp.precio FROM producto p
+							INNER JOIN detalleproducto dp
+							ON p.idproducto = dp.idproducto
+							WHERE p.estado = 2
+							GROUP BY p.idproducto";
+				$statement=$cnn->prepare($sql);
+				$statement->execute();
+
+				$data["data"] = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
+		public function listarPorCategoria(int $idcategoriaproducto){
+			$conexion = new Conexion();
+			try {
+				$cnn = $conexion->getConexion();
+					$sql = "SELECT p.idproducto, p.descripcion, p.estado, dp.urlimagen, 
+							dp.precio FROM producto p
+							INNER JOIN detalleproducto dp
+							ON p.idproducto = dp.idproducto
+							WHERE p.estado = 2 AND p.idcategoriaproducto = :idcategoriaproducto
+							GROUP BY p.idproducto";
+				$statement=$cnn->prepare($sql);
+				$statement->bindParam(":idcategoriaproducto", $idcategoriaproducto, PDO::PARAM_INT );
+				$statement->execute();
+
+				$data["data"] = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
 		public function buscar( $descripcion ){
 			$conexion = new Conexion();
 			try {
