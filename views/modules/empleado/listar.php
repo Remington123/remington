@@ -21,10 +21,6 @@
 							<th>Apellidomaterno</th>
 							<th>Dni</th>
 							<th>Email</th>
-							<th>Contrasena</th>
-							<th>Direccion</th>
-							<th>Fechanacimiento</th>
-							<th>Celuar</th>
 							<th></th>
 						</thead>
 					</table>

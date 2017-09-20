@@ -18,7 +18,7 @@ function dtCategoriaproducto(){
 		columns:[
 			{"data":"idcategoriaproducto"},
 			{"data":"descripcion"},
-			{"data":"apellidopaterno", 
+			{"data":"apellidopaterno"}, 
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
@@ -32,7 +32,7 @@ function obtener_data_modificar (tbody, table){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
 		var idusuario = $("#categoriaproducto").val( data.idcategoriaproducto ),
-				descripcion = $("#descripcion").val( data.descripcion ),
+				descripcion = $("#descripcion").val( data.descripcion );
 	
 	});
 }

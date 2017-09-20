@@ -21,10 +21,6 @@
 							<th>Apellidomaterno</th>
 							<th>Dni</th>
 							<th>Email</th>
-							<th>Contrasena</th>
-							<th>Direccion</th>
-							<th>Celular</th>
-							<th>Ruc</th>
 							<th></th>
 						</thead>
 					</table>
