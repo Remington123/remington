@@ -1,8 +1,8 @@
 <?php 
 
 	$accion = "eliminar";
-	$modulo = "categoriaproducto";
-	$controlador = $modulo.'/CategoriaproductoController';
+	$modulo = "comprobantepago";
+	$controlador = $modulo.'/ComprobantepagoController';
 	
 	$modalEliminar = '
 	<div class="row">

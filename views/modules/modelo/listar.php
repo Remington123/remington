@@ -15,9 +15,8 @@
 	            <div class="box-body">
 					<table id="dt_modelo" class="table table-striped">
 						<thead>
-							<th>ID</th>
+							<th>Idmodelo</th>
 							<th>Descripción</th>
-							<th>Categoría</th>
 							<th></th>
 						</thead>
 					</table>

@@ -1,8 +1,8 @@
 <?php
 	
 	$accion = "modificar";
-	$modulo = "pedido";
-	$controlador = $modulo.'/PedidoController';
+	$modulo = "tipousuario";
+	$controlador = $modulo.'/TipousuarioController';
 
 	$modalModificar = '
 	<div class="col-md-6">
@@ -21,19 +21,12 @@
 							<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 								<div class="form-group">
 									 <label  class="col-sm-2 control-label"
-	                              		for="fecha">Fecha</label>
+	                              		for="descripcion">Descripcion</label>
 									<div class="col-sm-10">
-										<input id="fecha" name="fecha" type="text" class="form-control">
+										<input id="descripcion" name="descripcion" type="text" class="form-control">
 									</div>
 								</div>							
-								<div class="form-group">
-									 <label  class="col-sm-2 control-label"
-	                              		for="total">total</label>
-									<div class="col-sm-10">
-										<input id="total name="total" type="text" class="form-control">
-									</div>
-								</div>
-
+								
 							<div class="modal-footer">
 								<button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

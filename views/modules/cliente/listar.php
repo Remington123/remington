@@ -15,12 +15,16 @@
 	            <div class="box-body">
 					<table id="dt_cliente" class="table table-striped">
 						<thead>
-							<th>ID</th>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Apellido M.</th>
+							<th>Idcliente</th>
+							<th>Nombres</th>
+							<th>Apellidopaterno</th>
+							<th>Apellidomaterno</th>
+							<th>Dni</th>
 							<th>Email</th>
+							<th>Contrasena</th>
+							<th>Direccion</th>
 							<th>Celular</th>
+							<th>Ruc</th>
 							<th></th>
 						</thead>
 					</table>

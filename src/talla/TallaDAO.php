@@ -16,7 +16,7 @@
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
-				$data = [];//arreglo vacio
+				$data["data"] = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}

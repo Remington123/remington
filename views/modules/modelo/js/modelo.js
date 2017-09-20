@@ -1,9 +1,8 @@
 /* Llamado o ejecución de funciones */
 dtModelo();
-//alert("Cliente.js");
-//guardar();
+guardar();
 
-//Creación de funciones JS para el módulo cliente
+//Creación de funciones JS para el módulo empleado
 function dtModelo(){
 
 	if ( $.fn.DataTable.isDataTable('#dt_modelo') )
@@ -19,7 +18,6 @@ function dtModelo(){
 		columns:[
 			{"data":"idmodelo"},
 			{"data":"descripcion"},
-			{"data":"categoria"},
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
@@ -39,7 +37,7 @@ function obtener_data_modificar (tbody, table){
 }
 
 function guardar(){
-	$("#frmmodeloregistrar").on("submit", function(e){
+	$("#frmguardarmodelo").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
 		//console.log(frm);
@@ -47,14 +45,45 @@ function guardar(){
 		//console.log("Controlador: " + controller);
 		$.ajax({
 			method:"POST",
-			url:"../src/"+controller,
+			url:"../src/"+controller+".php",
 			data: frm
 		}).done(function(info){
 			//respuesta del servidor
+			mensajes( info );
 			console.log(info);
-			
 		});
 	});
+}
+
+function mensajes( info ){
+	var json = JSON.parse(info);
+
+	var texto = "", color = "", div="";
+	if(json.respuesta == "bien"){
+		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+		color = "alert-success";
+	}
+	if(json.respuesta == "error"){
+		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+		color = "alert-danger";
+	}
+	if(json.respuesta == "llenar_datos"){
+		texto = "<strong>Advertencia!</strong> Llenar todos los datos solicitados.";
+		color = "alert-warning";
+	}
+	if(json.respuesta == "id_indefinido"){
+		texto = "<strong>Advertencia!</strong> ID no definido.";
+		color = "alert-warning";
+	}
+	console.log(texto);
+	div = `<div class="alert ${color} alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>					
+				</button>
+				${texto}
+			</div>`;
+
+	$(".mensaje").html( div ).removeClass("ocultar");
 }
 
 var spanish = {

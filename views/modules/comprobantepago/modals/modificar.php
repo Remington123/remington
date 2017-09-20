@@ -1,8 +1,8 @@
 <?php
 	
 	$accion = "modificar";
-	$modulo = "pedido";
-	$controlador = $modulo.'/PedidoController';
+	$modulo = "comprobantepago";
+	$controlador = $modulo.'/ComprobantepagoController';
 
 	$modalModificar = '
 	<div class="col-md-6">
@@ -21,16 +21,36 @@
 							<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 								<div class="form-group">
 									 <label  class="col-sm-2 control-label"
-	                              		for="fecha">Fecha</label>
+	                              		for="nombre">Nombre</label>
 									<div class="col-sm-10">
-										<input id="fecha" name="fecha" type="text" class="form-control">
+										<input id="nombre" name="nombre" type="text" class="form-control">
 									</div>
 								</div>							
 								<div class="form-group">
 									 <label  class="col-sm-2 control-label"
-	                              		for="total">total</label>
+	                              		for="apellidopaterno">Apellido Paterno</label>
 									<div class="col-sm-10">
-										<input id="total name="total" type="text" class="form-control">
+										<input id="apellidopaterno" name="apellidopaterno" type="text" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									 <label  class="col-sm-2 control-label"
+	                              		for="apellidomaterno">Apellido Materno</label>
+									<div class="col-sm-10">
+										<input id="apellidomaterno" name="apellidomaterno" type="text" class="form-control"></div>
+								</div>
+								<div class="form-group">
+									 <label  class="col-sm-2 control-label"
+	                              		for="email">Email</label>
+									<div class="col-sm-10">
+										<input id="email" name="email" type="text" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									 <label  class="col-sm-2 control-label"
+	                              		for="celular">Celular</label>
+									<div class="col-sm-10">
+										<input id="celular" name="celular" type="text" class="form-control">
 									</div>
 								</div>
 

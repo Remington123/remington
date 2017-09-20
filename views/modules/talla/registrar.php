@@ -1,6 +1,7 @@
 <?php 
-		$accion = "registrar";
+
 		$modulo = "talla";
+		$accion = "registrar";
 		$controlador = $modulo.'/TallaController';
 		$script = '/js/talla.js';
 
@@ -9,28 +10,34 @@
 		  <!-- general form elements -->
 		  <div class="box box-primary">
 		    <div class="box-header with-border">
-		      <h3 class="box-title">Form Talla</h3>
+		      <h3 class="box-title">Form Empleado</h3>
 		    </div>
 		    <!-- /.box-header -->
 		    <!-- form start -->
 		    <form id="frmguardar'.$modulo.'" action="'.$controlador.'" role="form">
 		    	<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 				<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
+
 		      <div class="box-body">
+
 		        <div class="form-group">
-		            <label for="talla">Talla</label>            
-		            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
+		            <label for="descripcion">Descripcion</label>            
+		            <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Nombres">
 		        </div>
 
-				<div class="form-group">
-		            <label for="acronimo">Acronimo</label>            
-		            <input type="text" id="acronimo" name="acronimo" class="form-control" placeholder="Acronimo">
-		        </div>		        
 		      </div>
 		      <!-- /.box-body -->
 		      <div class="box-footer">
 		        <button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 		      </div>
+
+			  <div class="row">
+		        <br>
+		       	<div class="col-sm-12 mensaje ocultar">
+		       			        		
+		       	</div>
+		      </div>
+
 		    </form>
 		  </div>
 		  <!-- /.box -->
@@ -39,4 +46,3 @@
 		$path = ["content"=>$content, "script"=>$script];
 		echo json_encode( $path );
 ?>
-	

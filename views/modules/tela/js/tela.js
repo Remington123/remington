@@ -1,43 +1,43 @@
 /* Llamado o ejecución de funciones */
-dttalla();
+dtTela();
 guardar();
 
 //Creación de funciones JS para el módulo empleado
-function dtTalla(){
+function dtTela(){
 
-	if ( $.fn.DataTable.isDataTable('#dt_talla') )
-	  	$("#dt_talla").empty();
+	if ( $.fn.DataTable.isDataTable('#dt_tela') )
+	  	$("#dt_tela").empty();
 
-	var table = $("#dt_talla").DataTable({
+	var table = $("#dt_tela").DataTable({
 		detroy: true,
 		ajax:{
 			method: "POST",
-			url: "../src/talla/TallaController.php",
+			url: "../src/tela/TelaController.php",
 			data: {opcion:"listar"}
 		},
 		columns:[
-			{"data":"idtalla"},
-			{"data":"descricion"},
+			{"data":"idtela"},
+			{"data":"descripcion"},
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
 	});
 
-	obtener_data_modificar("#dt_talla tbody", table);
+	obtener_data_modificar("#dt_tela tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
 	$(tbody).on("click", "button.modificar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
-		var idtalla = $("#idtalla").val( data.idtalla ),
+		var idtela = $("#idtela").val( data.idtela ),
 				descripcion = $("#descripcion").val( data.descripcion ),
 				opcion = $("#opcion").val("modificar");
 	});
 }
 
 function guardar(){
-	$("#frmguardarempleado").on("submit", function(e){
+	$("#frmguardartela").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
 		//console.log(frm);

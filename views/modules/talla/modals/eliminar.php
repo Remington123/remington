@@ -2,10 +2,11 @@
 
 	$accion = "eliminar";
 	$modulo = "talla";
+	$controlador = $modulo.'/TallaController';
 	
 	$modalEliminar = '
 	<div class="row">
-		<form id="frm'. $accion.$modulo.'" action="" method="POST">
+		<form id="frm'. $accion.$modulo.'" action="'.$controlador.'" method="POST">
 			<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 			<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 			<!-- Modal -->
@@ -21,8 +22,15 @@
 						</div>
 						<div class="modal-footer">
 							<button type="submit" id="'. $accion.'-'.$modulo.'" class="btn btn-primary">Aceptar</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						</div>
+
+						<div class="row">
+				        	<br>
+				        	<div class="col-sm-12 mensaje ocultar">
+				        		
+				        	</div>
+				        </div>
 					</div>
 				</div>
 			</div>

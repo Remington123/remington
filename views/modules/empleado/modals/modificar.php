@@ -2,7 +2,7 @@
 	
 	$accion = "modificar";
 	$modulo = "empleado";
-	$controlador = $modulo.'/ModeloController';
+	$controlador = $modulo.'/EmpleadoController';
 
 	$modalModificar = '
 	<div class="col-md-6">

@@ -1,36 +1,38 @@
 /* Llamado o ejecución de funciones */
-dttalla();
+dttipopago();
 guardar();
 
 //Creación de funciones JS para el módulo empleado
-function dtTalla(){
+function dtTipopago(){
 
-	if ( $.fn.DataTable.isDataTable('#dt_talla') )
-	  	$("#dt_talla").empty();
+	if ( $.fn.DataTable.isDataTable('#dt_tipopago') )
+	  	$("#dt_tipopago").empty();
 
-	var table = $("#dt_talla").DataTable({
+	var table = $("#dt_tipopago").DataTable({
 		detroy: true,
 		ajax:{
 			method: "POST",
-			url: "../src/talla/TallaController.php",
+			url: "../src/tipopago/TipopagoController.php",
 			data: {opcion:"listar"}
 		},
 		columns:[
-			{"data":"idtalla"},
-			{"data":"descricion"},
+			{"data":"idtipopago"},
+			{"data":"nombre"},
+			{"data":"descripcion"}, 
 			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
 			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
 		]
 	});
 
-	obtener_data_modificar("#dt_talla tbody", table);
+	obtener_data_modificar("#dt_tipopago tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
 	$(tbody).on("click", "button.modificar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
-		var idtalla = $("#idtalla").val( data.idtalla ),
+		var idtipopago = $("#idtipopago").val( data.idtipopago ),
+				nombre = $("#nombre").val( data.nombre ),
 				descripcion = $("#descripcion").val( data.descripcion ),
 				opcion = $("#opcion").val("modificar");
 	});

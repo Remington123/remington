@@ -21,8 +21,8 @@
 		      <div class="box-body">
 
 		        <div class="form-group">
-		            <label for="nombre">Nombre</label>            
-		            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
+		            <label for="nombres">Nombres</label>            
+		            <input type="text" id="nombres" name="nombres" class="form-control" placeholder="Nombres">
 		        </div>
 		        <div class="form-group">
 		          <label for="apellidopaterno">A. Paterno</label>
@@ -85,4 +85,3 @@
 		$path = ["content"=>$content, "script"=>$script];
 		echo json_encode( $path );
 ?>
-	5

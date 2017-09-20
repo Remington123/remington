@@ -13,7 +13,7 @@ class TipoUsuarioDAO implements Consultas{
 			$sql= "SELECT * FROM tipousuario;";
 			$statement=$cnn->prepare($sql);
 			$statement->execute();
-			$data = [];
+			$data["data"] = [];//arreglo vacio
 			while($resultado=$statement->fetch(PDO::FETCH_ASSOC)){
 				$data[]=$resultado;
 			}

@@ -14,7 +14,7 @@
 				$sql = " SELECT * FROM tela WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
-				$data = [];
+				$data["data"] = [];//arreglo vacio
 				while ($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}
