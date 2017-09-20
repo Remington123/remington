@@ -1,5 +1,6 @@
 /* Llamado o ejecución de funciones */
 dtModelo();
+llenarComboCategoria();
 guardar();
 
 //Creación de funciones JS para el módulo empleado
@@ -52,6 +53,24 @@ function guardar(){
 			mensajes( info );
 			console.log(info);
 		});
+	});
+}
+
+function llenarComboCategoria(){
+	$.ajax({
+		method: "POST",
+		url: "../src/categoriaproducto/CategoriaProductoController.php",
+		data: {opcion:"listar"}
+	}).done( function( info ){
+		var categoria = JSON.parse( info ),
+			option = "";
+		$("#idcategoriaproducto").html("");//limpiar el combo
+		option +=`<option> Seleccionar </option>`;
+			
+		for(i in categoria.data )
+			option +=`<option value="${categoria.data[i].idcategoriaproducto}"> ${categoria.data[i].descripcion} </option>`;
+
+		$("#idcategoriaproducto").html(option);
 	});
 }
 

@@ -23,6 +23,12 @@
 							<button type="submit" id="'. $accion.'-'.$modulo.'" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 						</div>
+						<div class="row">
+					        <br>
+					       	<div class="col-sm-12 mensaje ocultar">
+					       			        		
+					       	</div>
+					      </div>
 					</div>
 				</div>
 			</div>

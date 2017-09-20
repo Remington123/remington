@@ -16,9 +16,10 @@
 			$informacion =[];
 			$modelo =new Modelo();
 			$modelo->setDescripcion($_POST["descripcion"]);
-
+			$modelo->setIdcategoriaproducto($_POST["idcategoriaproducto"]);
+			
 			$dao = new ModeloDAO();
-			$dao->registrar( $modelo) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+			$dao->registrar( $modelo) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			return (json_encode($informacion));
 		}
 		 
@@ -26,12 +27,14 @@
 			$informacion =[];
 			$modelo =new Modelo();
 			$modelo->setDescripcion($_POST["descripcion"]);
+			$modelo->setIdcategoriaproducto($_POST["idcategoriaproducto"]);
+			//$modelo->setEstado($_POST["estado"]);
 			$dao =new ModeloDAO();
 					
 			if( $dao->modificar( $modelo ) )
-				$informacion["respuesta"] = "ok_modificacion";
+				$informacion["respuesta"] = "bien";
 			else
-				$informacion["respuesta"] = "error_modificacion";
+				$informacion["respuesta"] = "error";
 
 			return ( json_encode($informacion) );
 		}
@@ -44,12 +47,12 @@
 
 				$dao = new  ModeloDAO();
 				if( $dao->eliminar( $idmodelo ) )
-					$informacion["respuesta"] = "ok_eliminacion";
+					$informacion["respuesta"] = "bien";
 				else
-					$informacion["respuesta"] = "error_eliminacion";
+					$informacion["respuesta"] = "error";
 
 			}else{
-				$informacion["respuesta"] = "idmodelo_indefinido";
+				$informacion["respuesta"] = "id_indefinido";
 			}
 			
 			return ( json_encode($informacion) );

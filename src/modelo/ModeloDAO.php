@@ -34,14 +34,19 @@
 			$conexion = new Conexion();
 			$respuesta = false;
 			$statement = null;
-			
+
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO modelo(descripcion) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+				$sql = "INSERT INTO modelo(descripcion, idcategoriaproducto, estado) VALUES (?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				$descripcion = $objeto->getDescripcion();
+				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
+				$estado = 1;
+
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $descripcion, PDO::PARAM_STR);
+				$statement->bindParam(2, $idcategoriaproducto, PDO::PARAM_STR);
+				$statement->bindParam(3, $estado, PDO::PARAM_STR);
 				$respuesta = $statement->execute();//devuelve true, si no hubo error.
 				
 			}catch(Exception $e){
@@ -60,7 +65,8 @@
 			try{
 				$conexion = new Conexion();
 				$cnn = $conexion->getConexion();
-				$sql = "UPDATE cliente SET  nombres = :nombres;";
+				$sql = "UPDATE modelo SET  descripcion = :descripcion 
+						WHERE idmodelo = :idmodelo";
 
 				$idmodelo = $objeto->getIdmodelo();
 				$descripcion = $objeto->getDescripcion();
