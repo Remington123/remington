@@ -105,23 +105,53 @@
 				$statement->bindParam(6, $idtalla, PDO::PARAM_INT);
 				$statement->bindParam(7, $idcolor, PDO::PARAM_INT);
 				$statement->bindParam(8, $urlimagen, PDO::PARAM_STR);
-				$statement->bindParam(9, $estado, PDO::PARAM_INT);			
+				$statement->bindParam(9, $estado, PDO::PARAM_INT);
 
 				$respuesta = $statement->execute();
+
+				$this->descontarStock( $respuesta, $item, $cnn );
 			}
-			return $respuesta;	
+			return $respuesta;
 		}
 
-		public function descontarStock( bool $respuesta, int $idproducto, $idtalla, $idcolor, $cantidad, $cnn ){
-			//if( $respuesta ){				
-				$sql = "UPDATE detalleproducto SET stock =:stock
-						WHERE idproducto =:idproducto";//implementar
-				$statement = $cnn->prepare($sql);
-				$estado = 2;//estado completo
-				$statement->bindParam(":idproducto", $idproducto, PDO::PARAM_INT);
-				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+		public function descontarStock( $resultado, $item, $cnn ){
+			$respuesta = false;
+			if( $resultado ){
+
+				$sql = "SELECT iddetalleproducto, stock FROM detalleproducto 
+						WHERE idproducto = :idproducto AND idcolor = :idcolor AND idtalla = :idtalla; ";
+
+				$statement=$cnn->prepare($sql);
+
+				$idproducto = $item->getIdproducto();
+				$idcolor = $item->getIdcolor();
+				$idtalla = $item->getIdtalla();
+
+				$statement->bindParam(":idproducto", $idproducto , PDO::PARAM_INT);
+				$statement->bindParam(":idcolor", $idcolor , PDO::PARAM_INT);
+				$statement->bindParam(":idtalla", $idtalla , PDO::PARAM_INT);
 				$statement->execute();
-			//}
+
+				$stockActual = 0;
+				$iddetalleproducto = 0;
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$stockActual = $resultado["stock"];
+					$iddetalleproducto = $resultado["iddetalleproducto"];
+				}
+				$stockActual = $stockActual - $item->getCantidad();
+				
+
+
+				$sql2 = "UPDATE detalleproducto SET stock =:stock
+						WHERE iddetalleproducto =:iddetalleproducto;";//implementar
+				$statement = $cnn->prepare($sql2);
+				
+				$statement->bindParam(":stock", $stockActual , PDO::PARAM_INT);
+				$statement->bindParam(":iddetalleproducto", $iddetalleproducto , PDO::PARAM_INT);
+				$respuesta = $statement->execute();
+			}
+
+			return $respuesta;
 		}
 
 		public function guardarPedido($cabecera, $detalle) :bool{
@@ -154,7 +184,7 @@
 					$respuestadetalle = $this->guardarDetalle($idpedido, $detalle, $cnn);
 					if( $respuestadetalle ){						
 							$_SESSION["carrito"] = array();
-							
+							unset($_SESSION["carrito"]);
 					}
 				}
 

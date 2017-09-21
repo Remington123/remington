@@ -111,22 +111,58 @@
 		}
 
 		public function agregarItem( $objeto ){//$objeto es el producto
-			
-			if( isset( $_SESSION["carrito"] ) ){
-				$carrito = $_SESSION["carrito"];
+
+			if( $this->tieneStock( $objeto ) ){
+
+				if( isset( $_SESSION["carrito"] ) ){
+					$carrito = $_SESSION["carrito"];
+				}else{
+					$carrito = array();//arreglo vacio
+				}
+
+				array_push($carrito, $objeto);
+				$_SESSION["carrito"] = $carrito;
+				$_SESSION["carrito"];
+				return header('Location: ../../tienda/carrito-compras.php');
 			}else{
-				$carrito = array();//arreglo vacio
+				return header('Location: ../../tienda/index.php');
+			}			
+		}
+
+		public function tieneStock( $item ){
+			$conexion =new Conexion();
+			try{
+				$cnn =$conexion->getConexion();
+				$sql = "SELECT iddetalleproducto, stock FROM detalleproducto 
+						WHERE idproducto = :idproducto AND idcolor = :idcolor AND idtalla = :idtalla; ";
+
+				$statement=$cnn->prepare($sql);
+
+				$idproducto = $item->idproducto;
+				$idcolor = $item->idcolor;
+				$idtalla = $item->idtalla;
+
+				$statement->bindParam(":idproducto", $idproducto , PDO::PARAM_INT);
+				$statement->bindParam(":idcolor", $idcolor , PDO::PARAM_INT);
+				$statement->bindParam(":idtalla", $idtalla , PDO::PARAM_INT);
+				$statement->execute();
+
+				$stockActual = 0;
+				$iddetalleproducto = 0;
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$stockActual = $resultado["stock"];
+					$iddetalleproducto = $resultado["iddetalleproducto"];
+				}
+
+				return $stockActual >= $item->cantidad;
+
+			}catch (throwable $e){
+		    	echo $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
 			}
 
-			
-			//hacer una pequeña validación con el precio desde la BD segun idproducto
-			/*$objeto->getIdproducto();
-			$objeto->getCantidad();
-			$objeto->getImporte();*/
-			//agregando más items al carrito
-			array_push($carrito, $objeto);
-			$_SESSION["carrito"] = $carrito;
-			return $_SESSION["carrito"];
 		}
 
 		public function verificarItemRepetido( $objeto ){

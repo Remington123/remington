@@ -93,6 +93,9 @@
 			            <div class="col-sm-4">
 			            	<input type="text" id="cantidad" name="cantidad" value="<?php echo $cantidad; ?>" class="form-control" placeholder="Ingresar Cantidad">
 			            </div>
+			            <div class="col-sm-4">
+			            	<p class="mensaje"></p>
+			            </div>
 			        </div>
 
 					<div class="form-group">
@@ -107,18 +110,11 @@
 									<input type="hidden" id="item_talla" name="item_talla" value="">
 									<input type="hidden" id="color" name="color" value="">
 									<input type="hidden" name="importe" value="0">
-									<input type="submit" name="btnAgregar" value="AGREGAR" class="btn btn-success col-sm-2" />
+									<input type="submit" id="btnAgregar" name="btnAgregar" value="AGREGAR" class="btn btn-success col-sm-2" />
 								</fieldset>
 			        	
 			        	</div>
 				    </div>
-					
-					<div class="row">
-						<br>
-			        	<div class="col-sm-12 mensaje ocultar">
-			        		
-			        	</div>
-			        </div>
 				</form>
 
 							

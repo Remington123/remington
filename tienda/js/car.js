@@ -79,6 +79,7 @@ function listarTallasPorColor(){
 				option = "";
 			console.log(talla);
 			$("#idtalla").html("");//limpiar el combo
+			var stock = "";
 			//option +=`<option> Seleccionar </option>`;
 			
 			//validar cuando el length de tallas es cero, en talla.descripcion="Sin datos"
@@ -87,13 +88,25 @@ function listarTallasPorColor(){
 				$("#prenda_precio").val("S/. "+ talla.data[0].precio);
 				$("#item_precio").val( talla.data[0].precio );
 				$("#item_talla").val( talla.data[0].descripcion );
+				//stock = talla.data[0].stock;
+				//$(".mensaje").html("Stock disponible: " + stock ).css("color","green");
 			}
 
 			//Inicialmente debe llenar cierto datos en los siguientes campos
 			$("#prenda_precio").val("S/. "+ talla.data[0].precio);
 			$("#item_precio").val( talla.data[0].precio );
 			$("#item_talla").val( talla.data[0].descripcion );
-
+			stock = talla.data[0].stock;
+			
+			if( stock > 0){
+				$(".mensaje").html("Stock disponible: " + stock ).css("color","green");
+				$("#btnAgregar").prop("disabled", false);
+				$("#cantidad").prop("disabled", false);
+			}else{
+				$(".mensaje").html("Stock agotado.").css("color","red");
+				$("#btnAgregar").prop("disabled", true);
+				$("#cantidad").prop("disabled", true);
+			}
 
 
 			for(i in talla.data )
@@ -113,7 +126,19 @@ function seleccionarTalla(){
 			console.log( precio );
 			$("#prenda_precio").val("S/. "+precio);
 			$("#item_precio").val( precio );
-			$("#item_talla").val( talla );//ver porque no jala dato esta mierda
+			$("#item_talla").val( talla );
+
+			$(".mensaje").html("");
+
+			if( stock > 0){
+				$(".mensaje").html("Stock disponible: " + stock ).css("color","green");
+				$("#btnAgregar").prop("disabled", false);
+				$("#cantidad").prop("disabled", false);
+			}else{
+				$(".mensaje").html("Stock agotado.").css("color","red");
+				$("#btnAgregar").prop("disabled", true);				
+				$("#cantidad").prop("disabled", true);
+			}
 
 	});
 }
