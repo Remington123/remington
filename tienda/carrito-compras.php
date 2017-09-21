@@ -24,9 +24,9 @@
 						<th>ID</th>
 						<th>Imagen</th>
 						<th>Nombre</th>
-						<th>Color</th>
-						<th>Talla</th>
 						<th>Precio</th>
+						<th>Talla</th>
+						<th>Color</th>
 						<th>Cantidad</th>
 						<th>Importe</th>
 						<th>Opción</th>
@@ -42,9 +42,10 @@
 							<td><?php echo $p->idproducto; ?></td>
 							<td> <img src="<?php echo $p->urlimagen; ?>" width="100" height="80" > </td>
 							<td><?php echo $p->descripcion; ?></td>
-							<td class='precio'><?php echo $p->color;?></td>
-							<td class='precio'><?php echo $p->talla;?></td>
 							<td class='precio'><?php echo $p->precio;?></td>
+							<td><?php echo $p->talla;?></td>
+							<td><?php echo $p->color;?></td>
+
 							<td>
 								<input type='text' name='cantidad' class='cantidad data' min='1' value="<?php echo $p->cantidad;?>">
 							</td>
@@ -56,7 +57,9 @@
 							<td><input type="hidden" class="data" value="<?php echo $p->descripcion; ?>"></td>
 							<td><input type="hidden" class="data" value="<?php echo $p->precio;?>"></td>
 							<td><input type="hidden" class="data importe" value="<?php echo $p->importe; ?>"></td>
-							<td><input type="hidden" class="data" value="urlfoto"></td>
+							<td><input type="hidden" class="data" value="<?php echo $p->urlimagen; ?>"></td>
+							<td><input type="hidden" class="data" value="<?php echo $p->idtalla; ?>"></td>
+							<td><input type="hidden" class="data" value="<?php echo $p->idcolor; ?>"></td>
 							<?php $indice++; ?>
 						</tr>
 			<?php } ?>			
@@ -132,7 +135,7 @@
 
 		function obtenerDataTabla(tbody){
 			var sumarImporte = 0, contador = 0, 
-				numeroCampos = 6;//Todos menos el total
+				numeroCampos = 8;//Todos menos el total
 			var pedido = [], item = [];
 		    $(tbody).find('td input.data').each(function (i) {
 		    	contador++;
@@ -155,11 +158,13 @@
 			$("tr .cantidad").on("change", function(e){
 				e.preventDefault();
 				var cantidad = parseInt( $(this).val() ),
-					precio = $(this).parents("tr")[0].children[3].innerHTML,
-					importe = $(this).parents("tr")[0].children[5];
+					precio = $(this).parents("tr")[0].children[3].innerHTML,//5, celda de precio
+					importe = $(this).parents("tr")[0].children[7];//7, celda de importe
 					importe.innerText = cantidad * parseFloat(precio);
+				
+				console.log( $(this).parents("tr"));
 
-				var importe_enviar = $(this).parents("tr")[0].children[10].children[0];
+				var importe_enviar = $(this).parents("tr")[0].children[12].children[0];//12, celda de importe
 				importe_enviar.value = importe.innerText;
 				console.log(importe_enviar);
 

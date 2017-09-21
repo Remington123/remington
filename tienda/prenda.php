@@ -102,7 +102,7 @@
 									<input type="hidden" name="opcion" value="agregarItem" />
 									<input type="hidden" name="idproducto" value="<?php echo $idproducto; ?>">
 									<input type="hidden" name="descripcion" value="<?php echo $descripcion; ?>">
-									<input type="hidden" name="item_precio" value="<?php echo $precio; ?>">
+									<input type="hidden" id="item_precio" name="item_precio" value="<?php echo $precio; ?>">
 									<input type="hidden" id="url_imagen" name="url_imagen" value="">
 									<input type="hidden" id="item_talla" name="item_talla" value="">
 									<input type="hidden" id="color" name="color" value="">

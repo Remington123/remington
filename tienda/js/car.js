@@ -5,7 +5,41 @@ $(function(){
 	listarPorCategoria();
 	listarTallasPorColor();
 	seleccionarTalla();
+	guardarPedido();
 });
+
+function guardarPedido(){
+	$("#frmguardarpedido").on("submit", function(e){
+
+		e.preventDefault();
+		console.log("Formulario guardar Pedido");
+		var data = obtenerDataTabla("#tbody_pedidos");
+		console.log( data );
+
+	});
+}
+
+
+function obtenerDataTabla(tbody){
+	var sumarImporte = 0, contador = 0, 
+		numeroCampos = 8;//Todos menos el total
+	var pedido = [], item = [];
+    $(tbody).find('td input.data').each(function (i) {
+    	contador++;
+        if( contador < numeroCampos ){
+        	//console.log("fila "+i+": "+ $(this).val() );
+        	item.push( $(this).val() );
+        }else{
+        	contador = 0;
+        	//console.log("fila "+i+": "+ $(this).val() );
+        	item.push( $(this).val() );
+        	pedido.push( item );
+        	item = [];//setear el arreglo data para la siguiente fila
+        }
+    });
+    
+    return pedido;
+}
 
 function listarTallasPorColor(){
 	$("#idcolor").on("change", function(){
@@ -44,6 +78,8 @@ function listarTallasPorColor(){
 			$("#item_precio").val( talla.data[0].precio );
 			$("#item_talla").val( talla.data[0].descripcion );
 
+
+
 			for(i in talla.data )
 				option +=`<option data-stock="${talla.data[i].stock}" data-precio="${talla.data[i].precio}" value="${talla.data[i].idtalla}"> ${talla.data[i].descripcion} </option>`;		
 
@@ -58,6 +94,7 @@ function seleccionarTalla(){
 			stock = $("#idtalla option:selected").attr("data-stock"),
 			talla = $("#idtalla option:selected").text();
 			console.log( talla );
+			console.log( precio );
 			$("#prenda_precio").val("S/. "+precio);
 			$("#item_precio").val( precio );
 			$("#item_talla").val( talla );//ver porque no jala dato esta mierda
