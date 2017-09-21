@@ -84,5 +84,19 @@
 
 			return ( json_encode($informacion) );
 		}
+
+		public function validarAcceso(){
+			$dao = new ClienteDAO();
+			$cliente = new Cliente();
+			$cliente->setEmail( $_POST["email"] );
+			$cliente->setContrasena( $_POST["contrasena"] );
+
+			return $dao->validarAcceso( $cliente );
+		}
+
+		public function cerrarSesion(){
+			$dao = new ClienteDAO();
+			return $dao->cerrarSesion();
+		}
 	}
 ?>

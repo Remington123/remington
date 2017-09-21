@@ -9,6 +9,7 @@
 			$clienteBl = new ClienteBL();
 			$clienteBl->listar();
 		break;
+		
 		case 'registrar':
 			$clienteBl = new ClienteBL();
 			echo $clienteBl->registrar();
@@ -22,6 +23,21 @@
 		case 'eliminar':
 			$clienteBl = new ClienteBL();
 			echo $clienteBl->eliminar();
+		break;
+
+		case 'acceso':
+			session_start();
+			$clienteBl = new ClienteBL();
+			$clienteBl->validarAcceso();
+			header('Location: ../../tienda/index.php');
+		break;
+
+		case 'cerrarsesion':
+			session_start();
+			$clienteBl = new ClienteBL();
+			$clienteBl->cerrarSesion();
+			session_destroy();			
+			header('Location: ../../tienda/index.php');
 		break;
 	}
 	

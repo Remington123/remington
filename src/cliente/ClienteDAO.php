@@ -2,6 +2,7 @@
 
 	include (dirname(__FILE__). '/../comunes/Conexion.php'); 
 	include (dirname(__FILE__) . '/../comunes/Consultas.php');
+	//include 'Cliente.php';
 
 	class ClienteDAO implements Consultas{
 		private $conexion=null;
@@ -155,7 +156,58 @@
 				$conexion = null;
 			}
 			return $respuesta; 
-		}			
+		}
+
+		public function validarAcceso( $objeto ){
+			$conexion =new Conexion();
+			$statement=null; 
+			try {
+				$cnn=$conexion -> getConexion();
+				$sql= "SELECT idcliente, nombres, apellidopaterno, apellidomaterno, email FROM cliente 
+						WHERE email = :email AND contrasena = :contrasena; ";
+				$statement=$cnn->prepare($sql);
+
+				$email = $objeto->getEmail();
+				$contrasena = $objeto->getContrasena();
+
+				$statement->bindParam(":email", $email, PDO::PARAM_STR);
+				$statement->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
+
+				$statement->execute();
+
+				while($resultado=$statement->fetch(PDO::FETCH_ASSOC)){
+					$objCliente =  new Cliente();
+					$objCliente->setIdcliente( $resultado["idcliente"] );
+					$objCliente->setNombre( $resultado["nombres"] );
+					$objCliente->setApellidopaterno( $resultado["apellidopaterno"] );
+					$objCliente->setApellidomaterno( $resultado["apellidomaterno"] );
+					$objCliente->setEmail( $resultado["email"] );					
+				}
+
+				if( isset( $_SESSION["cliente"] ) ){
+					$cliente = $_SESSION["cliente"];
+				}else{
+					$cliente = array();//arreglo vacio
+				}
+
+				array_push($cliente, $objCliente);
+				$_SESSION["cliente"] = $cliente;
+				return $_SESSION["cliente"];
+
+			}catch (Throwable $e) {
+				echo $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
+		public function cerrarSesion(){
+			$_SESSION["cliente"] = array();
+			
+			return $_SESSION;			
+		}
+
 	}
 
 ?>

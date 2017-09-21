@@ -1,5 +1,6 @@
 $(function(){
 	//alert("Archivo car.js");
+	
 	irCarritoCompras();
 	listarProductoCompleto();
 	listarPorCategoria();
@@ -13,8 +14,22 @@ function guardarPedido(){
 
 		e.preventDefault();
 		console.log("Formulario guardar Pedido");
-		var data = obtenerDataTabla("#tbody_pedidos");
-		console.log( data );
+		var items = obtenerDataTabla("#tbody_pedidos");
+		var total = $("#total").val();
+		//var idcliente =  coger sesion
+		console.log( total );
+		var data = {
+			pedido: items,
+			total: $("#total").val()
+		};
+		
+		$.ajax({
+			method:"POST",
+			url: "../src/pedido/PedidoController.php",
+			data:{ opcion: "guardar", data: JSON.stringify(data)}
+		}).done(function( info ){
+			console.log( info );
+		});
 
 	});
 }
@@ -143,16 +158,6 @@ function listarPorCategoria(){
 }
 
 function listarProductoCompleto(){
-	/*se va a cambiar esta parte de listado sin tipo, por prodocuto
-	y en la pagina del producto solo, se va a listar por detalleproducto 
-	de acuerdo al id producto seleccionado , para que muestre 
-	las tallas, foto(s), colores, modelo, cantidad disponible
-	-hacer un combo de colores y de acuerdo a eso, mostrar las tallas disponibles.
-	-con el combo de colores, también cambiar las imágenes con dicho color.
-	-hacer validación de stock, de acuerdo al color y la talla elegida:
-	 si hay stock, entonces aparece el boton de agregar al carro, si no, debe mostrarse
-	 un mensaje de: stock agotado.	
-	 */
 
 	$.ajax({
 		method: "POST",
@@ -217,6 +222,24 @@ function dibujarEsquemaProducto( objProducto, col ){
 					</div>`;
 	return producto;//en action poner prenda.php
 }
+
+/*function loginCliente(){
+	$("#frminiciarcliente").on("submit", function(e){
+		e.preventDefault();
+		var frm = $(this).serialize();
+		console.log( frm );
+		var controller = $(this).attr("action");
+		console.log(controller);
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller,
+			data: frm
+		}).done( function(info){
+			console.log( info );
+		});
+	});
+}*/
+
 
 function irCarritoCompras(){
 	$("#btnCarrito").on("click", function(e){

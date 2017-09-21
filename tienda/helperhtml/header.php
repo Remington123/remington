@@ -1,3 +1,21 @@
+<?php 
+
+	include '../src/cliente/Cliente.php';//incluir esta la entidad para poder mostrar los datos
+	 session_start();    
+    //comprobamos si la sesion contiene algún dato.
+    $arreglo = isset($_SESSION['cliente']) ? $_SESSION['cliente'] : "";
+    
+    if($arreglo){
+	    $paterno = $arreglo[0]->getApellidopaterno();
+	    $materno = $arreglo[0]->getApellidomaterno();    	
+    }else{
+    	$paterno = "";
+	    $materno = ""; 
+    }
+
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +40,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header" id="home">
 	<div class="container">
 		<ul>
-		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
-			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
-			<li><i class="fa fa-phone" aria-hidden="true"></i> Call : 01234567898</li>
-			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Iniciar Sesión </a></li>
+			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Registrarse </a></li>
+			<!--<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
+			<li><i class="fa fa-user"></i> <?php echo $paterno." ".$materno; ?> </li>
+			<li>
+				<form action="../src/cliente/ClienteController.php" method="post">
+					<input type="hidden" id="opcion" name="opcion" value="cerrarsesion">
+					<button class="btn btn-default" type="submit">Cerrar Sesión</button>
+				</form>
+			</li>
 		</ul>
 	</div>
 </div>
@@ -139,19 +163,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 						<div class="modal-body modal-body-sub_agile">
 						<div class="col-md-12 modal_body_left modal_body_left1">
-						<h3 class="agileinfo_sign">Sign In <span>Now</span></h3>
-									<form action="#" method="post">
-							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
-								<label>Name</label>
-								<span></span>
-							</div>
+						<h3 class="agileinfo_sign">Iniciar Sesión <span>Ahora</span></h3>
+						<form id="frminiciarcliente" action="../src/cliente/ClienteController.php" method="post">
+							<input type="hidden" id="opcion" name="opcion" value="acceso">						
 							<div class="styled-input">
-								<input type="email" name="Email" required=""> 
+								<input type="email" id="email" name="email" required=""> 
 								<label>Email</label>
 								<span></span>
 							</div> 
-							<input type="submit" value="Sign In">
+							<div class="styled-input agile-styled-input-top">
+								<input type="password" id="contrasena" name="contrasena" required="">
+								<label>Contraseña</label>
+								<span></span>
+							</div>
+							<input type="submit" value="Iniciar Sesión">
 						</form>
 						  <!--<ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
 															<li><a href="#" class="facebook">
@@ -167,8 +192,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																  <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
 																  <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
 														</ul>-->
-														<div class="clearfix"></div>
-														<p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
+														<!--<div class="clearfix"></div>
+														<p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>-->
 
 						</div>
 						
@@ -190,29 +215,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 						<div class="modal-body modal-body-sub_agile">
 						<div class="col-md-12 modal_body_left modal_body_left1">
-						<h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
-						 <form action="#" method="post">
+						<h3 class="agileinfo_sign">Registrar <span>Ahora</span></h3>
+						 <form action="frmregistrarcliente" method="post">
 							<div class="styled-input agile-styled-input-top">
 								<input type="text" name="Name" required="">
-								<label>Name</label>
+								<label>Nombres</label>
+								<span></span>
+							</div>
+							<div class="styled-input agile-styled-input-top">
+								<input type="text" name="Name" required="">
+								<label>Apellido Paterno</label>
+								<span></span>
+							</div>
+							<div class="styled-input agile-styled-input-top">
+								<input type="text" name="Name" required="">
+								<label>Apellido Materno</label>
+								<span></span>
+							</div>
+							<div class="styled-input agile-styled-input-top">
+								<input type="text" name="Name" required="">
+								<label>Dni</label>
+								<span></span>
+							</div>
+							<div class="styled-input agile-styled-input-top">
+								<input type="text" name="Name" required="">
+								<label>Dirección</label>
 								<span></span>
 							</div>
 							<div class="styled-input">
-								<input type="email" name="Email" required=""> 
+								<input type="email" id="email" name="email" required=""> 
 								<label>Email</label>
 								<span></span>
 							</div> 
 							<div class="styled-input">
-								<input type="password" name="password" required=""> 
-								<label>Password</label>
+								<input type="password" id="contrasena" name="contrasena" required=""> 
+								<label>Contraseña</label>
 								<span></span>
 							</div> 
-							<div class="styled-input">
-								<input type="password" name="Confirm Password" required=""> 
-								<label>Confirm Password</label>
-								<span></span>
-							</div> 
-							<input type="submit" value="Sign Up">
+							<input type="submit" value="Registrar">
 						</form>
 						  <!--<ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
 															<li><a href="#" class="facebook">
@@ -228,8 +268,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																  <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
 																  <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
 														</ul>-->
-														<div class="clearfix"></div>
-														<p><a href="#">By clicking register, I agree to your terms</a></p>
+														<!--<div class="clearfix"></div>
+														<p><a href="#">By clicking register, I agree to your terms</a></p>-->
 
 						</div>
 						<div class="clearfix"></div>

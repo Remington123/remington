@@ -1,4 +1,6 @@
-<?php include 'helperhtml/header.php' ?>
+<?php 
+
+include 'helperhtml/header.php' ?>
 
 <!-- banner -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

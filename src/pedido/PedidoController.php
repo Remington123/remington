@@ -30,6 +30,11 @@
 			$pedidoBl = new PedidoBL();
 			echo $pedidoBl->eliminar();
 		break;
+
+		case 'guardar':
+			$pedidoBl = new PedidoBL();
+			echo $pedidoBl->guardarPedido();
+		break;
 	}
 
  ?>

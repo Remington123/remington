@@ -8,6 +8,7 @@
  	<h1>Realizar Compra</h1>
 
 	<?php 
+		/*VALIDAR QUE EL CLIENTE ESTE LOGEADO*/
 		if( isset($_SESSION["carrito"]) ){
 			$carrito = $_SESSION["carrito"];
 	?>
