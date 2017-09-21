@@ -1,18 +1,23 @@
 <?php 
 
 	include '../src/cliente/Cliente.php';//incluir esta la entidad para poder mostrar los datos
-	 session_start();    
+
+	if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }  
     //comprobamos si la sesion contiene algún dato.
     $arreglo = isset($_SESSION['cliente']) ? $_SESSION['cliente'] : "";
     
     if($arreglo){
+    	$idcliente = $arreglo[0]->getIdcliente();
 	    $paterno = $arreglo[0]->getApellidopaterno();
 	    $materno = $arreglo[0]->getApellidomaterno();    	
     }else{
+    	$idcliente = "";
     	$paterno = "";
 	    $materno = ""; 
     }
-
 
  ?>
 
@@ -43,6 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Iniciar Sesión </a></li>
 			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Registrarse </a></li>
 			<!--<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
+			<input type="hidden" id="idcliente" name="idcliente" value=" <?php echo $idcliente; ?> ">
 			<li><i class="fa fa-user"></i> <?php echo $paterno." ".$materno; ?> </li>
 			<li>
 				<form action="../src/cliente/ClienteController.php" method="post">

@@ -1,7 +1,7 @@
 <?php 
 
 	include '../src/detallepedido/Item.php';//incluir esta la entidad para poder mostrar los datos
-	session_start();
+	//session_start();
 	//header('Location: '.$_SERVER["PHP_SELF"]);
 	//echo $_SERVER["PHP_SELF"];
 

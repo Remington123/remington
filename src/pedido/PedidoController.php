@@ -32,8 +32,11 @@
 		break;
 
 		case 'guardar':
+			session_start();
 			$pedidoBl = new PedidoBL();
 			echo $pedidoBl->guardarPedido();
+			//session_destroy();
+			//header('Location: ../../tienda/realizar-compra.php');
 		break;
 	}
 

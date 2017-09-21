@@ -36,7 +36,7 @@
 			session_start();
 			$clienteBl = new ClienteBL();
 			$clienteBl->cerrarSesion();
-			session_destroy();			
+			//session_destroy();			
 			header('Location: ../../tienda/index.php');
 		break;
 	}

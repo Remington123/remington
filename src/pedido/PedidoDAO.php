@@ -151,7 +151,11 @@
 				$respuesta = $statement->execute();
 
 				if( $respuesta ){
-					$respuestadetalle = $this->guardarDetalle($idpedido, $detalle, $cnn);				
+					$respuestadetalle = $this->guardarDetalle($idpedido, $detalle, $cnn);
+					if( $respuestadetalle ){						
+							$_SESSION["carrito"] = array();
+							
+					}
 				}
 
 

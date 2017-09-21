@@ -1,6 +1,6 @@
 <?php 
 	include '../src/detallepedido/Item.php';//incluir esta la entidad para poder mostrar 
-	session_start();
+	//session_start();
 
 	include 'helperhtml/header.php';
  ?>
@@ -60,7 +60,10 @@
 						</tr>
 					</tbody>
 				</table>
+			<?php if( !empty( $idcliente ) ){ ?>
  				<button type="submit" class="btn btn-primary">Pagar</button>
+ 			<?php }else{ echo "Debes Iniciar Sesión";}?>
+
 			</form>
 		<?php }else if( !isset($carrito) ){
 			echo "No hay Items para realizar la compra";

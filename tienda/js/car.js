@@ -29,6 +29,7 @@ function guardarPedido(){
 			data:{ opcion: "guardar", data: JSON.stringify(data)}
 		}).done(function( info ){
 			console.log( info );
+			window.location = "realizar-compra.php";			
 		});
 
 	});
