@@ -18,7 +18,7 @@
 			$validar = new ClienteValidar();
 			if( $validar->datosObtenidosFormulario("registrar" ) ){
 				$cliente = new Cliente();
-				$cliente->setNombre( $_POST["nombre"] );
+				$cliente->setNombre( $_POST["nombres"] );
 				$cliente->setApellidopaterno( $_POST["apellidopaterno"] );
 				$cliente->setApellidomaterno( $_POST["apellidomaterno"] );
 				$cliente->setDni( $_POST["dni"] );
@@ -30,7 +30,7 @@
 				$cliente->setEstado(1);
 
 			$dao = new ClienteDAO();
-			$dao->registrar( $cliente ) ? $informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+			$dao->registrar( $cliente ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}

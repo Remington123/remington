@@ -3,7 +3,7 @@
 
 	class ClienteValidar implements IValidarDatosObtenidosFormulario{
 
-		public function datosObtenidosFormulario( $aaccion ) : bool{
+		public function datosObtenidosFormulario( $accion ) : bool{
 			$camposConValores = false;
 
 			if ( $accion == "registrar" ){
@@ -23,11 +23,10 @@
 				!empty( $_POST["apellidomaterno"]) &&
 				!empty( $_POST["dni"]) &&
 				!empty( $_POST["email"]) &&
-				!empty( $_POST["contraseña"]) &&
+				
 				!empty( $_POST["direccion"]) &&
 				!empty( $_POST{"celular"}) &&
-				!empty( $_POST{"ruc"}) &&
-				!empty( $_POST{"idtipousuario"}) ){
+				!empty( $_POST{"ruc"}) ){
 				$camposConValores = true;
 			}
 			return $camposConValores;

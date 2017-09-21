@@ -22,7 +22,7 @@
 	    		$dao = new PedidoDAO();
 				return $dao->listarPedido( $idpedido );
 			}else{
-				return $informacion["respuesta"] = "idproducto_indefinido";
+				return $informacion["respuesta"] = "id_indefinido";
 			}    	 	
 	    }
 

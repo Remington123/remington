@@ -12,6 +12,14 @@
 			return $dao->listar();
 		}
 
+		public function listarDetalleProducto() :string{
+	    	$informacion = [];
+
+	    	$dao = new DetalleProductoDAO();
+	    	$idproducto = $_POST["idproducto"];
+	    	return $dao->listarDetalleProducto( $idproducto );    	
+	    }
+
 		public function registrar() :string{
 
 			$informacion = [];

@@ -11,6 +11,11 @@
 			echo $productoBl->listar();
 		break;
 
+		case 'listarProducto':
+			$productoBl = new ProductoBl();
+			echo $productoBl->listarProducto();
+		break;
+
 		case 'registrar':
 			$productoBl = new ProductoBL();
 			echo $productoBl->registrar();

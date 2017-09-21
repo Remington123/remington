@@ -12,6 +12,8 @@ llenarComboTela("registrar", 0);
 guardarAsignacion();
 guardar();
 eliminar();
+obtenerDataProducto();
+
 
 var tabla_detalle = "";
 
@@ -53,12 +55,80 @@ function eliminar(){
 	});
 }
 
+
+function obtenerDataProducto(){
+	$("#btnlistar-producto").on("click",function(){
+		var idproducto = $("#idproducto").val();
+		if( idproducto == "" )
+			alert("Ingresar código de producto");
+		else{
+			$.ajax({
+				method: "POST",
+				url: "../src/producto/ProductoController.php",
+				data: {opcion:"listarProducto", idproducto: idproducto}
+			}).done( function( info ){
+				var producto = JSON.parse(info),
+					idproducto = producto.data[0].idproducto;
+				llenarDatosDeModulo( producto );	
+				//Pasamos el idproducto como parámetro
+					console.log("id prdo: "+ idproducto);
+				dtDetalleProducto( idproducto );
+			});
+		}
+	});
+}
+
+function llenarDatosDeModulo( producto ){
+	$("#producto").val( producto.data[0].producto );
+	$("#categoria").val( producto.data[0].categoria );
+	$("#idcategoriaproducto").val( producto.data[0].idcategoriaproducto );
+	$("#tela").val( producto.data[0].tela );
+	$("#idtela").val( producto.data[0].idtela );
+}
+
+function dtDetalleProducto( idproducto ){
+
+	var table = $("#dt_detalleproducto").DataTable({
+		"bDestroy": true,
+		ajax:{
+			method: "POST",
+			url: "../src/detalleproducto/DetalleProductoController.php",
+			data: {opcion:"listarProductoConDetalle", idproducto: idproducto}
+		},
+		columns:[
+			{"data":"iddetalleproducto"},
+			{"data":"modelo"},
+			{"data":"talla"},
+			{"data":"color"},
+			{"data":"urlimagen", render: function(data){
+				return `<img src="${data}" width="80" height="60">`;
+			}},
+			{"data":"stock"},
+			{"data":"precio"},
+			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>`}
+		]
+	});
+
+	obtener_datadetalle_modificar("#dt_detalleproducto tbody", table);
+}
+
+function obtener_datadetalle_modificar (tbody, table){
+	$(tbody).on("click", "button.modificar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		console.log(data);
+
+		var	opcion = $("#opcion").val("modificar"),
+			stock = $("#stock").val( data.stock ),
+			precio = $("#precio").val( data.precio );
+	});
+}
+
+
+
 function dtProducto(){
-	if ( $.fn.DataTable.isDataTable('#dt_producto') )
-	  	$("#dt_producto").empty();
 
 	var table = $("#dt_producto").DataTable({
-		destroy: true,
+		"bDestroy": true,
 		ajax:{
 			method: "POST",
 			url: "../src/producto/ProductoController.php",

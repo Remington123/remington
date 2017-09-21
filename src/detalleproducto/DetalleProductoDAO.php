@@ -27,6 +27,37 @@
 			}
 		}
 
+		public function listarDetalleProducto( $idproducto ){
+			$conexion =new Conexion();
+			try{
+				$cnn =$conexion->getConexion();
+				$sql ="SELECT dp.iddetalleproducto, dp.idproducto, dp.idmodelo, m.descripcion AS modelo, dp.idtalla, t.descripcion AS talla, dp.idcolor, c.nombre AS color, dp.urlimagen, dp.stock,	dp.precio
+						FROM detalleproducto dp
+						INNER JOIN modelo m
+						ON m.idmodelo = dp.idmodelo
+						INNER JOIN talla t
+						ON t.idtalla = dp.idtalla
+						INNER JOIN color c
+						ON c.idcolor = dp.idcolor
+						WHERE dp.idproducto = ?;";
+										$statement=$cnn->prepare($sql);
+				
+				$statement->bindParam(1, $idproducto, PDO::PARAM_INT);
+				$statement->execute();
+
+				$data["data"] = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+		    }catch (throwable $e){
+		    	echo $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
 		public function registrar( $objeto ) : bool{
 			$conexion = new Conexion();
 			$respuesta = false;

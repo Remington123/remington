@@ -42,7 +42,7 @@
 				$statement->bindParam(1, $idpedido, PDO::PARAM_INT);
 				$statement->execute();
 
-				$data = [];//arreglo vacio
+				$data["data"] = [];//arreglo vacio
 				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
 					$data["data"][] = $resultado;
 				}

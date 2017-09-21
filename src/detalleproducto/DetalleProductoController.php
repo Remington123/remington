@@ -29,6 +29,11 @@
 				echo $detalleproductoBl->eliminar();
 			break;
 
+			case 'listarProductoConDetalle':
+				$detalleproductoBl = new DetalleProductoBL();
+				echo $detalleproductoBl->listarDetalleProducto();
+			break;
+
 			case 'listarProductoDetallePorId':
 				$detalleproductoBl = new DetalleProductoBL();
 				$listaDetalle = $detalleproductoBl->listarProductoDetallePorId();

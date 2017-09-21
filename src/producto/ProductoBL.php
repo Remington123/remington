@@ -31,6 +31,13 @@
 			return ( json_encode($informacion) );
 		}
 
+		public function listarProducto(){
+
+			$idpedido = $_POST["idproducto"];
+    		$dao = new ProductoDAO();
+			return $dao->listarProducto( $idpedido );
+	    }
+
 		public function modificar() :string{
 
 			$informacion = [];
