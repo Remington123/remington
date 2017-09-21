@@ -5,14 +5,11 @@ guardar();
 //Creación de funciones JS para el módulo empleado
 function dtCategoriaproducto(){
 
-	if ( $.fn.DataTable.isDataTable('#dt_categoriaproducto') )
-	  	$("#dt_categoriaproducto").empty();
-
 	var table = $("#dt_categoriaproducto").DataTable({
-		detroy: true,
+		"bDestroy": true,
 		ajax:{
 			method: "POST",
-			url: "../src/categoriaproducto/CategoriaproductoController.php",
+			url: "../src/categoriaproducto/CategoriaProductoController.php",
 			data: {opcion:"listar"}
 		},
 		columns:[

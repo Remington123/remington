@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav menu__list">
 					<li class="active menu__item menu__item--current"><a class="menu__link" href="index.php">Inicio <span class="sr-only">(current)</span></a></li>
-					<li class=" menu__item"><a class="menu__link" href="about.html">Acerca De</a></li>
+					<li class=" menu__item"><a class="menu__link" href="#">Acerca De</a></li>
 					<li class="menu__item">
 						<a href="categoria.php" class="menu__link">Categorias</a>
 							<!--<ul class="dropdown-menu multi-column columns-3">
@@ -137,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li><a href="typography.html">Tipogrfia</a></li>
 								</ul>
 					</li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">Contacto</a></li>
+					<!--<li class=" menu__item"><a class="menu__link" href="contact.html">Contacto</a></li>-->
 				  </ul>
 				</div>
 			  </div>

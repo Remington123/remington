@@ -4,16 +4,19 @@
 
 	include 'helperhtml/header.php';
  ?>
+ 	<div class="container">
+		<div class="col-sm-12">
+	<br>
 
- 	<h1>Realizar Compra</h1>
-
+ 	<h2 id="h2.-bootstrap-heading">Realizar Compra</h2>
+	<br>
 	<?php 
 		/*VALIDAR QUE EL CLIENTE ESTE LOGEADO*/
 		if( isset($_SESSION["carrito"]) ){
 			$carrito = $_SESSION["carrito"];
 	?>
 			<form id="frmguardarpedido" method="POST">
-				<table>
+				<table class="table ">
 					<thead>
 						<th>ID</th>
 						<th>Imagen</th>
@@ -54,26 +57,24 @@
 						</tr>
 			<?php } ?>			
 						<tr>
-							<td colspan='5'>Total: </td>
-							<td id="totalcompra"><?php echo $total ?></td>
+							<td colspan='7'><strong>Total:</strong> </td>
+							<td id="totalcompra"><strong><?php echo $total ?></strong></td>
 							<td><input type="hidden" id="total" value="<?php echo $total ?>"></td>
 						</tr>
 					</tbody>
 				</table>
 			<?php if( !empty( $idcliente ) ){ ?>
  				<button type="submit" class="btn btn-primary">Pagar</button>
- 			<?php }else{ echo "Debes Iniciar Sesión";}?>
+ 			<?php }else{ echo "<strong class='text-danger'>¡Debes Iniciar Sesión!</strong>";}?>
 
 			</form>
 		<?php }else if( !isset($carrito) ){
 			echo "No hay Items para realizar la compra";
 		}
 		?>
-
- 	<h2>Cuenta Bancaria</h2>
- 	<h2>Pago con Tarjetas: API de CULQUI</h2>
-
- 	<button>Enviar Comprobante</button>
-
+ 	<h4>Cuenta Bancaria</h4>
+ 	<h4>Pago con Tarjetas: API de CULQUI</h4>
+	</div>
+</div>
 	
 <?php include 'helperhtml/footer.php' ?>

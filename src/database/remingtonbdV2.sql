@@ -89,7 +89,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`idcliente`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
   CONSTRAINT `fk_idtipousuario` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','pett@gmail.com','123','Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230','jose@gmail.com','123','Av. America Sur #123','978546213',NULL,1,1);
+INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','pett@gmail.com','123','Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230','jose@gmail.com','123','Av. America Sur #123','978546213',NULL,1,1),(3,'Ramón','Duran','Barahona','47859612','ram@gmail.com','123','Av. America Norte #784','978546123',NULL,1,1),(4,'Maria','Otiniano','Bacilio','47851023','mar@gmail.com','123','Urb. Palermo #451','987451226',NULL,1,1),(5,'Josue','Diaz','Alfaro','47859031','josue@gmail.com','123','Urb. Rinconada #745','974120245',NULL,1,1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,10 +140,10 @@ CREATE TABLE `comprobantepago` (
   `idpedido` varchar(7) DEFAULT NULL,
   `idtipopago` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
+  `serie` varchar(3) DEFAULT NULL,
+  `numero` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`idcomprobantepago`),
   KEY `fk_idtipopago_idx` (`idtipopago`),
-  KEY `fk_comprobantepagoidpedido_idx` (`idpedido`),
-  CONSTRAINT `fk_comprobantepagoidpedido` FOREIGN KEY (`idpedido`) REFERENCES `pedido` (`idpedido`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtipopago` FOREIGN KEY (`idtipopago`) REFERENCES `tipopago` (`idtipopago`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -223,13 +223,15 @@ CREATE TABLE `detallepedido` (
   `iddetallepedido` int(11) NOT NULL AUTO_INCREMENT,
   `idpedido` varchar(7) DEFAULT NULL,
   `idproducto` int(11) DEFAULT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
   `cantidad` mediumint(3) DEFAULT NULL,
   `importe` decimal(18,2) DEFAULT NULL,
+  `idtalla` int(11) DEFAULT NULL,
+  `idcolor` int(11) DEFAULT NULL,
+  `urlimagen` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`iddetallepedido`),
   KEY `fk_idproducto_idx` (`idproducto`),
-  KEY `fk_idpedido_idx` (`idpedido`),
-  CONSTRAINT `fk_idpedido` FOREIGN KEY (`idpedido`) REFERENCES `pedido` (`idpedido`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idproducto` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -256,12 +258,12 @@ CREATE TABLE `detalleproducto` (
   `idmodelo` int(11) DEFAULT NULL,
   `idtalla` int(11) DEFAULT NULL,
   `idcolor` tinyint(4) DEFAULT NULL,
-  `urlimagen` varchar(45) DEFAULT NULL,
+  `urlimagen` varchar(200) DEFAULT NULL,
   `stock` smallint(6) DEFAULT NULL,
   `precio` decimal(18,2) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`iddetalleproducto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,6 +272,7 @@ CREATE TABLE `detalleproducto` (
 
 LOCK TABLES `detalleproducto` WRITE;
 /*!40000 ALTER TABLE `detalleproducto` DISABLE KEYS */;
+INSERT INTO `detalleproducto` VALUES (1,1,1,1,1,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',10,50.00,1),(2,1,1,1,4,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',10,60.00,1),(3,3,3,4,2,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',0,50.00,1),(4,3,3,6,2,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',20,60.00,1);
 /*!40000 ALTER TABLE `detalleproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,9 +456,7 @@ CREATE TABLE `pedido` (
   `fecha` varchar(10) DEFAULT NULL,
   `idcliente` int(11) DEFAULT NULL,
   `total` decimal(18,2) DEFAULT NULL,
-  PRIMARY KEY (`idpedido`),
-  KEY `fk_idcliente_idx` (`idcliente`),
-  CONSTRAINT `fk_idcliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`idpedido`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -465,7 +466,6 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES ('CP00001','06/09/2017',1,200.00);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -526,7 +526,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Camisa Formal',1,1,1),(2,'Camisa a cuadros elegante',1,1,1),(3,'Chaleco de vestir',1,2,2),(4,'Camisa super elegante ',1,1,4);
+INSERT INTO `producto` VALUES (1,'Camisa Formal',2,1,1),(2,'Camisa a cuadros elegante',1,1,1),(3,'Chaleco de vestir',2,2,2),(4,'Camisa super elegante ',1,1,4);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -665,4 +665,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-14 22:54:57
+-- Dump completed on 2017-09-21  5:55:36

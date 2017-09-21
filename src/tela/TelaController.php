@@ -8,7 +8,7 @@
 	switch ( $opcion ) {
 		case 'listar':
 			$telaBl = new TelaBL();
-			$telaBl->listar();
+			echo $telaBl->listar();
 		break;
 
 		case 'registrar':

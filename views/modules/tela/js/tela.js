@@ -5,11 +5,8 @@ guardar();
 //Creación de funciones JS para el módulo empleado
 function dtTela(){
 
-	if ( $.fn.DataTable.isDataTable('#dt_tela') )
-	  	$("#dt_tela").empty();
-
 	var table = $("#dt_tela").DataTable({
-		detroy: true,
+		"bDestroy": true,
 		ajax:{
 			method: "POST",
 			url: "../src/tela/TelaController.php",

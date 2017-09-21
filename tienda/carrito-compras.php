@@ -9,9 +9,12 @@
  ?>
 
 
-	<!-- NO TOCAR -->	
-	<h2>Lista de Productos agregados al carrito de compras</h2>
-	<a href="http://www.worldanimalfoundation.net/f/wolf.pdf">PDF</a>
+	<!-- NO TOCAR -->
+	<div class="container">
+		<div class="col-sm-12">
+	<br>	
+	<h2 id="h2.-bootstrap-heading">Productos agregados al carrito de compras</h2>
+	<br>
 	<?php 
 		if( isset($_SESSION["carrito"]) ){
 			$carrito = $_SESSION["carrito"];
@@ -19,7 +22,7 @@
 			//var_dump($carrito);
 	?>
 			<form id="frmpedidos" method="POST">
-				<table>
+				<table class="table">
 					<thead>
 						<th>ID</th>
 						<th>Imagen</th>
@@ -50,7 +53,7 @@
 								<input type='text' name='cantidad' class='cantidad data' min='1' value="<?php echo $p->cantidad;?>">
 							</td>
 							<td class='importe'><?php echo $p->importe; ?></td>
-							<td><button type="button" data-indice-item="<?php echo $indice; ?>" class="eliminar">Eliminar</button></td>
+							<td><button type="button" data-indice-item="<?php echo $indice; ?>" class="eliminar btn btn-danger">Eliminar</button></td>
 							<?php $total = $total + $p->importe; ?>
 							
 							<td><input type="hidden" class="data" value="<?php echo $p->idproducto; ?>"></td>
@@ -64,14 +67,15 @@
 						</tr>
 			<?php } ?>			
 						<tr>
-							<td colspan='5'>Total: </td>
-							<td id="totalcompra"><?php echo $total ?></td>
+							<td colspan='7'><strong>Total:</strong> </td>
+							<td id="totalcompra"><strong><?php echo $total ?><strong></td>
 							<td><input type="hidden" id="total" value="<?php echo $total ?>"></td>
 						</tr>
 					</tbody>
 				</table>
 				<div>
-					<button type="button" id="btnIrCaja">Ir a Caja</button>
+					<button type="button" class="btn btn-primary" id="btnIrCaja">Ir a Caja</button>
+					<br><br>
 				</div>
 			</form>
 		<?php }else if( !isset($carrito) ){
@@ -79,7 +83,8 @@
 		}
 		?>
 	<!-- NO TOCAR -->
-
+	</div>
+</div>
 
 
 	<script
