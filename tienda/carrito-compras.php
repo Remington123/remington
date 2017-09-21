@@ -24,9 +24,9 @@
 						<th>ID</th>
 						<th>Imagen</th>
 						<th>Nombre</th>
-						<th>Precio</th>
 						<th>Talla</th>
 						<th>Color</th>
+						<th>Precio</th>
 						<th>Cantidad</th>
 						<th>Importe</th>
 						<th>Opción</th>
@@ -42,9 +42,9 @@
 							<td><?php echo $p->idproducto; ?></td>
 							<td> <img src="<?php echo $p->urlimagen; ?>" width="100" height="80" > </td>
 							<td><?php echo $p->descripcion; ?></td>
-							<td class='precio'><?php echo $p->precio;?></td>
 							<td><?php echo $p->talla;?></td>
 							<td><?php echo $p->color;?></td>
+							<td class='precio'><?php echo $p->precio;?></td>
 
 							<td>
 								<input type='text' name='cantidad' class='cantidad data' min='1' value="<?php echo $p->cantidad;?>">
@@ -158,7 +158,7 @@
 			$("tr .cantidad").on("change", function(e){
 				e.preventDefault();
 				var cantidad = parseInt( $(this).val() ),
-					precio = $(this).parents("tr")[0].children[3].innerHTML,//5, celda de precio
+					precio = $(this).parents("tr")[0].children[5].innerHTML,//5, celda de precio
 					importe = $(this).parents("tr")[0].children[7];//7, celda de importe
 					importe.innerText = cantidad * parseFloat(precio);
 				
