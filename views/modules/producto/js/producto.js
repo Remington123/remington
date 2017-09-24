@@ -280,11 +280,11 @@ function buscarDtProducto(){
 			"autoWidth": false
 	    });
 
-	    seleccionarProducto("#buscar_dt_producto tbody", table);
+	    seleccionarProducto("#buscar_dt_producto tbody", table, "asginar");
 	});
 }
 
-function seleccionarProducto(tbody, table){
+function seleccionarProducto(tbody, table, accion){
 	$(tbody).on("click", "a.seleccionar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log( data );
@@ -293,7 +293,7 @@ function seleccionarProducto(tbody, table){
 		if ( $.fn.DataTable.isDataTable('#dt_detalleproducto') ){
 	  		$("#dt_detalleproducto").empty();
 		}
-
+		
 		var idcategoriaproducto = $("#idcategoriaproducto").val( data.idcategoriaproducto ),
 			idproducto = $("#id_producto").val( data.idproducto ),
 			descripcion = $("#descripcion").val( data.descripcion ),

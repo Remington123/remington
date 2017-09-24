@@ -19,8 +19,8 @@
 							<th>Nombres</th>
 							<th>Apellidopaterno</th>
 							<th>Apellidomaterno</th>
-							<th>Dni</th>
 							<th>Email</th>
+							<th>Dni</th>
 							<th></th>
 						</thead>
 					</table>
