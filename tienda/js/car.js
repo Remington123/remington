@@ -1,6 +1,6 @@
 $(function(){
 	//alert("Archivo car.js");
-	
+	registrarCliente();
 	irCarritoCompras();
 	listarProductoCompleto();
 	listarPorCategoria();
@@ -8,6 +8,14 @@ $(function(){
 	seleccionarTalla();
 	guardarPedido();
 });
+
+function registrarCliente(){
+	$("#frmregistrarcliente").on("submit", function(e){
+		e.preventDefault();
+		var frm = $(this).serialize();
+		console.log( frm );
+	});
+}
 
 function guardarPedido(){
 	$("#frmguardarpedido").on("submit", function(e){
@@ -249,6 +257,13 @@ function dibujarEsquemaProducto( objProducto, col ){
 	return producto;//en action poner prenda.php
 }
 
+function irCarritoCompras(){
+	$("#btnCarrito").on("click", function(e){
+		e.preventDefault();
+		window.location = "carrito-compras.php";
+	});
+}
+
 /*function loginCliente(){
 	$("#frminiciarcliente").on("submit", function(e){
 		e.preventDefault();
@@ -266,10 +281,3 @@ function dibujarEsquemaProducto( objProducto, col ){
 	});
 }*/
 
-
-function irCarritoCompras(){
-	$("#btnCarrito").on("click", function(e){
-		e.preventDefault();
-		window.location = "carrito-compras.php";
-	});
-}

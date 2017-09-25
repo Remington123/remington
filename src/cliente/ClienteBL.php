@@ -25,7 +25,7 @@
 				$cliente->setEmail( $_POST["email"] );
 				$cliente->setCelular( $_POST["celular"] );
 				$cliente->setDireccion( $_POST["direccion"] );
-				$cliente->setRuc( $_POST["ruc"] );
+				//$cliente->setRuc( $_POST["ruc"] );
 				$cliente->setIdtipousuario( 1 );
 				$cliente->setEstado(1);
 
@@ -41,23 +41,24 @@
 		public function modificar() : string{
 			
 			$informacion = [];
-			$cliente = new ClienteValidar();
+			$validar = new ClienteValidar();
 			if( $validar->datosObtenidosFormulario("modificar") ){
+			$cliente = new Cliente();
 			$cliente->setIdcliente( $_POST["idcliente"] );
-			$cliente->setNombre( $_POST["nombre"] );
+			$cliente->setNombre( $_POST["nombres"] );
 			$cliente->setApellidopaterno( $_POST["apellidopaterno"] );
 			$cliente->setApellidomaterno( $_POST["apellidomaterno"] );
 			$cliente->setDni( $_POST["dni"] );
 			$cliente->setCelular( $_POST["celular"] );
 			$cliente->setDireccion( $_POST["direccion"] );
-			$cliente->setRuc( $_POST["ruc"] );
+			$cliente->setContrasena( $_POST["contrasena"] );
 			$cliente->setIdtipousuario( 1 );
 			$cliente->setEstado(1);
 
 			
 			$dao = new ClienteDAO();
 			$dao->modificar( $cliente ) ?
-				$informacion["respuesta"] = "ok_modificacion" : $informacion["respuesta"]= "error_modificacion";
+				$informacion["respuesta"] = "bien" : $informacion["respuesta"]= "error";
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}
@@ -74,12 +75,12 @@
 			$dao = new ClienteDAO();
 
 			if( $dao->eliminar( $idcliente ) )
-				$informacion["respuesta"] = "ok_eliminacion";
+				$informacion["respuesta"] = "bien";
 			else
-				$informacion["respuesta"] = "error_eliminacion";
+				$informacion["respuesta"] = "error";
 
 		}else{
-			$informacion["respuesta"] = "idcliente_indefinido";
+			$informacion["respuesta"] = "id_indefinido";
 		}
 
 			return ( json_encode($informacion) );

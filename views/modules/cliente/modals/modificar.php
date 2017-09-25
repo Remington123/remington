@@ -22,9 +22,9 @@
 							
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
-                              		for="nombre">Nombre</label>
+                              		for="nombres">Nombre</label>
 								<div class="col-sm-10">
-									<input id="nombre" name="nombre" type="text" class="form-control">
+									<input id="nombres" name="nombres" type="text" class="form-control">
 								</div>
 							</div>							
 							<div class="form-group">
@@ -42,23 +42,49 @@
 							</div>
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
-                              		for="email">Email</label>
+                              		for="dni">DNI</label>
 								<div class="col-sm-10">
-									<input id="email" name="email" type="text" class="form-control">
-								</div>
+									<input id="dni" name="dni" type="text" class="form-control"></div>
+							</div>
+							<div class="form-group">
+								 <label  class="col-sm-2 control-label"
+                              		for="direccion">Dirección</label>
+								<div class="col-sm-10">
+									<input id="direccion" name="direccion" type="text" class="form-control"></div>
 							</div>
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
                               		for="celular">Celular</label>
 								<div class="col-sm-10">
-									<input id="celular" name="celular" type="text" class="form-control">
+									<input id="celular" name="celular" type="text" class="form-control" minlength="9" maxlength="9">
 								</div>
-							</div>							
+							</div>	
+							<div class="form-group">
+								 <label  class="col-sm-2 control-label"
+                              		for="email">Email</label>
+								<div class="col-sm-10">
+									<input id="email" name="email" type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          				title="Por favor, introducir un formato de email valido, ejemplo: juan@gmail.com">
+								</div>
+							</div>
+							<div class="form-group">
+								 <label  class="col-sm-2 control-label"
+                              		for="contrasena">Contraseña</label>
+								<div class="col-sm-10">
+									<input id="contrasena" name="contrasena" type="text" class="form-control">
+								</div>
+							</div>					
 
 							<div class="modal-footer">
 								<button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 							</div>
+							 <div class="row">
+						        <br>
+						       	<div class="col-sm-12 mensaje ocultar">
+						       			        		
+						       	</div>
+						      </div>
 						</form>
 					</div>
 					<!--Fin modal-body-->

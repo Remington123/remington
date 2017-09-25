@@ -43,14 +43,15 @@
 									 <label  class="col-sm-2 control-label"
 	                              		for="email">Email</label>
 									<div class="col-sm-10">
-										<input id="email" name="email" type="text" class="form-control">
+										<input id="email" name="email" type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          				title="Por favor, introducir un formato de email valido, ejemplo: juan@gmail.com">
 									</div>
 								</div>
 								<div class="form-group">
 									 <label  class="col-sm-2 control-label"
 	                              		for="celular">Celular</label>
 									<div class="col-sm-10">
-										<input id="celular" name="celular" type="text" class="form-control">
+										<input id="celular" name="celular" type="text" class="form-control" minlength="9" maxlength="9">
 									</div>
 								</div>
 

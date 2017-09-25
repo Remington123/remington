@@ -22,11 +22,9 @@
 				!empty( $_POST["apellidopaterno"]) &&
 				!empty( $_POST["apellidomaterno"]) &&
 				!empty( $_POST["dni"]) &&
-				!empty( $_POST["email"]) &&
-				
-				!empty( $_POST["direccion"]) &&
-				!empty( $_POST{"celular"}) &&
-				!empty( $_POST{"ruc"}) ){
+				!empty( $_POST["contrasena"]) &&
+				//!empty( $_POST["direccion"])
+				!empty( $_POST["email"])){
 				$camposConValores = true;
 			}
 			return $camposConValores;

@@ -11,7 +11,7 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT idempleado ,nombres, apellidopaterno, apellidomaterno, email, celular FROM empleado;";
+				$sql = "SELECT idempleado ,nombres, apellidopaterno, apellidomaterno, email, celular, dni FROM empleado;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 

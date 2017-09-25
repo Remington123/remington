@@ -34,15 +34,16 @@
 		        </div>
 		        <div class="form-group">
 		          <label for="dni">Dni</label>
-		          <input type="text" id="dni" name="dni" class="form-control" placeholder="Dni">
+		          <input type="text" id="dni" name="dni" class="form-control" placeholder="Dni" minlength="8" maxlength="8">
 		        </div>
 		        <div class="form-group">
 		          <label for="email">Email</label>
-		          <input type="text" id="email" name="email" class="form-control" placeholder="Email">
+		          <input type="text" id="email" name="email" class="form-control" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          				title="Por favor, introducir un formato de email valido, ejemplo: juan@gmail.com">
 		        </div>
 		        <div class="form-group">
 		          <label for="contrasena">Contraseña</label>
-		          <input type="text" id="contrasena" name="contrasena" class="form-control" placeholder="Dirección">
+		          <input type="text" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" >
 		        </div>
 		        <div class="form-group">
 		          <label for="fechanacimiento">Fecha Nacimiento</label>
@@ -54,7 +55,7 @@
 		        </div>
 		        <div class="form-group">
 		          <label for="celular">Celular</label>
-		          <input type="text" id="celular" name="celular" class="form-control" placeholder="Celular">
+		          <input type="text" id="celular" name="celular" class="form-control" placeholder="Celular" minlength="9" maxlength="9">
 		        </div>
 		        <div class="form-group">
 		          <label for="idtipousuario">Tipo Usuario</label>

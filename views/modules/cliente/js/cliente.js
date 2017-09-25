@@ -6,7 +6,9 @@ guardar();
 
 //Creación de funciones JS para el módulo cliente
 function dtCliente(){
-	
+	if ( $.fn.DataTable.isDataTable('#dt_cliente') )
+		$("#dt_cliente").empty();
+
 	var table = $("#dt_cliente").DataTable({
 		"bDestroy": true,
 		ajax:{
@@ -37,11 +39,14 @@ function obtener_data_modificar (tbody, table){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
 		var idusuario = $("#idcliente").val( data.idcliente ),
-				nombre = $("#nombre").val( data.nombres ),
+				nombre = $("#nombres").val( data.nombres ),
 				apellidopaterno = $("#apellidopaterno").val( data.apellidopaterno ),
 				apellidomaterno = $("#apellidomaterno").val( data.apellidomaterno ),
 				email = $("#email").val( data.email ),
+				dni = $("#dni").val( data.dni ),
+				direccion = $("#direccion").val( data.direccion ),
 				celular = $("#celular").val( data.celular ),
+				contrasena = $("#contrasena").val( data.contrasena ),
 				opcion = $("#opcion").val("modificar");
 	});
 }
@@ -50,7 +55,7 @@ function guardar(){
 	$("#frmguardarcliente").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
-		//console.log(frm);
+		console.log(frm);
 		var controller = $(this).attr("action");
 		//console.log("Controlador: " + controller);
 		$.ajax({

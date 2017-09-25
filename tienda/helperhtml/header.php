@@ -222,34 +222,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="modal-body modal-body-sub_agile">
 						<div class="col-md-12 modal_body_left modal_body_left1">
 						<h3 class="agileinfo_sign">Registrar <span>Ahora</span></h3>
-						 <form action="frmregistrarcliente" method="post">
+						 <form id="frmregistrarcliente" method="post">
+						 	<input type="hidden" id="idcliente" name="idcliente" value="">
+							<input type="hidden" id="opcion" name="opcion" value="registrar">
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
+								<input type="text" id="nombres" name="nombres" required="">
 								<label>Nombres</label>
 								<span></span>
 							</div>
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
+								<input type="text" id="apellidopaterno" name="apellidopaterno" required="">
 								<label>Apellido Paterno</label>
 								<span></span>
 							</div>
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
+								<input type="text" id="apellidomaterno" name="apellidomaterno" required="">
 								<label>Apellido Materno</label>
 								<span></span>
 							</div>
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
+								<input type="text" id="dni" name="dni" required="" minlength="8" maxlength="8">
 								<label>Dni</label>
 								<span></span>
 							</div>
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" name="Name" required="">
+								<input type="text" id="direccion" name="direccion" required="">
 								<label>Dirección</label>
 								<span></span>
 							</div>
 							<div class="styled-input">
-								<input type="email" id="email" name="email" required=""> 
+								<input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Por favor, introducir un formato de email valido, ejemplo: juan@gmail.com" required=""> 
 								<label>Email</label>
 								<span></span>
 							</div> 
@@ -257,26 +259,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<input type="password" id="contrasena" name="contrasena" required=""> 
 								<label>Contraseña</label>
 								<span></span>
-							</div> 
+							</div>
+							<div class="styled-input">
+								<input type="password" id="confirmarcontrasena" name="confirmarcontrasena" required=""> 
+								<label>Confirmar Contraseña</label>
+								<span></span>
+							</div>
 							<input type="submit" value="Registrar">
 						</form>
-						  <!--<ul class="social-nav model-3d-0 footer-social w3_agile_social top_agile_third">
-															<li><a href="#" class="facebook">
-																  <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-																  <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
-															<li><a href="#" class="twitter"> 
-																  <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-																  <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
-															<li><a href="#" class="instagram">
-																  <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-																  <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
-															<li><a href="#" class="pinterest">
-																  <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-																  <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
-														</ul>-->
-														<!--<div class="clearfix"></div>
-														<p><a href="#">By clicking register, I agree to your terms</a></p>-->
-
 						</div>
 						<div class="clearfix"></div>
 					</div>

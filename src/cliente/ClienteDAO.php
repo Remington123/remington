@@ -14,7 +14,7 @@
 			try {
 
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT idcliente, nombres, apellidopaterno, apellidomaterno, email, celular FROM cliente;";
+				$sql = "SELECT idcliente, nombres, apellidopaterno, apellidomaterno, email, celular, dni, direccion, contrasena FROM cliente;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -49,7 +49,7 @@
 				$direccion = $objeto->getDireccion();
 				//$created_at = $objeto->getCreated_at();
 				$celular = $objeto->getCelular();
-				$ruc = $objeto->getRuc();
+				$ruc = "";//campo vacio
 				$idtipousuario = $objeto->getIdtipousuario();
 				$estado = $objeto->getEstado();				
 
@@ -90,7 +90,7 @@
 											dni = :dni, 
 											direccion = :direccion,
 											celular = :celular,
-											ruc = :ruc,
+											contrasena = :contrasena,
 											idtipousuario = :idtipousuario,
 											estado = :estado 
 						WHERE idcliente = :idcliente;";
@@ -104,7 +104,7 @@
 				//$email = $objeto->getEmail();
 				//$created_at = $objeto->getCreated_at();
 				$celular = $objeto->getCelular();
-				$ruc = $objeto->getRuc();
+				$contrasena = $objeto->getContrasena();
 				$idtipousuario = $objeto->getIdtipousuario();
 				$estado = $objeto->getEstado();	
 
@@ -117,7 +117,7 @@
 				$statement->bindParam(":dni", $dni, PDO::PARAM_STR);
 				$statement->bindParam(":direccion", $direccion, PDO::PARAM_STR);
 				$statement->bindParam(":celular", $celular, PDO::PARAM_STR);
-				$statement->bindParam(":ruc", $ruc, PDO::PARAM_STR);
+				$statement->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
 				$statement->bindParam(":idtipousuario", $idtipousuario, PDO::PARAM_INT);
 				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
 
