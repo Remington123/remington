@@ -18,7 +18,7 @@
 			$validar = new EmpleadoValidar();
 			if( $validar->datosObtenidosFormulario("registrar") ){
 				$empleado = new Empleado();
-				$empleado->setNombre( $_POST["nombre"] );
+				$empleado->setNombre( $_POST["nombres"] );
 				$empleado->setApellidopaterno( $_POST["apellidopaterno"] );
 				$empleado->setApellidomaterno( $_POST["apellidomaterno"]);
 				$empleado->setDni( $_POST["dni"] );
@@ -33,7 +33,7 @@
 				$dao = new EmpleadoDAO();
 				$dao->registrar( $empleado ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			}else{
-				$informacion[respuesta] = "llenar_datos";
+				$informacion["respuesta"] = "llenar_datos";
 			}
 
 			return ( json_encode($informacion) );
@@ -45,7 +45,7 @@
 			if( $validar->datosObtenidosFormulario("modificar" ) ){
 				$empleado = new Empleado();
 				$empleado->setIdempleado( $_POST["idempleado"] );
-				$empleado->setNombre( $_POST["nombre"] );
+				$empleado->setNombre( $_POST["nombres"] );
 				$empleado->setApellidopaterno( $_POST["apellidopaterno"] );
 				$empleado->setApellidomaterno( $_POST["apellidomaterno"] );
 				//$empleado->setDni( $_POST["dni"] );
@@ -69,10 +69,10 @@
 			$informacion = [];
 			$validar = new EmpleadoValidar();
 			if( $validar->idPrimarioObtenidoFormulario() ){
-				$idempledo = $_POST["idempledo"];
+				$idempleado = $_POST["idempleado"];
 
 				$dao = new EmpleadoDAO();
-				if( $dao->eliminar( $idempledo ) )
+				if( $dao->eliminar( $idempleado ) )
 					$informacion["respuesta"] = "bien";
 				else
 					$informacion["respuesta"] = "error";

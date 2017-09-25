@@ -1,6 +1,7 @@
 /* Llamado o ejecución de funciones */
 dtCliente();
 guardar();
+eliminar();
 //alert("Cliente.js");
 //guardar();
 
@@ -32,6 +33,7 @@ function dtCliente(){
 	});
 
 	obtener_data_modificar("#dt_cliente tbody", table);
+	obtener_idcliente_eliminar("#dt_cliente tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
@@ -48,8 +50,18 @@ function obtener_data_modificar (tbody, table){
 				celular = $("#celular").val( data.celular ),
 				contrasena = $("#contrasena").val( data.contrasena ),
 				opcion = $("#opcion").val("modificar");
+		limpiarMensaje();
 	});
 }
+
+function obtener_idcliente_eliminar (tbody, table){
+	$(tbody).on("click", "button.eliminar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		var idcliente = $("#frmeliminarcliente #idcliente").val( data.idcliente );
+		limpiarMensaje();
+	});
+}
+
 
 function guardar(){
 	$("#frmguardarcliente").on("submit", function(e){
@@ -68,6 +80,29 @@ function guardar(){
 			dtCliente();
 		});
 	});
+}
+
+function eliminar(){
+	$("#frmeliminarcliente").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize();
+		var controller = $(this).attr("action");
+		console.log(controller);
+		console.log( frm );
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){			
+			mensajes( info );
+			dtCliente();			
+		});
+	});
+}
+
+function limpiarMensaje(){
+	$(".mensaje").html("").addClass("ocultar");
 }
 
 function mensajes( info ){

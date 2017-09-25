@@ -11,7 +11,9 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT idempleado ,nombres, apellidopaterno, apellidomaterno, email, celular, dni FROM empleado;";
+				$sql = "SELECT idempleado ,nombres, apellidopaterno, apellidomaterno, email, celular, dni 
+						FROM empleado
+						WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -117,7 +119,29 @@
 		}
 
 		public function eliminar(int $id) : bool{
-			return true;
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE empleado SET  estado = :estado 
+						WHERE idempleado = :idempleado;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement->bindParam(":idempleado", $id, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+
+				$respuesta = $statement->execute();
+
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 
 		public function validarAcceso( $objeto ){

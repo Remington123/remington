@@ -17,7 +17,7 @@
 			}
 
 			if( !empty( $_POST["idempleado"] ) &&
-				!empty( $_POST["nombre"] ) &&
+				!empty( $_POST["nombres"] ) &&
 				!empty( $_POST["apellidopaterno"] ) &&
 				!empty( $_POST["apellidomaterno"] ) &&
 				//!empty( $_POST["dni"] ) &&

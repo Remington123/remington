@@ -42,9 +42,9 @@
 							</div>
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"
-                              		for="dni">DNI</label>
+                              		for="dni">Dni</label>
 								<div class="col-sm-10">
-									<input id="dni" name="dni" type="text" class="form-control"></div>
+									<input id="dni" name="dni" type="text" class="form-control" minlength="8" maxlength="8"></div>
 							</div>
 							<div class="form-group">
 								 <label  class="col-sm-2 control-label"

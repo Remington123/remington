@@ -1,6 +1,7 @@
 /* Llamado o ejecución de funciones */
 dtEmpleado();
 guardar();
+eliminar();
 var table;
 
 //Creación de funciones JS para el módulo empleado
@@ -32,6 +33,7 @@ function dtEmpleado(){
 	});
 	
 	obtener_data_modificar("#dt_empleado tbody", table);
+	obtener_idempleado_eliminar("#dt_empleado tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
@@ -39,12 +41,19 @@ function obtener_data_modificar (tbody, table){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
 		var idusuario = $("#idempleado").val( data.idempleado ),
-				nombre = $("#nombre").val( data.nombres ),
+				nombre = $("#nombres").val( data.nombres ),
 				apellidopaterno = $("#apellidopaterno").val( data.apellidopaterno ),
 				apellidomaterno = $("#apellidomaterno").val( data.apellidomaterno ),
 				email = $("#email").val( data.email ),
 				celular = $("#celular").val( data.celular ),
 				opcion = $("#opcion").val("modificar");
+	});
+}
+
+function obtener_idempleado_eliminar (tbody, table){
+	$(tbody).on("click", "button.eliminar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		var idempleado = $("#frmeliminarempleado #idempleado").val( data.idempleado );
 	});
 }
 
@@ -64,6 +73,25 @@ function guardar(){
 			mensajes( info );
 			dtEmpleado();
 			console.log(info);
+		});
+	});
+}
+
+function eliminar(){
+	$("#frmeliminarempleado").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize();
+		var controller = $(this).attr("action");
+		console.log(controller);
+		console.log( frm );
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){			
+			mensajes( info );
+			dtEmpleado();			
 		});
 	});
 }

@@ -23,7 +23,7 @@
 									 <label  class="col-sm-2 control-label"
 	                              		for="nombre">Nombre</label>
 									<div class="col-sm-10">
-										<input id="nombre" name="nombre" type="text" class="form-control">
+										<input id="nombres" name="nombres" type="text" class="form-control">
 									</div>
 								</div>							
 								<div class="form-group">

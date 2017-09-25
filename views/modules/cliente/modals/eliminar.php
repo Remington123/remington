@@ -6,7 +6,7 @@
 	
 	$modalEliminar = '
 	<div class="row">
-		<form id="frm'. $accion.$modulo.'" action="" method="POST">
+		<form id="frm'. $accion.$modulo.'" action="'.$controlador.'" method="POST">
 			<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
 			<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 			<!-- Modal -->
