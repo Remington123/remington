@@ -55,9 +55,12 @@ function guardarPedido(){
 		e.preventDefault();
 		console.log("Formulario guardar Pedido");
 		var items = obtenerDataTabla("#tbody_pedidos");
-		var total = $("#total").val();
+		var total = $("#total").val(),
+			email = $("#email").val(),
+			mensajecorreo = $("#mensajecorreo").val();
 		//var idcliente =  coger sesion
-		console.log( total );
+		console.log( email );
+		console.log( mensajecorreo );
 		var data = {
 			pedido: items,
 			total: $("#total").val()
@@ -68,10 +71,25 @@ function guardarPedido(){
 			url: "../src/pedido/PedidoController.php",
 			data:{ opcion: "guardar", data: JSON.stringify(data)}
 		}).done(function( info ){
-			console.log( info );
-			window.location = "realizar-compra.php";			
-		});
+			var json = JSON.parse( info );
 
+			if( json.respuesta == "bien" ){
+				enviarCorreo(email, mensajecorreo);
+			}
+
+			console.log( info );
+			//window.location = "realizar-compra.php";			
+		});
+	});
+}
+
+function enviarCorreo(email, mensaje){
+	$.ajax({
+		method:"POST",
+		url: "enviarCorreo.php",
+		data:{ email: email}
+	}).done(function( info ){
+		console.log( info );
 	});
 }
 

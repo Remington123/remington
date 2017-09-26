@@ -12,11 +12,13 @@
     if($arreglo){
     	$idcliente = $arreglo[0]->getIdcliente();
 	    $paterno = $arreglo[0]->getApellidopaterno();
-	    $materno = $arreglo[0]->getApellidomaterno();    	
+	    $materno = $arreglo[0]->getApellidomaterno();
+	    $email = $arreglo[0]->getEmail();
     }else{
     	$idcliente = "";
     	$paterno = "";
 	    $materno = ""; 
+	    $email = "";
     }
 
  ?>
@@ -49,6 +51,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Registrarse </a></li>
 			<!--<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>-->
 			<input type="hidden" id="idcliente" name="idcliente" value=" <?php echo $idcliente; ?> ">
+			<input type="hidden" id="email" name="email" value=" <?php echo $email; ?> ">
 			<li><i class="fa fa-user"></i> <?php echo $paterno." ".$materno; ?> </li>
 			<li>
 				<form action="../src/cliente/ClienteController.php" method="post">

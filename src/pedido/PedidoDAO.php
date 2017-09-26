@@ -182,10 +182,10 @@
 
 				if( $respuesta ){
 					$respuestadetalle = $this->guardarDetalle($idpedido, $detalle, $cnn);
-					if( $respuestadetalle ){						
+					/*if( $respuestadetalle ){						
 							$_SESSION["carrito"] = array();
 							unset($_SESSION["carrito"]);
-					}
+					}*/
 				}
 
 
