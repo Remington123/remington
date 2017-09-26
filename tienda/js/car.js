@@ -13,8 +13,40 @@ function registrarCliente(){
 	$("#frmregistrarcliente").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
+
+		var contrasena = $("#frmregistrarcliente #contrasena").val(),
+			confirmarContrasena = $("#frmregistrarcliente #confirmar").val();
+			
+		console.log(contrasena  + confirmarContrasena);
+
+			if( contrasena == confirmarContrasena ){
+				$.ajax({
+					method: "POST",
+					url: "../src/cliente/ClienteController.php",
+					data: frm
+				}).done( function(info){
+					window.location = "index.php";
+				});
+			}else{
+				texto = "<strong>La contraseñas no coinciden.</strong>";
+				color = "alert-danger";
+				mensajes(color, texto);
+			}
+
 		console.log( frm );
 	});
+}
+
+function mensajes(color, texto){
+	$(".mensaje").html("");//limpiar 
+	var div = `<div class="alert ${color} alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>					
+			</button>
+			${texto}
+		</div>`;
+
+	$(".mensaje").html( div ).removeClass("ocultar");
 }
 
 function guardarPedido(){

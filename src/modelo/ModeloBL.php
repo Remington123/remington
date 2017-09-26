@@ -28,7 +28,6 @@
 			$modelo =new Modelo();
 			$modelo->setIdmodelo($_POST["idmodelo"]);
 			$modelo->setDescripcion($_POST["descripcion"]);
-			//$modelo->setEstado($_POST["estado"]);
 			$dao =new ModeloDAO();
 					
 			if( $dao->modificar( $modelo ) )

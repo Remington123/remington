@@ -20,14 +20,20 @@
 		      <div class="box-body">
 
 		        <div class="form-group">
-		            <label for="nombre">Descripcion</label>            
-		            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
+		            <label for="descripcion">Descripción</label>            
+		            <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Descripción">
 		        </div>
 		        
 		      </div>
 		      <!-- /.box-body -->
 		      <div class="box-footer">
 		        <button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
+		      </div>
+		      <div class="row">
+		        <br>
+		       	<div class="col-sm-12 mensaje ocultar">
+		       			        		
+		       	</div>
 		      </div>
 		    </form>
 		  </div>

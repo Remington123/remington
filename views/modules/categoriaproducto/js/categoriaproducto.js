@@ -1,9 +1,13 @@
 /* Llamado o ejecución de funciones */
 dtCategoriaproducto();
 guardar();
+eliminar();
 
 //Creación de funciones JS para el módulo empleado
 function dtCategoriaproducto(){
+
+	if ( $.fn.DataTable.isDataTable('#dt_categoriaproducto') )
+		$("#dt_categoriaproducto").empty();
 
 	var table = $("#dt_categoriaproducto").DataTable({
 		"bDestroy": true,
@@ -27,9 +31,10 @@ function obtener_data_modificar (tbody, table){
 	$(tbody).on("click", "button.modificar", function(){
 		var data = table.row( $(this).parents("tr") ).data();
 		console.log(data);
-		var idusuario = $("#categoriaproducto").val( data.idcategoriaproducto ),
+		var idcategoriaproducto = $("#idcategoriaproducto").val( data.idcategoriaproducto ),
 				descripcion = $("#descripcion").val( data.descripcion );
-	
+
+		limpiarMensaje();	
 	});
 }
 
@@ -48,8 +53,33 @@ function guardar(){
 			//respuesta del servidor
 			mensajes( info );
 			console.log(info);
+			dtCategoriaproducto();
 		});
 	});
+}
+
+function eliminar(){
+	$("#frmeliminarcategoriaproducto").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize();
+		var controller = $(this).attr("action");
+		console.log(controller);
+		console.log( frm );
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){			
+			mensajes( info );
+			dtCategoriaproducto();			
+		});
+	});
+}
+
+
+function limpiarMensaje(){
+	$(".mensaje").html("").addClass("ocultar");
 }
 
 function mensajes( info ){

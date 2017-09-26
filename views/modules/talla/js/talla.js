@@ -1,6 +1,8 @@
 /* Llamado o ejecución de funciones */
 dtTalla();
 guardar();
+eliminar();
+llenarComboCategoria();
 
 //Creación de funciones JS para el módulo empleado
 function dtTalla(){
@@ -9,7 +11,7 @@ function dtTalla(){
 	  	$("#dt_talla").empty();
 
 	var table = $("#dt_talla").DataTable({
-		detroy: true,
+		"bDestroy": true,
 		ajax:{
 			method: "POST",
 			url: "../src/talla/TallaController.php",
@@ -24,6 +26,7 @@ function dtTalla(){
 	});
 
 	obtener_data_modificar("#dt_talla tbody", table);
+	obtener_idtalla_eliminar("#dt_talla tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){
@@ -32,12 +35,21 @@ function obtener_data_modificar (tbody, table){
 		console.log(data);
 		var idtalla = $("#idtalla").val( data.idtalla ),
 				descripcion = $("#descripcion").val( data.descripcion ),
+				categoria = $("#categoria").val( data.categoria ),
 				opcion = $("#opcion").val("modificar");
 	});
 }
 
+function obtener_idtalla_eliminar (tbody, table){
+	$(tbody).on("click", "button.eliminar", function(){
+		var data = table.row( $(this).parents("tr") ).data();
+		var idcliente = $("#frmeliminartalla #idtalla").val( data.idtalla );
+		limpiarMensaje();
+	});
+}
+
 function guardar(){
-	$("#frmguardarempleado").on("submit", function(e){
+	$("#frmguardartalla").on("submit", function(e){
 		e.preventDefault();
 		var frm = $(this).serialize();
 		//console.log(frm);
@@ -50,9 +62,51 @@ function guardar(){
 		}).done(function(info){
 			//respuesta del servidor
 			mensajes( info );
+			dtTalla();
 			console.log(info);
 		});
 	});
+}
+
+function eliminar(){
+	$("#frmeliminartalla").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize();
+		var controller = $(this).attr("action");
+		console.log(controller);
+		console.log( frm );
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){			
+			mensajes( info );
+			dtTalla();
+		});
+	});
+}
+
+function llenarComboCategoria(){
+	$.ajax({
+		method: "POST",
+		url: "../src/categoriaproducto/CategoriaProductoController.php",
+		data: {opcion:"listar"}
+	}).done( function( info ){
+		var categoria = JSON.parse( info ),
+			option = "";
+		$("#idcategoriaproducto").html("");//limpiar el combo
+		option +=`<option> Seleccionar </option>`;
+			
+		for(i in categoria.data )
+			option +=`<option value="${categoria.data[i].idcategoriaproducto}"> ${categoria.data[i].descripcion} </option>`;
+
+		$("#idcategoriaproducto").html(option);
+	});
+}
+
+function limpiarMensaje(){
+	$(".mensaje").html("").addClass("ocultar");
 }
 
 function mensajes( info ){

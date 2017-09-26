@@ -25,6 +25,7 @@
 				$cliente->setEmail( $_POST["email"] );
 				$cliente->setCelular( $_POST["celular"] );
 				$cliente->setDireccion( $_POST["direccion"] );
+				$cliente->setContrasena( $_POST["contrasena"] );
 				//$cliente->setRuc( $_POST["ruc"] );
 				$cliente->setIdtipousuario( 1 );
 				$cliente->setEstado(1);

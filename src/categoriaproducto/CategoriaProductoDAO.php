@@ -32,13 +32,12 @@
 			$statement = null;
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO categoriaproducto(descripcion, estado)
-					VALUES (??);";
+				$sql = "INSERT INTO categoriaproducto(descripcion, estado)	VALUES (?,?);";
 
 			$descripcion = $objeto->getDescripcion();
 			$estado = $objeto->getEstado();
 
-			$statement = $cnn->prepare( $sql	 );
+			$statement = $cnn->prepare( $sql );
 			$statement->bindParam(1, $descripcion, PDO::PARAM_STR );
 			$statement->bindParam(2, $estado, PDO::PARAM_INT );
 
@@ -64,10 +63,12 @@
 
 			$descripcion = $objeto->getDescripcion();
 			$estado = $objeto->getEstado();
+			$idcategoriaproducto = $objeto->getIdcategoriaproducto();
 
 			$statement = $cnn->prepare( $sql );
 			$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
 			$statement->bindParam(":estado", $estado, PDO::PARAM_INT);	
+			$statement->bindParam(":idcategoriaproducto", $idcategoriaproducto, PDO::PARAM_INT);	
 			$respuesta = $statement->execute();
 			}catch(Exception $e){
 				echo "EXCEPTION ".$e->getMessage();

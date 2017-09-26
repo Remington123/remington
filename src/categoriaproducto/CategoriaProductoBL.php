@@ -16,14 +16,14 @@ class CategoriaProductoBL{
 	public function registrar() :string{
 		$informacion = [];
 		$validar = new CategoriaProductoValidar();
-		if( $validar->datosObtenidosFormularario("registrar") ){
-			$categoriaproducto = new producto();
+		if( $validar->datosObtenidosFormulario("registrar") ){
+			$categoriaproducto = new CategoriaProducto();
 			$categoriaproducto->setDescripcion( $_POST["descripcion"] );
-			$producto->setEstado(1);
+			$categoriaproducto->setEstado(1);
 
 			$dao = new CategoriaProductoDAO();
 			$dao->registrar( $categoriaproducto ) ? 
-				$informacion["respuesta"] = "ok_registro" : $informacion["respuesta"] = "error_registro";
+				$informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 		}else{
 			$informacion["respuesta"] = "llenar_datos";
 		}
@@ -33,13 +33,15 @@ class CategoriaProductoBL{
 
 	public function modificar() :string{
 		$informacion = [];
-		$validar = new CategoriaProducto();
-		if( $validar->datosObtenidosFormularario("modificar") ) { 		$categoriaproducto = new  CategoriaProducto();
-		$categoriaproducto->setIdcategoriaProducto( $_POST["descripcion"] );
+		$validar = new CategoriaProductoValidar();
+		if( $validar->datosObtenidosFormulario("modificar") ) { 		
+		$categoriaproducto = new  CategoriaProducto();
+		$categoriaproducto->setIdcategoriaproducto( $_POST["idcategoriaproducto"] );
+		$categoriaproducto->setDescripcion( $_POST["descripcion"] );
 		$categoriaproducto->setEstado(1);
 
 		$dao = new CategoriaProductoDAO();
-		$dao->modificar( $producto ) ? $informacion["respuesta"] = "ok_modificar" : $informacion["respuesta"] = "error_modificar";
+		$dao->modificar( $categoriaproducto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 	}else{
 		$informacion["respuesta"] = "llenar_datos";
 	}
@@ -52,18 +54,17 @@ class CategoriaProductoBL{
 		$informacion = [];
 		$validar = new CategoriaProducto();
 		if( $validar->idPrimarioObtenidoFormulario()){
-			$idcategoriaproducto = $_POST[
-			"idcategoriaproducto"];
+			$idcategoriaproducto = $_POST["idcategoriaproducto"];
 
 		$dao = new CategoriaProducto();
 
 		if( $dao->eliminar( $idcategoriaproducto ) )
-			$informacion["respuesta"] = "ok_eliminacion";
+			$informacion["respuesta"] = "bien";
 		else
-			$informacion["respuesta"] = "error_eliminacion";
+			$informacion["respuesta"] = "error";
 
 		}else{
-			$informacion["respuesta"] = "idcategoriaproducto_indefinido";
+			$informacion["respuesta"] = "id_indefinido";
 		}
 
 		return ( json_encode($informacion) );

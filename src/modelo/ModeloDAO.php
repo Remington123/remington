@@ -13,7 +13,8 @@
 				$sql = "SELECT idmodelo, m.descripcion, m.idcategoriaproducto, cp.descripcion as categoria, m.estado 
 						FROM modelo m 
 						INNER JOIN categoriaproducto cp
-						ON m.idcategoriaproducto = cp.idcategoriaproducto;";
+						ON m.idcategoriaproducto = cp.idcategoriaproducto
+						WHERE m.estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -96,9 +97,10 @@
 				$estado = 0;
 
 				$statement = $cnn->prepare($sql);
-				$statement = bindParam(":idmodelo", $id, PDO::PARAM_INT);
+				$statement->bindParam(":idmodelo", $id, PDO::PARAM_INT);
 				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
-			
+				
+				$respuesta = $statement->execute();
 			}catch(Exception $e){
 				echo "EXCEPCIÓN ".$e->getMessage();
 			}finally{

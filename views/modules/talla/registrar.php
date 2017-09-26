@@ -10,7 +10,7 @@
 		  <!-- general form elements -->
 		  <div class="box box-primary">
 		    <div class="box-header with-border">
-		      <h3 class="box-title">Form Empleado</h3>
+		      <h3 class="box-title">Form Talla</h3>
 		    </div>
 		    <!-- /.box-header -->
 		    <!-- form start -->
@@ -19,10 +19,14 @@
 				<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 
 		      <div class="box-body">
-
+				
+				<div class="form-group">
+		          <label for="idcategoriaproducto">Categoría</label>
+		          <select class="form-control" id="idcategoriaproducto" name="idcategoriaproducto" ><option value="">Seleccionar</option></select>
+		        </div>
 		        <div class="form-group">
 		            <label for="descripcion">Descripcion</label>            
-		            <input type="text" id="descripcion" name="descripcion" class="form-control" placeholder="Nombres">
+		            <input type="text" id="descripcion" required name="descripcion" class="form-control" placeholder="Nombres">
 		        </div>
 
 		      </div>

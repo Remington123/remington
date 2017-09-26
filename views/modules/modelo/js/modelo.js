@@ -58,6 +58,7 @@ function obtener_data_modificar (tbody, table){
 				descripcion = $("#descripcion").val( data.descripcion ),
 				categoria = $("#categoria").val( data.categoria ),
 				opcion = $("#opcion").val("modificar");
+				limpiarMensaje();
 	});
 }
 
@@ -77,6 +78,11 @@ function llenarComboCategoria(){
 
 		$("#idcategoriaproducto").html(option);
 	});
+}
+
+
+function limpiarMensaje(){
+	$(".mensaje").html("").addClass("ocultar");
 }
 
 function mensajes( info ){

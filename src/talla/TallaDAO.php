@@ -10,9 +10,11 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT idtalla, t.descripcion, t.idcategoriaproducto, cp.descripcion as categoria, t.estado  		FROM talla t 
+				$sql = "SELECT idtalla, t.descripcion, t.idcategoriaproducto, cp.descripcion as categoria, t.estado  		
+						FROM talla t 
 						INNER JOIN categoriaproducto cp
-						ON t.idcategoriaproducto = cp.idcategoriaproducto;";
+						ON t.idcategoriaproducto = cp.idcategoriaproducto
+						WHERE t.estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
@@ -30,13 +32,80 @@
 		}
 		
 		public function registrar($objeto) : bool{
-			return true;
+			$conexion = new Conexion();
+			$respuesta = false;
+			$statement = null;
+
+			try{
+				$cnn = $conexion->getConexion();
+				$sql = "INSERT INTO talla(descripcion, idcategoriaproducto, estado) VALUES (?,?,?);";
+				/*Notice: Only variables should be passed by reference*/
+				$descripcion = $objeto->getDescripcion();
+				$idcategoriaproducto = $objeto->getIdcategoriaproducto();
+				$estado = 1;
+
+				$statement = $cnn->prepare( $sql );
+				$statement->bindParam(1, $descripcion, PDO::PARAM_STR);
+				$statement->bindParam(2, $idcategoriaproducto, PDO::PARAM_STR);
+				$statement->bindParam(3, $estado, PDO::PARAM_STR);
+				$respuesta = $statement->execute();//devuelve true, si no hubo error.
+				
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 		public function modificar($objeto) : bool{
-			return true;
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE talla SET  descripcion = :descripcion WHERE idtalla = :idtalla";
+
+				$idtalla = $objeto->getIdtalla();
+				$descripcion = $objeto->getDescripcion();
+				$statement = $cnn->prepare($sql);
+
+				$statement->bindParam(":idtalla", $idtalla, PDO::PARAM_INT);
+				$statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);				
+
+				$respuesta = $statement->execute();
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta; 
 		}
+
 		public function eliminar(int $id) : bool{
-			return true;
+			$conexion = null;
+			$statement = null;
+			$respuesta = false;
+			try{
+				$conexion = new Conexion();
+				$cnn = $conexion->getConexion();
+				$sql = "UPDATE talla SET estado = :estado WHERE idtalla = :idtalla;";
+				$estado = 0;
+
+				$statement = $cnn->prepare($sql);
+				$statement->bindParam(":idtalla", $id, PDO::PARAM_INT);
+				$statement->bindParam(":estado", $estado, PDO::PARAM_INT);
+				
+				$respuesta = $statement->execute();
+			}catch(Exception $e){
+				echo "EXCEPCIÓN ".$e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+			return $respuesta;
 		}
 
 		public function llenarCombo( $idcategoriaproducto ){

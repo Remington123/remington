@@ -31,7 +31,7 @@
 								 <label  class="col-sm-2 control-label"
                               		for="descripcion">Descripcion</label>
 								<div class="col-sm-10">
-									<input id="descripcion" name="descripcion" type="text" class="form-control">
+									<input id="descripcion" name="descripcion" required type="text" class="form-control">
 								</div>
 							</div>
 

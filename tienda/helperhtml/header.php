@@ -247,25 +247,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 							<div class="styled-input agile-styled-input-top">
 								<input type="text" id="direccion" name="direccion" required="">
+								<input type="hidden" id="celular" name="celular" required="">
 								<label>Dirección</label>
 								<span></span>
 							</div>
-							<div class="styled-input">
+							<div class="styled-input agile-styled-input-top">
 								<input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Por favor, introducir un formato de email valido, ejemplo: juan@gmail.com" required=""> 
 								<label>Email</label>
 								<span></span>
 							</div> 
-							<div class="styled-input">
+							<div class="styled-input agile-styled-input-top">
 								<input type="password" id="contrasena" name="contrasena" required=""> 
 								<label>Contraseña</label>
 								<span></span>
 							</div>
-							<div class="styled-input">
-								<input type="password" id="confirmarcontrasena" name="confirmarcontrasena" required=""> 
+							<div class="styled-input agile-styled-input-top">
+								<input type="password" id="confirmar" name="confirmar" required=""> 
 								<label>Confirmar Contraseña</label>
 								<span></span>
 							</div>
 							<input type="submit" value="Registrar">
+							<br><br>
+							<div class="styled-input agile-styled-input-top mensaje ocultar">	
+								
+							</div>
 						</form>
 						</div>
 						<div class="clearfix"></div>

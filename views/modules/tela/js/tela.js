@@ -5,6 +5,9 @@ guardar();
 //Creación de funciones JS para el módulo empleado
 function dtTela(){
 
+	if ( $.fn.DataTable.isDataTable('#dt_tela') )
+	  	$("#dt_tela").empty();
+
 	var table = $("#dt_tela").DataTable({
 		"bDestroy": true,
 		ajax:{
@@ -30,6 +33,7 @@ function obtener_data_modificar (tbody, table){
 		var idtela = $("#idtela").val( data.idtela ),
 				descripcion = $("#descripcion").val( data.descripcion ),
 				opcion = $("#opcion").val("modificar");
+				limpiarMensaje();
 	});
 }
 
@@ -51,6 +55,11 @@ function guardar(){
 		});
 	});
 }
+
+function limpiarMensaje(){
+	$(".mensaje").html("").addClass("ocultar");
+}
+
 
 function mensajes( info ){
 	var json = JSON.parse(info);
