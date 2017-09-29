@@ -49,12 +49,8 @@
 			$pedido = new Pedido();
 			$fecha_actual = date( 'Y/m/d', time() );
 			$pedido->setFecha( $fecha_actual );
-			$pedido->setIdcliente( 3 );//por el momento
-
-			//$pedido->setIdcliente( $_POST["idcliente"] );
-			//$pedido->setTotal( $carrito->{'idcliente'} );
+			$pedido->setIdcliente( intval( $carrito->{'idcliente'} ) );
 			$pedido->setTotal( $carrito->{'total'} );
-
 
 			$dao = new PedidoDAO();
 			$dao->guardarPedido( $pedido, $detalle ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";

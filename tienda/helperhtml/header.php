@@ -10,7 +10,7 @@
     $arreglo = isset($_SESSION['cliente']) ? $_SESSION['cliente'] : "";
     
     if($arreglo){
-    	$idcliente = $arreglo[0]->getIdcliente();
+    	$idcliente = trim( $arreglo[0]->getIdcliente() );
 	    $paterno = $arreglo[0]->getApellidopaterno();
 	    $materno = $arreglo[0]->getApellidomaterno();
 	    $email = $arreglo[0]->getEmail();

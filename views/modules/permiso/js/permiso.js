@@ -16,15 +16,17 @@ function dtPermiso(){
 			data: {opcion:"listar"}
 		},
 		columns:[
-			{"data":"idpermiso"},
-			{"data":"idtipousuario"},
-			{"data":"idmodulo"},
-			{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
-			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}
+			{"data":"idpermiso", visible: false},
+			{"data":"idtipousuario", visible: false},
+			{"data":"tipousuario"},
+			{"data":"idmodulo", visible: false},
+			{"data":"modulo"}
+			/*{"defaultContent": `<button type='button' data-target='#modalmodificar' data-toggle='modal' class='modificar btn btn-primary' ><i class='fa fa-pencil-square-o'></i></button>
+			<button type='button' data-target='#modaleliminar' data-toggle='modal' class='eliminar btn btn-danger' ><i class='fa fa-trash-o'></i></button>`}*/
 		]
 	});
 
-	obtener_data_modificar("#dt_permiso tbody", table);
+	//obtener_data_modificar("#dt_permiso tbody", table);
 }
 
 function obtener_data_modificar (tbody, table){

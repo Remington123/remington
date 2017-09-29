@@ -62,6 +62,7 @@
 							<td id='totalcompra'><strong>".$total."</strong></td>
 							<td><input type='hidden' id='total' value='".$total."'></td>
 							<input type='hidden' id='email' name='email' value='".$email."'>
+							<input type='hidden' id='idcliente' name='idcliente' value='".$idcliente."'>
 						</tr>
 					</tbody>
 				</table>";

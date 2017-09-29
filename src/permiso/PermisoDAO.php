@@ -12,7 +12,12 @@
 			
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM permiso;";
+				$sql = "SELECT p.idpermiso, p.idtipousuario, tu.descripcion AS tipousuario, p.idmodulo, m.nombre AS modulo, p.estado
+					FROM permiso p
+					INNER JOIN tipousuario tu
+					ON p.idtipousuario = tu.idtipousuario
+					INNER JOIN modulo m
+					ON p.idmodulo = m.idmodulo;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 

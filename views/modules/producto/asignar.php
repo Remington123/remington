@@ -65,7 +65,7 @@
         		<button type="button" id="agregar-item" class="btn btn-success">Agregar</button>
 	      	</div>     
 
-	      	<div class="col-md-12">       			            
+	      	<div class="col-md-12">
 		        
 		            <div class="box-body">
 						<table id="dt_detalleproducto" class="ocultar table table-hover">

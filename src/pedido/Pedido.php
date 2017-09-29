@@ -34,7 +34,7 @@
 		}
 
 		public function setIdcliente(int $idcliente){
-			$this->idcliente = $idcliente;
+			$this->idcliente = (int) trim($idcliente);
 		}
 
 		public function getTotal() :float{

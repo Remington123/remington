@@ -57,13 +57,17 @@ function guardarPedido(){
 		var items = obtenerDataTabla("#tbody_pedidos");
 		var total = $("#total").val(),
 			email = $("#email").val(),
-			mensajecorreo = $("#mensajecorreo").val();
-		//var idcliente =  coger sesion
+			//mensajecorreo = $("#mensajecorreo").val();
+			idcliente =  $("#idcliente").val();
+
+		console.log( idcliente );
+
 		console.log( email );
-		console.log( mensajecorreo );
+		//console.log( mensajecorreo );
 		var data = {
 			pedido: items,
-			total: $("#total").val()
+			total: $("#total").val(),
+			idcliente: idcliente
 		};
 		
 		$.ajax({
@@ -74,7 +78,7 @@ function guardarPedido(){
 			var json = JSON.parse( info );
 
 			if( json.respuesta == "bien" ){
-				enviarCorreo(email, mensajecorreo);
+				enviarCorreo(email);
 			}
 
 			console.log( info );
@@ -83,7 +87,7 @@ function guardarPedido(){
 	});
 }
 
-function enviarCorreo(email, mensaje){
+function enviarCorreo(email){
 	$.ajax({
 		method:"POST",
 		url: "enviarCorreo.php",

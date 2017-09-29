@@ -9,7 +9,7 @@
 		<div class="col-xs-12">
 	        <div class="box">
 	            <div class="box-header">
-	              <h3 class="box-title">Lista de Empleados</h3>
+	              <h3 class="box-title">Lista de Permisos de Módulos por Tipo de Usuario</h3>
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
@@ -17,8 +17,10 @@
 						<thead>
 							<th>Idpermiso</th>
 							<th>Idtipousuario</th>
+							<th>Tipo Usuario</th>
 							<th>Idmodulo</th>
-							<th></th>
+							<th>Módulo</th>
+							<!--<th></th>-->
 						</thead>
 					</table>
 				</div>
