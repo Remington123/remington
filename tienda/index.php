@@ -16,8 +16,8 @@ include 'helperhtml/header.php' ?>
 			<div class="item active"> 
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>GRACIAS <span>POR SU VICITA A TIENDA</span></h3>
-						<p>REMINGTON</p>
+						<h3>GRACIAS <span>POR SU VISITA AL TIENDA</span></h3>
+						<p> <SPAN> "REMINGTON"</SPAN></p>
 						<!--<a class="hvr-outline-out button2" href="mens.html">Shop Now </a>-->
 					</div>
 				</div>
