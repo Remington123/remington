@@ -16,8 +16,8 @@ include 'helperhtml/header.php' ?>
 			<div class="item active"> 
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>The Biggest <span>Sale</span></h3>
-						<p>Special for today</p>
+						<h3>GRACIAS <span>POR SU VICITA A TIENDA</span></h3>
+						<p>REMINGTON</p>
 						<!--<a class="hvr-outline-out button2" href="mens.html">Shop Now </a>-->
 					</div>
 				</div>
@@ -25,36 +25,31 @@ include 'helperhtml/header.php' ?>
 			<div class="item item2"> 
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>Summer <span>Collection</span></h3>
-						<p>New Arrivals On Sale</p>
-						<!--<a class="hvr-outline-out button2" href="mens.html">Shop Now </a>-->
+						<h3>TERNOS DE <span>BUENA CALIDAD</span></h3>
+
 					</div>
 				</div>
 			</div>
 			<div class="item item3"> 
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>The Biggest <span>Sale</span></h3>
-						<p>Special for today</p>
-						<!--<a class="hvr-outline-out button2" href="mens.html">Shop Now </a>-->
+						<h3>BIENVENIDO <span>TIENDA REMINGTON</span></h3>
 					</div>
 				</div>
 			</div>
 			<div class="item item4"> 
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>Summer <span>Collection</span></h3>
-						<p>New Arrivals On Sale</p>
-						<!--<a class="hvr-outline-out button2" href="mens.html">Shop Now </a>-->
+						<h3>GRACIAS POR SU <span>COMPRA</span></h3>
+						
 					</div>
 				</div>
 			</div>
 			<div class="item item5"> 
 				<div class="container">
 					<div class="carousel-caption">
-						<h3>The Biggest <span>Sale</span></h3>
-						<p>Special for today</p>
-						<!--<a class="hvr-outline-out button2" href="mens.html">Shop Now </a>-->
+						<h3>TELAS DE  <span>CALIDAD</span></h3>
+				
 					</div>
 				</div>
 			</div> 
