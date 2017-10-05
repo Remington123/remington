@@ -53,7 +53,7 @@ CREATE TABLE `categoriaproducto` (
   `descripcion` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idcategoriaproducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `categoriaproducto` (
 
 LOCK TABLES `categoriaproducto` WRITE;
 /*!40000 ALTER TABLE `categoriaproducto` DISABLE KEYS */;
-INSERT INTO `categoriaproducto` VALUES (1,'Camisa',1),(2,'Chaleco',1),(3,'Cobarta',1),(4,'Saco',1),(5,'Pantalón',1);
+INSERT INTO `categoriaproducto` VALUES (1,'Camisa',1),(2,'Chaleco',1),(3,'Cobarta',1),(4,'Saco',1),(5,'Pantalón',1),(6,'prueba categoria waa',1),(7,'prueba dos',1);
 /*!40000 ALTER TABLE `categoriaproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,10 +86,11 @@ CREATE TABLE `cliente` (
   `ruc` varchar(11) DEFAULT NULL,
   `idtipousuario` int(11) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
   PRIMARY KEY (`idcliente`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
   CONSTRAINT `fk_idtipousuario` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +99,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','pett@gmail.com','123','Urb. Libertad MZ V lote 7','984512367',NULL,1,1),(2,'Jose','Kano','Uriol','48561230','jose@gmail.com','123','Av. America Sur #123','978546213',NULL,1,1),(3,'Ramón','Duran','Barahona','47859612','ram@gmail.com','123','Av. America Norte #784','978546123',NULL,1,1),(4,'Maria','Otiniano','Bacilio','47851023','mar@gmail.com','123','Urb. Palermo #451','987451226',NULL,1,1),(5,'Josue','Diaz','Alfaro','47859031','josue@gmail.com','123','Urb. Rinconada #745','974120245',NULL,1,1);
+INSERT INTO `cliente` VALUES (1,'Petter','Rios','Abarca','47859612','pett@gmail.com','123','Urb. Libertad MZ V lote 7','984512367',NULL,1,1,'2017-09-18 00:00:00'),(2,'Jose','Kano','Uriol','48561230','jose@gmail.com','123','Av. America Sur #123','978546213',NULL,1,1,'2017-09-19 00:00:00'),(3,'Ramón','Duran','Barahona','47859612','ram@gmail.com','123','Av. America Norte #784','978546123',NULL,1,1,'2017-09-19 00:00:00'),(4,'Yanira','Otiniano','Bacilio','47851023','mar@gmail.com','123','Urb. Palermo #451','987451226',NULL,1,1,'2017-09-19 00:00:00'),(5,'Josue','Diaz','Alfaro','47859031','josue@gmail.com','123','Urb. Rinconada #745','974120245',NULL,1,1,'2017-09-20 00:00:00'),(6,'Emerson','Avila','Bacilio','71944622','emer@gmail.com','123','AV. America Suer 174','981032765','',1,1,'2017-09-20 00:00:00'),(7,'Kevin','Ruiz','Díaz','71944661','kevinyarascaponce@gmail.com','123','AV. America Suer 785','981032710','',1,1,'2017-09-21 00:00:00'),(8,'Adriano','Lopez','Ramos','47586977','ertert@hotmail.com','123','AV. America Suer 423','981032716','',1,1,'2017-09-21 00:00:00'),(9,'Eduardo','Castillo','Villacorta','47850021','eduardo@gmail.com','123','San Isidro #128','','',1,1,'2017-09-21 00:00:00'),(10,'Miguel','Santos','Villanueva','48520077','miguel@gmail.com','123','Urb. San Isidro #045','','',1,1,'2017-09-22 00:00:00'),(11,'Jeancarlo','Rios','Abarca','47851320','geo.rock4@hotmail.com','123','Urb. Libertad MZ V lote 18','','',1,1,'2017-09-23 00:00:00'),(12,'Mayra','Luján','Ruiz','48566336','mayra@gmail.com','123','Urb. San Isidro #53','','',1,1,'2017-09-26 00:00:00'),(13,'Leoncio','Prado','Rivera','42157845','leoncio@gmail.com','123','Urb. El Bosque #142','947856333','',1,1,'2017-10-04 00:00:00'),(14,'Rodrigo','Rojas','Balta','45963122','rodrigo@gmail.com','123','Urb. El Bosque #100','986300144','',1,1,'2017-10-04 00:00:00');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +234,7 @@ CREATE TABLE `detallepedido` (
   PRIMARY KEY (`iddetallepedido`),
   KEY `fk_idproducto_idx` (`idproducto`),
   CONSTRAINT `fk_idproducto` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,6 +243,7 @@ CREATE TABLE `detallepedido` (
 
 LOCK TABLES `detallepedido` WRITE;
 /*!40000 ALTER TABLE `detallepedido` DISABLE KEYS */;
+INSERT INTO `detallepedido` VALUES (1,'CP00001',1,'Camisa Formal',3,150.00,1,1,'https://http2.mlstatic.com/camisa-hombre-mang',1),(2,'CP00001',3,'Chaleco de vestir',3,180.00,6,2,'https://http2.mlstatic.com/camisa-hombre-mang',1),(3,'CP00002',1,'Camisa Formal',2,120.00,1,4,'https://http2.mlstatic.com/camisa-hombre-mang',1),(4,'CP00002',3,'Chaleco de vestir',2,100.00,4,2,'https://http2.mlstatic.com/camisa-hombre-mang',1),(5,'CP00003',1,'Camisa Formal',2,100.00,1,1,'https://http2.mlstatic.com/camisa-hombre-mang',1),(6,'CP00003',3,'Chaleco de vestir',3,180.00,6,2,'https://http2.mlstatic.com/camisa-hombre-mang',1);
 /*!40000 ALTER TABLE `detallepedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +274,7 @@ CREATE TABLE `detalleproducto` (
 
 LOCK TABLES `detalleproducto` WRITE;
 /*!40000 ALTER TABLE `detalleproducto` DISABLE KEYS */;
-INSERT INTO `detalleproducto` VALUES (1,1,1,1,1,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',10,50.00,1),(2,1,1,1,4,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',10,60.00,1),(3,3,3,4,2,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',0,50.00,1),(4,3,3,6,2,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',20,60.00,1);
+INSERT INTO `detalleproducto` VALUES (1,1,1,1,1,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',45,50.00,1),(2,1,1,1,4,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',48,60.00,1),(3,3,3,4,2,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',48,50.00,1),(4,3,3,6,2,'https://http2.mlstatic.com/camisa-hombre-manga-larga-D_NQ_NP_511705-MLA25072188118_092016-F.jpg',44,60.00,1);
 /*!40000 ALTER TABLE `detalleproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,7 +301,7 @@ CREATE TABLE `empleado` (
   PRIMARY KEY (`idempleado`),
   KEY `fk_idtipousuario_idx` (`idtipousuario`),
   CONSTRAINT `fk_idtipousuarioempleado` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,7 +310,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'kevin','Yarasca','Ponce','76525712','kevin@gmail.com','123','av. ferrocarril s/n','18/08/1995','920096053',2,1),(2,'Geovanny','Rios','Abarca','47523012','geo@gmail.com','123','Urb. Libertad MZ V lote 7','28/02/1991','947856321',3,1),(3,'Yanira','Aquino','Ladera','42159875','yani@gmail.com','123','Av.Universitaria N°240','10/08/1998','947856312',3,1),(4,'Deysi','Alejandro','Bazan','44963214','deysi@gmail.com','123','Alejandro deustua N°739','23/03/1996','981237451',2,1);
+INSERT INTO `empleado` VALUES (1,'kevin','Yarasca','Ponce','76525712','kevin@gmail.com','123','av. ferrocarril s/n','18/08/1995','920096053',2,1),(2,'Geovanny','Rios','Abarca','47523012','geo@gmail.com','123','Urb. Libertad MZ V lote 7','28/02/1991','947856321',3,1),(3,'Yanira','Aquino','Ladera','42159875','yani@gmail.com','123','Av.Universitaria N°240','10/08/1998','947856312',3,1),(4,'Deysi','Alejandro','Bazan','44963214','deysi@gmail.com','123','Alejandro deustua N°739','23/03/1996','981237451',2,1),(5,'Ricardo','Villanueva','Montoya','47584444','ricardo@gmail.com','123','AV. America Suer 199','1991/08/28','981034566',2,0),(6,'Ricardo','Villanueva','Montoya','47513000','ricardo@gmail.com','123','AV. America Suer 188','1991/08/14','984125455',2,1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +379,7 @@ CREATE TABLE `modelo` (
   PRIMARY KEY (`idmodelo`),
   KEY `fk_idcategoriaproductomodelo_idx` (`idcategoriaproducto`),
   CONSTRAINT `fk_idcategoriaproductomodelo` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,7 +388,7 @@ CREATE TABLE `modelo` (
 
 LOCK TABLES `modelo` WRITE;
 /*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
-INSERT INTO `modelo` VALUES (1,'Camisa manga corta',1,1),(2,'Camisa manga larga',1,1),(3,'Chaleco ajustado en terciopelo',2,1),(4,'Chaleco ajustado de cuadros',2,1);
+INSERT INTO `modelo` VALUES (1,'Camisa manga corta',1,1),(2,'Camisa manga larga',1,1),(3,'Chaleco ajustado en terciopelo',2,1),(4,'Chaleco ajustado de cuadros',2,1),(5,'prueba tres',1,1);
 /*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,7 +404,7 @@ CREATE TABLE `modulo` (
   `nombre` varchar(50) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idmodulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,7 +413,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-INSERT INTO `modulo` VALUES (1,'Cliente',1),(2,'Empleado',1),(3,'Producto',1),(4,'Categoria Producto',1),(5,'Modelo',1),(6,'Tela',1),(7,'Talla',1),(8,'Permiso',1),(9,'Pedido',1),(10,'Detalle Pedido',1);
+INSERT INTO `modulo` VALUES (1,'Cliente',1),(2,'Empleado',1),(3,'Producto',1),(4,'Categoria Producto',1),(5,'Modelo',1),(6,'Tela',1),(7,'Talla',1),(8,'Permiso',1),(9,'Pedido',1),(10,'Detalle Pedido',1),(11,'Reportes',1);
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,7 +433,7 @@ CREATE TABLE `pagina` (
   PRIMARY KEY (`idpagina`),
   KEY `fk_idmodulo_idx` (`idmodulo`),
   CONSTRAINT `fk_idmodulo` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,7 +442,7 @@ CREATE TABLE `pagina` (
 
 LOCK TABLES `pagina` WRITE;
 /*!40000 ALTER TABLE `pagina` DISABLE KEYS */;
-INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1),(16,9,'pedido/listar.php','fa fa-folder',1),(17,10,'detallepedido/listar.php','fa fa-folder',1),(18,3,'producto/asignar.php','fa fa-folder',1);
+INSERT INTO `pagina` VALUES (1,1,'cliente/registrar.php','fa fa-folder',1),(2,1,'cliente/listar.php','fa fa-folder',1),(3,2,'empleado/registrar.php','fa fa-folder',1),(4,2,'empleado/listar.php','fa fa-folder',1),(5,3,'producto/registrar.php','fa fa-folder',1),(6,3,'producto/listar.php','fa fa-folder',1),(7,4,'categoriaproducto/registrar.php','fa fa-folder',1),(8,4,'categoriaproducto/listar.php','fa fa-folder',1),(9,5,'modelo/registrar.php','fa fa-folder',1),(10,5,'modelo/listar.php','fa fa-folder',1),(11,6,'tela/registrar.php','fa fa-folder',1),(12,6,'tela/listar.php','fa fa-folder',1),(13,7,'talla/registrar.php','fa fa-folder',1),(14,7,'talla/listar.php','fa fa-folder',1),(15,8,'permiso/listar.php','fa fa-folder',1),(16,9,'pedido/listar.php','fa fa-folder',1),(17,10,'detallepedido/listar.php','fa fa-folder',1),(18,3,'producto/asignar.php','fa fa-folder',1),(19,3,'producto/listardetalle.php','fa fa-folder',1),(20,11,'reportes/pedidos.php','fa fa-folder',1),(21,11,'reportes/productos.php','fa fa-folder',1),(22,11,'reportes/clientes.php','fa fa-folder',1);
 /*!40000 ALTER TABLE `pagina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,6 +468,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES ('CP00001','2017/10/04',11,330.00),('CP00002','2017/10/04',7,220.00),('CP00003','2017/10/04',2,280.00);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,7 +489,7 @@ CREATE TABLE `permiso` (
   KEY `fk_idmodulo_idx` (`idmodulo`),
   CONSTRAINT `fk_idmodulopermiso` FOREIGN KEY (`idmodulo`) REFERENCES `modulo` (`idmodulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_idtipousuariopermiso` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtipousuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -495,7 +498,7 @@ CREATE TABLE `permiso` (
 
 LOCK TABLES `permiso` WRITE;
 /*!40000 ALTER TABLE `permiso` DISABLE KEYS */;
-INSERT INTO `permiso` VALUES (1,2,2,0),(2,2,3,0),(3,2,4,1),(4,2,5,1),(5,2,6,1),(6,2,7,1),(7,3,1,1),(8,3,2,1),(9,3,3,1),(10,3,4,1),(11,3,5,1),(12,3,6,1),(13,3,7,1),(14,3,8,1),(15,3,9,1),(16,3,10,1);
+INSERT INTO `permiso` VALUES (1,2,2,0),(2,2,3,0),(3,2,4,1),(4,2,5,1),(5,2,6,1),(6,2,7,1),(7,3,1,1),(8,3,2,1),(9,3,3,1),(10,3,4,1),(11,3,5,1),(12,3,6,1),(13,3,7,1),(14,3,8,1),(15,3,9,1),(16,3,10,1),(17,3,11,1);
 /*!40000 ALTER TABLE `permiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -545,7 +548,7 @@ CREATE TABLE `talla` (
   PRIMARY KEY (`idtalla`),
   KEY `fk_idcategoriaproductotalla_idx` (`idcategoriaproducto`),
   CONSTRAINT `fk_idcategoriaproductotalla` FOREIGN KEY (`idcategoriaproducto`) REFERENCES `categoriaproducto` (`idcategoriaproducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -554,7 +557,7 @@ CREATE TABLE `talla` (
 
 LOCK TABLES `talla` WRITE;
 /*!40000 ALTER TABLE `talla` DISABLE KEYS */;
-INSERT INTO `talla` VALUES (1,'S - pecho 91 - 96 cm',1,1),(2,'M - pecho 96 - 101 cm',1,1),(3,'L - pecho 101 - 106 cm',1,1),(4,'42 - W 81 cm',2,1),(5,'44 - W 84 cm',2,1),(6,'46 - W 91 cm',2,1);
+INSERT INTO `talla` VALUES (1,'S - pecho 91 - 96 cm',1,1),(2,'M - pecho 96 - 101 cm',1,1),(3,'L - pecho 101 - 106 cm',1,1),(4,'42 - W 81 cm',2,1),(5,'44 - W 84 cm',2,1),(6,'46 - W 91 cm',2,1),(7,'prueba tres',1,0);
 /*!40000 ALTER TABLE `talla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -665,4 +668,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-21  5:55:36
+-- Dump completed on 2017-10-04 12:59:35

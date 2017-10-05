@@ -14,6 +14,7 @@ guardar();
 eliminar();
 obtenerDataProducto();
 
+guardarModificacionStockPrecio();
 
 var tabla_detalle = "";
 
@@ -88,6 +89,9 @@ function llenarDatosDeModulo( producto ){
 
 function dtDetalleProducto( idproducto ){
 
+	if ( $.fn.DataTable.isDataTable('#dt_detalleproducto') )
+		$("#dt_detalleproducto").empty();
+
 	var table = $("#dt_detalleproducto").DataTable({
 		"bDestroy": true,
 		ajax:{
@@ -118,8 +122,30 @@ function obtener_datadetalle_modificar (tbody, table){
 		console.log(data);
 
 		var	opcion = $("#opcion").val("modificar"),
+			iddetalleproducto = $("#iddetalleproducto").val( data.iddetalleproducto ),
+			id_producto = $("#id_producto").val( data.idproducto ),
 			stock = $("#stock").val( data.stock ),
 			precio = $("#precio").val( data.precio );
+	});
+}
+
+function guardarModificacionStockPrecio(){
+	$("#frmmodificardetalleproducto").on("submit", function(e){
+		e.preventDefault();
+		//alert("form hola");
+		var frm = $(this).serialize(),
+			controller = $(this).attr("action"),
+			idproducto = $("#idproducto").val();
+			console.log( idproducto );
+			console.log( frm );
+		$.ajax({
+			method:"POST",
+			url:"../src/"+controller+".php",
+			data: frm
+		}).done(function(info){
+			mensajes( info );
+			dtDetalleProducto( idproducto );
+		});
 	});
 }
 

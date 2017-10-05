@@ -37,8 +37,17 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM producto;";
+				$sql = "SELECT pr.idproducto, pr.descripcion, p.fecha , SUM(dp.cantidad) AS cantidad ,SUM(dp.importe) AS total
+						FROM pedido p
+						INNER JOIN detallepedido dp
+						ON p.idpedido = dp.idpedido
+						INNER JOIN producto pr
+						ON dp.idproducto = pr.idproducto
+						WHERE fecha between ? AND ?
+						GROUP BY pr.descripcion;";
 				$statement=$cnn->prepare($sql);
+				$statement->bindParam(1, $fechaInicio, PDO::PARAM_STR);
+				$statement->bindParam(2, $fechaFin, PDO::PARAM_STR);
 				$statement->execute();
 
 				$data["data"] = [];//arreglo vacio

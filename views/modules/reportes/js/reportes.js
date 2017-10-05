@@ -66,6 +66,37 @@ function dtReportePedido(){
 					{"data":"email"},
 					{"data":"total"},
 					{"data":"fecha"}
+				],
+				"dom": "<'row'<'form-inline' <'col-sm-offset-5'B>>>"
+					 +"<'row' <'form-inline' <'col-sm-1'f>>>"
+					 +"<rt>"
+					 +"<'row'<'form-inline'"
+					 +" <'col-sm-6 col-md-6 col-lg-6'l>"
+					 +"<'col-sm-6 col-md-6 col-lg-6'p>>>",
+				"buttons":[
+					{
+						"text": "<i class='fa fa-user-plus'></i>",
+						"titleAttr": "Agregar Usuario",
+						"className": "btn btn-success",
+						"action": function(){
+							agregar_nuevo_usuario();
+						}
+					},
+					{
+		                extend:    'excelHtml5',
+		                text:      '<i class="fa fa-file-excel-o"></i>',
+		                titleAttr: 'Excel'
+		         },
+		         {
+		         	extend: 'csvHtml5',
+		         	text: '<i class="fa fa-file-text-o"></i>',
+		         	titleAttr: 'CSV'
+		         },
+		         {
+		                extend:    'pdfHtml5',
+		                text:      '<i class="fa fa-file-pdf-o"></i>',
+		                titleAttr: 'PDF'
+		         }
 				]
 			});
 		}
@@ -111,21 +142,33 @@ function dtReporteCliente(){
 
 function dtReporteProducto(){
 
-	if ( $.fn.DataTable.isDataTable('#dt_reportepedido_productos') )
-	  	$("#dt_reportepedido_productos").empty();
+	$("#buscar").on("click", function(){
+		var fechaInicio = $("#fechaInicio").val(),
+			fechaFin =  $("#fechaFin").val();
 
-	var table = $("#dt_reportepedido_productos").DataTable({
-		"bDestroy": true,
-		ajax:{
-			method: "POST",
-			url: "../src/reportes/ReportesController.php",
-			data: {opcion:"listar"}
-		},
-		columns:[
-			{"data":"idpedido"},
-			{"data":"fecha"},
-			{"data":"total"}
-		]
+		if( Date.parse( fechaInicio ) > Date.parse( fechaFin ) ){
+			alert("Fecha Inicio no pude ser mayor que la fecha Fin");
+		}else{
+			if ( $.fn.DataTable.isDataTable('#dt_reportepedido_productos') )
+			  	$("#dt_reportepedido_productos").empty();
+
+			var table = $("#dt_reportepedido_productos").DataTable({
+				"bDestroy": true,
+				ajax:{
+					method: "POST",
+					url: "../src/reportes/ReportesController.php",
+					data: { opcion:"productosVendidosPorRangoFechas", 
+									fechaInicio: fechaInicio,
+									fechaFin: fechaFin}
+				},
+				columns:[
+					{"data":"idproducto", visible: false},
+					{"data":"descripcion"},
+					{"data":"fecha"},
+					{"data":"cantidad"},
+					{"data":"total"}
+				]
+			});
+		}
 	});
 }
-

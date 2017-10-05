@@ -29,7 +29,7 @@
 			session_start();
 			$clienteBl = new ClienteBL();
 			$clienteBl->validarAcceso();
-			header('Location: ../../tienda/index.php');
+			//header('Location: ../../tienda/index.php');
 		break;
 
 		case 'cerrarsesion':

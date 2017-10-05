@@ -22,46 +22,29 @@
 
 		public function registrar() :string{
 
-			$informacion = [];
-			//$validar = new ProductoValidar();
-			//if( $validar->datosObtenidosFormulario( "registrar" ) ){
-				$items = json_decode( $_POST["items"] );
-				//var_dump($items);
-				
-
-				$dao = new DetalleProductoDAO();
-				$dao->registrar( $items ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
-			//}else{
-				//$informacion["respuesta"] = "llenar_datos";
-			//}
-
+			$informacion = [];			
+			$items = json_decode( $_POST["items"] );
+			$dao = new DetalleProductoDAO();
+			$dao->registrar( $items ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 			return ( json_encode($informacion) );
 		}
 
 		public function modificar() :string{
 
-			$informacion = [];
-			$validar = new ProductoValidar();
-			if( $validar->datosObtenidosFormulario( "modificar" ) ){
-				$producto = new Producto();
-				$producto->setIdproducto( $_POST["idproducto"] );
-				$producto->setDescripcion( $_POST["descripcion"] );
-				$producto->setPrecio( $_POST["precio"] );
-				$producto->setPrecioventa( $_POST["precioventa"] );
-				$producto->setStock( $_POST["stock"] );
-				$producto->setStockactual( $_POST["stock"] );
-				$producto->setEstado(1);
-				$producto->setIdmodelo( $_POST["idmodelo"] );
-				$producto->setIdtalla( $_POST["idtalla"] );
-				$producto->setIdtela( $_POST["idtela"] );
-				$producto->setIdcategoriaproducto( $_POST["idcategoriaproducto"] );
-				//agregar url de imagen del producto
+			$informacion = [];			
+			$detalleProducto = new DetalleProducto();
+			$detalleProducto->setIdproducto( $_POST["id_producto"] );
+			//$detalleProducto->setDescripcion( $_POST["descripcion"] );
+			$detalleProducto->setPrecio( $_POST["precio"] );
+			$detalleProducto->setStock( $_POST["stock"] );
+			//$detalleProducto->setEstado(1);
+			//$detalleProducto->setIdmodelo( $_POST["idmodelo"] );
+			//$detalleProducto->setIdtalla( $_POST["idtalla"] );
+			$detalleProducto->setIddetalleproducto( $_POST["iddetalleproducto"] );
+			//agregar url de imagen del producto
 
-				$dao = new DetalleProductoDAO();
-				$dao->modificar( $producto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
-			}else{
-				$informacion["respuesta"] = "llenar_datos";
-			}
+			$dao = new DetalleProductoDAO();
+			$dao->modificar( $detalleProducto ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
 
 			return ( json_encode($informacion) );
 		}

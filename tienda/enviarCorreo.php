@@ -104,6 +104,8 @@
 				    echo "error";
 				} else {
 				    echo "bien";
+
+				    //aquí generar el comprobante de pago automáticamente y guardarlo en la BD
 				    $_SESSION["carrito"] = array();
 					unset($_SESSION["carrito"]);
 				}							

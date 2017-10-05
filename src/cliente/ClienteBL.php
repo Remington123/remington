@@ -89,12 +89,21 @@
 		}
 
 		public function validarAcceso(){
+
 			$dao = new ClienteDAO();
 			$cliente = new Cliente();
 			$cliente->setEmail( $_POST["email"] );
 			$cliente->setContrasena( $_POST["contrasena"] );
 
-			return $dao->validarAcceso( $cliente );
+			$existe = $dao->existeCliente( $cliente );
+
+			if( $existe ){
+				$dao->validarAcceso( $cliente );
+				return header('Location: ../../tienda/index.php');
+			}else{
+				return header('Location: ../../tienda/index.php');
+			}
+
 		}
 
 		public function cerrarSesion(){

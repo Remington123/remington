@@ -15,6 +15,11 @@
 			$reportesBL = new ReportesBL();
 			echo $reportesBL->reporteClientes();
 		break;
+
+		case 'productosVendidosPorRangoFechas':
+			$reportesBL = new ReportesBL();
+			echo $reportesBL->reporteProductos();
+		break;
 	}
 
 

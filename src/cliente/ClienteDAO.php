@@ -12,7 +12,6 @@
 			$conexion = new Conexion();
 
 			try {
-
 				$cnn = $conexion->getConexion();
 				$sql = "SELECT idcliente, nombres, apellidopaterno, apellidomaterno, email, celular, dni, direccion, contrasena 
 						FROM cliente WHERE estado = 1;";
@@ -39,7 +38,7 @@
 			
 			try{
 				$cnn = $conexion->getConexion();
-				$sql = "INSERT INTO cliente(nombres, apellidopaterno, apellidomaterno, dni, email, contrasena, direccion, celular, ruc, idtipousuario, estado) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+				$sql = "INSERT INTO cliente(nombres, apellidopaterno, apellidomaterno, dni, email, contrasena, direccion, celular, ruc, idtipousuario, estado, fecha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 				/*Notice: Only variables should be passed by reference*/
 				$nombre = $objeto->getNombre();
 				$apellidopaterno = $objeto->getApellidopaterno();
@@ -52,7 +51,8 @@
 				$celular = $objeto->getCelular();
 				$ruc = "";//campo vacio
 				$idtipousuario = $objeto->getIdtipousuario();
-				$estado = $objeto->getEstado();				
+				$estado = $objeto->getEstado();
+				$fecha =  date( 'Y/m/d', time() );
 
 				$statement = $cnn->prepare( $sql );
 				$statement->bindParam(1, $nombre, PDO::PARAM_STR);
@@ -66,6 +66,7 @@
 				$statement->bindParam(9, $ruc, PDO::PARAM_STR);
 				$statement->bindParam(10, $idtipousuario, PDO::PARAM_INT);
 				$statement->bindParam(11, $estado, PDO::PARAM_INT);
+				$statement->bindParam(12, $fecha, PDO::PARAM_STR);
 
 				$respuesta = $statement->execute();//devuelve true, si no hubo error.
 				
@@ -158,6 +159,36 @@
 				$conexion = null;
 			}
 			return $respuesta; 
+		}
+
+		public function existeCliente( $objeto ) : int{
+			$conexion = new Conexion();
+			$statement=null; 
+			try {
+				$cnn = $conexion->getConexion();
+				$sql = "SELECT COUNT(idcliente) AS existe FROM cliente 
+						WHERE email = :email AND contrasena = :contrasena;";
+				$statement=$cnn->prepare($sql);
+
+				$email = $objeto->getEmail();
+				$contrasena = $objeto->getContrasena();
+
+				$statement->bindParam(":email", $email, PDO::PARAM_STR);
+				$statement->bindParam(":contrasena", $contrasena, PDO::PARAM_STR);
+
+				$statement->execute();
+				$existe = 0;
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$existe = $resultado["existe"];
+				}
+				return $existe;
+
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
 		}
 
 		public function validarAcceso( $objeto ){

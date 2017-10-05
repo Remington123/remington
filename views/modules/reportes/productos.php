@@ -39,12 +39,11 @@
 					<div class="col-md-12">
 						<table id="dt_reportepedido_productos" class="table table-striped">
 							<thead>
-								<th>ID</th>
+								<th>ID Producto</th>
+								<th>Descripción</th>
 								<th>Fecha</th>
-								<th>idCliente</th>
-								<th>Cliente</th>
+								<th>Cantidad</th>
 								<th>Total</th>
-								<th></th>
 							</thead>
 						</table>
 					</div>

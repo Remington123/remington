@@ -15,8 +15,9 @@
 						</div>
 						<!--Fin modal-body-->
 						<div class="modal-body">
-							<form id="frmguardar'.$modulo.'" class="form-horizontal" action="'.$controlador.'" method="POST">
+							<form id="frmmodificar'.$modulo.'" class="form-horizontal" action="'.$controlador.'" method="POST">
 							<input type="hidden" id="id'.$modulo.'" name="id'.$modulo.'" value="">
+							<input type="hidden" id="id_producto" name="id_producto" value="">
 							<input type="hidden" id="opcion" name="opcion" value="'. $accion.'">
 							
 							<!--<div class="form-group">
@@ -55,7 +56,7 @@
 							
 
 							<div class="modal-footer">
-								<button type="submit" id="guardar-'.$modulo.'" class="btn btn-primary">Guardar</button>
+								<button type="submit" id="modificar-'.$modulo.'" class="btn btn-primary">Guardar</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 							</div>
 							
