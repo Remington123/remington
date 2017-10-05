@@ -31,9 +31,6 @@
 				$correo->Subject = 'PHPMailer GMail SMTP Prueba';
 				//$mensaje = "<h3>".$_POST["mensaje"]."</h3>";
 
-
-
-
 	$cabecera = "";
 	$cuerpo = "";
 	$pie="";
@@ -92,10 +89,6 @@
 				}		
 
 				$mensaje = $cabecera.$cuerpo.$pie;
-
-
-
-
 
 				$correo->Body = $mensaje;
 				//$correo->AltBody = 'This is the body in plain text for non-HTML mail clients';

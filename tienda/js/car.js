@@ -6,7 +6,7 @@ $(function(){
 	listarPorCategoria();
 	listarTallasPorColor();
 	seleccionarTalla();
-	guardarPedido();
+	//guardarPedido();
 });
 
 function registrarCliente(){
@@ -49,7 +49,7 @@ function mensajes(color, texto){
 	$(".mensaje").html( div ).removeClass("ocultar");
 }
 
-function guardarPedido(){
+/*function guardarPedido(){
 	$("#frmguardarpedido").on("submit", function(e){
 
 		e.preventDefault();
@@ -85,9 +85,10 @@ function guardarPedido(){
 			//window.location = "realizar-compra.php";			
 		});
 	});
-}
+}*/
 
-function enviarCorreo(email){
+
+/*function enviarCorreo(email){
 	$.ajax({
 		method:"POST",
 		url: "enviarCorreo.php",
@@ -95,10 +96,10 @@ function enviarCorreo(email){
 	}).done(function( info ){
 		console.log( info );
 	});
-}
+}*/
 
 
-function obtenerDataTabla(tbody){
+/*function obtenerDataTabla(tbody){
 	var sumarImporte = 0, contador = 0, 
 		numeroCampos = 8;//Todos menos el total
 	var pedido = [], item = [];
@@ -117,7 +118,7 @@ function obtenerDataTabla(tbody){
     });
     
     return pedido;
-}
+}*/
 
 function listarTallasPorColor(){
 	$("#idcolor").on("change", function(){

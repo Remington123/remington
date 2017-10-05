@@ -4,6 +4,8 @@
 
 	include 'helperhtml/header.php';
 
+
+
 	$cabecera = "";
 	$cuerpo = "";
 	$pie = "";
@@ -71,17 +73,67 @@
 	//$oculto.= "		<input type='hidden' id='mensajecorreo' name='mensajecorreo' value='".$mensaje."'>";
 			 	//enviarCorreo( $email, $mensaje );
 
- 	$pie .="	<button type='submit' class='btn btn-primary'>Pagar</button>";
+
+
+ 	$pie .="	<!-- Trigger the modal with a button -->
+				  <button type='button' class='btn btn-info' data-toggle='modal' data-target='#modalpagar'>Comprar</button>
+
+				  <!-- Modal -->
+				  <div class='modal fade' id='modalpagar' role='dialog'>
+				    <div class='modal-dialog'>
+				    
+				      <!-- Modal content-->
+				      <div class='modal-content'>
+				        <div class='modal-header'>
+				          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+				          <h4 class='modal-title'>Realizar Pago</h4>
+				        </div>
+				        <div class='modal-body'>
+			         		<div>
+							    <label>
+							         <span>Correo Electrónico</span>
+							      <input type='text' size='50' name='email' value='".$email."' data-culqi='card[email]' id='card[email]'>
+							    </label>
+							  </div>
+							  <input type='hidden' id='cliente_email' name='cliente_email' value='".$email."'>
+							  <input type='hidden' id='monto' name='monto' value='".$total."'>
+							  <div class='form-group'>
+							    <label>
+							      <span>Número de tarjeta</span>
+							      <input type='text' size='20' data-culqi='card[number]'  id='card[number]'>
+							    </label>
+							  </div>
+							  <div class='form-group'>
+							    <label>
+							      <span>CVV</span>
+							      <input type='text' size='4' data-culqi='card[cvv]' id='card[cvv]'>
+							    </label>
+							  </div>
+							  <div class='form-group'>
+							    <label>
+							      <span>Fecha expiración (MM/YYYY)</span>
+							      <input type='text' size='2' data-culqi='card[exp_month]' id='card[exp_month]'>
+							    </label>
+							    <span>/</span>
+							    <input type='text' size='4' data-culqi='card[exp_year]' id='card[exp_year]'>
+							  </div>
+				        </div>
+				        <div class='modal-footer'>
+				          <button type='submit' class='btn btn-primary'>Pagar</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>";
  			 }else{ 
  	$pie .="	<strong class='text-danger'>¡Debes Iniciar Sesión!</strong>";
  			}
 	$pie .=" 	</form>";
 		}else if( !isset($carrito) ){
-	$pie .="	No hay Items para realizar la compra";
+	$pie .="	<strong class='text-danger'>No hay Items para realizar la compra</strong>";
 		}
 		
- 	$pie .="	<h4>Cuenta Bancaria</h4>
- 			<h4>Pago con Tarjetas: API de CULQUI</h4>
+ 	$pie .="
 			</div>
 		</div>";
 	
@@ -89,5 +141,23 @@
 	echo $cabecera.$cuerpo.$oculto.$pie;
 
 include 'helperhtml/footer.php';
+
+	echo  "<!-- Incluyendo .js de Culqi-->
+			<script src='https://checkout.culqi.com/v2'></script>
+
+			<script src='js/pago.js' ></script>
+			
+			<script>		
+
+				$(function(){
+  					//alert('Culquiii');
+
+					Culqi.publicKey = 'pk_test_PnizAP8dlMp7uAXV';
+					Culqi.init();
+					pagar();
+
+				});
+
+			</script>";
 
 ?>

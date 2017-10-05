@@ -6,14 +6,7 @@
 </head>
 <body>
 
-<!-- Incluyendo .js de Culqi-->
-<script src="https://checkout.culqi.com/v2"></script>
 
-<!-- Configurando el checkout-->
-<script>
-    Culqi.publicKey = 'pk_test_PnizAP8dlMp7uAXV';
-    Culqi.init();
-</script>
 
 <div class="container">
 	<div class="row">
@@ -23,9 +16,10 @@
 		   <div>
 		        <label>
 		         <span>Correo Electrónico</span>
-		      <input type="text" size="50" data-culqi="card[email]" id="card[email]">
+		      <input type="text" size="50" name="email" data-culqi="card[email]" id="card[email]">
 		    </label>
 		  </div>
+		  <!--<input type="hidden" id="cliente_email" name="cliente_email" value="">-->
 		  <div>
 		    <label>
 		      <span>Número de tarjeta</span>
@@ -51,38 +45,23 @@
 		  </div>
 		</form>
 
+		<!-- Incluyendo .js de Culqi-->
+		<script src="https://checkout.culqi.com/v2"></script>
+		
 		<script
 			  src="https://code.jquery.com/jquery-3.2.1.min.js"
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			  crossorigin="anonymous"></script>
+
+		<script src="js/pago.js" ></script>
 		
-		<script>
+		<script>		
 
 			$(function(){
+				Culqi.publicKey = 'pk_test_PnizAP8dlMp7uAXV';
+				Culqi.init();
 				pagar();
 			});
-
-			function culqi() {
-
-			    if(Culqi.token) { // ¡Token creado exitosamente!
-			        // Get the token ID:
-			        var token = Culqi.token.id;
-			                alert('Se ha creado un token:' + token);
-
-			    }else{ // ¡Hubo algún problema!
-			        // Mostramos JSON de objeto error en consola
-			        console.log(Culqi.error);
-			        alert(Culqi.error.mensaje);
-			    }
-			};
-
-			function pagar(){
-				$("#culqi-card-form").on("submit", function(e){
-					e.preventDefault();
-		    		Culqi.createToken();
-
-				});
-			}
 
 		</script>
 		

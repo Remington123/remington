@@ -74,14 +74,14 @@
 <script src="dist/js/demo.js"></script>
 
 <!--botones DataTables-->	
-<script src="js/dataTables.buttons.min.js"></script>
-<script src="js/buttons.bootstrap.min.js"></script>
+<script src="plugins/datatables/buttons/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables/buttons/buttons.bootstrap.min.js"></script>
 <!--Libreria para exportar Excel-->
-<script src="js/jszip.min.js"></script>
+<script src="plugins/datatables/buttons/jszip.min.js"></script>
 <!--Librerias para exportar PDF-->
-<script src="js/pdfmake.min.js"></script>
-<script src="js/vfs_fonts.js"></script>
+<script src="plugins/datatables/buttons/pdfmake.min.js"></script>
+<script src="plugins/datatables/buttons/vfs_fonts.js"></script>
 <!--Librerias para botones de exportación-->
-<script src="js/buttons.html5.min.js"></script>
+<script src="plugins/datatables/buttons/buttons.html5.min.js"></script>
 
 
