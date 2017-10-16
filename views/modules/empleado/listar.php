@@ -17,10 +17,10 @@
 						<thead>
 							<th>Idempleado</th>
 							<th>Nombres</th>
-							<th>Apellid´paterno</th>
+							<th>Apellidos</th>
 							<th>Apellidomaterno</th>
-							<th>Dni</th>
 							<th>Email</th>
+							<th>Dni</th>							
 							<th></th>
 						</thead>
 					</table>

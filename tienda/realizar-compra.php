@@ -81,48 +81,54 @@
 				  <!-- Modal -->
 				  <div class='modal fade' id='modalpagar' role='dialog'>
 				    <div class='modal-dialog'>
-				    
-				      <!-- Modal content-->
-				      <div class='modal-content'>
-				        <div class='modal-header'>
-				          <button type='button' class='close' data-dismiss='modal'>&times;</button>
-				          <h4 class='modal-title'>Realizar Pago</h4>
-				        </div>
-				        <div class='modal-body'>
-			         		<div>
-							    <label>
-							         <span>Correo Electrónico</span>
-							      <input type='text' size='50' name='email' value='".$email."' data-culqi='card[email]' id='card[email]'>
-							    </label>
-							  </div>
-							  <input type='hidden' id='cliente_email' name='cliente_email' value='".$email."'>
-							  <input type='hidden' id='monto' name='monto' value='".$total."'>
-							  <div class='form-group'>
-							    <label>
-							      <span>Número de tarjeta</span>
-							      <input type='text' size='20' data-culqi='card[number]'  id='card[number]'>
-							    </label>
-							  </div>
-							  <div class='form-group'>
-							    <label>
-							      <span>CVV</span>
-							      <input type='text' size='4' data-culqi='card[cvv]' id='card[cvv]'>
-							    </label>
-							  </div>
-							  <div class='form-group'>
-							    <label>
-							      <span>Fecha expiración (MM/YYYY)</span>
-							      <input type='text' size='2' data-culqi='card[exp_month]' id='card[exp_month]'>
-							    </label>
-							    <span>/</span>
-							    <input type='text' size='4' data-culqi='card[exp_year]' id='card[exp_year]'>
-							  </div>
-				        </div>
-				        <div class='modal-footer'>
-				          <button type='submit' class='btn btn-primary'>Pagar</button>
-				        </div>
+				    <!--ROW-->
+				    <div class='row'>
+				    	<div class='col-sm-12'>
+					      <!-- Modal content-->
+					      <div class='modal-content'>
+					        <div class='modal-header'>
+					          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+					          <h4 class='modal-title'>Realizar Pago</h4>
+					        </div>
+					        <div class='modal-body'>
+				         		<div class='form-group'>
+								    <label class='culqui-label'>
+								         <span>Correo Electrónico</span>	      
+								    </label>
+								    <input class='culqui-input input-large' type='text' size='50' name='email' value='".$email."' data-culqi='card[email]' id='card[email]' disabled>
+								  </div>
+								  <input class='culqui-input' type='hidden' id='cliente_email' name='cliente_email' value='".$email."'>
+								  <input class='culqui-input' type='hidden' id='monto' name='monto' value='".$total."'>
+								  <div class='form-group'>
+								    <label class='culqui-label'>
+								      Número de tarjeta
+								    </label>
+								    <input class='culqui-input' type='text' size='20' data-culqi='card[number]'  id='card[number]' minlength='16' maxlength='16'>
+								  </div>
+								  <div class='horizontal'>
+									  <div class='form-group culqui-col-1'>
+									    <label class='culqui-label'>
+									      CVV
+									    </label>
+									    <input class='culqui-input' type='text' size='4' data-culqi='card[cvv]' id='card[cvv]' minlength='3' maxlength='3'>
+									  </div>
+									  <div class='form-group culqui-col-2'>
+									    <label class='culqui-label'>
+									      Fecha expiración (MM/YYYY)
+									    </label>
+									    <input class='culqui-input' type='text' size='2' data-culqi='card[exp_month]' id='card[exp_month]' minlength='2' maxlength='2'>
+									    <span>/</span>
+									    <input class='culqui-input' type='text' size='4' data-culqi='card[exp_year]' id='card[exp_year]' minlength='4' maxlength='4'>
+									  </div>
+								  </div>
+					        </div>
+					        <div class='modal-footer'>
+					          <button type='submit' class='btn culqui-btn-verde'>Pagar</button>
+					        </div>
+					      </div>
+				      	</div>
 				      </div>
-				      
+				      <!--END ROW-->
 				    </div>
 				  </div>";
  			 }else{ 

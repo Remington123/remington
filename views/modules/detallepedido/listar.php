@@ -61,7 +61,7 @@
 							<th>Producto</th>
 							<th>Cantidad</th>
 							<th>Importe</th>
-							<th></th>
+							
 						</thead>
 					</table>
 				</div>

@@ -16,8 +16,6 @@
 						<thead>
 							<th>ID</th>
 							<th>Fecha</th>
-							<th>idCliente</th>
-							<th>Cliente</th>
 							<th>Total</th>
 							<th></th>
 						</thead>

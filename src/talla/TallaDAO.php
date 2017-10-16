@@ -112,7 +112,7 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM talla WHERE idcategoriaproducto = :idcategoriaproducto;";
+				$sql = "SELECT * FROM talla WHERE idcategoriaproducto = :idcategoriaproducto AND estado=1;";
 				$statement=$cnn->prepare($sql);
 				$statement->bindParam(":idcategoriaproducto", $idcategoriaproducto, PDO::PARAM_INT);
 				$statement->execute();

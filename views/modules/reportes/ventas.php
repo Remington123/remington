@@ -8,7 +8,7 @@
 		<div class="col-md-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Reporte de Pedidos <small>Mostrar los pedidos realizados de acuerdo a un rango de fecha.</small></h3>
+					<h3 class="box-title">Reporte de Ventas <small>Mostrar las ventas realizadas de acuerdo a un rango de fecha.</small></h3>
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
@@ -18,7 +18,7 @@
 		                  <div class="input-group-addon">
 		                    <i class="fa fa-calendar"></i>
 		                  </div>
-		                  <input type="text" class="form-control pull-right datepicker_pedidos" id="fechaInicio" name="fechaInicio">
+		                  <input type="text" class="form-control pull-right datepicker_ventas" id="fechaInicio" name="fechaInicio">
 		                </div>
 		            </div>
 
@@ -28,7 +28,7 @@
 		                  <div class="input-group-addon">
 		                    <i class="fa fa-calendar"></i>
 		                  </div>
-		                  <input type="text" class="form-control pull-right datepicker_pedidos" id="fechaFin" name="fechaFin">
+		                  <input type="text" class="form-control pull-right datepicker_ventas" id="fechaFin" name="fechaFin">
 		                </div>
 		            </div>
 					

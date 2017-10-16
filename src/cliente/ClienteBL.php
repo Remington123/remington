@@ -30,13 +30,26 @@
 				$cliente->setIdtipousuario( 1 );
 				$cliente->setEstado(1);
 
-			$dao = new ClienteDAO();
-			$dao->registrar( $cliente ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
+				$dao = new ClienteDAO();
+				$data = $dao->validarExistenciaEmailDni( $cliente );
+				$email = isset($data["email"]) ? $data["email"] : "";
+				$dni = isset($data["dni"]) ? $data["dni"] : "";
+
+				if( $dni == $cliente->getDni() ){
+					$informacion["respuesta"] = "dni_existe";
+				}else{
+					if( $email == $cliente->getEmail() ){
+						$informacion["respuesta"] = "email_existe";
+					}else{
+						$dao->registrar( $cliente ) ? $informacion["respuesta"] = "bien" : $informacion["respuesta"] = "error";
+					}
+				}
+
 			}else{
 				$informacion["respuesta"] = "llenar_datos";
 			}
 
-			return ( json_encode($informacion) );		
+			return ( json_encode($informacion) );
 		}
 		
 		public function modificar() : string{

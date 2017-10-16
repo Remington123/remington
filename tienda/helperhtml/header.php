@@ -40,6 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for bootstrap working -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
 <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/culqi.css">
 </head>
 
 <body>
@@ -231,27 +232,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						 <form id="frmregistrarcliente" method="post">
 						 	<input type="hidden" id="idcliente" name="idcliente" value="">
 							<input type="hidden" id="opcion" name="opcion" value="registrar">
-							<div class="styled-input agile-styled-input-top">
+							<div class="styled-input ">
 								<input type="text" id="nombres" name="nombres" required="">
 								<label>Nombres</label>
 								<span></span>
 							</div>
-							<div class="styled-input agile-styled-input-top">
+							<div class="styled-input ">
 								<input type="text" id="apellidopaterno" name="apellidopaterno" required="">
 								<label>Apellido Paterno</label>
 								<span></span>
 							</div>
-							<div class="styled-input agile-styled-input-top">
+							<div class="styled-input ">
 								<input type="text" id="apellidomaterno" name="apellidomaterno" required="">
 								<label>Apellido Materno</label>
 								<span></span>
 							</div>
 							<div class="styled-input agile-styled-input-top">
-								<input type="text" id="dni" name="dni" required="" minlength="8" maxlength="8">
+								<input type="text" id="dni" name="dni" required="" minlength="8" maxlength="8" pattern="\d*" title="Por favor, introducir solo números">
 								<label>Dni</label>
 								<span></span>
 							</div>
-							<div class="styled-input agile-styled-input-top">
+							<div class="styled-input ">
 								<input type="text" id="direccion" name="direccion" required="">
 								<input type="hidden" id="celular" name="celular" required="">
 								<label>Dirección</label>
@@ -263,12 +264,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<span></span>
 							</div> 
 							<div class="styled-input agile-styled-input-top">
-								<input type="password" id="contrasena" name="contrasena" required=""> 
+								<input type="password" id="contrasena" name="contrasena" required="" minlength="6" maxlength="6"> 
 								<label>Contraseña</label>
 								<span></span>
 							</div>
 							<div class="styled-input agile-styled-input-top">
-								<input type="password" id="confirmar" name="confirmar" required=""> 
+								<input type="password" id="confirmar" name="confirmar" required="" minlength="6" maxlength="6"> 
 								<label>Confirmar Contraseña</label>
 								<span></span>
 							</div>

@@ -88,6 +88,12 @@
 			return $dao->listarPorCategoria( $idcategoriaproducto );
 		}
 
+		public function listarPorColor(){
+			$dao = new ProductoDAO();
+			$idcolor = $_POST["idcolor"];
+			return $dao->listarPorColor( $idcolor );
+		}
+
 		public function buscar(){
 			$dao = new ProductoDAO();
 			$descripcion = $_POST["descripcion"];

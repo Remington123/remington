@@ -235,6 +235,34 @@
 			}
 		}
 
+		public function validarExistenciaEmailDni( $objeto ){
+			$conexion = new Conexion();
+			$statement=null; 
+			try {
+				$cnn = $conexion->getConexion();
+				$sql = "SELECT email, dni
+						FROM cliente WHERE email = :email OR dni = :dni;";
+				$statement=$cnn->prepare($sql);
+				$email = $objeto->getEmail();
+				$dni = $objeto->getDni();
+
+				$statement->bindParam(":email", $email, PDO::PARAM_STR);
+				$statement->bindParam(":dni", $dni, PDO::PARAM_STR);
+				$statement->execute();
+
+				$datos = [];
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$datos = $resultado;
+				}
+				return $datos;
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
 		public function cerrarSesion(){
 			$_SESSION["cliente"] = array();
 			

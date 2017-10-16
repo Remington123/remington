@@ -17,7 +17,7 @@
 						<thead>
 							<th>Idtela</th>
 							<th>Descripcion</th>
-							<th></th>
+							
 						</thead>
 					</table>
 				</div>

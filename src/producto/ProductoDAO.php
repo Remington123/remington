@@ -202,6 +202,34 @@
 			}
 		}
 
+		public function listarPorColor(int $idcolor){
+			$conexion = new Conexion();
+			try {
+				$cnn = $conexion->getConexion();
+					$sql = "SELECT p.idproducto, p.descripcion, t.descripcion as talla, stock, precio
+							FROM detalleproducto dp
+							INNER JOIN talla t
+							ON t.idtalla = dp.idtalla
+							INNER JOIN producto p
+							ON p.idproducto = dp.idproducto
+							WHERE p.estado = 2 AND idcolor= :idcolor";
+				$statement=$cnn->prepare($sql);
+				$statement->bindParam(":idcolor", $idcolor, PDO::PARAM_INT );
+				$statement->execute();
+
+				$data["data"] = [];//arreglo vacio
+				while($resultado = $statement->fetch(PDO::FETCH_ASSOC)){
+					$data["data"][] = $resultado;
+				}
+				return json_encode($data);
+			}catch (Throwable $e) {
+				return $e->getMessage();
+			}finally{
+				$statement->closeCursor();
+				$conexion = null;
+			}
+		}
+
 		public function buscar( $descripcion ){
 			$conexion = new Conexion();
 			try {

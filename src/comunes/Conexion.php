@@ -3,6 +3,8 @@
 	class Conexion{
 		private $host = "localhost";
 		private $dbname = "remington";
+		//private $user = "Moderador1991";
+		//private $password = "Hola123";
 		private $user = "root";
 		private $password = "";
 		private $conexion = null;

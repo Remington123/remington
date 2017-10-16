@@ -1,6 +1,6 @@
 /* Llamado o ejecución de funciones */
 iniciarCamposFechas();
-dtReportePedido();
+dtReporteVentas();
 dtReporteCliente();
 dtReporteProducto();
 
@@ -21,7 +21,7 @@ function iniciarCamposFechas(){
 	};
 
 
-	$('.datepicker_pedidos').datepicker({
+	$('.datepicker_ventas').datepicker({
       autoclose: true
     });
 
@@ -34,7 +34,7 @@ function iniciarCamposFechas(){
     });
 }
 
-function dtReportePedido(){
+function dtReporteVentas(){
 	$("#buscar").on("click", function(){
 		var fechaInicio = $("#fechaInicio").val(),
 			fechaFin =  $("#fechaFin").val();

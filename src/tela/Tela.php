@@ -3,13 +3,13 @@
 	class Tela {
 		private $idtela;
 		private $descripcion;
-		private $idcategoriaproducto;
+		private $color;
 		private $estado;
 
 		public function __construct(){
 			$this->idtela = 0;
 			$this->descripcion = "";
-			$this->$idcategoriaproducto = 0;
+			$this->color = "";
 			$this->estado = 0;
 		}
 
@@ -29,12 +29,12 @@
 			$this->descripcion = $descripcion;
 		}
 
-		public function getIdcategoriaproducto() :string{
-			return $this->Idcategoriaproducto;
+		public function getColor() :string{
+			return $this->color;
 		}
 
-		public function setColor(string $idcategoriaproducto){
-			$this->Idcategoriaproducto = $Idcategoriaproducto;
+		public function setColor(string $color){
+			$this->color = $color;
 		}
 
 		public function getEstado() :int{

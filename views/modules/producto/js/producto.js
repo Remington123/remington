@@ -15,6 +15,7 @@ eliminar();
 obtenerDataProducto();
 
 guardarModificacionStockPrecio();
+mostrarDtProductoColor();
 
 var tabla_detalle = "";
 
@@ -149,9 +150,9 @@ function guardarModificacionStockPrecio(){
 	});
 }
 
-
-
 function dtProducto(){
+	if ( $.fn.DataTable.isDataTable('#dt_producto') )
+		$("#dt_producto").empty();
 
 	var table = $("#dt_producto").DataTable({
 		"bDestroy": true,
@@ -238,6 +239,38 @@ function obtener_idproducto_eliminar (tbody, table){
 		limpiarMensaje();
 	});
 }
+
+function mostrarDtProductoColor(){
+	$("#mostrarproductos").on("click", function(){
+
+		if ( $.fn.DataTable.isDataTable('#dt_productocolor') )
+			$("#dt_productocolor").empty();
+		var idcolor = $("#idcolor").val();
+		console.log("idcolor: "+ idcolor);
+
+		var table = $("#dt_productocolor").DataTable({
+			"bDestroy": true,
+			"searching": false,
+			"lengthChange": false,
+			"language": spanish,
+			ajax:{
+				method: "POST",
+				url: "../src/producto/ProductoController.php",
+				data: {opcion:"listarPorColor", idcolor: idcolor}
+			},
+			columns:[
+				{"data":"idproducto", "width": "5%"},
+				{"data":"descripcion", "width": "40%"},
+				//{"data":"color", "width": "20%"},
+				{"data":"talla","width": "15%"},
+				{"data":"stock","width": "10%"},
+				{"data":"precio","width": "10%"}
+			]
+		});
+	});
+
+}
+
 
 function mensajes( info ){
 	var json = JSON.parse(info);

@@ -22,13 +22,14 @@
 			    $correo->Port = 465;                                    // TCP port to connect to
 
 				//Recipients
-				$correo->setFrom("administrador@remyngton.com", "PRUEBA");
+				$correo->setFrom("administrador@remyngton.com", "REMYNGTON");
 				$correo->addAddress( $_POST["email"] );
 				$correo->addAddress('geovanny.j.rios@gmail.com');
 
 				//Content
 				$correo->isHTML(true);
-				$correo->Subject = 'PHPMailer GMail SMTP Prueba';
+				$correo->Subject = 'Lista de Productos Comprados';
+				//$correo->Subject = 'PHPMailer GMail SMTP Prueba';
 				//$mensaje = "<h3>".$_POST["mensaje"]."</h3>";
 
 	$cabecera = "";
@@ -36,7 +37,7 @@
 	$pie="";
 	$mensaje = "";
 
-	$cabecera .="<h2>Realizar Compra</h2>
+	$cabecera .="<h2>Lista de Productos</h2>
 				<br>";
 		if( isset($_SESSION['carrito']) ){
 			$carrito = $_SESSION['carrito'];

@@ -18,9 +18,9 @@
 		    <!-- form start -->
 		    <form id="frmlistar'.$modulo.'" action="'.$controlador.'" role="form">
 		      <div class="box-body">
-			    <div class="form-group col-md-12">        	
+			    <!--<div class="form-group col-md-12">        	
         			<button type="button" data-target="#modalbuscar" data-toggle="modal" id="modal-buscar-'.$modulo.'" class="btn btn-primary">Buscar Producto</button>
-		    	</div>  
+		    	</div>-->  
 
 		        <div class="form-group col-md-6">
 		            <label for="idproducto">Producto</label>            

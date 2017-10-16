@@ -31,7 +31,7 @@
 			$statement = null;
 			try{
 				$cnn =$conexion->getConexion();
-				$sql =" SELECT p.idpedido, fecha, total, p.idcliente, 
+				$sql =" SELECT p.idpedido, p.fecha, total, p.idcliente, 
 				CONCAT( nombres, ' ', apellidopaterno, ' ', apellidomaterno ) AS cliente
 						FROM pedido p
 						INNER JOIN cliente c

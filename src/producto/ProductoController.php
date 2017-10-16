@@ -41,6 +41,11 @@
 			echo $productoBl->listarPorCategoria();
 		break;
 
+		case 'listarPorColor':
+			$productoBl = new ProductoBL();
+			echo $productoBl->listarPorColor();
+		break;
+
 		case 'asignar':
 			$productoBl = new ProductoBL();
 			echo $productoBl->asignar();

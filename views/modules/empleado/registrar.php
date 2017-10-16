@@ -43,7 +43,7 @@
 		        </div>
 		        <div class="form-group">
 		          <label for="contrasena">Contraseña</label>
-		          <input type="text" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" >
+		          <input type="password" id="contrasena" name="contrasena" minlength="6" maxlength="6" class="form-control" placeholder="Contraseña" >
 		        </div>
 		        <div class="form-group">
 		          <label for="fechanacimiento">Fecha Nacimiento</label>

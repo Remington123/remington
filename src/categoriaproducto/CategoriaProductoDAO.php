@@ -10,7 +10,7 @@
 			$conexion = new Conexion();
 			try {
 				$cnn = $conexion->getConexion();
-				$sql = "SELECT * FROM categoriaproducto;";
+				$sql = "SELECT * FROM categoriaproducto WHERE estado = 1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 

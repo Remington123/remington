@@ -15,7 +15,8 @@ function registrarCliente(){
 		var frm = $(this).serialize();
 
 		var contrasena = $("#frmregistrarcliente #contrasena").val(),
-			confirmarContrasena = $("#frmregistrarcliente #confirmar").val();
+			confirmarContrasena = $("#frmregistrarcliente #confirmar").val(),
+			texto = "", color = "";
 			
 		console.log(contrasena  + confirmarContrasena);
 
@@ -25,7 +26,17 @@ function registrarCliente(){
 					url: "../src/cliente/ClienteController.php",
 					data: frm
 				}).done( function(info){
-					window.location = "index.php";
+					var json = JSON.parse( info );
+					if( json.respuesta == "bien" )
+						window.location = "index.php";
+					else if( json.respuesta == "dni_existe" ){
+						texto = "<strong>El DNI ingresado ya existe.</strong>";
+						color = "alert-info";
+					}else if( json.respuesta == "email_existe" ){
+						texto = "<strong>El Email ingresado ya existe.</strong>";
+						color = "alert-info";
+					}
+					mensajes(color, texto);
 				});
 			}else{
 				texto = "<strong>La contraseñas no coinciden.</strong>";

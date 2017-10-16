@@ -19,7 +19,7 @@
 					$data["modulo"][] = $resultado;
 				}
 
-				$sql = "SELECT * FROM pagina;";
+				$sql = "SELECT * FROM pagina WHERE estado=1;";
 				$statement=$cnn->prepare($sql);
 				$statement->execute();
 
